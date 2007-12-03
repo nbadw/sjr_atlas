@@ -1,0 +1,39 @@
+#capturefor(headline)
+<h2>An unexpected error happened.</h2>
+<p> This is the rescue page. See the exception details below:</p>
+#end
+
+#macro(showexception $exc)
+<h3>$exc.GetType().Name</h3>
+
+<p>
+Message:<br />
+$exc.Message
+</p>
+
+#if($exc.StackTrace)
+<div class="stacktrace">
+StackTrace:<br />
+<pre>
+$exc.StackTrace
+</pre>
+</div>
+#end
+
+#if($exc.InnerException)
+<div class="inner-exception">
+<b>Inner exception:</b>
+#set($inner = $exc.InnerException)
+#showexception($inner)
+#end
+</div>
+#end
+
+<div id="content" class="clearfix">	
+	<div class="innerwrap">
+		<div class="textbox">		
+            #set($exception = $context.LastException)
+            #showexception($exception)               
+        </div>
+	</div>
+</div>

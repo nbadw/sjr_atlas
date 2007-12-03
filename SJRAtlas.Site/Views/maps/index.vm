@@ -1,0 +1,67 @@
+#capturefor(headline)		    
+<h1>About the Maps</h1><p>There are 2 types of maps presented: interactive and published. Interactive maps present current data which are updated on a regular basis and through web mapping technology, clients can interact with the map, zooming into areas of interest and requesting information.  The published maps, on the other hand, are static and presented as PDF files.</p>
+<p>There is also an advanced interactive map for clients wishing access to more data and functionality. <span style="display: none;">Login is required. <a href="#">Click here to register</a>.</span></p>
+#end
+
+#capturefor(javascripts)
+<script type="text/javascript" language="javascript" src="$siteroot/Content/javascripts/yahoo-dom-event.js"></script>
+<script type="text/javascript" language="javascript" src="$siteroot/Content/javascripts/animation-min.js"></script>
+<script type="text/javascript" language="javascript" src="$siteroot/Content/javascripts/tools-min.js"></script>
+<script type="text/javascript" language="javascript" src="$siteroot/Content/javascripts/effects-min.js"></script>
+<script type="text/javascript" language="javascript" src="$siteroot/Content/javascripts/maps-index.js"></script>
+#end
+
+<div id="content" class="clearfix">	
+	<div class="innerwrap">
+		<div class="textbox yui-gc">		
+                <div class="yui-u first"> 
+                    <div id="map-controls">
+                        <a href="#easymaps" class="active toggle">Interactive Maps</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+                        <a href="#published-maps" class="toggle">Published Maps</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+                        <a href="#advancedmap" class="toggle">Advanced Map</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+                        <a href="#help" class="toggle">Help</a>
+                    </div> 
+                    <div id="easymaps">                    
+                        <ul>
+                        #foreach( $map in $maps )
+                            <li class="easymap" onmouseover="show_large_preview('$!{map.LargeThumbnail}');" onmouseout="remove_large_preview();">
+                                <img class="thumbnail" alt="Map Preview" src="$!{map.Thumbnail}" />
+                                <h4 class="title"><a target="_blank" href="http://gis.mektekdev.com/demo/Default.aspx?resource=$map.ResourceName">$map.Title</a></h4>
+                                <p>$map.Description</p>
+                            </li>
+                        #end
+                        </ul>
+                    </div>
+                    <div id="published-maps" style="display:none;">
+                    #if($published_maps.Length == 0)
+                        <p>No Published Maps Found</p>
+                    #else
+                        #foreach( $map in $published_maps )
+                            <li>
+                                <h4 class="title"><a href="$Resource.Href($map.DefaultLink)">$map.Title</a></h4>
+                                <p class="abstract">$map.Abstract</p>
+                                <p class="origin"><b>Origin:</b> $map.Origin</p>
+                                <p class="published"><b>Published:</b> $map.TimePeriod</p>
+                            </li>
+                        #end
+                    #end  
+                    </div>
+                    <div id="advancedmap" style="display:none;">
+                        about advanced map...
+                    </div>
+                    <div id="help" style="display:none;">
+                        Please see: <a href="$siteroot/Content/SJR Atlas User Manual - Release 1.pdf">SJR Atlas User Manual - Release 1</a>
+                    </div>                    
+                </div>
+                <div class="yui-u">
+                    <h2>Preview Screenshot</h2>
+                    <div id="map-preview">
+                        <p id="preview-message">Place the mouse over a map to view a larger preview image</p>
+                        <img style="display: none;" id="large-preview-img" src="" />
+                    </div>                   
+                </div>
+            </div>                  
+        </div>
+	</div>
+</div>
+

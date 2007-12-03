@@ -1,0 +1,28 @@
+#capturefor(headline)
+<h1>Information</h1>
+<p>You're currently viewing metadata information on <span class="search_query">$metadata.Title</span>. 
+#end
+
+<div id="content" class="clearfix">	
+	<div class="innerwrap">
+		<div class="textbox">			
+            <div class="two_column first">
+                <div class="column first">                    
+                    <h3 class="alt-link-color">$metadata.Title</h3>
+                    <p>$metadata.Abstract</p>
+                    <p>
+                    <a href="#">HTML</a> | <a href="#">PDF</a> | <a href="#">XML</a>
+                </div>
+                <div class="column">
+                    <h2>Need Help?</h2>
+                    <p>You're currently viewing information on <span class="search_query">$metadata.Title</span>.</p>
+                    <p>If this isn't what you are looking for you may also want to try the following:</p>
+                    <ul>
+                        <li><a href="/search/advanced.rails">Advanced Search</a></li>
+                        <li>Another Link</li>
+                    </ul>
+                </div>
+            </div>                  
+        </div>
+	</div>
+</div>

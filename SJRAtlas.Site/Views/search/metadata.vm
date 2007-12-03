@@ -1,0 +1,37 @@
+#capturefor(headline)
+<h1>Search</h1>
+<p>You've searched for: <span class="search_query">&ldquo;$!{query}&rdquo;</span>. Please select one of the below locations to continue.</p>
+#end
+
+<div id="content" class="clearfix">	
+	<div class="innerwrap">
+		<div class="textbox">			
+            <div class="two_column first">
+                <div class="column first">
+                    <h2>Metadata Search Results</h2>
+                    #foreach( $metadata in $results )
+                        <li class="metadata">
+                            <h4 class="result-title"><a href="#" title="$metadata.Title">$metadata.Title</a></h4>
+                            <p>$metadata.Abstract</p>
+                            <p>  
+                            View As: 
+                            $Url.Link('PDF', "%{controller='metadata', action='view', querystring='id=$metadata.Id&output=pdf'}", "%{title='View as PDF', class='results-url'}"), 
+                            $Url.Link('HTML', "%{controller='metadata', action='view', querystring='id=$metadata.Id'}", "%{title='View as HTML', class='results-url'}"),
+                            $Url.Link('XML', "%{controller='metadata', action='view', querystring='id=$metadata.Id&output=xml'}", "%{title='View as XML', class='results-url'}")
+                            </p>                                                      
+                        </li>
+                    #end
+                </div>
+                <div class="column">
+                    <h2>Need Help?</h2>
+                    <p>You've searched the Atlas for: <span class="search_query">&ldquo;$!{query}&rdquo;</span>.</p>
+                    <p>If you haven't found what you are looking for you may also want to try the following:</p>
+                    <ul>
+                    <li>$Url.Link('Advanced Search', "%{controller='search', action='advanced'}")</li>
+                    <li>$Url.Link('Search Tips', "%{controller='search', action='tips'}")</li>
+                </ul>
+                </div>
+            </div>                  
+        </div>
+	</div>
+</div>

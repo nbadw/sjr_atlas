@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Castle.ActiveRecord.Framework.Internal.Tests</name>
+    </assembly>
+    <members>
+        <member name="T:Castle.ActiveRecord.Framework.Internal.Tests.Model.ClassWithBadMapping">
+            <summary>
+            Used to verify that you can't map an AR class as a [Property]
+            </summary>
+        </member>
+        <member name="M:Castle.ActiveRecord.Framework.Internal.Tests.Model.CustomPersister.Update(System.Object,System.Object[],System.Int32[],System.Boolean,System.Object[],System.Object,System.Object,NHibernate.Engine.ISessionImplementor)">
+            <summary>
+            
+                        Update a persistent instance
+                        
+            </summary>
+            
+            <param name="id">The id.</param>
+            <param name="fields">The fields.</param>
+            <param name="dirtyFields">The dirty fields.</param>
+            <param name="hasDirtyCollection">if set to <c>true</c> [has dirty collection].</param>
+            <param name="oldFields">The old fields.</param>
+            <param name="oldVersion">The old version.</param>
+            <param name="obj">The obj.</param>
+            <param name="session">The session.</param>
+        </member>
+        <member name="P:Castle.ActiveRecord.Framework.Internal.Tests.Model.CustomPersister.PropertyCheckability">
+            <summary>
+            
+                        Properties that may be dirty (and thus should be dirty-checked). These
+                        include all updatable properties and some associations.
+                        
+            </summary>
+            
+        </member>
+        <member name="P:Castle.ActiveRecord.Framework.Internal.Tests.Model.CustomPersister.PropertyVersionability">
+            <summary>
+            
+                        Get the "versionability" of the properties of this class (is the property optimistic-locked)
+                        
+            </summary>
+            
+            <value>
+            
+            <c>true</c> if the property is optimistic-locked; otherwise, 
+            <c>false</c>.
+            </value>
+            
+        </member>
+        <member name="P:Castle.ActiveRecord.Framework.Internal.Tests.Model.CustomPersister.QuerySpaces">
+            <summary>
+            
+                        Returns an array of objects that identify spaces in which properties of this class are persisted,
+                        for instances of this class and its subclasses.
+                        
+            </summary>
+            
+        </member>
+        <member name="T:Castle.ActiveRecord.Framework.Internal.Tests.Model.Company">
+            <summary>
+            Warning: This is a wrong definition!
+            </summary>
+        </member>
+        <member name="T:Castle.ActiveRecord.Framework.Internal.Tests.Model.ClassWithCompositeKey2">
+            <summary>
+            Simplest case for CompositeKey support on AR
+            </summary>
+        </member>
+        <member name="T:Castle.ActiveRecord.Framework.Internal.Tests.Model.ClassWithCompositeKey3">
+            <summary>
+            In this case the composite key has a BelongsTo, which should be supported
+            as well (must generate key-many-to-one instead of key-property)
+            </summary>
+        </member>
+        <member name="T:Castle.ActiveRecord.Framework.Internal.Tests.Model.VersionedTimestampedClass">
+            <summary>
+            Warning: This is a wrong definition!
+            </summary>
+        </member>
+        <member name="M:ConstantMappingTestAttribute.GetMappings">
+            <summary>
+            Get the mapping xml to add to NHibernate's configuration.
+            Note that we allow to return more than a single mapping, each string is 
+            treated as a seperated document.
+            </summary>
+        </member>
+    </members>
+</doc>

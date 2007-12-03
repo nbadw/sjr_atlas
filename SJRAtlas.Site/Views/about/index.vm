@@ -1,0 +1,59 @@
+#capturefor(headline)
+<h1>Our Goal</h1>
+<p>To develop and maintain a comprehensive, up-to-date GIS-based repository of multi-agency fisheries, aquatic and environmental information which is easily accessible to those involved in resource management decisions - resource managers, policy makers, researchers, and the public.</p>
+#end
+
+<div id="content" class="clearfix">	
+	<div class="innerwrap">
+		<div class="textbox yui-gc">		
+            <div class="yui-u first">   
+                <h2>About Us</h2>                 
+                <p>The New Brunswick Aquatic Data Warehouse is a GIS-based repository of fisheries and aquatic information for the Province of New Brunswick. Its purpose is to support ecosystem-based resource management by providing a framework to coordinate the management and sharing of aquatic resource data among provincial and federal governments, NGO's, industry and the public. The New Brunswick Aquatic Resources Data Warehouse is a program within the Canadian Rivers Institute at the University of New Brunswick in Fredericton, NB.</p>
+                <p>The NB Aquatic Data Warehouse has been developed through funding and support from the NB Environmental Trust Fund, NB Wildlife Trust Fund, Canada-NB Recreational Fisheries Agreement, NB Department of Natural Resources, NB Department of Environment and Local Government, Fisheries and Oceans Canada, J.D. Irving Limited, Bowater Pulp and Paper Canada Ltd., Fraser Papers Ltd. and ESRI Canada Limited.</p>
+                
+                <h2>Background</h2>
+                <p>Information on New Brunswick's aquatic resources is being collected by many organizations, including government, universities, community groups, conservation organizations, and more recently, the forest industry. All this information, however, is being stored in a variety of formats, is poorly documented, and use of standard codes and identifiers is non-existent. Data sharing, at best, is a tedious and cumbersome task. Yet there is an ever increasing requirement for efficient sharing of information among organizations in order to make ecologically sound management decisions. The NB Aquatic Data Warehouse compiles data collected by these agencies into a standard format and references all data to a uniquely identified water body and/or to a mapped data collection site.</p>
+                <p>The foundation of the Aquatic Data Warehouse is an inventory of the Province's lakes and streams (Please refer to in the Data Warehouse Manual of the web site for more details on the lake and stream inventory). Each body of water is assigned a unique number, plus a set of drainage system codes. Within New Brunswick, all lakes and streams belong to one of 13 major drainage basins. Second level drainage units represent major watercourses (5th order or higher and > 100 km2 drainage area) within the first level basins. These sub-basins can be subdivided into third level units if they contain streams which meet or exceed the minimum size criteria: a combination of 4th order and 100 km2 drainage area. Similarly, third level drainage units are further subdivided into fourth level units if they contain streams meeting or exceeding the minimum size criteria. In a few cases where streams exhibit extreme dichotomy, sixth level drainage units are created. Please refer to DWM-05-Drainage System and DWM-06-Water Resource Inventory in the Data Warehouse Manual section of the web site for more details.</p>
+            </div>
+            <div class="yui-u">
+                <h2>Contact Information</h2>
+                <p>To obtain copies of data and for more information, please contact:</p>
+                
+                <!--
+                <form id="contact-form" name="contact-form" method="post" action="#">
+                    <label id="lbl-name" for="lbl-name">Name</label><br/>
+                    <input id="name" type="text" name="name"/><br/>
+                    <label id="lbl-email" for="email">Email</label><br/>
+                    <input id="email" type="text" name="email"/> <br/>
+                    <label id="lbl-message" for="message">Your Message</label><br/>
+                    <textarea id="message" name="message"></textarea>
+                    <input id="submit" type="submit" name="submit" value="Send"/>  
+                </form> 
+                -->
+                
+                <div class="contact">
+                    <h3>Faye Cowie</h3>
+                    <p style="font-style: italic">                    
+                    Project Manager<br />
+                    Canadian Rivers Institute<br />
+                    University of New Brunswick<br />
+                    Bag Service 41111<br />
+                    Fredericton, NB E3C 2G6<br />
+                    Phone:	(506) 365-8927 or (506) 458-7557<br />
+                    Fax:	(506) 365-8972<br />
+                    Email:	ardw@nbnet.nb.ca                    </p>                </div>                <br />                                <div class="contact">                    <h3>R. Allen Curry, Ph. D.</h3>                    <p style="font-style: italic">                    Director, Canadian Rivers Institute<br />
+                    Associate Professor of Biology and Forestry and Environmental Management<br />
+                    Professor of Recreational Fisheries Research<br />
+                    Assistant Director, NB Coop. Fish and Wildlife Research Unit<br />
+                    University of New Brunswick<br />
+                    Fredericton, NB E3B 6E1<br />
+                    Phone:	(506) 452-6208<br />
+                    Fax:	(506) 453-3583<br />
+                    Web: <a href="http://www.unb.ca/cri">www.unb.ca/cri</a><br />
+                    <a href="http://www.unb.ca/fredericton/science/biology/Faculty/Curry.html">www.unb.ca/fredericton/science/biology/Faculty/Curry.html</a>
+                    </p>                </div>
+            </div>                
+        </div>
+	</div>
+</div>
+

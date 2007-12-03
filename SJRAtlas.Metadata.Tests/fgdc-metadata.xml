@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE metadata SYSTEM "http://www.fgdc.gov/metadata/fgdc-std-001-1998.dtd">
+<metadata>
+<idinfo>
+<citation>
+<citeinfo>
+<origin>REQUIRED: The name of an organization or individual that developed the data set.</origin>
+<pubdate>REQUIRED: The date when the data set is published or otherwise made available for release.</pubdate>
+<title>DataWarehouse_2006_Master.mxd</title>
+</citeinfo>
+</citation>
+<descript>
+<abstract>REQUIRED: A brief narrative summary of the data set.</abstract>
+<purpose>REQUIRED: A summary of the intentions with which the data set was developed.</purpose>
+</descript>
+<timeperd>
+<timeinfo>
+<sngdate>
+<caldate>REQUIRED: The year (and optionally month, or month and day) for which the data set corresponds to the ground.</caldate>
+</sngdate>
+</timeinfo>
+<current>REQUIRED: The basis on which the time period of content information is determined.</current>
+</timeperd>
+<status>
+<progress>REQUIRED: The state of the data set.</progress>
+<update>REQUIRED: The frequency with which changes and additions are made to the data set after the initial data set is completed.</update>
+</status>
+<spdom>
+<bounding>
+<westbc>
+REQUIRED: Western-most coordinate of the limit of coverage expressed in longitude.</westbc>
+<eastbc>
+REQUIRED: Eastern-most coordinate of the limit of coverage expressed in longitude.</eastbc>
+<northbc>
+REQUIRED: Northern-most coordinate of the limit of coverage expressed in latitude.</northbc>
+<southbc>
+REQUIRED: Southern-most coordinate of the limit of coverage expressed in latitude.</southbc>
+</bounding>
+</spdom>
+<keywords>
+<theme>
+<themekt>REQUIRED: Reference to a formally registered thesaurus or a similar authoritative source of theme keywords.</themekt>
+<themekey>REQUIRED: Common-use word or phrase used to describe the subject of the data set.</themekey>
+</theme>
+</keywords>
+<accconst>REQUIRED: Restrictions and legal prerequisites for accessing the data set.</accconst>
+<useconst>REQUIRED: Restrictions and legal prerequisites for using the data set after access is granted.</useconst>
+<native>Microsoft Windows XP Version 5.1 (Build 2600) Service Pack 2; ESRI ArcCatalog 9.2.0.1324</native>
+</idinfo>
+<distinfo>
+<resdesc>Map Files</resdesc>
+</distinfo>
+<metainfo>
+<metd>20070813</metd>
+<metc>
+<cntinfo>
+<cntorgp>
+<cntorg>REQUIRED: The organization responsible for the metadata information.</cntorg>
+<cntper>REQUIRED: The person responsible for the metadata information.</cntper>
+</cntorgp>
+<cntaddr>
+<addrtype>REQUIRED: The mailing and/or physical address for the organization or individual.</addrtype>
+<city>REQUIRED: The city of the address.</city>
+<state>REQUIRED: The state or province of the address.</state>
+<postal>REQUIRED: The ZIP or other postal code of the address.</postal>
+</cntaddr>
+<cntvoice>REQUIRED: The telephone number by which individuals can speak to the organization or individual.</cntvoice>
+</cntinfo>
+</metc>
+<metstdn>FGDC Content Standards for Digital Geospatial Metadata</metstdn>
+<metstdv>FGDC-STD-001-1998</metstdv>
+<mettc>local time</mettc>
+<metextns>
+<onlink>http://www.esri.com/metadata/esriprof80.html</onlink>
+<metprof>ESRI Metadata Profile</metprof>
+</metextns>
+</metainfo>
+</metadata>

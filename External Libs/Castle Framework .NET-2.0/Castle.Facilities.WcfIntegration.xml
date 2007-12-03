@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Castle.Facilities.WcfIntegration</name>
+    </assembly>
+    <members>
+        <member name="M:Castle.Facilities.WcfIntegration.WindsorDependencyInjectionServiceBehavior.Validate(System.ServiceModel.Description.ServiceDescription,System.ServiceModel.ServiceHostBase)">
+            <summary>
+            Provides the ability to inspect the service host and the service description to confirm that the service can run successfully.
+            </summary>
+            <param name="serviceHostBase">The service host that is currently being constructed.</param>
+            <param name="serviceDescription">The service description.</param>
+        </member>
+        <member name="M:Castle.Facilities.WcfIntegration.WindsorDependencyInjectionServiceBehavior.AddBindingParameters(System.ServiceModel.Description.ServiceDescription,System.ServiceModel.ServiceHostBase,System.Collections.ObjectModel.Collection{System.ServiceModel.Description.ServiceEndpoint},System.ServiceModel.Channels.BindingParameterCollection)">
+            <summary>
+            Provides the ability to pass custom data to binding elements to support the contract implementation.
+            </summary>
+            <param name="serviceHostBase">The host of the service.</param>
+            <param name="bindingParameters">Custom objects to which binding elements have access.</param>
+            <param name="serviceDescription">The service description of the service.</param>
+            <param name="endpoints">The service endpoints.</param>
+        </member>
+        <member name="T:Castle.Facilities.WcfIntegration.WindsorInstanceProvider">
+            <summary>
+            Initialize a service using Windsor
+            </summary>
+        </member>
+        <member name="M:Castle.Facilities.WcfIntegration.WindsorInstanceProvider.#ctor(Castle.MicroKernel.IKernel,System.Type)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Castle.Facilities.WcfIntegration.WindsorInstanceProvider"/> class.
+            </summary>
+        </member>
+        <member name="M:Castle.Facilities.WcfIntegration.WindsorInstanceProvider.GetInstance(System.ServiceModel.InstanceContext)">
+            <summary>
+            Returns a service object given the specified <see cref="T:System.ServiceModel.InstanceContext"></see> object.
+            </summary>
+            
+            <returns>
+            A user-defined service object.
+            </returns>
+            
+            <param name="instanceContext">The current <see cref="T:System.ServiceModel.InstanceContext"></see> object.</param>
+        </member>
+        <member name="M:Castle.Facilities.WcfIntegration.WindsorInstanceProvider.GetInstance(System.ServiceModel.InstanceContext,System.ServiceModel.Channels.Message)">
+            <summary>
+            Returns a service object given the specified <see cref="T:System.ServiceModel.InstanceContext"></see> object.
+            </summary>
+            
+            <returns>
+            The service object.
+            </returns>
+            
+            <param name="message">The message that triggered the creation of a service object.</param>
+            <param name="instanceContext">The current <see cref="T:System.ServiceModel.InstanceContext"></see> object.</param>
+        </member>
+        <member name="M:Castle.Facilities.WcfIntegration.WindsorInstanceProvider.ReleaseInstance(System.ServiceModel.InstanceContext,System.Object)">
+            <summary>
+            Called when an <see cref="T:System.ServiceModel.InstanceContext"></see> object recycles a service object.
+            </summary>
+            
+            <param name="instanceContext">The service's instance context.</param>
+            <param name="instance">The service object to be recycled.</param>
+        </member>
+    </members>
+</doc>

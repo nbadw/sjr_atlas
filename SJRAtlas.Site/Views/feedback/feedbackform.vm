@@ -1,0 +1,53 @@
+<div id="feedback">
+    <div id="feedback-form-content">
+    $Ajax.BuildFormRemoteTag("$siteroot/feedback/submitfeedback.rails", "%{Loading='start_submit(request)', Complete='done_submit(request)'}") 
+
+    #if($flash.summary)
+    <h4 style="color: Red; font-weight: bold;">The following problems must be corrected for the form to be submitted:</h4>
+    <ul>
+        #foreach($errormessage in $summary.ErrorMessages)
+            <li>$errormessage</li>
+        #end
+    </ul>
+    #else        
+    <p>Description of Feedback...</p>
+    #end
+
+    <div>
+    $Form.LabelFor("feedback.sendername", "Your Name:")
+    $Form.TextField("feedback.sendername")
+    </div>
+
+    <div>
+    $Form.LabelFor("feedback.senderemail", "Your Email:")
+    $Form.TextField("feedback.senderemail")
+    </div>
+
+    <div>
+    $Form.LabelFor("feedback.subject", "Subject:")
+    $Form.TextField("feedback.subject")
+    </div>
+
+    <div>
+    $Form.LabelFor("feedback.message", "Message:")
+    $Form.TextArea("feedback.message")
+    </div>
+    
+    <div>
+    $Form.Submit("Submit")	    
+    </div>
+    
+    $Form.EndFormTag()
+    </div>
+    
+    <div id="submitting" style="display: none; text-align: center; padding-top: 5em;">
+        <img src="$siteroot/Content/images/ajax-loader.gif" />
+        <p style="margin-top: 7px;">Sending Feedback...</p>
+    </div>
+    
+    <div id="submit-done-msg" style="display: none; padding: 5em 3em 0;">
+    
+    </div>
+</div>
+
+

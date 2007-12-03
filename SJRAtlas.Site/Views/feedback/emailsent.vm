@@ -1,0 +1,3 @@
+<h3>Your message has been sent to our developers.</h3>
+<h3>Thanks for the feedback!</h3>
+<a href="#" onclick="hideIbox(); return false;">Close Window</a> 

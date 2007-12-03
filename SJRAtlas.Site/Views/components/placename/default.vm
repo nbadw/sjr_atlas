@@ -1,0 +1,9 @@
+<div class="placename" style="margin-bottom: 1em;">
+<span style="font-weight: bold;">
+$Url.Link("$name, $region", "%{controller='placename', action='view', querystring='id=$id'}", "%{title='Select This Location', class='results-url'}")
+</span>($status_term Name)<br />
+Place Name Type: $!{generic_term}<br />
+County: $!{county}<br />
+Longitude: $longitude, Latitude: $latitude<br />
+<a onclick="view_location('$id'); return false;" class="option" target="_blank" href="http://gis.mektekdev.com/demo/Default.aspx?resource=View_Location&markerPoint[0]=$londec,$latdec&Units=Decimal Degrees&CoordSys=NAD83">View Location in Map</a><br />
+</div>

@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Castle.Services.Transaction.Tests</name>
+    </assembly>
+    <members>
+        <member name="P:Castle.Services.Transaction.Tests.TransientActivityManager.CurrentActivity">
+            <summary>
+            Gets the current activity.
+            </summary>
+            <value>The current activity.</value>
+        </member>
+    </members>
+</doc>

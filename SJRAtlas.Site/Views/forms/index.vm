@@ -1,0 +1,65 @@
+#capturefor(headline)
+<h1>Forms</h1>
+<p>The NB Aquatic Data Warehouse, NB Department of Natural Resources NB Department of Environment and NB Wildlife Council collaborated to create standardized data collection forms for various fisheries and environmental activities. The purpose of the forms is to ensure data is collected at the same level of detail and in the same manner. </p>
+#end
+
+<div id="content" class="clearfix">	
+	<div class="innerwrap">
+		<div class="textbox yui-gc">		
+            <div class="yui-u first">
+                <h2>The following data collection forms are available:</h2>
+                <ul>
+                    <li>Water Temperature Data Logger Form</li>
+                    <li>Fish Stocking Form</li>
+                    <li>Electrofishing Forms</li>
+                    <li>Individual Fish Measurements Form</li>
+                    <li>Aquatic Habitat Enhancement / Restoration Form</li>
+                    <li>Environmental Stream Assessment</li>
+                    <li>Stream Habitat Survey</li>
+                    <li>Water Flow Calculation Form</li>
+                </ul>   
+                <p>These forms provide space to record many important details related to the specific activity, including particulars on the sampling site and methods used. Users should complete all applicable spaces on the forms. Accurately identifying the location of the activity is particularly important. Please record GPS coordinates if available, water body identification numbers (from NB Aquatic Data Warehouse), and textual descriptions. Also, note the locations on a 1:50,000 topographic map. The download package includes a manual for completing the forms.</p>
+                <p>Upon completing the forms, please forward copies of all data, including paper forms, maps, and electronic files, such as digital photographs of sites, data logger output files, GPS coordinates, spreadsheets, Access files, etc., to one of the addresses below:</p>                
+                <table id="form-addresses">
+                    <thead>
+                        <tr>
+                            <th>Wildlife Trust Fund Projects</th>
+                            <th>Other Projects</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td> 
+                                <address>                      
+                                NB Wildlife Council,<br />
+                                1350 Regent Street, Room 206<br />
+                                Ancilliary Building<br />
+                                Box 23019<br />
+                                Fredericton, NB<br />
+                                E3B 7B3<br />
+                                Attention: Claire Caron
+                                </address> 
+                            </td>
+                            <td>
+                                <address>
+                                Department of Natural Resources<br />
+                                Fish and Wildlife Branch<br />
+                                Fisheries Management Program<br />
+                                PO Box 6000<br />
+                                Fredericton, NB<br />
+                                E3B 5H1<br />
+                                Attention: Fisheries Data Program
+                                </address>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="yui-u">
+                <h2>Download</h2>
+                <p><a href="$siteroot/Content/Standard-Forms.zip">Forms Package</a></p>
+                <p>This package includes all standard forms and manual.</p>                                
+            </div>               
+        </div>
+	</div>
+</div>

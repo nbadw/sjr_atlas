@@ -1,0 +1,14 @@
+#set($exception = $context.LastException)
+
+#capturefor(headline)
+<h2>An unexpected error happened.</h2>
+#end
+
+<div id="content" class="clearfix">	
+	<div class="innerwrap">
+		<div class="textbox">		
+		    <h3>Error</h3>
+		    <p>$exception.Message</p>
+        </div>
+	</div>
+</div>

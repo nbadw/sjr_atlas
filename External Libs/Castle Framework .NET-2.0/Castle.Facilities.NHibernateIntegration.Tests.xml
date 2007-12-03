@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Castle.Facilities.NHibernateIntegration.Tests</name>
+    </assembly>
+    <members>
+        <member name="T:Castle.Facilities.NHibernateIntegration.Tests.Common.TestInterceptor">
+            <summary>
+            An implementation of the <see cref="T:NHibernate.IInterceptor"/> interface for testing
+            purposes.
+            </summary>
+        </member>
+        <member name="T:Castle.Facilities.NHibernateIntegration.Tests.Internals.SessionManagerTestCase">
+            <summary>
+            Tests the default implementation of ISessionStore
+            </summary>
+        </member>
+        <member name="M:Castle.Facilities.NHibernateIntegration.Tests.Internals.SessionManagerTestCase.NewTransactionBeforeUsingSession">
+            <summary>
+            This test ensures that the transaction takes 
+            ownership of the session and disposes it at the end
+            of the transaction
+            </summary>
+        </member>
+        <member name="M:Castle.Facilities.NHibernateIntegration.Tests.Internals.SessionManagerTestCase.NewTransactionAfterUsingSession">
+            <summary>
+            In this case the transaction should not take
+            ownership of the session (not dipose it at the 
+            end of the transaction)
+            </summary>
+        </member>
+        <member name="M:Castle.Facilities.NHibernateIntegration.Tests.Internals.SessionManagerTestCase.NewTransactionBeforeUsingSessionWithTwoDatabases">
+            <summary>
+            This test ensures that the transaction enlists the 
+            the sessions of both database connections
+            </summary>
+        </member>
+        <member name="M:Castle.Facilities.NHibernateIntegration.Tests.Internals.SessionManagerTestCase.SecondDatabaseSessionEnlistedOnlyOnceInActualTransaction">
+            <summary>
+            This test ensures that the session is enlisted in actual transaction 
+            only once for second database session
+            </summary>
+        </member>
+        <member name="T:Castle.Facilities.NHibernateIntegration.Tests.Internals.SessionStoreTestCase">
+            <summary>
+            Tests the default implementation of ISessionStore
+            </summary>
+        </member>
+    </members>
+</doc>

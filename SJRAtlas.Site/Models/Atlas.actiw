@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<model dslVersion="1.0.0.0" Id="c10b5322-c941-42d3-98c4-b00d3b936b55" xmlns="http://schemas.microsoft.com/dsltools/ActiveWriter">
+  <additionalImports>AAEAAAD/////AQAAAAAAAAAMAgAAAF1BbHRpbm9yZW4uQWN0aXZlV3JpdGVyLkRzbCwgVmVyc2lvbj0xLjAuMC4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPTkwNTE0MTM5NmRkYjA3OTkEAQAAAKEBU3lzdGVtLkNvbGxlY3Rpb25zLkdlbmVyaWMuTGlzdGAxW1tBbHRpbm9yZW4uQWN0aXZlV3JpdGVyLkltcG9ydCwgQWx0aW5vcmVuLkFjdGl2ZVdyaXRlci5Ec2wsIFZlcnNpb249MS4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj05MDUxNDEzOTZkZGIwNzk5XV0DAAAABl9pdGVtcwVfc2l6ZQhfdmVyc2lvbgQAAB9BbHRpbm9yZW4uQWN0aXZlV3JpdGVyLkltcG9ydFtdAgAAAAgICQMAAAAAAAAAAAAAAAcDAAAAAAEAAAAAAAAABB1BbHRpbm9yZW4uQWN0aXZlV3JpdGVyLkltcG9ydAIAAAAL</additionalImports>
+  <classes>
+    <modelClass name="Error" schema="dbo" table="errors">
+      <properties>
+        <modelProperty Id="d83f100a-a21c-4fca-93a2-eb1aed330f11" name="Message" column="message" columnType="StringClob" length="0" />
+        <modelProperty Id="e17152fa-ec39-4f36-902a-62962a2f6c09" name="StackTrace" column="stacktrace" columnType="StringClob" length="0" />
+        <modelProperty Id="6092b468-0525-44a6-9760-f6bfa54987d1" name="Source" column="source" columnType="StringClob" length="0" />
+        <modelProperty Id="f7dd703b-c1b6-40b0-bf7c-018f62eb9b20" name="ParentId" column="parent_exception" columnType="Int32" length="0" />
+        <modelProperty Id="efef5076-707e-442a-8de5-9043691d82b6" name="Id" column="id" columnType="Int32" length="0" notNull="true" keyType="PrimaryKey" />
+      </properties>
+    </modelClass>
+  </classes>
+</model>

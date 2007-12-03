@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Castle.Facilities.AutomaticTransactionManagement.Tests</name>
+    </assembly>
+    <members>
+        <member name="T:Castle.Facilities.AutomaticTransactionManagement.Tests.CustomerService">
+            <summary>
+            Summary description for CustomerService.
+            </summary>
+        </member>
+        <member name="T:Castle.Facilities.AutomaticTransactionManagement.Tests.MockTransactionManager">
+            <summary>
+            Summary description for MockTransactionManager.
+            </summary>
+        </member>
+        <member name="M:Castle.Facilities.AutomaticTransactionManagement.Tests.FacilityBasicTestCase.RollBackExplicitOnClass">
+            <summary>
+            Tests the situation where the class uses
+            ATM, but grab the transaction manager and rollbacks the 
+            transaction manually
+            </summary>
+        </member>
+    </members>
+</doc>

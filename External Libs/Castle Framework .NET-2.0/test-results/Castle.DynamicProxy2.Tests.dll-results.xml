@@ -1,0 +1,375 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!--This file represents the results of running a test suite-->
+<test-results name="C:\src\castle\build\net-2.0\debug\Castle.DynamicProxy2.Tests.dll" total="160" failures="2" not-run="10" date="2007-09-20" time="12:15:11">
+  <environment nunit-version="2.2.8.0" clr-version="2.0.50727.832" os-version="Microsoft Windows NT 5.1.2600 Service Pack 2" platform="Win32NT" cwd="C:\src\castle" machine-name="D65C2FD1" user="nbdata" user-domain="D65C2FD1" />
+  <culture-info current-culture="en-US" current-uiculture="en-US" />
+  <test-suite name="C:\src\castle\build\net-2.0\debug\Castle.DynamicProxy2.Tests.dll" success="False" time="12.844" asserts="0">
+    <results>
+      <test-suite name="Castle" success="False" time="12.844" asserts="0">
+        <results>
+          <test-suite name="Castle.DynamicProxy" success="False" time="12.844" asserts="0">
+            <results>
+              <test-suite name="Castle.DynamicProxy.Tests" success="False" time="10.750" asserts="0">
+                <results>
+                  <test-suite name="Castle.DynamicProxy.Tests.AccessLevelTestCase" success="False" time="0.672" asserts="0">
+                    <results>
+                      <test-case name="Castle.DynamicProxy.Tests.AccessLevelTestCase.ProtectedConstructor" executed="True" success="False" time="0.234" asserts="1">
+                        <failure>
+                          <message><![CDATA[
+TearDown : System.Reflection.TargetInvocationException : Exception has been thrown by the target of an invocation.
+  ----> NUnit.Framework.AssertionException : PeVerify reported error(s): 
+
+Microsoft (R) .NET Framework PE Verifier.  Version  2.0.50727.42
+Copyright (c) Microsoft Corporation.  All rights reserved.
+
+File not found or has bad headers.
+
+VerifyPEformat: Error Opening file
+1 Error Verifying CastleDynProxy2.dll
+]]></message>
+                          <stack-trace><![CDATA[
+--TearDown
+   at System.RuntimeMethodHandle._InvokeMethodFast(Object target, Object[] arguments, SignatureStruct& sig, MethodAttributes methodAttributes, RuntimeTypeHandle typeOwner)
+   at System.RuntimeMethodHandle.InvokeMethodFast(Object target, Object[] arguments, Signature sig, MethodAttributes methodAttributes, RuntimeTypeHandle typeOwner)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture, Boolean skipVisibilityChecks)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at NUnit.Core.TestMethod.doTearDown(TestCaseResult testResult)
+--TargetInvocationException
+   at Castle.DynamicProxy.Tests.BasePEVerifyTestCase.RunPEVerifyOnGeneratedAssembly() in c:\src\castle\Tools\Castle.DynamicProxy2\Castle.DynamicProxy.Tests\BasePEVerifyTestCase.cs:line 74
+   at Castle.DynamicProxy.Tests.BasePEVerifyTestCase.TearDown() in c:\src\castle\Tools\Castle.DynamicProxy2\Castle.DynamicProxy.Tests\BasePEVerifyTestCase.cs:line 38
+]]></stack-trace>
+                        </failure>
+                      </test-case>
+                      <test-case name="Castle.DynamicProxy.Tests.AccessLevelTestCase.ProtectedMethods" executed="True" success="False" time="0.031" asserts="3">
+                        <failure>
+                          <message><![CDATA[
+TearDown : System.Reflection.TargetInvocationException : Exception has been thrown by the target of an invocation.
+  ----> NUnit.Framework.AssertionException : PeVerify reported error(s): 
+
+Microsoft (R) .NET Framework PE Verifier.  Version  2.0.50727.42
+Copyright (c) Microsoft Corporation.  All rights reserved.
+
+File not found or has bad headers.
+
+VerifyPEformat: Error Opening file
+1 Error Verifying CastleDynProxy2.dll
+]]></message>
+                          <stack-trace><![CDATA[
+--TearDown
+   at System.RuntimeMethodHandle._InvokeMethodFast(Object target, Object[] arguments, SignatureStruct& sig, MethodAttributes methodAttributes, RuntimeTypeHandle typeOwner)
+   at System.RuntimeMethodHandle.InvokeMethodFast(Object target, Object[] arguments, Signature sig, MethodAttributes methodAttributes, RuntimeTypeHandle typeOwner)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture, Boolean skipVisibilityChecks)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at NUnit.Core.TestMethod.doTearDown(TestCaseResult testResult)
+--TargetInvocationException
+   at Castle.DynamicProxy.Tests.BasePEVerifyTestCase.RunPEVerifyOnGeneratedAssembly() in c:\src\castle\Tools\Castle.DynamicProxy2\Castle.DynamicProxy.Tests\BasePEVerifyTestCase.cs:line 74
+   at Castle.DynamicProxy.Tests.BasePEVerifyTestCase.TearDown() in c:\src\castle\Tools\Castle.DynamicProxy2\Castle.DynamicProxy.Tests\BasePEVerifyTestCase.cs:line 38
+]]></stack-trace>
+                        </failure>
+                      </test-case>
+                      <test-case name="Castle.DynamicProxy.Tests.AccessLevelTestCase.InternalConstructorIsNotReplicated" executed="True" success="True" time="0.313" asserts="1" />
+                      <test-case name="Castle.DynamicProxy.Tests.AccessLevelTestCase.InternalConstructorIsReplicatedWhenInternalsVisibleTo" executed="True" success="True" time="0.094" asserts="1" />
+                    </results>
+                  </test-suite>
+                  <test-suite name="Castle.DynamicProxy.Tests.BasicClassProxyTestCase" success="True" time="1.703" asserts="0">
+                    <results>
+                      <test-case name="Castle.DynamicProxy.Tests.BasicClassProxyTestCase.ProxyForClass" executed="True" success="True" time="0.141" asserts="12" />
+                      <test-case name="Castle.DynamicProxy.Tests.BasicClassProxyTestCase.Caching" executed="True" success="True" time="0.156" asserts="0" />
+                      <test-case name="Castle.DynamicProxy.Tests.BasicClassProxyTestCase.ProxyForNonPublicClass" executed="True" success="True" time="0.109" asserts="0" />
+                      <test-case name="Castle.DynamicProxy.Tests.BasicClassProxyTestCase.ProxyForClassWithIndexer" executed="True" success="True" time="0.078" asserts="4" />
+                      <test-case name="Castle.DynamicProxy.Tests.BasicClassProxyTestCase.ClassWithDifferentAccessLevelOnProperties" executed="True" success="True" time="0.125" asserts="3" />
+                      <test-case name="Castle.DynamicProxy.Tests.BasicClassProxyTestCase.ClassWithInheritance" executed="True" success="True" time="0.141" asserts="2" />
+                      <test-case name="Castle.DynamicProxy.Tests.BasicClassProxyTestCase.ProxyForNestedClass" executed="True" success="True" time="0.141" asserts="2" />
+                      <test-case name="Castle.DynamicProxy.Tests.BasicClassProxyTestCase.ProxyForClassWithInterfaces" executed="True" success="True" time="0.094" asserts="6" />
+                      <test-case name="Castle.DynamicProxy.Tests.BasicClassProxyTestCase.ProxyForCharReturnType" executed="True" success="True" time="0.078" asserts="2" />
+                      <test-case name="Castle.DynamicProxy.Tests.BasicClassProxyTestCase.ProxyForClassWithConstructors" executed="True" success="True" time="0.078" asserts="5" />
+                      <test-case name="Castle.DynamicProxy.Tests.BasicClassProxyTestCase.MethodParamNamesAreReplicated" executed="True" success="True" time="0.078" asserts="1" />
+                      <test-case name="Castle.DynamicProxy.Tests.BasicClassProxyTestCase.ProducesInvocationsThatCantChangeTarget" executed="True" success="True" time="0.125" asserts="3" />
+                      <test-case name="Castle.DynamicProxy.Tests.BasicClassProxyTestCase.ProxyTypeWithMultiDimentionalArrayAsParameters" executed="False">
+                        <reason>
+                          <message><![CDATA[Multi dimensional arrays seems to not work at all]]></message>
+                        </reason>
+                      </test-case>
+                      <test-case name="Castle.DynamicProxy.Tests.BasicClassProxyTestCase.ProxyForBaseTypeFromSignedAssembly" executed="True" success="True" time="0.219" asserts="2" />
+                      <test-case name="Castle.DynamicProxy.Tests.BasicClassProxyTestCase.ProxyForBaseTypeAndInterfaceFromSignedAssembly" executed="True" success="True" time="0.141" asserts="3" />
+                      <test-case name="Castle.DynamicProxy.Tests.BasicClassProxyTestCase.ProxyForBaseTypeFromUnsignedAssembly" executed="False">
+                        <reason>
+                          <message><![CDATA[To get this running, the Tests project must not be signed.]]></message>
+                        </reason>
+                      </test-case>
+                      <test-case name="Castle.DynamicProxy.Tests.BasicClassProxyTestCase.ProxyForBaseTypeAndInterfaceFromUnsignedAssembly" executed="False">
+                        <reason>
+                          <message><![CDATA[To get this running, the Tests project must not be signed.]]></message>
+                        </reason>
+                      </test-case>
+                      <test-case name="Castle.DynamicProxy.Tests.BasicClassProxyTestCase.ProxyForBaseTypeAndInterfaceFromSignedAndUnsignedAssemblies1" executed="False">
+                        <reason>
+                          <message><![CDATA[To get this running, the Tests project must not be signed.]]></message>
+                        </reason>
+                      </test-case>
+                      <test-case name="Castle.DynamicProxy.Tests.BasicClassProxyTestCase.ProxyForBaseTypeAndInterfaceFromSignedAndUnsignedAssemblies2" executed="False">
+                        <reason>
+                          <message><![CDATA[To get this running, the Tests project must not be signed.]]></message>
+                        </reason>
+                      </test-case>
+                    </results>
+                  </test-suite>
+                  <test-suite name="Castle.DynamicProxy.Tests.BasicInterfaceProxyTestCase" success="True" time="0.891" asserts="0">
+                    <results>
+                      <test-case name="Castle.DynamicProxy.Tests.BasicInterfaceProxyTestCase.BasicInterfaceProxyWithValidTarget" executed="True" success="True" time="0.109" asserts="2" />
+                      <test-case name="Castle.DynamicProxy.Tests.BasicInterfaceProxyTestCase.Caching" executed="True" success="True" time="0.094" asserts="0" />
+                      <test-case name="Castle.DynamicProxy.Tests.BasicInterfaceProxyTestCase.BasicInterfaceProxyWithValidTarget2" executed="True" success="True" time="0.078" asserts="1" />
+                      <test-case name="Castle.DynamicProxy.Tests.BasicInterfaceProxyTestCase.InterfaceInheritance" executed="True" success="True" time="0.109" asserts="2" />
+                      <test-case name="Castle.DynamicProxy.Tests.BasicInterfaceProxyTestCase.Indexer" executed="True" success="True" time="0.078" asserts="2" />
+                      <test-case name="Castle.DynamicProxy.Tests.BasicInterfaceProxyTestCase.ProxyTypeWithMultiDimentionalArrayAsParameter" executed="True" success="True" time="0.094" asserts="0" />
+                      <test-case name="Castle.DynamicProxy.Tests.BasicInterfaceProxyTestCase.CantCreateInterfaceTargetedProxyWithoutInterface" executed="True" success="True" time="0.047" asserts="0" />
+                      <test-case name="Castle.DynamicProxy.Tests.BasicInterfaceProxyTestCase.InterfaceTargetTypeProducesInvocationsThatCanChangeTarget" executed="True" success="True" time="0.078" asserts="2" />
+                      <test-case name="Castle.DynamicProxy.Tests.BasicInterfaceProxyTestCase.ChangingInvocationTargetSucceeds" executed="True" success="True" time="0.125" asserts="1" />
+                      <test-case name="Castle.DynamicProxy.Tests.BasicInterfaceProxyTestCase.MethodParamNamesAreReplicated" executed="True" success="True" time="0.078" asserts="1" />
+                    </results>
+                  </test-suite>
+                  <test-suite name="Castle.DynamicProxy.Tests.BasicInterfaceProxyWithoutTargetTestCase" success="True" time="0.625" asserts="0">
+                    <results>
+                      <test-case name="Castle.DynamicProxy.Tests.BasicInterfaceProxyWithoutTargetTestCase.BasicInterfaceProxyWithValidTarget_ThrowsIfInterceptorCallsProceed" executed="True" success="True" time="0.109" asserts="0" />
+                      <test-case name="Castle.DynamicProxy.Tests.BasicInterfaceProxyWithoutTargetTestCase.CanReplaceReturnValueOfInterfaceMethod" executed="True" success="True" time="0.109" asserts="1" />
+                      <test-case name="Castle.DynamicProxy.Tests.BasicInterfaceProxyWithoutTargetTestCase.CanThrowExceptionFromInterceptorOfInterfaceMethod" executed="True" success="True" time="0.172" asserts="0" />
+                      <test-case name="Castle.DynamicProxy.Tests.BasicInterfaceProxyWithoutTargetTestCase.ProxyWithGenericTypeThatInheritFromGenericType" executed="True" success="True" time="0.109" asserts="0" />
+                      <test-case name="Castle.DynamicProxy.Tests.BasicInterfaceProxyWithoutTargetTestCase.ProducesInvocationsThatCantChangeTarget" executed="True" success="True" time="0.125" asserts="2" />
+                    </results>
+                  </test-suite>
+                  <test-suite name="Castle.DynamicProxy.Tests.BugsReportedTestCase" success="True" time="0.063" asserts="0">
+                    <results>
+                      <test-case name="Castle.DynamicProxy.Tests.BugsReportedTestCase.InterfaceInheritance" executed="True" success="True" time="0.016" asserts="1" />
+                      <test-case name="Castle.DynamicProxy.Tests.BugsReportedTestCase.ProxyInterfaceWithSetterOnly" executed="True" success="True" time="0.000" asserts="1" />
+                      <test-case name="Castle.DynamicProxy.Tests.BugsReportedTestCase.CallingProceedOnAbstractMethodShouldThrowException" executed="True" success="True" time="0.016" asserts="1" />
+                      <test-case name="Castle.DynamicProxy.Tests.BugsReportedTestCase.ProxyTypeThatInheritFromGenericType" executed="True" success="True" time="0.016" asserts="1" />
+                      <test-case name="Castle.DynamicProxy.Tests.BugsReportedTestCase.DYNPROXY_51_GenericMarkerInterface" executed="True" success="True" time="0.016" asserts="0" />
+                    </results>
+                  </test-suite>
+                  <test-suite name="Castle.DynamicProxy.Tests.CacheKeyTestCase" success="True" time="0.016" asserts="0">
+                    <results>
+                      <test-case name="Castle.DynamicProxy.Tests.CacheKeyTestCase.InstanceEquivalence" executed="True" success="True" time="0.000" asserts="2" />
+                      <test-case name="Castle.DynamicProxy.Tests.CacheKeyTestCase.InstanceEquivalence_WithInterfaces" executed="True" success="True" time="0.000" asserts="2" />
+                      <test-case name="Castle.DynamicProxy.Tests.CacheKeyTestCase.DifferentKeys" executed="True" success="True" time="0.016" asserts="3" />
+                      <test-case name="Castle.DynamicProxy.Tests.CacheKeyTestCase.DifferentOptions" executed="True" success="True" time="0.000" asserts="2" />
+                    </results>
+                  </test-suite>
+                  <test-suite name="Castle.DynamicProxy.Tests.ClassEmitterTestCase" success="True" time="0.453" asserts="0">
+                    <results>
+                      <test-case name="Castle.DynamicProxy.Tests.ClassEmitterTestCase.AutomaticDefaultConstructorGeneration" executed="True" success="True" time="0.078" asserts="0" />
+                      <test-case name="Castle.DynamicProxy.Tests.ClassEmitterTestCase.AutomaticDefaultConstructorGenerationWithClosedGenericType" executed="True" success="True" time="0.078" asserts="0" />
+                      <test-case name="Castle.DynamicProxy.Tests.ClassEmitterTestCase.StaticMethodArguments" executed="True" success="True" time="0.078" asserts="1" />
+                      <test-case name="Castle.DynamicProxy.Tests.ClassEmitterTestCase.InstanceMethodArguments" executed="True" success="True" time="0.109" asserts="1" />
+                      <test-case name="Castle.DynamicProxy.Tests.ClassEmitterTestCase.ForceUnsignedFalseWithSignedTypes" executed="True" success="True" time="0.063" asserts="1" />
+                      <test-case name="Castle.DynamicProxy.Tests.ClassEmitterTestCase.ForceUnsignedTrueWithSignedTypes" executed="True" success="True" time="0.047" asserts="1" />
+                    </results>
+                  </test-suite>
+                  <test-suite name="Castle.DynamicProxy.Tests.ClassWithAttributesTestCase" success="True" time="0.109" asserts="0">
+                    <results>
+                      <test-case name="Castle.DynamicProxy.Tests.ClassWithAttributesTestCase.EnsureProxyHasAttributesOnClassAndMethods" executed="True" success="True" time="0.047" asserts="4" />
+                      <test-case name="Castle.DynamicProxy.Tests.ClassWithAttributesTestCase.EnsureProxyHasAttributesOnClassAndMethods_ComplexAttributes" executed="True" success="True" time="0.063" asserts="20" />
+                    </results>
+                  </test-suite>
+                  <test-suite name="Castle.DynamicProxy.Tests.GenerationHookTestCase" success="True" time="0.031" asserts="0">
+                    <results>
+                      <test-case name="Castle.DynamicProxy.Tests.GenerationHookTestCase.HookIsUsedForConcreteClassProxy" executed="True" success="True" time="0.016" asserts="17" />
+                      <test-case name="Castle.DynamicProxy.Tests.GenerationHookTestCase.HookIsUsedForInterfaceProxy" executed="True" success="True" time="0.016" asserts="16" />
+                    </results>
+                  </test-suite>
+                  <test-suite name="Castle.DynamicProxy.Tests.GenericClassProxyTestCase" success="True" time="1.672" asserts="0">
+                    <results>
+                      <test-case name="Castle.DynamicProxy.Tests.GenericClassProxyTestCase.ProxyWithGenericArgument" executed="True" success="True" time="0.109" asserts="4" />
+                      <test-case name="Castle.DynamicProxy.Tests.GenericClassProxyTestCase.ProxyWithGenericArguments" executed="True" success="True" time="0.109" asserts="4" />
+                      <test-case name="Castle.DynamicProxy.Tests.GenericClassProxyTestCase.ProxyWithGenericArgumentsWithBaseGenericClass" executed="True" success="True" time="0.078" asserts="4" />
+                      <test-case name="Castle.DynamicProxy.Tests.GenericClassProxyTestCase.ProxyWithGenericArgumentsAndArgumentConstraints" executed="True" success="True" time="0.078" asserts="3" />
+                      <test-case name="Castle.DynamicProxy.Tests.GenericClassProxyTestCase.GenericProxyWithIndexer" executed="True" success="True" time="0.078" asserts="3" />
+                      <test-case name="Castle.DynamicProxy.Tests.GenericClassProxyTestCase.ProxyWithGenericArgumentsAndMethodGenericArguments" executed="True" success="True" time="0.078" asserts="4" />
+                      <test-case name="Castle.DynamicProxy.Tests.GenericClassProxyTestCase.ProxyWithGenericArgumentsAndMethodGenericArgumentsWithConstraints" executed="True" success="True" time="0.125" asserts="4" />
+                      <test-case name="Castle.DynamicProxy.Tests.GenericClassProxyTestCase.ProxyWithGenericArgumentsAndMethodGenericArgumentsWithOneNotDefinedOnType" executed="True" success="True" time="0.078" asserts="4" />
+                      <test-case name="Castle.DynamicProxy.Tests.GenericClassProxyTestCase.ProxyWithGenericArgumentsAndMethodGenericReturn" executed="True" success="True" time="0.078" asserts="4" />
+                      <test-case name="Castle.DynamicProxy.Tests.GenericClassProxyTestCase.GenericMethodArgumentsAndTypeGenericArgumentsWithSameName" executed="True" success="True" time="0.094" asserts="2" />
+                      <test-case name="Castle.DynamicProxy.Tests.GenericClassProxyTestCase.ClassWithGenMethodOnly" executed="True" success="True" time="0.078" asserts="3" />
+                      <test-case name="Castle.DynamicProxy.Tests.GenericClassProxyTestCase.MethodInfoClosedInGenTypeGenMethodRefType" executed="True" success="True" time="0.125" asserts="10" />
+                      <test-case name="Castle.DynamicProxy.Tests.GenericClassProxyTestCase.MethodInfoClosedInGenTypeGenMethodValueType" executed="True" success="True" time="0.094" asserts="10" />
+                      <test-case name="Castle.DynamicProxy.Tests.GenericClassProxyTestCase.MethodInfoClosedInGenTypeNongenMethodRefTypeRefType" executed="True" success="True" time="0.094" asserts="8" />
+                      <test-case name="Castle.DynamicProxy.Tests.GenericClassProxyTestCase.MethodInfoClosedInGenTypeNongenMethodValueTypeValueType" executed="True" success="True" time="0.109" asserts="8" />
+                      <test-case name="Castle.DynamicProxy.Tests.GenericClassProxyTestCase.MethodInfoClosedInGenTypeNongenMethodValueTypeRefType" executed="True" success="True" time="0.094" asserts="8" />
+                      <test-case name="Castle.DynamicProxy.Tests.GenericClassProxyTestCase.MethodInfoClosedInNongenTypeGenMethod" executed="True" success="True" time="0.109" asserts="10" />
+                      <test-case name="Castle.DynamicProxy.Tests.GenericClassProxyTestCase.ThrowsWhenProxyingGenericTypeDefNoTarget" executed="True" success="True" time="0.047" asserts="0" />
+                    </results>
+                  </test-suite>
+                  <test-suite name="Castle.DynamicProxy.Tests.GenericInterfaceProxyTestCase" success="True" time="2.219" asserts="0">
+                    <results>
+                      <test-case name="Castle.DynamicProxy.Tests.GenericInterfaceProxyTestCase.ProxyWithGenericArgument" executed="True" success="True" time="0.141" asserts="3" />
+                      <test-case name="Castle.DynamicProxy.Tests.GenericInterfaceProxyTestCase.ProxyWithGenericArgumentAndGenericMethod" executed="True" success="True" time="0.109" asserts="2" />
+                      <test-case name="Castle.DynamicProxy.Tests.GenericInterfaceProxyTestCase.ProxyWithGenericArgumentAndGenericMethodAndGenericReturn" executed="True" success="True" time="0.109" asserts="3" />
+                      <test-case name="Castle.DynamicProxy.Tests.GenericInterfaceProxyTestCase.ProxyWithGenInterfaceWithGenericArrays" executed="True" success="True" time="0.125" asserts="4" />
+                      <test-case name="Castle.DynamicProxy.Tests.GenericInterfaceProxyTestCase.ProxyWithGenInterfaceWithBase" executed="True" success="True" time="0.094" asserts="3" />
+                      <test-case name="Castle.DynamicProxy.Tests.GenericInterfaceProxyTestCase.ProxyWithGenExplicitImplementation" executed="True" success="True" time="0.063" asserts="0" />
+                      <test-case name="Castle.DynamicProxy.Tests.GenericInterfaceProxyTestCase.TwoGenericsInterfaceWithoutTarget" executed="True" success="True" time="0.078" asserts="0" />
+                      <test-case name="Castle.DynamicProxy.Tests.GenericInterfaceProxyTestCase.NonGenInterfaceWithParentGenClassImplementingGenInterface" executed="True" success="True" time="0.078" asserts="0" />
+                      <test-case name="Castle.DynamicProxy.Tests.GenericInterfaceProxyTestCase.WithoutTarget" executed="True" success="True" time="0.078" asserts="0" />
+                      <test-case name="Castle.DynamicProxy.Tests.GenericInterfaceProxyTestCase.MethodInfoClosedInGenIfcGenMethodRefTypeNoTarget" executed="True" success="True" time="0.078" asserts="12" />
+                      <test-case name="Castle.DynamicProxy.Tests.GenericInterfaceProxyTestCase.MethodInfoClosedInGenIfcGenMethodValueTypeNoTarget" executed="True" success="True" time="0.109" asserts="12" />
+                      <test-case name="Castle.DynamicProxy.Tests.GenericInterfaceProxyTestCase.MethodInfoClosedInGenIfcNongenMethodRefTypeNoTarget" executed="True" success="True" time="0.094" asserts="9" />
+                      <test-case name="Castle.DynamicProxy.Tests.GenericInterfaceProxyTestCase.MethodInfoClosedInGenIfcNongenMethodValueTypeNoTarget" executed="True" success="True" time="0.094" asserts="9" />
+                      <test-case name="Castle.DynamicProxy.Tests.GenericInterfaceProxyTestCase.MethodInfoClosedInNongenIfcGenMethodNoTarget" executed="True" success="True" time="0.094" asserts="10" />
+                      <test-case name="Castle.DynamicProxy.Tests.GenericInterfaceProxyTestCase.MethodInfoClosedInGenIfcGenMethodRefTypeWithTarget" executed="True" success="True" time="0.125" asserts="22" />
+                      <test-case name="Castle.DynamicProxy.Tests.GenericInterfaceProxyTestCase.MethodInfoClosedInGenIfcGenMethodValueTypeWithTarget" executed="True" success="True" time="0.078" asserts="22" />
+                      <test-case name="Castle.DynamicProxy.Tests.GenericInterfaceProxyTestCase.MethodInfoClosedInGenIfcNongenMethodRefTypeWithTarget" executed="True" success="True" time="0.125" asserts="16" />
+                      <test-case name="Castle.DynamicProxy.Tests.GenericInterfaceProxyTestCase.MethodInfoClosedInGenIfcNongenMethodValueTypeWithTarget" executed="True" success="True" time="0.109" asserts="16" />
+                      <test-case name="Castle.DynamicProxy.Tests.GenericInterfaceProxyTestCase.MethodInfoClosedInNongenIfcGenMethodWithTarget" executed="True" success="True" time="0.109" asserts="18" />
+                      <test-case name="Castle.DynamicProxy.Tests.GenericInterfaceProxyTestCase.ThrowsWhenProxyingGenericTypeDefNoTarget" executed="True" success="True" time="0.047" asserts="0" />
+                      <test-case name="Castle.DynamicProxy.Tests.GenericInterfaceProxyTestCase.TypeGetMethodsIsStable" description="There is a strange CLR bug resulting from our loading the tokens of methods in generic types. This test ensures we do not trigger it." executed="False">
+                        <reason>
+                          <message><![CDATA[Currently, we trigger the bug, and work around it - see MethodFinder]]></message>
+                        </reason>
+                      </test-case>
+                      <test-case name="Castle.DynamicProxy.Tests.GenericInterfaceProxyTestCase.MethodFinderIsStable" description="There is a strange CLR bug resulting from our loading the tokens of methods in generic types. This test ensures we correctly work around it." executed="True" success="True" time="0.109" asserts="4" />
+                      <test-case name="Castle.DynamicProxy.Tests.GenericInterfaceProxyTestCase.TypeGetMethodsIsStableInDifferentAppDomains" description="There is a strange CLR bug resulting from our loading the tokens of methods in generic types. This test ensures we do not trigger it across AppDomains. If we do, MethodFinder must provide a cross-AppDomain workaround." executed="True" success="True" time="0.156" asserts="3" />
+                    </results>
+                  </test-suite>
+                  <test-suite name="Castle.DynamicProxy.Tests.InvocationTestCase" success="True" time="0.250" asserts="0">
+                    <results>
+                      <test-case name="Castle.DynamicProxy.Tests.InvocationTestCase.InvocationForConcreteClassProxy" executed="True" success="True" time="0.125" asserts="17" />
+                      <test-case name="Castle.DynamicProxy.Tests.InvocationTestCase.InvocationForInterfaceProxyWithTarget" executed="True" success="True" time="0.125" asserts="17" />
+                    </results>
+                  </test-suite>
+                  <test-suite name="Castle.DynamicProxy.Tests.MethodComparerTestCase" success="True" time="0.000" asserts="0">
+                    <results>
+                      <test-case name="Castle.DynamicProxy.Tests.MethodComparerTestCase.CompareMethods" executed="True" success="True" time="0.000" asserts="28" />
+                    </results>
+                  </test-suite>
+                  <test-suite name="Castle.DynamicProxy.Tests.MethodFinderTestCase" success="True" time="0.016" asserts="0">
+                    <results>
+                      <test-case name="Castle.DynamicProxy.Tests.MethodFinderTestCase.AssertArrayAreEqualUnsorted" executed="True" success="True" time="0.000" asserts="17" />
+                      <test-case name="Castle.DynamicProxy.Tests.MethodFinderTestCase.GetMethodsForPublic" executed="True" success="True" time="0.000" asserts="5" />
+                      <test-case name="Castle.DynamicProxy.Tests.MethodFinderTestCase.GetMethodsForNonPublic" executed="True" success="True" time="0.000" asserts="6" />
+                      <test-case name="Castle.DynamicProxy.Tests.MethodFinderTestCase.GetMethodsForPublicAndNonPublic" executed="True" success="True" time="0.000" asserts="10" />
+                      <test-case name="Castle.DynamicProxy.Tests.MethodFinderTestCase.GetMethodsThrowsOnStatic" executed="True" success="True" time="0.000" asserts="0" />
+                      <test-case name="Castle.DynamicProxy.Tests.MethodFinderTestCase.GetMethodsThrowsOnOtherFlags" executed="True" success="True" time="0.000" asserts="0" />
+                    </results>
+                  </test-suite>
+                  <test-suite name="Castle.DynamicProxy.Tests.MethodsWithAttributesOnParametersTestCase" success="True" time="0.125" asserts="0">
+                    <results>
+                      <test-case name="Castle.DynamicProxy.Tests.MethodsWithAttributesOnParametersTestCase.ParametersAreCopiedToProxiedObject" executed="True" success="True" time="0.063" asserts="0" />
+                      <test-case name="Castle.DynamicProxy.Tests.MethodsWithAttributesOnParametersTestCase.CanGetParameterAttributeFromProxiedObject" executed="True" success="True" time="0.063" asserts="1" />
+                    </results>
+                  </test-suite>
+                  <test-suite name="Castle.DynamicProxy.Tests.MixinTestCase" success="True" time="0.000" asserts="0">
+                    <results />
+                  </test-suite>
+                  <test-suite name="Castle.DynamicProxy.Tests.ModuleScopeTestCase" success="True" time="0.297" asserts="0">
+                    <results>
+                      <test-case name="Castle.DynamicProxy.Tests.ModuleScopeTestCase.ModuleScopeStoresModuleBuilder" executed="True" success="True" time="0.000" asserts="2" />
+                      <test-case name="Castle.DynamicProxy.Tests.ModuleScopeTestCase.ModuleScopeCanHandleSignedAndUnsignedInParallel" executed="True" success="True" time="0.016" asserts="12" />
+                      <test-case name="Castle.DynamicProxy.Tests.ModuleScopeTestCase.ImplicitModulePaths" executed="True" success="True" time="0.016" asserts="6" />
+                      <test-case name="Castle.DynamicProxy.Tests.ModuleScopeTestCase.ExplicitModulePaths" executed="True" success="True" time="0.016" asserts="12" />
+                      <test-case name="Castle.DynamicProxy.Tests.ModuleScopeTestCase.SaveSigned" executed="True" success="True" time="0.047" asserts="164" />
+                      <test-case name="Castle.DynamicProxy.Tests.ModuleScopeTestCase.SaveUnsigned" executed="True" success="True" time="0.000" asserts="4" />
+                      <test-case name="Castle.DynamicProxy.Tests.ModuleScopeTestCase.SaveWithPath" executed="True" success="True" time="0.031" asserts="4" />
+                      <test-case name="Castle.DynamicProxy.Tests.ModuleScopeTestCase.SaveThrowsWhenNoModuleObtained" executed="True" success="True" time="0.000" asserts="0" />
+                      <test-case name="Castle.DynamicProxy.Tests.ModuleScopeTestCase.SaveThrowsWhenMultipleAssembliesGenerated" executed="True" success="True" time="0.016" asserts="0" />
+                      <test-case name="Castle.DynamicProxy.Tests.ModuleScopeTestCase.SaveWithFlagFalseDoesntThrowsWhenMultipleAssembliesGenerated" executed="True" success="True" time="0.000" asserts="0" />
+                      <test-case name="Castle.DynamicProxy.Tests.ModuleScopeTestCase.ExplicitSaveWorksEvenWhenMultipleAssembliesGenerated" executed="True" success="True" time="0.047" asserts="166" />
+                      <test-case name="Castle.DynamicProxy.Tests.ModuleScopeTestCase.ExplicitSaveThrowsWhenSpecifiedAssemblyNotGeneratedWeakName" executed="True" success="True" time="0.016" asserts="0" />
+                      <test-case name="Castle.DynamicProxy.Tests.ModuleScopeTestCase.ExplicitSaveThrowsWhenSpecifiedAssemblyNotGeneratedStrongName" executed="True" success="True" time="0.000" asserts="0" />
+                      <test-case name="Castle.DynamicProxy.Tests.ModuleScopeTestCase.GeneratedAssembliesDefaultName" executed="True" success="True" time="0.016" asserts="2" />
+                      <test-case name="Castle.DynamicProxy.Tests.ModuleScopeTestCase.GeneratedAssembliesWithCustomName" executed="True" success="True" time="0.000" asserts="2" />
+                      <test-case name="Castle.DynamicProxy.Tests.ModuleScopeTestCase.ModuleScopeDoesntTryToDeleteFromCurrentDirectory" executed="True" success="True" time="0.078" asserts="0" />
+                    </results>
+                  </test-suite>
+                  <test-suite name="Castle.DynamicProxy.Tests.OutRefParams" success="True" time="0.063" asserts="0">
+                    <results>
+                      <test-case name="Castle.DynamicProxy.Tests.OutRefParams.CanCreateProxyOfInterfaceWithOutParameter" executed="True" success="True" time="0.016" asserts="1" />
+                      <test-case name="Castle.DynamicProxy.Tests.OutRefParams.CanCallMethodWithOutParameter" executed="True" success="True" time="0.016" asserts="0" />
+                      <test-case name="Castle.DynamicProxy.Tests.OutRefParams.CanAffectValueOfOutParameter" executed="True" success="True" time="0.000" asserts="1" />
+                      <test-case name="Castle.DynamicProxy.Tests.OutRefParams.CanCreateProxyWithRefParam" executed="True" success="True" time="0.016" asserts="1" />
+                      <test-case name="Castle.DynamicProxy.Tests.OutRefParams.CanCreateComplexOutRefProxyOnClass" executed="True" success="True" time="0.016" asserts="3" />
+                      <test-case name="Castle.DynamicProxy.Tests.OutRefParams.CanCreateProxyWithStructRefParam" executed="False">
+                        <reason>
+                          <message><![CDATA[Explicit selection required]]></message>
+                        </reason>
+                      </test-case>
+                    </results>
+                  </test-suite>
+                  <test-suite name="Castle.DynamicProxy.Tests.RhinoMocksTestCase" success="True" time="1.547" asserts="0">
+                    <results>
+                      <test-case name="Castle.DynamicProxy.Tests.RhinoMocksTestCase.GenericClassWithGenericMethod" executed="True" success="True" time="0.109" asserts="1" />
+                      <test-case name="Castle.DynamicProxy.Tests.RhinoMocksTestCase.GenericClassWithGenericMethodWitoutTarget" executed="True" success="True" time="0.078" asserts="1" />
+                      <test-case name="Castle.DynamicProxy.Tests.RhinoMocksTestCase.UsingEvents_Interface" executed="True" success="True" time="0.109" asserts="2" />
+                      <test-case name="Castle.DynamicProxy.Tests.RhinoMocksTestCase.UsingEvents_Class" executed="True" success="True" time="0.078" asserts="2" />
+                      <test-case name="Castle.DynamicProxy.Tests.RhinoMocksTestCase.NeedingToCreateNewMethodTableSlot" executed="False">
+                        <reason>
+                          <message><![CDATA[I dont think the effort to fix this edge case is worthwhile]]></message>
+                        </reason>
+                      </test-case>
+                      <test-case name="Castle.DynamicProxy.Tests.RhinoMocksTestCase.ProxyingInterfaceWithGuid" executed="True" success="True" time="0.172" asserts="1" />
+                      <test-case name="Castle.DynamicProxy.Tests.RhinoMocksTestCase.ProxyingInternalInterface" executed="True" success="True" time="0.234" asserts="1" />
+                      <test-case name="Castle.DynamicProxy.Tests.RhinoMocksTestCase.CanProxyDataSet" executed="True" success="True" time="0.250" asserts="0" />
+                      <test-case name="Castle.DynamicProxy.Tests.RhinoMocksTestCase.ProxyingComInteraces" executed="True" success="True" time="0.078" asserts="1" />
+                      <test-case name="Castle.DynamicProxy.Tests.RhinoMocksTestCase.ProxyingGenericClassWithGenericClassConstraint" executed="True" success="True" time="0.078" asserts="1" />
+                      <test-case name="Castle.DynamicProxy.Tests.RhinoMocksTestCase.ProxyInternalMethod" executed="True" success="True" time="0.078" asserts="1" />
+                      <test-case name="Castle.DynamicProxy.Tests.RhinoMocksTestCase.ProxyingProtectedInternalAbstractMethod" executed="True" success="True" time="0.109" asserts="1" />
+                      <test-case name="Castle.DynamicProxy.Tests.RhinoMocksTestCase.VirtualMethodCallsFromTheConstructor" executed="True" success="True" time="0.094" asserts="2" />
+                      <test-case name="Castle.DynamicProxy.Tests.RhinoMocksTestCase.InternalClassWithInternalMethodAndProperty" executed="True" success="True" time="0.078" asserts="3" />
+                    </results>
+                  </test-suite>
+                  <test-suite name="Castle.DynamicProxy.Tests.TypeEquivalentTestCase" success="True" time="0.000" asserts="0">
+                    <results>
+                      <test-case name="Castle.DynamicProxy.Tests.TypeEquivalentTestCase.SimpleCases" executed="True" success="True" time="0.000" asserts="5" />
+                      <test-case name="Castle.DynamicProxy.Tests.TypeEquivalentTestCase.GenericTypeParameter" executed="True" success="True" time="0.000" asserts="4" />
+                      <test-case name="Castle.DynamicProxy.Tests.TypeEquivalentTestCase.GenericTypesWithGenericParameter" executed="True" success="True" time="0.000" asserts="7" />
+                      <test-case name="Castle.DynamicProxy.Tests.TypeEquivalentTestCase.ArrayTypes" executed="True" success="True" time="0.000" asserts="3" />
+                      <test-case name="Castle.DynamicProxy.Tests.TypeEquivalentTestCase.GenericArrayTypes" executed="True" success="True" time="0.000" asserts="5" />
+                    </results>
+                  </test-suite>
+                  <test-suite name="Castle.DynamicProxy.Tests.XmlSerializationTestCase" success="True" time="0.000" asserts="0">
+                    <results>
+                      <test-case name="Castle.DynamicProxy.Tests.XmlSerializationTestCase.ProxyIsXmlSerializable" executed="False">
+                        <reason>
+                          <message><![CDATA[Could not come up with a solution for this]]></message>
+                        </reason>
+                      </test-case>
+                    </results>
+                  </test-suite>
+                </results>
+              </test-suite>
+              <test-suite name="Castle.DynamicProxy.Test" success="True" time="2.094" asserts="0">
+                <results>
+                  <test-suite name="Castle.DynamicProxy.Test.SerializableClassTestCase" success="True" time="2.078" asserts="0">
+                    <results>
+                      <test-case name="Castle.DynamicProxy.Test.SerializableClassTestCase.CreateSerializable" executed="True" success="True" time="0.094" asserts="1" />
+                      <test-case name="Castle.DynamicProxy.Test.SerializableClassTestCase.ImplementsISerializable" executed="True" success="True" time="0.078" asserts="1" />
+                      <test-case name="Castle.DynamicProxy.Test.SerializableClassTestCase.SimpleProxySerialization" executed="True" success="True" time="0.094" asserts="1" />
+                      <test-case name="Castle.DynamicProxy.Test.SerializableClassTestCase.SerializationDelegate" executed="True" success="True" time="0.094" asserts="1" />
+                      <test-case name="Castle.DynamicProxy.Test.SerializableClassTestCase.SimpleInterfaceProxy" executed="True" success="True" time="0.141" asserts="5" />
+                      <test-case name="Castle.DynamicProxy.Test.SerializableClassTestCase.SimpleInterfaceProxy_WithoutTarget" executed="True" success="True" time="0.156" asserts="4" />
+                      <test-case name="Castle.DynamicProxy.Test.SerializableClassTestCase.CustomMarkerInterface" executed="True" success="True" time="0.094" asserts="3" />
+                      <test-case name="Castle.DynamicProxy.Test.SerializableClassTestCase.HashtableSerialization" executed="True" success="True" time="0.156" asserts="3" />
+                      <test-case name="Castle.DynamicProxy.Test.SerializableClassTestCase.SerializatingObjectsWithoutDefaultConstructor" executed="True" success="True" time="0.094" asserts="2" />
+                      <test-case name="Castle.DynamicProxy.Test.SerializableClassTestCase.SerializeObjectsWithDelegateToOtherObject" executed="True" success="True" time="0.125" asserts="16" />
+                      <test-case name="Castle.DynamicProxy.Test.SerializableClassTestCase.SerializeObjectsWithDelegateToThisObject" executed="True" success="True" time="0.094" asserts="14" />
+                      <test-case name="Castle.DynamicProxy.Test.SerializableClassTestCase.SerializeObjectsWithIndirectDelegateToThisObject" executed="True" success="True" time="0.094" asserts="14" />
+                      <test-case name="Castle.DynamicProxy.Test.SerializableClassTestCase.SerializeObjectsWithIndirectDelegateToMember" executed="True" success="True" time="0.094" asserts="14" />
+                      <test-case name="Castle.DynamicProxy.Test.SerializableClassTestCase.SerializeClassWithIndirectSelfReference" executed="True" success="True" time="0.094" asserts="2" />
+                      <test-case name="Castle.DynamicProxy.Test.SerializableClassTestCase.SerializeClassWithDirectAndIndirectSelfReference" executed="True" success="True" time="0.078" asserts="3" />
+                      <test-case name="Castle.DynamicProxy.Test.SerializableClassTestCase.ProxyKnowsItsGenerationOptions" executed="True" success="True" time="0.281" asserts="5" />
+                      <test-case name="Castle.DynamicProxy.Test.SerializableClassTestCase.ProxyGenerationOptionsRespectedOnDeserialization" executed="True" success="True" time="0.094" asserts="10" />
+                      <test-case name="Castle.DynamicProxy.Test.SerializableClassTestCase.MixinsAppliedOnDeserialization" executed="False">
+                        <reason>
+                          <message><![CDATA[Checks serialization with mixins, un-ignore when these are implemented.]]></message>
+                        </reason>
+                      </test-case>
+                      <test-case name="Castle.DynamicProxy.Test.SerializableClassTestCase.ProxyGenerationOptionsRespectedOnDeserializationComplex" executed="True" success="True" time="0.109" asserts="18" />
+                    </results>
+                  </test-suite>
+                </results>
+              </test-suite>
+            </results>
+          </test-suite>
+        </results>
+      </test-suite>
+    </results>
+  </test-suite>
+</test-results>

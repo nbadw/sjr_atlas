@@ -1,0 +1,42 @@
+#capturefor(headline)
+<h1>Tabular Data</h1>
+#end
+
+<div id="content" class="clearfix">	
+	<div class="innerwrap">
+		<div class="textbox">	
+		    <div id="tabular">
+		        #foreach($query in $queries)
+		            <div class="query-results">	
+		                <table>
+		                    <thead>
+		                        <tr>
+		                            #foreach($column_name in $query.ColumnNames)
+		                                <th>$column_name</th>
+		                            #end
+		                        </tr>		            
+		                    </thead>
+        		        
+		                    <tbody>
+		                        #set($count = 0)
+	                            #foreach($record in $query.QueryRecords)
+	                                #if($count % 2 == 0)
+	                                    <tr class="even">
+	                                #else
+	                                    <tr class="odd">
+	                                #end	                
+	                                #foreach($value in $record)
+	                                    <td>$value</td>
+	                                #end
+	                                </tr>
+	                                #set($count = $count + 1)		                
+	                            #end
+		                    </tbody>
+		                </table>  
+		            </div> 
+		        #end
+		    </div>                    
+        </div>
+	</div>
+</div>
+

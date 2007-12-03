@@ -1,0 +1,138 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Castle.DynamicProxy.Tests</name>
+    </assembly>
+    <members>
+        <member name="T:Castle.DynamicProxy.Test.Classes.ClassMarshalByRef">
+            <summary>
+            Summary description for ClassMarshalByRef.
+            </summary>
+        </member>
+        <member name="T:Castle.DynamicProxy.Test.Classes.ClassWithConstructors">
+            <summary>
+            Summary description for ClassWithConstructors.
+            </summary>
+        </member>
+        <member name="T:Castle.DynamicProxy.Test.Classes.ClassWithGuid">
+            <summary>
+            Summary description for GuidClass.
+            </summary>
+        </member>
+        <member name="T:Castle.DynamicProxy.Test.Classes.MySerializableClass">
+            <summary>
+            Summary description for MySerializableClass.
+            </summary>
+        </member>
+        <member name="T:Castle.DynamicProxy.Test.Classes.NonPublicConstructorClass">
+            <summary>
+            Summary description for NonPublicConstructorClass.
+            </summary>
+        </member>
+        <member name="T:Castle.DynamicProxy.Test.Classes.NonPublicMethodsClass">
+            <summary>
+            Summary description for NonPublicMethodsClass.
+            </summary>
+        </member>
+        <member name="T:Castle.DynamicProxy.Test.Classes.NoVirtualMethodClass">
+            <summary>
+            Summary description for NoVirtualMethodClass.
+            </summary>
+        </member>
+        <member name="T:Castle.DynamicProxy.Test.Classes.SealedMethodsClass">
+            <summary>
+            Summary description for SealedMethodsClass.
+            </summary>
+        </member>
+        <member name="T:Castle.DynamicProxy.Test.Classes.ServiceClass">
+            <summary>
+            Summary description for ServiceClass.
+            </summary>
+        </member>
+        <member name="T:Castle.DynamicProxy.Test.Classes.SimpleClass">
+            <summary>
+            Summary description for SimpleClass.
+            </summary>
+        </member>
+        <member name="T:Castle.DynamicProxy.Test.Classes.SpecializedServiceClass">
+            <summary>
+            Summary description for SpecializedServiceClass.
+            </summary>
+        </member>
+        <member name="T:Castle.DynamicProxy.Test.Classes.SubNamespace.SimpleClass">
+            <summary>
+            Summary description for SimpleClass.
+            </summary>
+        </member>
+        <member name="T:Castle.DynamicProxy.Test.ClassInterfaces.IMyInterface">
+            <summary>
+            Summary description for IMyInterface.
+            </summary>
+        </member>
+        <member name="T:Castle.DynamicProxy.Test.ClassInterfaces.IMySecondInterface">
+            <summary>
+            Summary description for IMySecondInterface.
+            </summary>
+        </member>
+        <member name="T:Castle.DynamicProxy.Test.ClassInterfaces.State">
+            <summary>
+            Simple enum declaration
+            </summary>
+        </member>
+        <member name="T:Castle.DynamicProxy.Test.ClassInterfaces.IServiceStatus">
+            <summary>
+            Summary description for IServiceStatus.
+            </summary>
+        </member>
+        <member name="T:Castle.DynamicProxy.Test.ClassInterfaces.MyInterfaceImpl">
+            <summary>
+            Summary description for MyInterfaceImpl.
+            </summary>
+        </member>
+        <member name="T:Castle.DynamicProxy.Test.ClassInterfaces.MySecondInterfaceImpl">
+            <summary>
+            Summary description for MySecondInterfaceImpl.
+            </summary>
+        </member>
+        <member name="T:Castle.DynamicProxy.Test.Mixins.ComplexMixin">
+            <summary>
+            Summary description for ComplexMixin.
+            </summary>
+        </member>
+        <member name="T:Castle.DynamicProxy.Test.Mixins.OtherMixin">
+            <summary>
+            Summary description for OtherMixin.
+            </summary>
+        </member>
+        <member name="T:Castle.DynamicProxy.Test.Mixins.SimpleMixin">
+            <summary>
+            Summary description for SimpleMixin.
+            </summary>
+        </member>
+        <member name="T:Castle.DynamicProxy.Test.AccessLevelTestCase">
+            <summary>
+            Summary description for AccessLevelTestCase.
+            </summary>
+        </member>
+        <member name="T:Castle.DynamicProxy.Test.CachedTypeTestCase">
+            <summary>
+            Summary description for CachedTypeTestCase.
+            </summary>
+        </member>
+        <member name="T:Castle.DynamicProxy.Test.MixinTestCase">
+            <summary>
+            Summary description for CachedTypeTestCase.
+            </summary>
+        </member>
+        <member name="M:Castle.DynamicProxy.Test.ProxyGeneratorTestCase.NameBugReportedTest">
+            <summary>
+            See http://support.castleproject.org/browse/DYNPROXY-42
+            </summary>
+        </member>
+        <member name="T:Castle.DynamicProxy.Test.SerializableClassTestCase">
+            <summary>
+            Summary description for SerializableClassTestCase.
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Castle.DynamicProxy2.Tests</name>
+    </assembly>
+    <members>
+        <member name="T:Castle.DynamicProxy.Test.Classes.MySerializableClass">
+            <summary>
+            Summary description for MySerializableClass.
+            </summary>
+        </member>
+        <member name="T:Castle.DynamicProxy.Tests.InterClasses.IMyInterface2">
+            <summary>
+            Summary description for IMyInterface.
+            </summary>
+        </member>
+        <member name="T:Castle.DynamicProxy.Tests.InterClasses.MyInterfaceImpl">
+            <summary>
+            Summary description for MyInterfaceImpl.
+            </summary>
+        </member>
+        <member name="M:Castle.DynamicProxy.Tests.BasicClassProxyTestCase.MethodParamNamesAreReplicated">
+            <summary>
+            See http://support.castleproject.org/browse/DYNPROXY-43
+            </summary>
+        </member>
+        <member name="M:Castle.DynamicProxy.Tests.BasicInterfaceProxyTestCase.MethodParamNamesAreReplicated">
+            <summary>
+            See http://support.castleproject.org/browse/DYNPROXY-43
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!--This file represents the results of running a test suite-->
+<test-results name="C:\src\castle\build\net-2.0\debug\Castle.Services.Transaction.Tests.dll" total="14" failures="0" not-run="0" date="2007-09-20" time="12:14:51">
+  <environment nunit-version="2.2.8.0" clr-version="2.0.50727.832" os-version="Microsoft Windows NT 5.1.2600 Service Pack 2" platform="Win32NT" cwd="C:\src\castle" machine-name="D65C2FD1" user="nbdata" user-domain="D65C2FD1" />
+  <culture-info current-culture="en-US" current-uiculture="en-US" />
+  <test-suite name="C:\src\castle\build\net-2.0\debug\Castle.Services.Transaction.Tests.dll" success="True" time="0.031" asserts="0">
+    <results>
+      <test-suite name="Castle" success="True" time="0.031" asserts="0">
+        <results>
+          <test-suite name="Castle.Services" success="True" time="0.031" asserts="0">
+            <results>
+              <test-suite name="Castle.Services.Transaction" success="True" time="0.031" asserts="0">
+                <results>
+                  <test-suite name="Castle.Services.Transaction.Tests" success="True" time="0.031" asserts="0">
+                    <results>
+                      <test-suite name="Castle.Services.Transaction.Tests.NestedTransactionsTestCase" success="True" time="0.016" asserts="0">
+                        <results>
+                          <test-case name="Castle.Services.Transaction.Tests.NestedTransactionsTestCase.NestedRequiresWithCommits" executed="True" success="True" time="0.016" asserts="3" />
+                          <test-case name="Castle.Services.Transaction.Tests.NestedTransactionsTestCase.NestedRequiresAndRequiresNew" executed="True" success="True" time="0.000" asserts="4" />
+                          <test-case name="Castle.Services.Transaction.Tests.NestedTransactionsTestCase.SameResources" executed="True" success="True" time="0.000" asserts="1" />
+                          <test-case name="Castle.Services.Transaction.Tests.NestedTransactionsTestCase.NotSupportedAndNoActiveTransaction" executed="True" success="True" time="0.000" asserts="1" />
+                          <test-case name="Castle.Services.Transaction.Tests.NestedTransactionsTestCase.NotSupportedAndActiveTransaction" executed="True" success="True" time="0.000" asserts="0" />
+                          <test-case name="Castle.Services.Transaction.Tests.NestedTransactionsTestCase.NestedRollback" executed="True" success="True" time="0.000" asserts="0" />
+                          <test-case name="Castle.Services.Transaction.Tests.NestedTransactionsTestCase.InvalidDispose1" executed="True" success="True" time="0.000" asserts="0" />
+                          <test-case name="Castle.Services.Transaction.Tests.NestedTransactionsTestCase.InvalidDispose2" executed="True" success="True" time="0.000" asserts="0" />
+                        </results>
+                      </test-suite>
+                      <test-suite name="Castle.Services.Transaction.Tests.TransactionManagerTestCase" success="True" time="0.016" asserts="0">
+                        <results>
+                          <test-case name="Castle.Services.Transaction.Tests.TransactionManagerTestCase.SynchronizationsAndCommit" executed="True" success="True" time="0.016" asserts="4" />
+                          <test-case name="Castle.Services.Transaction.Tests.TransactionManagerTestCase.SynchronizationsAndRollback" executed="True" success="True" time="0.000" asserts="4" />
+                          <test-case name="Castle.Services.Transaction.Tests.TransactionManagerTestCase.ResourcesAndCommit" executed="True" success="True" time="0.000" asserts="9" />
+                          <test-case name="Castle.Services.Transaction.Tests.TransactionManagerTestCase.ResourcesAndRollback" executed="True" success="True" time="0.000" asserts="9" />
+                          <test-case name="Castle.Services.Transaction.Tests.TransactionManagerTestCase.InvalidBegin" executed="True" success="True" time="0.000" asserts="0" />
+                          <test-case name="Castle.Services.Transaction.Tests.TransactionManagerTestCase.InvalidCommit" executed="True" success="True" time="0.000" asserts="0" />
+                        </results>
+                      </test-suite>
+                    </results>
+                  </test-suite>
+                </results>
+              </test-suite>
+            </results>
+          </test-suite>
+        </results>
+      </test-suite>
+    </results>
+  </test-suite>
+</test-results>

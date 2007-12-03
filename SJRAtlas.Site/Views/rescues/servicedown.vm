@@ -1,0 +1,26 @@
+#capturefor(headline)
+<h1>Search</h1>
+<p>You've searched $context for: <span class="search_query">&ldquo;$!{query}&rdquo;</span>. An error occured while trying to process this request.</p>
+#end
+
+<div id="content" class="clearfix">	
+	<div class="innerwrap">
+		<div class="textbox">			
+            <div class="two_column first">
+                <div class="column first">
+                    <h2>An Error Occured</h2>
+                    <p>$message</p>
+                </div>
+                <div class="column">
+                    <h2>Need Help?</h2>
+                    <p>You've searched $context for: <span class="search_query">&ldquo;$!{query}&rdquo;</span>.</p>
+                    <p>If you haven't found what you are looking for you may also want to try the following:</p>
+                    <ul>
+                        <li><a href="/search/advanced.rails">Advanced Search</a></li>
+                        <li>Another Link</li>
+                    </ul>
+                </div>
+            </div>                  
+        </div>
+	</div>
+</div>

@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Castle.MonoRail.Framework.Tests</name>
+    </assembly>
+    <members>
+        <member name="M:Castle.MonoRail.Framework.Tests.Helpers.FormHelperCheckboxFieldListTestCase.BugReport1">
+            <summary>
+            Code posted on the mailing list
+            </summary>
+        </member>
+        <member name="M:Castle.MonoRail.Framework.Tests.Helpers.FormHelperCheckboxFieldListTestCase.CheckboxFieldList1">
+            <summary>
+            Tests the subscription.Months as null and an int array as source
+            </summary>
+        </member>
+        <member name="M:Castle.MonoRail.Framework.Tests.Helpers.FormHelperCheckboxFieldListTestCase.CheckboxFieldList2">
+            <summary>
+            Tests the subscription.Months as non null and an int array as source
+            </summary>
+        </member>
+        <member name="M:Castle.MonoRail.Framework.Tests.Helpers.FormHelperCheckboxFieldListTestCase.CheckboxFieldList3">
+            <summary>
+            Tests the subscription.Months2 as null and using a <c>Month</c> array as data source
+            </summary>
+        </member>
+        <member name="M:Castle.MonoRail.Framework.Tests.Helpers.FormHelperCheckboxFieldListTestCase.CheckboxFieldList3a">
+            <summary>
+            Tests the subscription.Months2 as null and using a <c>Month</c> array as data source
+            </summary>
+        </member>
+        <member name="M:Castle.MonoRail.Framework.Tests.Helpers.FormHelperCheckboxFieldListTestCase.CheckboxFieldList4">
+            <summary>
+            Tests the subscription.Months2 as non null and using a <c>Month</c> array as data source
+            </summary>
+        </member>
+        <member name="M:Castle.MonoRail.Framework.Tests.Helpers.FormHelperCheckboxFieldListTestCase.CheckboxFieldList5">
+            <summary>
+            Tests the subscription.Months2 as non null and using a <c>Month</c> array as data source
+            but with selection
+            </summary>
+        </member>
+        <member name="M:Castle.MonoRail.Framework.Tests.Helpers.FormHelperSetOperation.SingleSelectionDifferentTypes">
+            <summary>
+            The target is a decimal while the data source is an array of strings
+            </summary>
+        </member>
+    </members>
+</doc>

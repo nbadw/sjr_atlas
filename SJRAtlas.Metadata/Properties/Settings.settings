@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="SJRAtlas.Metadata.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="MetadataIndexPath" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">c:\metadata\indexes\dev</Value>
+    </Setting>
+    <Setting Name="PrinceCommandLineExecutable" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">C:\Program Files\Prince\Engine\bin\prince.exe</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

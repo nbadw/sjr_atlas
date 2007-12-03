@@ -1,0 +1,106 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Castle.Windsor.Tests</name>
+    </assembly>
+    <members>
+        <member name="T:Castle.Windsor.Tests.Components.CalculatorService">
+            <summary>
+            Summary description for CalculatorService.
+            </summary>
+        </member>
+        <member name="T:Castle.Windsor.Tests.Components.ICalcService">
+            <summary>
+            Summary description for ICalcService.
+            </summary>
+        </member>
+        <member name="T:Castle.Windsor.Tests.Components.CalculatorServiceWithAttributes">
+            <summary>
+            Summary description for CalculatorServiceWithAttributes.
+            </summary>
+        </member>
+        <member name="T:Castle.Windsor.Tests.Components.CalculatorServiceWithMultipleInterfaces">
+            <summary>
+            Summary description for CalculatorServiceWithAttributes.
+            </summary>
+        </member>
+        <member name="T:Castle.Windsor.Tests.Components.CalculatorServiceWithSingleProxyBehavior">
+            <summary>
+            Summary description for CalculatorServiceWithAttributes.
+            </summary>
+        </member>
+        <member name="T:Castle.Windsor.Tests.Components.CalculatorServiceWithoutSingleProxyBehavior">
+            <summary>
+            Summary description for CalculatorServiceWithAttributes.
+            </summary>
+        </member>
+        <member name="M:Castle.Windsor.Tests.Components.ComponentWithStringProperty.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Castle.Windsor.Tests.Components.ComponentWithStringProperty"/> class.
+            </summary>
+            <param name="name">The name.</param>
+        </member>
+        <member name="P:Castle.Windsor.Tests.Components.ComponentWithStringProperty.Name">
+            <summary>
+            Gets the name.
+            </summary>
+            <value>The name.</value>
+        </member>
+        <member name="T:Castle.Windsor.Tests.Components.Employee">
+            <summary>
+            Summary description for Employee.
+            </summary>
+        </member>
+        <member name="T:Castle.Windsor.Tests.Components.IEmployee">
+            <summary>
+            Summary description for IEmployee.
+            </summary>
+        </member>
+        <member name="T:Castle.Windsor.Tests.Components.IReviewableEmployee">
+            <summary>
+            Summary description for IReviewableEmployee.
+            </summary>
+        </member>
+        <member name="T:Castle.Windsor.Tests.Components.IReviewer">
+            <summary>
+            Summary description for IReviewer.
+            </summary>
+        </member>
+        <member name="T:Castle.Windsor.Tests.Components.ReviewableEmployee">
+            <summary>
+            Summary description for ReviewableEmployee.
+            </summary>
+        </member>
+        <member name="T:Castle.Windsor.Tests.Components.Reviewer">
+            <summary>
+            Summary description for Reviewer.
+            </summary>
+        </member>
+        <member name="T:Castle.Windsor.Tests.Configuration.AppDomainConfigSourceTestCase">
+            <summary>
+            Summary description for AppDomainConfigSourceTestCase.
+            </summary>
+        </member>
+        <member name="T:Castle.Windsor.Tests.XmlProcessor.XmlProcessorTestCase">
+            <summary>
+            Summary description for Class1.
+            </summary>
+        </member>
+        <member name="M:Castle.Windsor.Tests.XmlProcessor.XmlProcessorTestCase.RunTests">
+            <summary>
+            Runs the tests.
+            </summary>
+        </member>
+        <member name="T:Castle.Windsor.Tests.DependencyProblem">
+            <summary>
+            Reported at http://forum.castleproject.org/posts/list/17.page
+            </summary>
+        </member>
+        <member name="T:Castle.Windsor.Tests.RobotWireTestCase">
+            <summary>
+            Check for existence of any problem, as 
+            reported http://forum.castleproject.org/posts/list/214.page
+            </summary>
+        </member>
+    </members>
+</doc>

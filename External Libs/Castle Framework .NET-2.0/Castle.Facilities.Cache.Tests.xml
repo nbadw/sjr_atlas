@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Castle.Facilities.Cache.Tests</name>
+    </assembly>
+    <members>
+        <member name="T:Castle.Facilities.Cache.Tests.CacheTest">
+            <summary>
+            Summary description for Class1.
+            </summary>
+        </member>
+        <member name="T:Castle.Facilities.Cache.Tests.FifoCacheManager">
+            <summary>
+            Description résumée de FifoCacheManager.
+            </summary>
+        </member>
+        <member name="M:Castle.Facilities.Cache.Tests.FifoCacheManager.#ctor(System.Int32)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Castle.Facilities.Cache.Tests.FifoCacheManager.Clear">
+            <summary>
+            Clears all elements from the cache.
+            </summary>
+        </member>
+        <member name="P:Castle.Facilities.Cache.Tests.FifoCacheManager.CacheKeyGenerator">
+            <summary>
+            A generator of keys for a cache entry.
+            </summary>
+        </member>
+        <member name="P:Castle.Facilities.Cache.Tests.FifoCacheManager.Item(System.Object)">
+            <summary>
+            Adds an item with the specified key and value into cached data.
+            Gets a cached object with the specified key.
+            </summary>
+            <value>The cached object or <c>null</c></value>
+        </member>
+        <member name="T:Castle.Facilities.Cache.Tests.IServiceA">
+            <summary>
+            Description résumée de IServcieA.
+            </summary>
+        </member>
+        <member name="T:Castle.Facilities.Cache.Tests.IServiceB">
+            <summary>
+            Description résumée de IServiceB.
+            </summary>
+        </member>
+        <member name="T:Castle.Facilities.Cache.Tests.IServiceC">
+            <summary>
+            Description résumée de IServiceC.
+            </summary>
+        </member>
+        <member name="T:Castle.Facilities.Cache.Tests.IServiceD">
+            <summary>
+            Summary description for IServiceD.
+            </summary>
+        </member>
+        <member name="T:Castle.Facilities.Cache.Tests.ServiceA">
+            <summary>
+            Description résumée de ServiceA.
+            </summary>
+        </member>
+        <member name="T:Castle.Facilities.Cache.Tests.ServiceB">
+            <summary>
+            Description résumée de ServiceB.
+            </summary>
+        </member>
+        <member name="T:Castle.Facilities.Cache.Tests.ServiceC">
+            <summary>
+            Description résumée de ServiceC.
+            </summary>
+        </member>
+        <member name="T:Castle.Facilities.Cache.Tests.ServiceD">
+            <summary>
+            Summary description for ServiceD.
+            </summary>
+        </member>
+    </members>
+</doc>

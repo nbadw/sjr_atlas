@@ -1,0 +1,113 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Castle.ActiveRecord.Tests</name>
+    </assembly>
+    <members>
+        <member name="P:Castle.ActiveRecord.Tests.Model.CompositeModel.Agent.Holder">
+            <summary>
+            We make it visible only to for test cases' assertions 
+            </summary>
+        </member>
+        <member name="M:Castle.ActiveRecord.Tests.Model.CompositeModel.Group.OnSave">
+            <summary>
+            Lifecycle method invoked during Save of the entity
+            </summary>
+        </member>
+        <member name="M:Castle.ActiveRecord.Tests.Model.CompositeModel.Group.OnUpdate">
+            <summary>
+            Lifecycle method invoked during Update of the entity
+            </summary>
+        </member>
+        <member name="M:Castle.ActiveRecord.Tests.Model.CompositeModel.Group.OnDelete">
+            <summary>
+            Lifecycle method invoked during Delete of the entity
+            </summary>
+        </member>
+        <member name="M:Castle.ActiveRecord.Tests.Model.CompositeModel.Group.OnLoad(System.Object)">
+            <summary>
+            Lifecycle method invoked during Load of the entity
+            </summary>
+        </member>
+        <member name="T:Castle.ActiveRecord.Tests.Model.CompositeUserType.DoubleStringType">
+            <summary>
+            Extracted from the NHibernate.Model
+            </summary>
+        </member>
+        <member name="P:Castle.ActiveRecord.Tests.Model.GenericModel.SurveyAssociation.SurveyId">
+            <summary>
+            Get/Set the surveyId
+            </summary>
+        </member>
+        <member name="P:Castle.ActiveRecord.Tests.Model.GenericModel.SurveyAssociation.CompanyId">
+            <summary>
+            Get/Set the companyId
+            </summary>
+        </member>
+        <member name="P:Castle.ActiveRecord.Tests.Model.GenericModel.SurveyAssociation.DepartmentId">
+            <summary>
+            Get/Set the departmentId
+            </summary>
+        </member>
+        <member name="P:Castle.ActiveRecord.Tests.Model.GenericModel.SurveyAssociation.UserGroupId">
+            <summary>
+            Get/Set the userGroupId
+            </summary>
+        </member>
+        <member name="P:Castle.ActiveRecord.Tests.Model.GenericModel.SurveyAssociation.UserProfileId">
+            <summary>
+            Get/Set the userProfileId
+            </summary>
+        </member>
+        <member name="T:Castle.ActiveRecord.Tests.Model.RulesModel.RuleBase">
+            <summary>
+            Base class that is not persisted to database
+            </summary>
+        </member>
+        <member name="P:Castle.ActiveRecord.Tests.Model.RulesModel.RuleBase.Count">
+            <summary>
+            Property persisted to database even though the class itself is not.
+            </summary>
+        </member>
+        <member name="T:Castle.ActiveRecord.Tests.Model.RulesModel.PersistedRule">
+            <summary>
+            Base class that is persisted to database, 
+            </summary>
+        </member>
+        <member name="T:Castle.ActiveRecord.Tests.Model.RulesModel.EmployeeRule">
+            <summary>
+            Another step in the way, this one is not persisted, but has properties that will be persisted
+            </summary>
+        </member>
+        <member name="T:Castle.ActiveRecord.Tests.Model.BadPostClass">
+            <summary>
+            Used to verify that you can't map an AR class as a [Property]
+            </summary>
+        </member>
+        <member name="M:Castle.ActiveRecord.Tests.Model.Blog.OnSave">
+            <summary>
+            Lifecycle method invoked during Save of the entity
+            </summary>
+        </member>
+        <member name="M:Castle.ActiveRecord.Tests.Model.Blog.OnUpdate">
+            <summary>
+            Lifecycle method invoked during Update of the entity
+            </summary>
+        </member>
+        <member name="M:Castle.ActiveRecord.Tests.Model.Blog.OnDelete">
+            <summary>
+            Lifecycle method invoked during Delete of the entity
+            </summary>
+        </member>
+        <member name="M:Castle.ActiveRecord.Tests.Model.Blog.OnLoad(System.Object)">
+            <summary>
+            Lifecycle method invoked during Load of the entity
+            </summary>
+        </member>
+        <member name="P:Castle.ActiveRecord.Tests.BlogLazy.Holder">
+            <summary>
+            We make it visible only to for test cases' assertions 
+            </summary>
+        </member>
+    </members>
+</doc>

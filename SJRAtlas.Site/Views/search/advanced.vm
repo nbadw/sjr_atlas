@@ -1,0 +1,108 @@
+#capturefor(headline)
+<h1>Advanced Search</h1>
+<p>This is an advanced search option for querying tabular data. You will be able to download the tabular data and its associated spatial data if available. </p>
+<p>Enter search criteria in the form below:</p>
+#end
+
+#capturefor(header)
+<link type="text/css" rel="stylesheet" href="$siteroot/Content/javascripts/treeview/assets/skins/sam/treeview.css"> 
+<link type="text/css" rel="stylesheet" href="$siteroot/Content/javascripts/autocomplete/assets/skins/sam/autocomplete.css"> 
+<style>
+.yui-skin-sam .yui-ac-input { width: 400px; }
+.yui-skin-sam .yui-ac-content { width: 400px; }
+</style>
+#end
+
+#capturefor(javascripts)
+<script type="text/javascript" language="javascript" src="$siteroot/Content/javascripts/yahoo-dom-event.js"></script>
+<script type="text/javascript" language="javascript" src="$siteroot/Content/javascripts/connection-min.js"></script> 
+<script type="text/javascript" language="javascript" src="$siteroot/Content/javascripts/treeview/treeview-min.js" ></script> 
+<script type="text/javascript" language="javascript" src="$siteroot/Content/javascripts/autocomplete/autocomplete-debug.js"></script> 
+<script type="text/javascript" language="javascript" src="$siteroot/Content/javascripts/advanced-search.js"></script>
+#end
+
+<div id="content" class="clearfix">	
+	<div class="innerwrap">
+		<div class="textbox">
+		    
+            $Ajax.InstallScripts()
+            $Scriptaculous.InstallScripts()
+            $FormHelper.InstallScripts()
+		
+		    $Form.FormTag("%{action='submitadvanced', immediate='true', useLabels='true'}")
+		    
+		    #if($flash.summary)
+		    <br />
+		        #foreach($errormessage in $summary.ErrorMessages)
+		            $errormessage<br />
+		        #end
+		    <br />
+		    #end
+		    
+		    <div id="dataset" class="step">
+		        <span class="step-num">Step #1 of 4.</span>
+		        $Form.LabelFor("options.dataset", 'Select a Data Set:')
+		        $Form.Select("options.dataset", $datasets, "%{value='id', text='name', firstoption='(Required)' firstoptionvalue=''}")
+		    </div>
+		    
+		    <div id="aoi-toggles" style="xdisplay: none;" class="step">
+		        <span class="step-num">Step #2 of 4.</span>
+		        Is your area of interest:
+		        <a href="javascript:void(0)" id="aoi-watershed" class="aoi-toggle" onclick="toggle_area_of_interest('watershed');">Watershed Area</a>, 
+		        <a href="javascript:void(0)" id="aoi-waterbody" class="aoi-toggle" onclick="toggle_area_of_interest('waterbody');">Lake or Stream</a>, 
+		        a <a href="javascript:void(0)" id="aoi-aquatic-site" class="aoi-toggle" onclick="toggle_area_of_interest('aquatic-site');">Specific Site</a>,
+		        or <a href="javascript:void(0)" id="aoi-all" class="aoi-toggle" onclick="toggle_area_of_interest('all');">All</a>?
+		    </div>
+		    
+		    <div id="all" class="area-of-interest" style="display: none;">
+		        <p>All Areas Will Be Searched</p>
+		    </div>
+		    
+		    <div id="aquatic-site" class="area-of-interest" style="display: none;">
+		        $Form.LabelFor("options.aquaticsiteid", "Aquatic Site ID:")
+		        $Form.TextField("options.aquaticsiteid")
+		    </div>
+		    		
+		    <div id="waterbody" class="area-of-interest" style="display: none;">    
+		        <div id="waterbody-autocomplete" class="yui-skin-sam">
+		            $Form.LabelFor("options.waterbody", 'Water Body:')
+		            $Form.TextField("options.waterbody")
+		        </div>
+		    </div>
+		    		 
+		    <div id="watershed" class="area-of-interest" style="display: none;">   
+		        <!--
+		        <div id="watershed-unit-tree">
+		            $Form.LabelFor("options.watershedcode", "Watershed Code:")
+		            $Form.TextField("options.watershedcode")		    
+		        </div>		        		        
+		        -->
+        		    
+        		<div id="watershed-autocomplete" class="yui-skin-sam" >
+	                $Form.LabelFor("options.watershed", 'Watershed:')
+	                $Form.TextField("options.watershed")
+	            </div>
+		    </div>
+		    <div style="margin-bottom: 2em;"></div>
+		    
+		    <div id="agency" style="xdisplay: none;" class="step">
+		        <span class="step-num">Step #3 of 4.</span>     		    
+		        $Form.LabelFor("options.agency", "Select an Agency (optional):")
+		        $Form.Select("options.agency", $agencies, "%{firstoption='All'}")
+		    </div>
+		    
+		    <div id="date-range" style="xdisplay: none;" class="step">
+		        <span class="step-num">Step #4 of 4.</span>		    
+		        $Form.LabelFor("options.daterange", "Specify a Date Range (optional):")
+		        $Form.TextField("options.daterange")
+		    </div>
+		    
+		    <div id="do-search" style="xdisplay: none;">
+		        $Form.Submit("Search")	    
+		    </div>
+		    
+		    $Form.EndFormTag()
+		               
+        </div>
+	</div>
+</div>

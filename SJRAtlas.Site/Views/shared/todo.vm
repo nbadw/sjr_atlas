@@ -1,0 +1,12 @@
+#capturefor(headline)
+<h1>Sorry,</h1>
+<p>This section has not yet been built...</p>
+#end
+
+<div id="content" class="clearfix">	
+	<div class="innerwrap">
+		<div class="textbox">			
+            <p>Todo:<br />Create the template for this page</p>    
+        </div>
+	</div>
+</div>

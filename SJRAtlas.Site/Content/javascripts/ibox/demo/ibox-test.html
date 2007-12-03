@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>iBox Test Page</title>
+<script type="text/javascript" src="ibox.js"></script>
+<link rel="stylesheet" href="ibox.css" type="text/css"  media="screen"/>
+
+<style type="text/css" media="screen,projection">
+	* {font-family:Arial, Helvetica, sans-serif;}
+	p,div,span{font-size:12px;}
+	body {background-image:url(images/bg-diag.gif);}
+	#main_wrapper {width:776px;border:3px dashed #000;margin-left:auto;margin-right:auto;background-color:#366;padding:5px;color:#FFF}
+	#img_container {width:400px;margin-left:auto;margin-right:auto;}
+	#img_container ul {display:block;padding:0;margin:0;list-style:none;}
+	#img_container ul li{float:left;width:100px;margin:10px;}
+	#img_container ul li a img {width:80px;height:80px;;border:2px dashed #000;padding:10px;background-color:#FFF;}
+	#img_container ul li a:hover img {background-image:url(images/bg-diag.gif);border:2px dashed  #990000;}
+	br {clear:left;}
+	a {color:#FFFFFF;}
+	#content {margin: 10px; }
+	#content a {color:#000000;}
+</style>
+</head>
+
+<body>
+<h1 style="text-align:center">iBox Demo</h1>
+
+<div id="main_wrapper">
+<p style="font-weight:bolder">iBox is a lightweight script that lets you overlay images, divs, and HTML on your current page. It is damn easy to install and setup.</p>
+<p>Visit the <a href="/blog/p_ibox.html">blog post on iBox</a> for more information and download.</p>
+
+<h1>1. Images</h1>
+<div id="img_container">
+	<ul>
+		<li><a href="images/large/image_1b.jpg"  rel="ibox?height=450&width=1024" title="Good Barbeque at 1024x450!"><img src="images/small/image_1.jpg" alt=""/></a></li>
+		<li><a href="images/large/image_2.jpg" rel="ibox?height=426&width=500" title="500x426!" ><img src="images/small/image_2.jpg" alt=""/></a></li>
+		<li><a href="images/large/image_3.jpg" rel="ibox" title="Auto Detect Image Size" ><img src="images/small/image_3.jpg" alt=""/></a></li>
+		
+	</ul>
+
+</div>
+
+<br />
+<h1>2. AJAX</h1>
+<p>
+<a href="ibox-ajax-test.html" rel="ibox&height=400" title="Loading External HTML File using AJAX" >Or an external html file [ibox-ajax-test.html] by clicking here</a>
+|| Raw HTML file here: <a href="ibox-ajax-test.html">ibox-ajax-test.html</a>
+</p>
+
+<br />
+<h1>3. Support for JS and non-JS</h1>
+
+<p>We have not forgotten about non-JS users. The login form example - JS users see a login form overlay, non-JS users get forwarded to the login page: <br />
+
+<a href="login.html" rel="ibox&height=130&width=275" target="ibox-login.html" title="Login" >Or View our Ajax Login Form</a>
+</p>
+
+<br />
+<h1>4. Support for overlay of div on existing page</h1>
+<p>
+<a href="#inner_content" rel="ibox&height=400" title="Loading Internal HTML Content" >View the content of the div [inner_content] in iBox by clicking here</a> (view source to see div content below)
+</p>
+
+<div id="inner_content" style="display:none;">
+
+<div style="background:#000000;color:#ffffff;border:1px dashed #FFFFFF;padding:15px;margin:15px;">	
+	<h2>It is a hidden div!</h2>
+	<p>If you were to view source, you would find a div called 'inner_content'. This is that div. We have used CSS to set its display property to none, but using <a href="/blog/p_ibox.html">iBox</a>, you can clearly see it as an overlay. Hurrah!</p>
+	<p>It is even styled. Oh so pretty it is</p>
+</div>
+</div>
+
+</div>
+
+
+</body>
+</html>

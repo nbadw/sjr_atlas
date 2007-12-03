@@ -1,0 +1,91 @@
+#capturefor(headline)
+<h1>Search</h1>
+<p>You've searched for: <span class="search_query">&ldquo;$!{query}&rdquo;</span>. Please select one of the below locations to continue.</p>
+#end
+
+#set($map_width  = 265)
+#set($map_height = 265)
+
+#capturefor(javascripts)
+<script type="text/javascript" language="javascript" src="$siteroot/Content/javascripts/yahoo-dom-event.js"></script>
+<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAAGINyEenSy_3jKcSV_XX_gRR0Y2HH-zMRe3GSELsCzjHcutYjhhSF9QG_fbkfQoYXtxZ4Ld8KrQTOFA" type="text/javascript"></script>
+<script type="text/javascript">
+//<![CDATA[
+var map;
+var markers = new Object();
+#foreach($result in $results)
+markers['$result.Id'] = new GMarker(new GLatLng($result.LatDec, $result.LongDec));
+#end
+
+function load()
+{
+    if (GBrowserIsCompatible()) 
+    {
+        // if browser is compatible, display the map element
+        var map_element = dom.get('gmap');
+        dom.setStyle(map_element, 'display', 'block');
+        
+        // create the map
+        map = new GMap2(map_element);
+        var bounds = new GLatLngBounds(new GLatLng($min_lat, $min_lon), new GLatLng($max_lat, $max_lon));                    
+        map.setCenter(bounds.getCenter(), map.getBoundsZoomLevel(bounds, new GSize($map_width, $map_height)));
+        map.addControl(new GLargeMapControl());
+        
+        // add marker overlays
+        for(var id in markers)
+        {        
+            map.addOverlay(markers[id]);
+        }        
+    }
+}
+
+function unload()
+{
+    GUnload();
+}
+
+function view_location(clicked_id)
+{
+    for(var id in markers)
+    {        
+        markers[id].hide();
+    } 
+    
+    marker = markers[clicked_id];
+    marker.show();
+    map.panTo(marker.getLatLng());
+}
+
+var dom = YAHOO.util.Dom;
+var evt = YAHOO.util.Event;
+
+evt.onDOMReady(load);
+evt.addListener(document.body, 'unload', unload);
+//]]>
+</script>
+#end
+
+<div id="content" class="clearfix">	
+	<div class="innerwrap">
+		<div class="textbox yui-gc">		
+            <div class="yui-u first">
+                <h2>Which Location Did You Mean?</h2>
+                #foreach($result in $results)
+                    #component(placename with "placename=$result")
+                #end                    
+            </div>
+            <div class="yui-u">
+                <div id="gmap" style="display: none; width: ${map_width}px; height: ${map_height}px; margin-bottom: 1em;">                    
+                </div>
+            
+                <h2>Need Help?</h2>
+                <p>You've searched the Atlas for: <span class="search_query">&ldquo;$!{query}&rdquo;</span>.</p>
+                <p>If you haven't found what you are looking for you may also want to try the following:</p>
+                <ul>
+                    <li>$Url.Link('Advanced Search', "%{controller='search', action='advanced'}")</li>
+                    <li>$Url.Link('Search Tips', "%{controller='search', action='tips'}")</li>
+                </ul>
+            </div>               
+        </div>
+	</div>
+</div>
