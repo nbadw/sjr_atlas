@@ -6,8 +6,7 @@ using NUnit.Framework;
 namespace SJRAtlas.Models.Tests
 {
     [TestFixture]
-    public class MetadataTest
+    public class PresentationTest
     {
-
     }
 }

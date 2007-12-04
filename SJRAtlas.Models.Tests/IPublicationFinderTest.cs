@@ -24,7 +24,7 @@ namespace SJRAtlas.Models.Tests
             PublishedMap map = new PublishedMap();
             map.Id = 1;
             map.Title = "Test Map";
-            map.Abstract = "This map object will be used for testing only.";
+            map.Abstract = "Map Abstract";
             map.Author = "Colin Casey";
             map.File = @"c:\path\to\some\map\file";
             map.CreateAndFlush();
@@ -32,7 +32,7 @@ namespace SJRAtlas.Models.Tests
             PublishedReport report = new PublishedReport();
             report.Id = 2;
             report.Title = "Test Report";
-            report.Abstract = "Like the map, this report will be used for testing only.";
+            report.Abstract = "Report Abstract";
             report.Author = "Colin Casey";
             report.File = @"c:\path\to\a\report";
             report.CreateAndFlush();
@@ -60,38 +60,36 @@ namespace SJRAtlas.Models.Tests
         }
 
         [Test]
-        public void TestFindByDefaultQuery()
+        public void TestFindAllByQuery()
         {            
-            string query = "%map%";
-            Assert.AreEqual(2, finder.FindByDefaultQuery(query).Length);
+            string query = "Test%";
+            Assert.AreEqual(2, finder.FindAllByQuery(query).Length);
         }
 
         [Test]
-        public void TestFindMapByQuery()
+        public void TestFindAllMapsByQuery()
         {
-            string expectedTitle = "Test Map";
-            string query = "from Publication p where p.Title = ?";
-            IPublication[] publications = finder.FindByQuery(query, expectedTitle);
-            Assert.AreEqual(1, publications.Length);
-            Assert.AreEqual(expectedTitle, publications[0].Title);
+            string query = "Test Map";
+            PublishedMap[] maps = finder.FindAllByQuery<PublishedMap>(query);
+            Assert.AreEqual(1, maps.Length);
+            Assert.AreEqual(query, maps[0].Title);
         }
 
         [Test]
-        public void TestFindReportByQuery()
+        public void TestFindAllReportByQuery()
         {
-            string expectedTitle = "Test Report";
-            string query = "from Publication p where p.Title = ?";
-            IPublication[] publications = finder.FindByQuery(query, expectedTitle);
-            Assert.AreEqual(1, publications.Length);
-            Assert.AreEqual(expectedTitle, publications[0].Title);
+            string query = "Test Report";
+            PublishedReport[] reports = finder.FindAllByQuery<PublishedReport>(query);
+            Assert.AreEqual(1, reports.Length);
+            Assert.AreEqual(query, reports[0].Title);
         }
+	
 
         [Test]
         public void TestFindByQueryMatchesNothing()
         {
-            string expectedTitle = "NOT A TITLE";
-            string query = "from Publication p where p.Title = ?";
-            IPublication[] publications = finder.FindByQuery(query, expectedTitle);
+            string query = "NOT A TITLE";
+            IPublication[] publications = finder.FindAllByQuery(query);
             Assert.AreEqual(0, publications.Length);
         }
     }

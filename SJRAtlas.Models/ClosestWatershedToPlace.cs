@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Castle.ActiveRecord;
+using NHibernate.Expression;
 
 namespace SJRAtlas.Models
 {
@@ -43,9 +44,11 @@ namespace SJRAtlas.Models
             return Watershed.IsWithinBasin();
         }
 
-        internal static ClosestWatershedToPlace FindByCgndbKey(string CgndbKey)
+        internal static ClosestWatershedToPlace FindByCgndbKey(string cgndbKey)
         {
-            throw new Exception("The method or operation is not implemented.");
+            DetachedCriteria criteria = DetachedCriteria.For<ClosestWatershedToPlace>();
+            criteria.Add(Expression.Eq("Place", cgndbKey));
+            return ClosestWatershedToPlace.FindOne(criteria);
         }
     }
 }

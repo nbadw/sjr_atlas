@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 using System.Collections;
 using Castle.ActiveRecord.Queries;
+using NHibernate.Expression;
+using Castle.ActiveRecord;
 
 namespace SJRAtlas.Models.Finders
 {
@@ -15,19 +17,28 @@ namespace SJRAtlas.Models.Finders
             return Publication.TryFind(id);
         }
 
-        public IPublication[] FindByQuery(string query, params object[] positionalParamters)
+        //public IPublication[] FindByQuery(string query, params object[] positionalParamters)
+        //{
+        //    SimpleQuery<Publication> command = new SimpleQuery<Publication>(
+        //        query, positionalParamters);
+        //    return command.Execute();
+        //}
+
+        public IPublication[] FindAllByQuery(string query)
         {
             SimpleQuery<Publication> command = new SimpleQuery<Publication>(
-                query, positionalParamters);
+                "from Publication p where p.Title like ? or p.Abstract like ?",
+                query, query);
             return command.Execute();
         }
 
-        public IPublication[] FindByDefaultQuery(object queryParameter)
+        public T[] FindAllByQuery<T>(string query) where T : Publication
         {
-            SimpleQuery<Publication> command = new SimpleQuery<Publication>(
-                "from Publication p where p.Title like ? or p.Summary like ?",
-                queryParameter, queryParameter);
-            return command.Execute();
+            DetachedCriteria criteria = DetachedCriteria.For<T>();
+            criteria.Add(Expression.Like("Title", query)).
+                Add(Expression.Like("Abstract", query));
+
+            return ActiveRecordMediator<T>.FindAll(criteria);
         }
 
         #endregion
