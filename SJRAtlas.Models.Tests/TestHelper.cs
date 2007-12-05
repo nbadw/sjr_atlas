@@ -35,16 +35,16 @@ namespace SJRAtlas.Models.Tests
                 MethodInfo setter = property.GetSetMethod();
 
                 if (Object.Equals(getter.Invoke(instance, new object[0]), testValue))
-                    summary.Add("This test will not work as expected since test value is already equal to actual value.");
+                    summary.Add("This test of property " + propertyName + " will not work as expected since test value is already equal to actual value.");
 
                 setter.Invoke(instance, new object[] { testValue });
 
                 if (!Object.Equals(getter.Invoke(instance, new object[0]), testValue))
-                    summary.Add("Property value should be equal to test value but was not");
+                    summary.Add(String.Format("Property value for {0} should be {1} but was {2}", propertyName, testValue.ToString(), getter.Invoke(instance, new object[0])));
             }
             catch (Exception e)
             {
-                summary.Add(e.Message);
+                summary.Add("Error on property " + propertyName + ": " + e.Message);
             }
 
             return summary;

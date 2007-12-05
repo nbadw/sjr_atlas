@@ -6,21 +6,36 @@ using Castle.ActiveRecord;
 
 namespace SJRAtlas.Models
 {
-    [ActiveRecord("tblDrainageUnit", Mutable = false)]
+    [ActiveRecord("tblDrainageUnit")]
     public class Watershed : ActiveRecordBase<Watershed>, IPlace, ICoordinateAware
     {
-        public Watershed()
+        public Watershed() : this(new NullAtlasRepository(), new Place())
         {
         }
 
-        public Watershed(IAtlasRepository repository) : this(repository, null)
+        public Watershed(IAtlasRepository repository) : this(repository, new Place())
         {
         }
 
         public Watershed(IAtlasRepository repository, IPlace place)
         {
+            if (repository == null)
+                throw new ArgumentNullException("repository");
+
+            if (place == null)
+                throw new ArgumentNullException("place");
+
             this.repository = repository;
-            this.place = place;
+            this.place = new Place();
+            this.level1No = "00";
+            this.level2No = "00";
+            this.level3No = "00";
+            this.level4No = "00";
+            this.level5No = "00";
+            this.level6No = "00";
+            this.drainageCode = String.Format("{0}-{1}-{2}-{3}-{4}-{5}",
+                                          Level1No, Level2No, Level3No,
+                                          Level4No, Level5No, Level6No);
         }
 
         private IAtlasRepository repository;
@@ -32,41 +47,22 @@ namespace SJRAtlas.Models
         }
 
         private IPlace place;
-        private bool hasPlaceAlreadyBeenLoaded = false;
 
         public IPlace Place
         {
-            get
-            {
-                // lazy load the place
-                if (!hasPlaceAlreadyBeenLoaded && place == null)
-                {
-                    place = Repository.Find<Place>(CgndbKey);
-                    hasPlaceAlreadyBeenLoaded = true;
-                }
-
-                return place;
-            }
+            get { return place; }
             set { place = value; }
-        }
-
-        private string drainageCode;
-
-        [PrimaryKey("DrainageCd", Generator = PrimaryKeyType.Assigned)]
-        public string DrainageCode
-        {
-            get { return drainageCode; }
-            set { drainageCode = value; }
         }
 
         public string FlowsInto
         {
             get
             {
-                throw new System.NotImplementedException();
+                return DrainsInto != null ? DrainsInto : TributaryOf;
             }
             set
             {
+                throw new NotSupportedException();
             }
         }
         
@@ -74,40 +70,39 @@ namespace SJRAtlas.Models
         {
             get
             {
-                throw new System.NotImplementedException();
-            }
-            set
-            {
+                if (Level2No != "00")
+                {
+                    StringBuilder sb = new StringBuilder();
+                    sb.Append(Level1Name);
+
+                    if (Level3No != "00")
+                    {
+                        sb.Append(" - ");
+                        sb.Append(Level2Name);
+                    }
+                    if (Level4No != "00")
+                    {
+                        sb.Append(" - ");
+                        sb.Append(Level3Name);
+                    }
+                    if (Level5No != "00")
+                    {
+                        sb.Append(" - ");
+                        sb.Append(Level4Name);
+                    }
+                    if (Level6No != "00")
+                    {
+                        sb.Append(" - ");
+                        sb.Append(Level5Name);
+                    }
+
+                    return sb.ToString();
+                }
+
+                return String.Empty;
             }
         }
-
-        public string DrainsInto
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-            set
-            {
-            }
-        }
-
-        private string name;
-
-        public string Name
-        {
-            get { return name; }
-            set { name = value; }
-        }
-
-        private string cgndbKey;
-
-        public string CgndbKey
-        {
-            get { return cgndbKey; }
-            set { cgndbKey = value; }
-        }
-
+                
         public WaterBody[] WaterBodies
         {
             get
@@ -124,8 +119,210 @@ namespace SJRAtlas.Models
             }
         }
 
-        #region IPlace Members
+        #region ActiveRecord Properties
+
+        private string drainageCode;
+
+        [PrimaryKey("DrainageCd", Generator = PrimaryKeyType.Assigned)]
+        public string DrainageCode
+        {
+            get { return drainageCode; }
+            set { drainageCode = value; }
+        }
+
+        private string name;
+
+        [Property("UnitName")]
+        public string Name
+        {
+            get { return name; }
+            set { name = value; }
+        }
         
+        private Place activeRecordPlace;
+
+        [BelongsTo("CGNDB_Key")]
+        protected Place ActiveRecordPlace
+        {
+            get { return activeRecordPlace; }
+            set 
+            { 
+                activeRecordPlace = value;
+                Place = value;
+            }
+        }
+
+        private string drainsInto;
+
+        [Property]
+        public string DrainsInto
+        {
+            get { return drainsInto; }
+            set { drainsInto = value; }
+        }
+
+        private string unitType;
+
+        [Property(Length = 4)]
+        public string UnitType
+        {
+            get { return unitType; }
+            set { unitType = value; }
+        }
+
+        private string borderInd;
+
+        [Property(Length = 1)]
+        public string BorderInd
+        {
+            get { return borderInd; }
+            set { borderInd = value; }
+        }
+
+        private int streamOrder;
+
+        [Property]
+        public int StreamOrder
+        {
+            get { return streamOrder; }
+            set { streamOrder = value; }
+        }
+        private float areaHA;
+
+        [Property(Column = "Area_ha")]
+        public float AreaHA
+        {
+            get { return areaHA; }
+            set { areaHA = value; }
+        }
+
+        private float areaPercent;
+
+        [Property(Column = "Area_percent")]
+        public float AreaPercent
+        {
+            get { return areaPercent; }
+            set { areaPercent = value; }
+        }
+
+        private string level1No;
+
+        [Property(Length = 2)]
+        public string Level1No
+        {
+            get { return level1No; }
+            set { level1No = value; }
+        }
+
+        private string level1Name;
+
+        [Property(Length = 40)]
+        public string Level1Name
+        {
+            get { return level1Name; }
+            set { level1Name = value; }
+        }
+
+        private string level2No;
+
+        [Property(Length = 2)]
+        public string Level2No
+        {
+            get { return level2No; }
+            set { level2No = value; }
+        }
+
+        private string level2Name;
+
+        [Property(Length = 50)]
+        public string Level2Name
+        {
+            get { return level2Name; }
+            set { level2Name = value; }
+        }
+
+        private string level3No;
+
+        [Property(Length = 2)]
+        public string Level3No
+        {
+            get { return level3No; }
+            set { level3No = value; }
+        }
+
+        private string level3Name;
+
+        [Property(Length = 50)]
+        public string Level3Name
+        {
+            get { return level3Name; }
+            set { level3Name = value; }
+        }
+
+        private string level4No;
+
+        [Property(Length = 2)]
+        public string Level4No
+        {
+            get { return level4No; }
+            set { level4No = value; }
+        }
+
+        private string level4Name;
+
+        [Property(Length = 50)]
+        public string Level4Name
+        {
+            get { return level4Name; }
+            set { level4Name = value; }
+        }
+
+        private string level5No;
+
+        [Property(Length = 2)]
+        public string Level5No
+        {
+            get { return level5No; }
+            set { level5No = value; }
+        }
+
+        private string level5Name;
+
+        [Property(Length = 50)]
+        public string Level5Name
+        {
+            get { return level5Name; }
+            set { level5Name = value; }
+        }
+
+        private string level6No;
+
+        [Property(Length = 2)]
+        public string Level6No
+        {
+            get { return level6No; }
+            set { level6No = value; }
+        }
+
+        private string level6Name;
+
+        [Property(Length = 50)]
+        public string Level6Name
+        {
+            get { return level6Name; }
+            set { level6Name = value; }
+        }
+
+        #endregion
+
+        #region IPlace Members
+
+        public string CgndbKey
+        {
+            get { return Place.CgndbKey; }
+            set { Place.CgndbKey = value; }
+        }
+
         public string ConciseTerm
         {
             get { return Place.ConciseTerm; }
@@ -170,6 +367,9 @@ namespace SJRAtlas.Models
 
         public bool IsWithinBasin()
         {
+            if (DrainageCode == null)
+                return false;
+
             Regex re = new Regex(@"01-[\d]{2}-[\d]{2}-[\d]{2}-[\d]{2}-[\d]{2}");
             return re.IsMatch(DrainageCode);
         }
@@ -224,9 +424,14 @@ namespace SJRAtlas.Models
 
         #region ICoordinateAware Members
 
+        private LatLngCoord coord;
+
         public LatLngCoord GetCoordinate()
         {
-            throw new Exception("The method or operation is not implemented.");
+            if (coord == null)
+                coord = new LatLngCoord(Place.Latitude, Place.Longitude);
+
+            return coord;
         }
 
         #endregion

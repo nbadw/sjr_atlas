@@ -165,7 +165,7 @@ namespace SJRAtlas.Models.Tests
             properties.Add("Region", "NB");
             properties.Add("Repository", mocks.CreateMock<IAtlasRepository>());
             TestHelper.ErrorSummary errors = TestHelper.TestProperties(place, properties);
-            Assert.AreEqual(0, errors.Count, "The following errors occurred during property testing:\n" + errors.GetSummary());
+            Assert.IsEmpty(errors, "The following errors occurred during property testing:\n" + errors.GetSummary());
         }
     }
 }
