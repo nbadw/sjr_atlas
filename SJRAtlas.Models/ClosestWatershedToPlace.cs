@@ -44,10 +44,12 @@ namespace SJRAtlas.Models
             return Watershed.IsWithinBasin();
         }
 
-        internal static ClosestWatershedToPlace FindByCgndbKey(string cgndbKey)
+        public static ClosestWatershedToPlace FindByCgndbKey(string cgndbKey)
         {
             DetachedCriteria criteria = DetachedCriteria.For<ClosestWatershedToPlace>();
-            criteria.Add(Expression.Eq("Place", cgndbKey));
+            Place place = new Place();
+            place.CgndbKey = cgndbKey;
+            criteria.Add(Expression.Eq("Place", place));
             return ClosestWatershedToPlace.FindOne(criteria);
         }
     }

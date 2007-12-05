@@ -1,15 +1,26 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Castle.ActiveRecord;
 
 namespace SJRAtlas.Models
 {
-    public class InteractiveMap : IMetadataAware
+    [ActiveRecord("interactive_maps")]
+    public class InteractiveMap : ActiveRecordBase<InteractiveMap>, IMetadataAware
     {
-        #region IMetadataAware Members
+        #region ActiveRecord Properties
 
+        private int id;	
+
+        [PrimaryKey("id")]
+        public int Id
+        {
+            get { return id; }
+            set { id = value; }
+        }
 
         #endregion
+
         #region IMetadataAware Members
 
         public Metadata GetMetadata()

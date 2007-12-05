@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Castle.ActiveRecord;
+using SJRAtlas.Models.Finders;
 
 namespace SJRAtlas.Models
 {
@@ -167,13 +168,19 @@ namespace SJRAtlas.Models
             {
                 if (!closestWatershedToPlaceAlreadyLoaded)
                 {
-                    closestWatershedToPlace = 
-                        ClosestWatershedToPlace.FindByCgndbKey(CgndbKey);
+
+                    closestWatershedToPlace = Repository.GetFinder<ClosestWatershedToPlaceFinder>()
+                        .FindByCgndbKey(CgndbKey);
 
                     closestWatershedToPlaceAlreadyLoaded = true;
                 }
 
                 return closestWatershedToPlace;
+            }
+            set
+            {
+                closestWatershedToPlace = value;
+                closestWatershedToPlaceAlreadyLoaded = true;
             }
         }
 
@@ -183,13 +190,17 @@ namespace SJRAtlas.Models
         {
             get 
             {
-                //if (interactiveMaps == null)
-                //{
-                //    string queryParam = String.Format("%{0}%", Name);
-                //    interactiveMaps = Repository.FindByDefaultQuery<InteractiveMap>(queryParam);
-                //}
+                if (interactiveMaps == null)
+                {
+                    string query = String.Format("%{0}%", Name);
+                    InteractiveMapFinder finder = Repository.GetFinder<InteractiveMapFinder>();
+                    interactiveMaps = finder.FindAllByQuery(query);
+                }
 
-                return (interactiveMaps != null ? interactiveMaps : new InteractiveMap[0]); 
+                if (interactiveMaps == null)
+                    interactiveMaps = new InteractiveMap[0];
+
+                return interactiveMaps; 
             }
         }
 
@@ -199,13 +210,17 @@ namespace SJRAtlas.Models
         {
             get 
             {
-                //if (publications == null)
-                //{
-                //    string queryParam = String.Format("%{0}%", Name);
-                //    publications = Repository.FindByDefaultQuery<IPublication>(queryParam);
-                //}
+                if (publications == null)
+                {
+                    string query = String.Format("%{0}%", Name);
+                    IPublicationFinder finder = Repository.GetFinder<IPublicationFinder>();
+                    publications = finder.FindAllByQuery(query);
+                }
 
-                return (publications != null ? publications : new IPublication[0]); 
+                if (publications == null)
+                    publications = new IPublication[0];
+
+                return publications; 
             }
         }
 
@@ -221,7 +236,7 @@ namespace SJRAtlas.Models
 
         private LatLngCoord coordinate;
 
-        public LatLngCoord GetCoordinate()
+        public virtual LatLngCoord GetCoordinate()
         {
             if (coordinate == null)
             {

@@ -23,17 +23,17 @@ namespace SJRAtlas.Models.Tests
         public void TestFind()
         {
             int id = 0;
-            MockEntity entity = new MockEntity();
-            IEntityFinder<MockEntity> finder = mocks.CreateMock<IEntityFinder<MockEntity>>();
+            IEntity entity = mocks.CreateMock<IEntity>();
+            IEntityFinder<IEntity> finder = mocks.CreateMock<IEntityFinder<IEntity>>();
             IDictionary finders = mocks.CreateMock<IDictionary>();
             atlas.Finders = finders;
 
             Expect.Call(finder.Find(id)).Return(entity);
-            Expect.Call(finders[typeof(MockEntity)]).Return(finder);
+            Expect.Call(finders[typeof(IEntity)]).Return(finder);
 
             mocks.ReplayAll();
 
-            Assert.AreEqual(entity, atlas.Find<MockEntity>(id));
+            Assert.AreEqual(entity, atlas.Find<IEntity>(id));
 
             mocks.VerifyAll();
         }
@@ -110,17 +110,5 @@ namespace SJRAtlas.Models.Tests
         //    atlas.Finders = mocks.CreateMock<IDictionary>();
         //    Assert.AreEqual(0, atlas.FindByQuery<IEntity>("id = ?", 7).Length);
         //}
-    }
-
-    public class MockEntity : IEntity
-    {
-        #region IEntity Members
-
-        public object GetId()
-        {
-            throw new Exception("The method or operation is not implemented.");
-        }
-
-        #endregion
     }
 }

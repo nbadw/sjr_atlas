@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using NUnit.Framework;
 using Rhino.Mocks;
+using SJRAtlas.Models.Finders;
 
 namespace SJRAtlas.Models.Tests
 {
@@ -22,17 +23,29 @@ namespace SJRAtlas.Models.Tests
             place.CgndbKey = "ABCDE";
             place.CreateAndFlush();
 
+            WaterBody waterBody1 = new WaterBody();
+            waterBody1.Id = 1234567;
+            waterBody1.Name = "Test WaterBody 1";
+            waterBody1.CreateAndFlush();
+
+            WaterBody waterBody2 = new WaterBody();
+            waterBody2.Id = 1234568;
+            waterBody2.Name = "Test WaterBody 2";
+            waterBody2.CreateAndFlush();
+
             watershed = new Watershed();
             watershed.DrainageCode = "01-00-00-00-00-00";
             watershed.Name = "Saint John River";
             watershed.Place = place;
+            watershed.WaterBodies.Add(waterBody1);
+            watershed.WaterBodies.Add(waterBody2);
             watershed.CreateAndFlush();
 
             mocks = new MockRepository();
         }
 
         [Test]
-        public void FindWatershed()
+        public void TestFindWatershed()
         {
             Watershed found = Watershed.Find("01-00-00-00-00-00");
             Assert.AreEqual(watershed, found);
@@ -43,6 +56,7 @@ namespace SJRAtlas.Models.Tests
         {
             Watershed watershed = new Watershed();
             watershed.Place = new Place();
+
             Dictionary<string, object> properties = new Dictionary<string, object>();
             properties.Add("AreaHA", float.MaxValue);
             properties.Add("AreaPercent", float.MaxValue);
@@ -84,14 +98,6 @@ namespace SJRAtlas.Models.Tests
         }
 
         [Test]
-        public void TestSetActiveRecordPlaceAlsoSetsPlace()
-        {
-            Watershed watershed = new Watershed();
-            Place place = new Place();
-            Assert.Fail();
-        }
-
-        [Test]
         [ExpectedException(typeof(ArgumentNullException))]
         public void TestWatershedConstructorWhenAtlasArgumentIsNull()
         {
@@ -115,7 +121,7 @@ namespace SJRAtlas.Models.Tests
 
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void PlaceCannotBeSetToNull()
+        public void TestPlaceCannotBeSetToNull()
         {
             Watershed watershed = new Watershed();
             watershed.Place = null;
@@ -129,38 +135,92 @@ namespace SJRAtlas.Models.Tests
         }
 
         [Test]
-        public void TestBelongsToPlaceIsSetToDefaultIfPlaceDoesNotExist()
+        public void TestHasManyWaterBodies()
         {
-            // test code goes here
-            Assert.Fail();
+            Watershed found = Watershed.Find("01-00-00-00-00-00");
+            Assert.AreEqual(2, found.WaterBodies.Count);
         }	
 
         [Test]
-        public void FindRelatedInteractiveMaps()
+        public void TestRelatedPublications()
         {
-            // test code goes here
-            Assert.Fail();
-        }	
+            IAtlasRepository repository = mocks.CreateMock<IAtlasRepository>();
+            IPublicationFinder finder = mocks.CreateMock<IPublicationFinder>();
+            Expect.Call(repository.GetFinder<IPublicationFinder>()).Return(finder);
+            Expect.Call(finder.FindAllByQuery(null)).IgnoreArguments().Return(new IPublication[3]);
+            mocks.ReplayAll();
+
+            Watershed watershed = new Watershed(repository);
+            IPublication[] publications = watershed.RelatedPublications;
+
+            Assert.AreEqual(3, publications.Length);
+            mocks.VerifyAll();
+        }
 
         [Test]
-        public void TestFindRelatedPublications()
+        public void TestRelatedPublicationsNeverReturnsNull()
         {
-            // test code goes here
-            Assert.Fail();
+            IAtlasRepository repository = mocks.CreateMock<IAtlasRepository>();
+            IPublicationFinder finder = mocks.CreateMock<IPublicationFinder>();
+            Expect.Call(repository.GetFinder<IPublicationFinder>()).Return(finder);
+            Expect.Call(finder.FindAllByQuery(null)).IgnoreArguments().Return(null);
+            mocks.ReplayAll();
+
+            Watershed watershed = new Watershed(repository);
+            IPublication[] publications = watershed.RelatedPublications;
+
+            Assert.IsNotNull(publications);
+            Assert.IsEmpty(publications);
+            mocks.VerifyAll();
+        }
+
+        [Test]
+        public void TestRelatedInteractiveMaps()
+        {
+            IAtlasRepository repository = mocks.CreateMock<IAtlasRepository>();
+            InteractiveMapFinder finder = mocks.CreateMock<InteractiveMapFinder>();
+            Expect.Call(repository.GetFinder<InteractiveMapFinder>()).Return(finder);
+            Expect.Call(finder.FindAllByQuery(null)).IgnoreArguments().Return(new InteractiveMap[3]);
+            mocks.ReplayAll();
+            
+            Watershed watershed = new Watershed(repository);
+            InteractiveMap[] interactiveMaps = watershed.RelatedInteractiveMaps;
+
+            Assert.AreEqual(3, interactiveMaps.Length);
+            mocks.VerifyAll();
+        }
+
+        [Test]
+        public void TestRelatedInteractiveMapsNeverReturnsNull()
+        {            
+            IAtlasRepository repository = mocks.CreateMock<IAtlasRepository>();
+            InteractiveMapFinder finder = mocks.CreateMock<InteractiveMapFinder>();
+            Expect.Call(repository.GetFinder<InteractiveMapFinder>()).Return(finder);
+            Expect.Call(finder.FindAllByQuery(null)).IgnoreArguments().Return(null);
+            mocks.ReplayAll();
+
+            Watershed watershed = new Watershed(repository);
+            InteractiveMap[] interactiveMaps = watershed.RelatedInteractiveMaps;
+
+            Assert.IsNotNull(interactiveMaps);
+            Assert.IsEmpty(interactiveMaps);
+            mocks.VerifyAll();
         }
 
         [Test]
         public void TestFindRelatedDataSets()
         {
-            // test code goes here
-            Assert.Fail();
-        }
+            WaterBody waterBody1 = mocks.CreateMock<WaterBody>();
+            WaterBody waterBody2 = mocks.CreateMock<WaterBody>();
+            Expect.Call(waterBody1.DataSets).Return(new DataSet[2]);
+            Expect.Call(waterBody2.DataSets).Return(new DataSet[3]);
+            mocks.ReplayAll();
 
-        [Test]
-        public void FindAllByDrainageCodeOrUnitName()
-        {
-            // test code goes here
-            Assert.Fail();
+            Watershed watershed = new Watershed();
+            watershed.WaterBodies.Add(waterBody1);
+            watershed.WaterBodies.Add(waterBody2);
+            Assert.AreEqual(5, watershed.DataSets.Length);
+            mocks.VerifyAll();
         }
 
         [Test]
@@ -194,10 +254,25 @@ namespace SJRAtlas.Models.Tests
         }
 
         [Test]
-        public void TestFlowsInto()
+        public void TestFlowsIntoWhenDrainsIntoIsNull()
         {
-            // test code goes here
-            Assert.Fail();
+            string flowsInto = "LEVEL1";
+            Watershed watershed = new Watershed();
+            watershed.DrainsInto = null;
+            watershed.Level1No = "01";
+            watershed.Level1Name = flowsInto;
+            watershed.Level2No = "02";
+            watershed.Level2Name = "LEVEL2";
+            Assert.AreEqual(flowsInto, watershed.FlowsInto);
+        }
+
+        [Test]
+        public void TestFlowsIntoWhenDrainsIntoIsNotNull()
+        {
+            string flowsInto = "TEST VALUE";
+            Watershed watershed = new Watershed();
+            watershed.DrainsInto = flowsInto;
+            Assert.AreEqual(flowsInto, watershed.DrainsInto);
         }
 
         [Test]
@@ -205,25 +280,22 @@ namespace SJRAtlas.Models.Tests
         {
             double lat = 37.3;
             double lon = 73.7;
-            IPlace place = mocks.CreateMock<IPlace>();
-
-            Expect.Call(place.Latitude).Repeat.Twice().Return(lat);
-            Expect.Call(place.Longitude).Repeat.Twice().Return(lon);
-
+            Place place = mocks.CreateMock<Place>();
+            Expect.Call(place.GetCoordinate()).Return(new LatLngCoord(lat, lon));
             mocks.ReplayAll();
 
             Watershed watershed = new Watershed();
             watershed.Place = place;
 
             LatLngCoord coord = watershed.GetCoordinate();
-            Assert.AreEqual(lat, place.Latitude);
-            Assert.AreEqual(lon, place.Longitude);
+            Assert.AreEqual(lat, coord.Latitude);
+            Assert.AreEqual(lon, coord.Longitude);
 
             mocks.VerifyAll();
         }
 
         [Test]
-        public void IsWithinBasin()
+        public void TestIsWithinBasin()
         {
             string drainageCode = "01-00-00-00-00-00";
             watershed.DrainageCode = drainageCode;
@@ -231,7 +303,7 @@ namespace SJRAtlas.Models.Tests
         }
 
         [Test]
-        public void IsWithinBasinWithBadlyFormattedDrainageCodes()
+        public void TestIsWithinBasinWithBadlyFormattedDrainageCodes()
         {
             string[] notInBasinCodes = new string[]
             {

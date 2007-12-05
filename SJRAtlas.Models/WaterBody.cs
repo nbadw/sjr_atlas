@@ -5,6 +5,7 @@ using Castle.ActiveRecord;
 
 namespace SJRAtlas.Models
 {
+    [ActiveRecord("tblWaterBody")]
     public class WaterBody : ActiveRecordBase<WaterBody>, IPlace, ICoordinateAware
     {
         private IAtlasRepository repository;
@@ -19,13 +20,13 @@ namespace SJRAtlas.Models
 
         private int id;
 
-        [PrimaryKey("WaterBodyID")]
+        [PrimaryKey("WaterBodyID", Generator = PrimaryKeyType.Assigned)]
         public int Id
         {
             get { return id; }
             set { id = value; }
         }
-
+        
         private IPlace place;
 
         public IPlace Place
@@ -137,29 +138,13 @@ namespace SJRAtlas.Models
             set { flowsIntoWaterBodyName = value; }
         }
 
-        private DateTime created;
-
-        [Property("DateEntered")]
-        public DateTime Created
-        {
-            get { return created; }
-            set { created = value; }
-        }
-
-        private DateTime modified;
-
-        [Property("DateModified")]
-        public DateTime Modified
-        {
-            get { return modified; }
-            set { modified = value; }
-        }
-
         #endregion
 
-        public DataSet[] DataSets
+        private DataSet[] datasets;
+
+        public virtual DataSet[] DataSets
         {
-            get { throw new NotSupportedException(); }
+            get { return datasets; }
         }
 
         #region IPlace Members

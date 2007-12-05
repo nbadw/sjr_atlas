@@ -17,14 +17,7 @@ namespace SJRAtlas.Models.Finders
             return Publication.TryFind(id);
         }
 
-        //public IPublication[] FindByQuery(string query, params object[] positionalParamters)
-        //{
-        //    SimpleQuery<Publication> command = new SimpleQuery<Publication>(
-        //        query, positionalParamters);
-        //    return command.Execute();
-        //}
-
-        public IPublication[] FindAllByQuery(string query)
+        public virtual IPublication[] FindAllByQuery(string query)
         {
             SimpleQuery<Publication> command = new SimpleQuery<Publication>(
                 "from Publication p where p.Title like ? or p.Abstract like ?",

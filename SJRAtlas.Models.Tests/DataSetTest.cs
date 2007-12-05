@@ -6,7 +6,7 @@ using NUnit.Framework;
 namespace SJRAtlas.Models.Tests
 {
     [TestFixture]
-    public class DataSet
+    public class DataSetTest
     {
 
     }

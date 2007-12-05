@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
 using Castle.ActiveRecord;
+using SJRAtlas.Models.Finders;
 
 namespace SJRAtlas.Models
 {
@@ -17,7 +18,7 @@ namespace SJRAtlas.Models
         {
         }
 
-        public Watershed(IAtlasRepository repository, IPlace place)
+        public Watershed(IAtlasRepository repository, Place place)
         {
             if (repository == null)
                 throw new ArgumentNullException("repository");
@@ -26,7 +27,8 @@ namespace SJRAtlas.Models
                 throw new ArgumentNullException("place");
 
             this.repository = repository;
-            this.place = new Place();
+            this.place = place;
+            this.waterbodies = new List<WaterBody>();
             this.level1No = "00";
             this.level2No = "00";
             this.level3No = "00";
@@ -46,23 +48,11 @@ namespace SJRAtlas.Models
             set { repository = value; }
         }
 
-        private IPlace place;
-
-        public IPlace Place
-        {
-            get { return place; }
-            set { place = value; }
-        }
-
         public string FlowsInto
         {
             get
             {
                 return DrainsInto != null ? DrainsInto : TributaryOf;
-            }
-            set
-            {
-                throw new NotSupportedException();
             }
         }
         
@@ -102,20 +92,33 @@ namespace SJRAtlas.Models
                 return String.Empty;
             }
         }
-                
-        public WaterBody[] WaterBodies
+
+        private IList<WaterBody> waterbodies;
+
+        [HasMany(typeof(WaterBody), Cascade = ManyRelationCascadeEnum.SaveUpdate)]
+        public IList<WaterBody> WaterBodies
         {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
+            get { return waterbodies; }
+            set { waterbodies = value; }
         }
+
+        private DataSet[] datasets;
 
         public DataSet[] DataSets
         {
             get
             {
-                throw new System.NotImplementedException();
+                if (datasets == null)
+                {
+                    List<DataSet> collectedDataSets = new List<DataSet>();
+                    foreach (WaterBody waterbody in WaterBodies)
+                    {
+                        collectedDataSets.AddRange(waterbody.DataSets);
+                    }
+                    datasets = collectedDataSets.ToArray();
+                }
+
+                return datasets;
             }
         }
 
@@ -138,17 +141,18 @@ namespace SJRAtlas.Models
             get { return name; }
             set { name = value; }
         }
-        
-        private Place activeRecordPlace;
+                
+        private Place place;
 
-        [BelongsTo("CGNDB_Key")]
-        protected Place ActiveRecordPlace
+        [BelongsTo("CGNDB_Key", Cascade=CascadeEnum.SaveUpdate)]
+        public Place Place
         {
-            get { return activeRecordPlace; }
-            set 
+            get { return place; }            
+            set             
             { 
-                activeRecordPlace = value;
-                Place = value;
+                if(value == null)
+                    throw new ArgumentNullException("place");
+                place = value; 
             }
         }
 
@@ -365,7 +369,7 @@ namespace SJRAtlas.Models
             set { Place.GenericTerm = value; }
         }
 
-        public bool IsWithinBasin()
+        public virtual bool IsWithinBasin()
         {
             if (DrainageCode == null)
                 return false;
@@ -404,19 +408,43 @@ namespace SJRAtlas.Models
             set { Place.Region = value; }
         }
 
+        private InteractiveMap[] interactiveMaps;
+
         public InteractiveMap[] RelatedInteractiveMaps
         {
-            get 
-            { 
-                throw new Exception("The method or operation is not implemented."); 
+            get
+            {
+                if (interactiveMaps == null)
+                {
+                    string query = String.Format("%{0}%", Name);
+                    InteractiveMapFinder finder = Repository.GetFinder<InteractiveMapFinder>();
+                    interactiveMaps = finder.FindAllByQuery(query);
+                }
+
+                if (interactiveMaps == null)
+                    interactiveMaps = new InteractiveMap[0];
+
+                return interactiveMaps;
             }
         }
 
+        private IPublication[] publications;
+
         public IPublication[] RelatedPublications
         {
-            get 
-            { 
-                throw new Exception("The method or operation is not implemented."); 
+            get
+            {
+                if (publications == null)
+                {
+                    string query = String.Format("%{0}%", Name);
+                    IPublicationFinder finder = Repository.GetFinder<IPublicationFinder>();
+                    publications = finder.FindAllByQuery(query);
+                }
+
+                if (publications == null)
+                    publications = new IPublication[0];
+
+                return publications;
             }
         }
 
@@ -424,14 +452,9 @@ namespace SJRAtlas.Models
 
         #region ICoordinateAware Members
 
-        private LatLngCoord coord;
-
         public LatLngCoord GetCoordinate()
         {
-            if (coord == null)
-                coord = new LatLngCoord(Place.Latitude, Place.Longitude);
-
-            return coord;
+            return Place.GetCoordinate();
         }
 
         #endregion

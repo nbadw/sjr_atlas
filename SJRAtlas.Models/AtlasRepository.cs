@@ -28,30 +28,17 @@ namespace SJRAtlas.Models
 
         public T Find<T>(object id)
         {
-            IEntityFinder<T> finder = (IEntityFinder<T>)Finders[typeof(T)];
+            IEntityFinder<T> finder = (IEntityFinder<T>)GetFinder<T>();
             if (finder == null)
                 return default(T);
 
             return finder.Find(id);
         }
 
-        //public T[] FindByDefaultQuery<T>(object queryParameter)
-        //{
-        //    IEntityFinder<T> finder = (IEntityFinder<T>)Finders[typeof(T)];
-        //    if (finder == null)
-        //        return new T[0];
-
-        //    return finder.FindByDefaultQuery(queryParameter);
-        //}
-
-        //public T[] FindByQuery<T>(string query, params object[] positionalParameters)
-        //{
-        //    IEntityFinder<T> finder = (IEntityFinder<T>)Finders[typeof(T)];
-        //    if (finder == null)
-        //        return new T[0];
-
-        //    return finder.FindByQuery(query, positionalParameters);
-        //}
+        public T GetFinder<T>()
+        {
+            return (T)Finders[typeof(T)];
+        }
 
         #endregion
     }

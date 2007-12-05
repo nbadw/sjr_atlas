@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Text;
 using NUnit.Framework;
 using Rhino.Mocks;
+using SJRAtlas.Models.Finders;
 
 namespace SJRAtlas.Models.Tests
 {
     [TestFixture]
-    public class PlaceTest
+    public class PlaceTest : AbstractModelTestCase
     {
         private Place place;
         private MockRepository mocks;
@@ -16,6 +17,7 @@ namespace SJRAtlas.Models.Tests
         [SetUp]
         public void Setup()
         {
+            base.Init();
             mocks = new MockRepository();
             repository = mocks.CreateMock<IAtlasRepository>();
             place = new Place(repository);
@@ -60,88 +62,95 @@ namespace SJRAtlas.Models.Tests
         [Test]
         public void TestIsWithinBasin()
         {
-            ClosestWatershedToPlace closest = mocks.CreateMock<ClosestWatershedToPlace>();            
-            Expect.Call(closest.IsWithinBasin()).Return(true);
+            ClosestWatershedToPlace closestWatershedToPlace = mocks.CreateMock<ClosestWatershedToPlace>();
+            Expect.Call(closestWatershedToPlace.IsWithinBasin()).Return(true);
             mocks.ReplayAll();
-
+            place.ClosestWatershedToPlace = closestWatershedToPlace;
             Assert.IsTrue(place.IsWithinBasin());
-
             mocks.VerifyAll();
         }
 
         [Test]
-        public void TestPlaceIsNotWithinBasin()
+        public void TestIsWithinBasinWhenClosestWatershedToPlaceIsNull()
         {
-            ClosestWatershedToPlace closest = mocks.CreateMock<ClosestWatershedToPlace>();
-            
-            Expect.Call(closest.IsWithinBasin()).Return(false);
-            mocks.ReplayAll();
-
+            place.ClosestWatershedToPlace = null;
             Assert.IsFalse(place.IsWithinBasin());
+        }	
 
+        [Test]
+        public void TestClosestWatershedToPlace()
+        {
+            ClosestWatershedToPlaceFinder finder = mocks.CreateMock<ClosestWatershedToPlaceFinder>();
+            ClosestWatershedToPlace closestWatershedToPlace = mocks.CreateMock<ClosestWatershedToPlace>();
+            Expect.Call(repository.GetFinder<ClosestWatershedToPlaceFinder>()).Return(finder);
+            Expect.Call(finder.FindByCgndbKey(place.CgndbKey)).Return(closestWatershedToPlace);
+            mocks.ReplayAll();
+            Assert.AreEqual(closestWatershedToPlace, place.ClosestWatershedToPlace);
             mocks.VerifyAll();
         }
 
         [Test]
-        public void TestPlaceIsNotWithinBasinWhenClosestWatershedDoesNotExist()
+        public void TestClosestWatershedToPlaceOnlyCalledOnce()
         {
-            
+            ClosestWatershedToPlaceFinder finder = mocks.CreateMock<ClosestWatershedToPlaceFinder>();
+            ClosestWatershedToPlace closestWatershedToPlace = mocks.CreateMock<ClosestWatershedToPlace>();
+            Expect.Call(repository.GetFinder<ClosestWatershedToPlaceFinder>())
+                .Repeat.Once().Return(finder);
+            Expect.Call(finder.FindByCgndbKey(place.CgndbKey))
+                .Repeat.Once().Return(closestWatershedToPlace);
             mocks.ReplayAll();
-
-            Assert.IsFalse(place.IsWithinBasin());
-
+            ClosestWatershedToPlace callOne = place.ClosestWatershedToPlace;
+            ClosestWatershedToPlace callTwo = place.ClosestWatershedToPlace;
             mocks.VerifyAll();
-        }
+        }	
 
         [Test]
         public void TestRelatedPublications()
         {
-            //Expect.Call(repository.FindByDefaultQuery<IPublication>("%" + place.Name + "%"))
-            //    .Return(new IPublication[0]);
+            IPublicationFinder finder = mocks.CreateMock<IPublicationFinder>();
+            Expect.Call(repository.GetFinder<IPublicationFinder>()).Return(finder);
+            Expect.Call(finder.FindAllByQuery(null)).IgnoreArguments().Return(new IPublication[3]);
             mocks.ReplayAll();
-
             IPublication[] publications = place.RelatedPublications;
-            Assert.IsNotNull(publications);
-
+            Assert.AreEqual(3, publications.Length);
             mocks.VerifyAll();
         }
 
         [Test]
         public void TestRelatedPublicationsNeverReturnsNull()
         {
-            //Expect.Call(repository.FindByDefaultQuery<IPublication>("%" + place.Name + "%"))
-            //    .Return(null);
+            IPublicationFinder finder = mocks.CreateMock<IPublicationFinder>();
+            Expect.Call(repository.GetFinder<IPublicationFinder>()).Return(finder);
+            Expect.Call(finder.FindAllByQuery(null)).IgnoreArguments().Return(null);
             mocks.ReplayAll();
-
             IPublication[] publications = place.RelatedPublications;
             Assert.IsNotNull(publications);
-
+            Assert.IsEmpty(publications);
             mocks.VerifyAll();
         }
 
         [Test]
-        public void TestInteractiveMaps()
+        public void TestRelatedInteractiveMaps()
         {
-            //Expect.Call(repository.FindByDefaultQuery<InteractiveMap>("%" + place.Name + "%"))
-            //    .Return(new InteractiveMap[0]);
+            InteractiveMapFinder finder = mocks.CreateMock<InteractiveMapFinder>();
+            Expect.Call(repository.GetFinder<InteractiveMapFinder>()).Return(finder);
+            Expect.Call(finder.FindAllByQuery(null)).IgnoreArguments().Return(new InteractiveMap[3]);
             mocks.ReplayAll();
-
-            InteractiveMap[] maps = place.RelatedInteractiveMaps;
-            Assert.IsNotNull(maps);
-
+            InteractiveMap[] interactiveMaps = place.RelatedInteractiveMaps;
+            Assert.AreEqual(3, interactiveMaps.Length);
             mocks.VerifyAll();
         }
 
         [Test]
-        public void TestInteractiveMapsNeverReturnsNull()
+        public void TestRelatedInteractiveMapsNeverReturnsNull()
         {
-            //Expect.Call(repository.FindByDefaultQuery<InteractiveMap>("%" + place.Name + "%"))
-            //    .Return(null);
+            InteractiveMapFinder finder = mocks.CreateMock<InteractiveMapFinder>();
+            Expect.Call(repository.GetFinder<InteractiveMapFinder>()).Return(finder);
+            Expect.Call(finder.FindAllByQuery(null)).IgnoreArguments().Return(null);
             mocks.ReplayAll();
-
-            InteractiveMap[] maps = place.RelatedInteractiveMaps;
-            Assert.IsNotNull(maps);
-
+            InteractiveMap[] interactiveMaps = place.RelatedInteractiveMaps;
+            Assert.IsNotNull(interactiveMaps);
+            Assert.IsEmpty(interactiveMaps);
             mocks.VerifyAll();
         }
 
