@@ -26,7 +26,13 @@ namespace SJRAtlas.Models
         public IAtlasRepository Repository
         {
             get { return repository; }
-            set { repository = value; }
+            set 
+            {
+                if (value == null)
+                    throw new ArgumentNullException("repository");
+
+                repository = value; 
+            }
         }
 
         #region ActiveRecord Properties

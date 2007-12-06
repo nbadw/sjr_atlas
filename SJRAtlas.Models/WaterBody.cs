@@ -6,14 +6,38 @@ using Castle.ActiveRecord;
 namespace SJRAtlas.Models
 {
     [ActiveRecord("tblWaterBody")]
-    public class WaterBody : ActiveRecordBase<WaterBody>, IPlace, ICoordinateAware
+    public class WaterBody : ActiveRecordBase<WaterBody>, IWaterBody, IPlace, ICoordinateAware
     {
-        private IAtlasRepository repository;
+        public WaterBody()
+            : this(new NullAtlasRepository(), new Place(), new Watershed())
+        {
+
+        }
+
+        public WaterBody(IAtlasRepository repository)
+            : this(repository, new Place(), new Watershed())
+        {
+
+        }
+
+        public WaterBody(IAtlasRepository repository, Place place, Watershed watershed)
+        {
+            if (repository == null)
+                throw new ArgumentNullException("repository");
+            if (place == null)
+                throw new ArgumentNullException("place");
+            if (watershed == null)
+                throw new ArgumentNullException("watershed");
+
+            this.watershed = watershed;
+            this.watershed.Place = place;
+            this.watershed.Place.Repository = repository;
+        }
 
         public IAtlasRepository Repository
         {
-            get { return repository; }
-            set { repository = value; }
+            get { return Place.Repository; }
+            set { Place.Repository = value; }
         }
 
         #region ActiveRecord Properties
@@ -26,26 +50,12 @@ namespace SJRAtlas.Models
             get { return id; }
             set { id = value; }
         }
-        
-        private IPlace place;
 
-        public IPlace Place
-        {
-            get { return place; }
-            set { place = value; }
-        }
-
-        private Place activeRecordPlace;
-        
         [BelongsTo("CGNDB_Key")]
-        protected Place ActiveRecordPlace
+        public Place Place
         {
-            get { return activeRecordPlace; }
-            set
-            {
-                activeRecordPlace = value;
-                Place = value;
-            }
+            get { return Watershed.Place; }
+            set { Watershed.Place = value; }
         }
 
         private string altCgndbKey;
@@ -63,7 +73,13 @@ namespace SJRAtlas.Models
         public Watershed Watershed
         {
             get { return watershed; }
-            set { watershed = value; }
+            set 
+            {
+                if (value == null)
+                    throw new ArgumentNullException("watershed");
+
+                watershed = value; 
+            }
         }
 
         private string type;
@@ -114,7 +130,7 @@ namespace SJRAtlas.Models
         private string surveyedInd;
 
         [Property("Surveyed_Ind", Length = 1)]
-        public string SurveryInd
+        public string SurveyedInd
         {
             get { return surveyedInd; }
             set { surveyedInd = value; }
@@ -144,7 +160,26 @@ namespace SJRAtlas.Models
 
         public virtual DataSet[] DataSets
         {
-            get { return datasets; }
+            get 
+            {
+                if (datasets == null)
+                {
+                    datasets = new DataSet[DataSetList.Count];
+                    DataSetList.CopyTo(datasets, 0);
+                }
+
+                return datasets;
+            }
+        }
+
+        private IList<DataSet> datasetList = new List<DataSet>();
+
+        [HasAndBelongsToMany(typeof(DataSet), Table = "auxWaterBody_DataType_XRef",
+            ColumnKey = "WaterBodyID", ColumnRef = "DataTypeID")]
+        public IList<DataSet> DataSetList
+        {
+            get { return datasetList; }
+            set { datasetList = value; }
         }
 
         #region IPlace Members
@@ -234,32 +269,21 @@ namespace SJRAtlas.Models
 
         public InteractiveMap[] RelatedInteractiveMaps
         {
-            get
-            {
-                throw new Exception("The method or operation is not implemented.");
-            }
+            get { return Place.RelatedInteractiveMaps; }
         }
 
         public IPublication[] RelatedPublications
         {
-            get
-            {
-                throw new Exception("The method or operation is not implemented.");
-            }
+            get { return Place.RelatedPublications; }
         }
 
         #endregion
 
         #region ICoordinateAware Members
 
-        private LatLngCoord coord;
-
         public LatLngCoord GetCoordinate()
         {
-            if (coord == null)
-                coord = new LatLngCoord(Place.Latitude, Place.Longitude);
-
-            return coord;
+            return Place.GetCoordinate();
         }
 
         #endregion

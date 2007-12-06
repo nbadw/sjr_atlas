@@ -10,53 +10,69 @@ namespace SJRAtlas.Models.Tests
     [TestFixture]
     public class WatershedTest : AbstractModelTestCase
     {
-        private Watershed watershed;
-        private Place place; 
         private MockRepository mocks;
 
         [SetUp]
         public void Setup()
         {
             base.Init();
-
-            place = new Place();
-            place.CgndbKey = "ABCDE";
-            place.CreateAndFlush();
-
-            WaterBody waterBody1 = new WaterBody();
-            waterBody1.Id = 1234567;
-            waterBody1.Name = "Test WaterBody 1";
-            waterBody1.CreateAndFlush();
-
-            WaterBody waterBody2 = new WaterBody();
-            waterBody2.Id = 1234568;
-            waterBody2.Name = "Test WaterBody 2";
-            waterBody2.CreateAndFlush();
-
-            watershed = new Watershed();
-            watershed.DrainageCode = "01-00-00-00-00-00";
-            watershed.Name = "Saint John River";
-            watershed.Place = place;
-            watershed.WaterBodies.Add(waterBody1);
-            watershed.WaterBodies.Add(waterBody2);
-            watershed.CreateAndFlush();
-
             mocks = new MockRepository();
         }
 
         [Test]
         public void TestFindWatershed()
         {
-            Watershed found = Watershed.Find("01-00-00-00-00-00");
-            Assert.AreEqual(watershed, found);
+            string drainageCode = "01-02-03-04-05-06";
+
+            Watershed watershed = new Watershed();
+            watershed.Place.CgndbKey = "ABCDE";
+            watershed.Place.CreateAndFlush();
+            watershed.DrainageCode = drainageCode;
+            watershed.CreateAndFlush();
+
+            Watershed dbWatershed = Watershed.Find(drainageCode);
+            Assert.IsNotNull(dbWatershed);
+            Assert.AreEqual(drainageCode, dbWatershed.DrainageCode);
+        }
+
+        [Test]
+        public void TestConstructors()
+        {
+            Watershed watershed;
+
+            watershed = new Watershed();
+            Assert.IsNotNull(watershed.Repository);
+            Assert.IsNotNull(watershed.Place);
+
+            IAtlasRepository repository = mocks.CreateMock<IAtlasRepository>();
+            watershed = new Watershed(repository);
+            Assert.AreEqual(repository, watershed.Repository);
+            Assert.IsNotNull(watershed.Place);
+
+            Place place = mocks.CreateMock<Place>();
+            watershed = new Watershed(repository, place);
+            Assert.AreEqual(repository, watershed.Repository);
+            Assert.AreEqual(place, watershed.Place);
+        }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void TestWatershedConstructorWhenRepositoryIsNull()
+        {
+            new Watershed(null);
+        }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void TestWatershedConstructorWhenPlaceIsNull()
+        {
+            new Watershed(mocks.CreateMock<IAtlasRepository>(), null);
         }	
 
         [Test]
         public void TestProperties()
         {
             Watershed watershed = new Watershed();
-            watershed.Place = new Place();
-
             Dictionary<string, object> properties = new Dictionary<string, object>();
             properties.Add("AreaHA", float.MaxValue);
             properties.Add("AreaPercent", float.MaxValue);
@@ -98,20 +114,6 @@ namespace SJRAtlas.Models.Tests
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void TestWatershedConstructorWhenAtlasArgumentIsNull()
-        {
-            new Watershed(null);
-        }
-
-        [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void TestWatershedConstructorWhenPlaceArgumentIsNull()
-        {
-            new Watershed(mocks.CreateMock<IAtlasRepository>(), null);
-        }	
-
-        [Test]
         public void TestWatershedConstructorSetsDefaultPlaceAndRepository()
         {
             Watershed watershed = new Watershed();
@@ -120,91 +122,89 @@ namespace SJRAtlas.Models.Tests
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void TestPlaceCannotBeSetToNull()
-        {
-            Watershed watershed = new Watershed();
-            watershed.Place = null;
-        }
-
-        [Test]
         public void TestBelongsToPlace()
         {
-            Watershed found = Watershed.Find("01-00-00-00-00-00");
-            Assert.AreEqual(place, found.Place);
+            string drainageCode = "01-02-03-04-05-06";
+            string cgndbKey = "ABCDE";
+
+            Watershed watershed = new Watershed();
+            watershed.Place.CgndbKey = cgndbKey;
+            watershed.Place.CreateAndFlush();
+            watershed.DrainageCode = drainageCode;
+            watershed.CreateAndFlush();
+
+            Watershed dbWatershed = Watershed.Find(drainageCode);
+            Assert.IsNotNull(dbWatershed);
+            Assert.IsNotNull(dbWatershed.Place);
+            Assert.AreEqual(cgndbKey, dbWatershed.Place.CgndbKey);
         }
 
         [Test]
         public void TestHasManyWaterBodies()
         {
-            Watershed found = Watershed.Find("01-00-00-00-00-00");
-            Assert.AreEqual(2, found.WaterBodies.Count);
-        }	
+            string drainageCode = "01-02-03-04-05-06";
+            int id1 = 1234;
+            int id2 = 5678;
+
+            Watershed watershed = new Watershed();
+            watershed.Place.CgndbKey = "ABCDE";
+            watershed.Place.CreateAndFlush();
+            watershed.DrainageCode = drainageCode;
+            watershed.CreateAndFlush();
+
+            WaterBody waterBody1 = new WaterBody();
+            waterBody1.Id = id1;
+            waterBody1.Watershed = watershed;
+            waterBody1.Place = watershed.Place;
+            waterBody1.CreateAndFlush();
+
+            WaterBody waterBody2 = new WaterBody();
+            waterBody2.Id = id2;
+            waterBody2.Watershed = watershed;
+            waterBody2.Place = watershed.Place;
+            waterBody2.CreateAndFlush();
+
+            watershed.WaterBodies.Add(waterBody1);
+            watershed.WaterBodies.Add(waterBody2);
+            watershed.SaveAndFlush();
+
+            Watershed dbWatershed = Watershed.Find(drainageCode);
+            Assert.IsNotNull(dbWatershed);
+            Assert.AreEqual(2, dbWatershed.WaterBodies.Count);
+            Assert.AreEqual(id1, dbWatershed.WaterBodies[0].Id);
+            Assert.AreEqual(id2, dbWatershed.WaterBodies[1].Id);
+        }
 
         [Test]
         public void TestRelatedPublications()
         {
-            IAtlasRepository repository = mocks.CreateMock<IAtlasRepository>();
-            IPublicationFinder finder = mocks.CreateMock<IPublicationFinder>();
-            Expect.Call(repository.GetFinder<IPublicationFinder>()).Return(finder);
-            Expect.Call(finder.FindAllByQuery(null)).IgnoreArguments().Return(new IPublication[3]);
-            mocks.ReplayAll();
-
-            Watershed watershed = new Watershed(repository);
-            IPublication[] publications = watershed.RelatedPublications;
-
-            Assert.AreEqual(3, publications.Length);
-            mocks.VerifyAll();
+            Watershed watershed = new Watershed();
+            watershed.Repository = mocks.CreateMock<IAtlasRepository>();
+            base.TestRelatedPublications(mocks, watershed, watershed.Repository);
         }
 
         [Test]
         public void TestRelatedPublicationsNeverReturnsNull()
         {
-            IAtlasRepository repository = mocks.CreateMock<IAtlasRepository>();
-            IPublicationFinder finder = mocks.CreateMock<IPublicationFinder>();
-            Expect.Call(repository.GetFinder<IPublicationFinder>()).Return(finder);
-            Expect.Call(finder.FindAllByQuery(null)).IgnoreArguments().Return(null);
-            mocks.ReplayAll();
-
-            Watershed watershed = new Watershed(repository);
-            IPublication[] publications = watershed.RelatedPublications;
-
-            Assert.IsNotNull(publications);
-            Assert.IsEmpty(publications);
-            mocks.VerifyAll();
+            Watershed watershed = new Watershed();
+            watershed.Repository = mocks.CreateMock<IAtlasRepository>();
+            base.TestRelatedPublicationsNeverReturnsNull(mocks, watershed, watershed.Repository);
         }
 
         [Test]
         public void TestRelatedInteractiveMaps()
         {
-            IAtlasRepository repository = mocks.CreateMock<IAtlasRepository>();
-            InteractiveMapFinder finder = mocks.CreateMock<InteractiveMapFinder>();
-            Expect.Call(repository.GetFinder<InteractiveMapFinder>()).Return(finder);
-            Expect.Call(finder.FindAllByQuery(null)).IgnoreArguments().Return(new InteractiveMap[3]);
-            mocks.ReplayAll();
-            
-            Watershed watershed = new Watershed(repository);
-            InteractiveMap[] interactiveMaps = watershed.RelatedInteractiveMaps;
-
-            Assert.AreEqual(3, interactiveMaps.Length);
-            mocks.VerifyAll();
+            Watershed watershed = new Watershed();
+            watershed.Repository = mocks.CreateMock<IAtlasRepository>();
+            base.TestRelatedInteractiveMaps(mocks, watershed, watershed.Repository);
         }
 
         [Test]
         public void TestRelatedInteractiveMapsNeverReturnsNull()
-        {            
-            IAtlasRepository repository = mocks.CreateMock<IAtlasRepository>();
-            InteractiveMapFinder finder = mocks.CreateMock<InteractiveMapFinder>();
-            Expect.Call(repository.GetFinder<InteractiveMapFinder>()).Return(finder);
-            Expect.Call(finder.FindAllByQuery(null)).IgnoreArguments().Return(null);
-            mocks.ReplayAll();
-
-            Watershed watershed = new Watershed(repository);
-            InteractiveMap[] interactiveMaps = watershed.RelatedInteractiveMaps;
-
-            Assert.IsNotNull(interactiveMaps);
-            Assert.IsEmpty(interactiveMaps);
-            mocks.VerifyAll();
+        {
+            Watershed watershed = new Watershed();
+            watershed.Repository = mocks.CreateMock<IAtlasRepository>();
+            base.TestRelatedInteractiveMapsNeverReturnsNull(mocks, watershed, watershed.Repository);
         }
 
         [Test]
@@ -298,6 +298,7 @@ namespace SJRAtlas.Models.Tests
         public void TestIsWithinBasin()
         {
             string drainageCode = "01-00-00-00-00-00";
+            Watershed watershed = new Watershed();
             watershed.DrainageCode = drainageCode;
             Assert.IsTrue(watershed.IsWithinBasin());
         }
@@ -314,6 +315,7 @@ namespace SJRAtlas.Models.Tests
                 "ab-cd-ef-gh-ij-kl",
                 "01-.."
             };
+            Watershed watershed = new Watershed();
 
             foreach (string drainageCode in notInBasinCodes)
             {
@@ -321,6 +323,22 @@ namespace SJRAtlas.Models.Tests
                 Assert.IsFalse(watershed.IsWithinBasin(), "IsWithinBasin should return false for value " + drainageCode);
             }
         }
-		
+
+
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void TestRepositoryCannotBeSetToNull()
+        {
+            Watershed watershed = new Watershed();
+            watershed.Repository = null;
+        }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void TestPlaceCannotBeSetToNull()
+        {
+            Watershed watershed = new Watershed();
+            watershed.Place = null;
+        }
     }
 }

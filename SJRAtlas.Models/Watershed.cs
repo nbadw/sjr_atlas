@@ -8,7 +8,7 @@ using SJRAtlas.Models.Finders;
 namespace SJRAtlas.Models
 {
     [ActiveRecord("tblDrainageUnit")]
-    public class Watershed : ActiveRecordBase<Watershed>, IPlace, ICoordinateAware
+    public class Watershed : ActiveRecordBase<Watershed>, IPlace, IWatershed, ICoordinateAware
     {
         public Watershed() : this(new NullAtlasRepository(), new Place())
         {
@@ -26,8 +26,8 @@ namespace SJRAtlas.Models
             if (place == null)
                 throw new ArgumentNullException("place");
 
-            this.repository = repository;
             this.place = place;
+            this.place.Repository = repository;
             this.waterbodies = new List<WaterBody>();
             this.level1No = "00";
             this.level2No = "00";
@@ -40,12 +40,10 @@ namespace SJRAtlas.Models
                                           Level4No, Level5No, Level6No);
         }
 
-        private IAtlasRepository repository;
-
         public IAtlasRepository Repository
         {
-            get { return repository; }
-            set { repository = value; }
+            get { return Place.Repository; }
+            set { Place.Repository = value; }
         }
 
         public string FlowsInto
@@ -152,6 +150,7 @@ namespace SJRAtlas.Models
             { 
                 if(value == null)
                     throw new ArgumentNullException("place");
+
                 place = value; 
             }
         }

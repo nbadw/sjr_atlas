@@ -10,38 +10,47 @@ namespace SJRAtlas.Models.Tests
     [TestFixture]
     public class PlaceTest : AbstractModelTestCase
     {
-        private Place place;
         private MockRepository mocks;
-        private IAtlasRepository repository;
 
         [SetUp]
         public void Setup()
         {
             base.Init();
             mocks = new MockRepository();
-            repository = mocks.CreateMock<IAtlasRepository>();
-            place = new Place(repository);
         }
 
         [Test]
         public void TestConstructors()
         {
-            Place place1 = new Place();
-            Assert.IsNotNull(place1.Repository);
-            Place place2 = new Place(repository);
-            Assert.AreEqual(repository, place2.Repository);
+            Place place;
+            IAtlasRepository repository = mocks.CreateMock<IAtlasRepository>();
+
+            place = new Place();
+            Assert.IsNotNull(place.Repository);
+
+            place = new Place(repository);
+            Assert.AreEqual(repository, place.Repository);
         }
 
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void TestConstructorWhenRepositoryParameterIsNull()
+        public void TestConstructorWhenRepositoryIsNull()
         {
             new Place(null);
         }
 
         [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void TestRepositoryCannotBeSetToNull()
+        {
+            Place place = new Place();
+            place.Repository = null;
+        }
+
+        [Test]
         public void TestGetId()
         {
+            Place place = new Place();
             Assert.IsNull(place.CgndbKey);
             Assert.IsNull(place.GetId());
             place.CgndbKey = "ABCDE";
@@ -51,17 +60,21 @@ namespace SJRAtlas.Models.Tests
         [Test]
         public void TestGetCoordinate()
         {
-            place.Latitude = 3.7;
-            place.Longitude = 7.3;
+            double lat = 3.7;
+            double lon = 7.3;
+            Place place = new Place();
+            place.Latitude = lat;
+            place.Longitude = lon;
             LatLngCoord coordinate = place.GetCoordinate();
             Assert.IsNotNull(coordinate);
-            Assert.AreEqual(place.Latitude, coordinate.Latitude);
-            Assert.AreEqual(place.Longitude, coordinate.Longitude);
+            Assert.AreEqual(lat, coordinate.Latitude);
+            Assert.AreEqual(lon, coordinate.Longitude);
         }
 
         [Test]
         public void TestIsWithinBasin()
         {
+            Place place = new Place();
             ClosestWatershedToPlace closestWatershedToPlace = mocks.CreateMock<ClosestWatershedToPlace>();
             Expect.Call(closestWatershedToPlace.IsWithinBasin()).Return(true);
             mocks.ReplayAll();
@@ -73,6 +86,7 @@ namespace SJRAtlas.Models.Tests
         [Test]
         public void TestIsWithinBasinWhenClosestWatershedToPlaceIsNull()
         {
+            Place place = new Place();
             place.ClosestWatershedToPlace = null;
             Assert.IsFalse(place.IsWithinBasin());
         }	
@@ -80,6 +94,9 @@ namespace SJRAtlas.Models.Tests
         [Test]
         public void TestClosestWatershedToPlace()
         {
+            Place place = new Place();
+            IAtlasRepository repository = mocks.CreateMock<IAtlasRepository>();
+            place.Repository = repository;
             ClosestWatershedToPlaceFinder finder = mocks.CreateMock<ClosestWatershedToPlaceFinder>();
             ClosestWatershedToPlace closestWatershedToPlace = mocks.CreateMock<ClosestWatershedToPlace>();
             Expect.Call(repository.GetFinder<ClosestWatershedToPlaceFinder>()).Return(finder);
@@ -92,6 +109,9 @@ namespace SJRAtlas.Models.Tests
         [Test]
         public void TestClosestWatershedToPlaceOnlyCalledOnce()
         {
+            Place place = new Place();
+            IAtlasRepository repository = mocks.CreateMock<IAtlasRepository>();
+            place.Repository = repository;
             ClosestWatershedToPlaceFinder finder = mocks.CreateMock<ClosestWatershedToPlaceFinder>();
             ClosestWatershedToPlace closestWatershedToPlace = mocks.CreateMock<ClosestWatershedToPlace>();
             Expect.Call(repository.GetFinder<ClosestWatershedToPlaceFinder>())
@@ -107,56 +127,39 @@ namespace SJRAtlas.Models.Tests
         [Test]
         public void TestRelatedPublications()
         {
-            IPublicationFinder finder = mocks.CreateMock<IPublicationFinder>();
-            Expect.Call(repository.GetFinder<IPublicationFinder>()).Return(finder);
-            Expect.Call(finder.FindAllByQuery(null)).IgnoreArguments().Return(new IPublication[3]);
-            mocks.ReplayAll();
-            IPublication[] publications = place.RelatedPublications;
-            Assert.AreEqual(3, publications.Length);
-            mocks.VerifyAll();
+            Place place = new Place();
+            place.Repository = mocks.CreateMock<IAtlasRepository>();
+            base.TestRelatedPublications(mocks, place, place.Repository);
         }
 
         [Test]
         public void TestRelatedPublicationsNeverReturnsNull()
         {
-            IPublicationFinder finder = mocks.CreateMock<IPublicationFinder>();
-            Expect.Call(repository.GetFinder<IPublicationFinder>()).Return(finder);
-            Expect.Call(finder.FindAllByQuery(null)).IgnoreArguments().Return(null);
-            mocks.ReplayAll();
-            IPublication[] publications = place.RelatedPublications;
-            Assert.IsNotNull(publications);
-            Assert.IsEmpty(publications);
-            mocks.VerifyAll();
+            Place place = new Place();
+            place.Repository = mocks.CreateMock<IAtlasRepository>();
+            base.TestRelatedPublicationsNeverReturnsNull(mocks, place, place.Repository);
         }
 
         [Test]
         public void TestRelatedInteractiveMaps()
         {
-            InteractiveMapFinder finder = mocks.CreateMock<InteractiveMapFinder>();
-            Expect.Call(repository.GetFinder<InteractiveMapFinder>()).Return(finder);
-            Expect.Call(finder.FindAllByQuery(null)).IgnoreArguments().Return(new InteractiveMap[3]);
-            mocks.ReplayAll();
-            InteractiveMap[] interactiveMaps = place.RelatedInteractiveMaps;
-            Assert.AreEqual(3, interactiveMaps.Length);
-            mocks.VerifyAll();
+            Place place = new Place();
+            place.Repository = mocks.CreateMock<IAtlasRepository>();
+            base.TestRelatedInteractiveMaps(mocks, place, place.Repository);
         }
 
         [Test]
         public void TestRelatedInteractiveMapsNeverReturnsNull()
         {
-            InteractiveMapFinder finder = mocks.CreateMock<InteractiveMapFinder>();
-            Expect.Call(repository.GetFinder<InteractiveMapFinder>()).Return(finder);
-            Expect.Call(finder.FindAllByQuery(null)).IgnoreArguments().Return(null);
-            mocks.ReplayAll();
-            InteractiveMap[] interactiveMaps = place.RelatedInteractiveMaps;
-            Assert.IsNotNull(interactiveMaps);
-            Assert.IsEmpty(interactiveMaps);
-            mocks.VerifyAll();
+            Place place = new Place();
+            place.Repository = mocks.CreateMock<IAtlasRepository>();
+            base.TestRelatedInteractiveMapsNeverReturnsNull(mocks, place, place.Repository);
         }
 
         [Test]
         public void TestProperties()
         {
+            Place place = new Place();
             Dictionary<string, object> properties = new Dictionary<string, object>();
             properties.Add("CgndbKey", "ABCDE");
             properties.Add("County", "Northumberland");

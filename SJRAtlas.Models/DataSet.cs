@@ -1,11 +1,22 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Castle.ActiveRecord;
 
 namespace SJRAtlas.Models
 {
-    public class DataSet : IMetadataAware
+    [ActiveRecord("auxDataTypes")]
+    public class DataSet : ActiveRecordBase<DataSet>, IMetadataAware
     {
+        private int id;
+
+        [PrimaryKey("DataTypeID")]
+        public int Id
+        {
+            get { return id; }
+            set { id = value; }
+        }
+
         public SJRAtlas.Models.Presentation[] Presentations
         {
             get
