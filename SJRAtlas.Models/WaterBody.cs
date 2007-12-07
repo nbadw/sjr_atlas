@@ -9,21 +9,13 @@ namespace SJRAtlas.Models
     public class WaterBody : ActiveRecordBase<WaterBody>, IPlace, ICoordinateAware
     {
         public WaterBody()
-            : this(new NullAtlasRepository(), new Place(), new Watershed())
+            : this(new Place(), new Watershed())
         {
 
         }
 
-        public WaterBody(IAtlasRepository repository)
-            : this(repository, new Place(), new Watershed())
+        public WaterBody(Place place, Watershed watershed)
         {
-
-        }
-
-        public WaterBody(IAtlasRepository repository, Place place, Watershed watershed)
-        {
-            if (repository == null)
-                throw new ArgumentNullException("repository");
             if (place == null)
                 throw new ArgumentNullException("place");
             if (watershed == null)
@@ -31,13 +23,6 @@ namespace SJRAtlas.Models
 
             this.watershed = watershed;
             this.watershed.Place = place;
-            this.watershed.Place.Repository = repository;
-        }
-
-        public IAtlasRepository Repository
-        {
-            get { return Place.Repository; }
-            set { Place.Repository = value; }
         }
 
         #region ActiveRecord Properties

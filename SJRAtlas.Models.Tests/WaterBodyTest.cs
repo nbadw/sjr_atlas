@@ -14,7 +14,7 @@ namespace SJRAtlas.Models.Tests
         [SetUp]
         public void Setup()
         {
-            base.Init();
+            base.Setup();
             mocks = new MockRepository();
         }
 
@@ -22,51 +22,32 @@ namespace SJRAtlas.Models.Tests
         public void TestConstructors()
         {
             WaterBody waterbody;
-            IAtlasRepository repository = mocks.CreateMock<IAtlasRepository>();
             Place place = mocks.CreateMock<Place>();
             Watershed watershed = mocks.CreateMock<Watershed>();
 
             waterbody = new WaterBody();
-            Assert.IsNotNull(waterbody.Repository);
             Assert.IsNotNull(waterbody.Place);
             Assert.IsNotNull(waterbody.Watershed);
 
-            waterbody = new WaterBody(repository);
-            Assert.AreEqual(repository, waterbody.Repository);
-            Assert.IsNotNull(waterbody.Place);
-            Assert.IsNotNull(waterbody.Watershed);
-
-            waterbody = new WaterBody(repository, place, watershed);
-            Assert.AreEqual(repository, waterbody.Repository);
+            waterbody = new WaterBody(place, watershed);
             Assert.AreEqual(place, waterbody.Place);
             Assert.AreEqual(watershed, waterbody.Watershed);
         }
 
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void TestConstructorWhenNullRepositoryIsPassed()
-        {
-            Place place = mocks.CreateMock<Place>();
-            Watershed watershed = mocks.CreateMock<Watershed>();
-            new WaterBody(null, place, watershed);
-        }
-
-        [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void TestConstructorWhenNullPlaceIsPassed()
         {
-            IAtlasRepository repository = mocks.CreateMock<IAtlasRepository>();
             Watershed watershed = mocks.CreateMock<Watershed>();
-            new WaterBody(repository, null, watershed);
+            new WaterBody(null, watershed);
         }
 
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
         public void TestConstructorWhenNullWatershedIsPassed()
         {
-            IAtlasRepository repository = mocks.CreateMock<IAtlasRepository>();
             Place place = mocks.CreateMock<Place>();
-            new WaterBody(repository, place, null);
+            new WaterBody(place, null);
         }	
 
         [Test]
@@ -110,7 +91,6 @@ namespace SJRAtlas.Models.Tests
             properties.Add("Longitude", 7.3);
             properties.Add("NtsMap", "TestValue");
             properties.Add("Region", "NB");
-            properties.Add("Repository", mocks.CreateMock<IAtlasRepository>());
             properties.Add("SurveyedInd", "TestValue");
             properties.Add("Type", "TestValue");
             TestHelper.ErrorSummary errors = TestHelper.TestProperties(waterbody, properties);
@@ -237,14 +217,6 @@ namespace SJRAtlas.Models.Tests
             mocks.ReplayAll();
             Assert.IsTrue(waterbody.IsWithinBasin());
             mocks.VerifyAll();
-        }
-
-        [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void TestRepositoryCannotBeSetToNull()
-        {
-            WaterBody waterbody = new WaterBody();
-            waterbody.Repository = null;
         }
 
         [Test]

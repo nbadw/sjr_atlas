@@ -8,7 +8,7 @@ namespace SJRAtlas.Site.Models
 
         public void LoadChildren()
         {
-            innerExceptions = Error.FindAllByProperty("ParentId", this.Id);
+            //innerExceptions = Error.FindAllByProperty("ParentId", this.Id);
         }
     }
 }

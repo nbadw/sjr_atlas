@@ -54,22 +54,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClosestWatershedToPlace.cs" />
-    <Compile Include="Finders\ClosestWatershedToPlaceFinder.cs" />
-    <Compile Include="Finders\DataSetFinder.cs" />
-    <Compile Include="Finders\InteractiveMapFinder.cs" />
-    <Compile Include="Finders\NullFinder.cs" />
     <Compile Include="IPlace.cs" />
     <Compile Include="Publication.cs" />
-    <Compile Include="AtlasRepository.cs" />
     <Compile Include="LatLngCoord.cs" />
     <Compile Include="DataSet.cs" />
-    <Compile Include="Finders\IPublicationFinder.cs" />
-    <Compile Include="Finders\PlaceFinder.cs" />
     <Compile Include="GraphPresentation.cs" />
-    <Compile Include="IAtlasRepository.cs" />
     <Compile Include="ICoordinateAware.cs" />
-    <Compile Include="IEntity.cs" />
-    <Compile Include="IEntityFinder.cs" />
     <Compile Include="IMetadataAware.cs" />
     <Compile Include="InteractiveMap.cs" />
     <Compile Include="IPublication.cs" />
@@ -83,9 +73,6 @@
     <Compile Include="SummaryReportPresentation.cs" />
     <Compile Include="WaterBody.cs" />
     <Compile Include="Watershed.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="SJRAtlasModelsDiagram.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

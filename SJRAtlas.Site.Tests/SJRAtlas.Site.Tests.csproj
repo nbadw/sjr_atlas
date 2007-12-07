@@ -88,6 +88,10 @@
     </Reference>
     <Reference Include="Castle.MonoRail.Framework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL" />
     <Reference Include="Castle.MonoRail.TestSupport, Version=1.0.1.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL" />
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\External Libs\Castle Framework .NET-2.0\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.framework, Version=2.2.8.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL" />
     <Reference Include="Rhino.Mocks, Version=3.2.0.781, Culture=neutral, PublicKeyToken=0b3305902db7183f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -108,11 +112,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="TestFiles\fgdc-std-001-1998.dtd" />
     <Compile Include="AbstractModelTestCase.cs" />
     <Compile Include="AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Components\BasicInfoComponentTest.cs" />
+    <Compile Include="Components\PlaceInfoComponentTest.cs" />
     <Compile Include="Components\ResourceComponentTest.cs" />
     <Compile Include="Controllers\AboutControllerTest.cs" />
     <Compile Include="Controllers\FeedbackControllerTest.cs" />
@@ -124,19 +129,14 @@
     <Compile Include="Models\FeedbackTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SJRAtlas.Core\SJRAtlas.Core.csproj">
-      <Project>{81B151EF-4C5F-4E0B-82A5-A2276975693D}</Project>
-      <Name>SJRAtlas.Core</Name>
+    <ProjectReference Include="..\SJRAtlas.Models\SJRAtlas.Models.csproj">
+      <Project>{43819902-84F0-47AB-B474-C1EF5E89ED8A}</Project>
+      <Name>SJRAtlas.Models</Name>
     </ProjectReference>
     <ProjectReference Include="..\SJRAtlas.Site\SJRAtlas.Site.csproj">
       <Project>{136FD2E6-F684-4A3E-85D2-9A1B2B6896C5}</Project>
       <Name>SJRAtlas.Site</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="TestFiles\DataWarehouse_2006_Master.xml" />
-    <Content Include="TestFiles\fgdc-metadata.xml" />
-    <Content Include="TestFiles\metadata.html" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

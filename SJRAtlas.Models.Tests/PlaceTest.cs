@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Text;
 using NUnit.Framework;
 using Rhino.Mocks;
-using SJRAtlas.Models.Finders;
 
 namespace SJRAtlas.Models.Tests
 {
@@ -15,46 +14,8 @@ namespace SJRAtlas.Models.Tests
         [SetUp]
         public void Setup()
         {
-            base.Init();
+            base.Setup();
             mocks = new MockRepository();
-        }
-
-        [Test]
-        public void TestConstructors()
-        {
-            Place place;
-            IAtlasRepository repository = mocks.CreateMock<IAtlasRepository>();
-
-            place = new Place();
-            Assert.IsNotNull(place.Repository);
-
-            place = new Place(repository);
-            Assert.AreEqual(repository, place.Repository);
-        }
-
-        [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void TestConstructorWhenRepositoryIsNull()
-        {
-            new Place(null);
-        }
-
-        [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void TestRepositoryCannotBeSetToNull()
-        {
-            Place place = new Place();
-            place.Repository = null;
-        }
-
-        [Test]
-        public void TestGetId()
-        {
-            Place place = new Place();
-            Assert.IsNull(place.CgndbKey);
-            Assert.IsNull(place.GetId());
-            place.CgndbKey = "ABCDE";
-            Assert.AreEqual(place.CgndbKey, place.GetId());
         }
 
         [Test]
@@ -94,34 +55,24 @@ namespace SJRAtlas.Models.Tests
         [Test]
         public void TestClosestWatershedToPlace()
         {
+            string cgndbKey = "ABCDE";
             Place place = new Place();
-            IAtlasRepository repository = mocks.CreateMock<IAtlasRepository>();
-            place.Repository = repository;
-            ClosestWatershedToPlaceFinder finder = mocks.CreateMock<ClosestWatershedToPlaceFinder>();
-            ClosestWatershedToPlace closestWatershedToPlace = mocks.CreateMock<ClosestWatershedToPlace>();
-            Expect.Call(repository.GetFinder<ClosestWatershedToPlaceFinder>()).Return(finder);
-            Expect.Call(finder.FindByCgndbKey(place.CgndbKey)).Return(closestWatershedToPlace);
-            mocks.ReplayAll();
-            Assert.AreEqual(closestWatershedToPlace, place.ClosestWatershedToPlace);
-            mocks.VerifyAll();
-        }
+            place.CgndbKey = cgndbKey;
+            place.CreateAndFlush();
 
-        [Test]
-        public void TestClosestWatershedToPlaceOnlyCalledOnce()
-        {
-            Place place = new Place();
-            IAtlasRepository repository = mocks.CreateMock<IAtlasRepository>();
-            place.Repository = repository;
-            ClosestWatershedToPlaceFinder finder = mocks.CreateMock<ClosestWatershedToPlaceFinder>();
-            ClosestWatershedToPlace closestWatershedToPlace = mocks.CreateMock<ClosestWatershedToPlace>();
-            Expect.Call(repository.GetFinder<ClosestWatershedToPlaceFinder>())
-                .Repeat.Once().Return(finder);
-            Expect.Call(finder.FindByCgndbKey(place.CgndbKey))
-                .Repeat.Once().Return(closestWatershedToPlace);
-            mocks.ReplayAll();
-            ClosestWatershedToPlace callOne = place.ClosestWatershedToPlace;
-            ClosestWatershedToPlace callTwo = place.ClosestWatershedToPlace;
-            mocks.VerifyAll();
+            Watershed watershed = new Watershed();
+            watershed.DrainageCode = "01-02-03-04-05-06";
+            watershed.Place = place;
+            watershed.CreateAndFlush();
+
+            ClosestWatershedToPlace closestWatershedToPlace = new ClosestWatershedToPlace();
+            closestWatershedToPlace.Place = place;
+            closestWatershedToPlace.Watershed = watershed;
+            closestWatershedToPlace.CreateAndFlush();
+
+            Place dbPlace = Place.Find(cgndbKey);
+            Assert.IsNotNull(dbPlace);
+            Assert.AreEqual(closestWatershedToPlace, place.ClosestWatershedToPlace);
         }	
 
         [Test]
@@ -197,7 +148,6 @@ namespace SJRAtlas.Models.Tests
             properties.Add("Longitude", 7.3);
             properties.Add("NtsMap", "TestValue");
             properties.Add("Region", "NB");
-            properties.Add("Repository", mocks.CreateMock<IAtlasRepository>());
             TestHelper.ErrorSummary errors = TestHelper.TestProperties(place, properties);
             Assert.IsEmpty(errors, "The following errors occurred during property testing:\n" + errors.GetSummary());
         }

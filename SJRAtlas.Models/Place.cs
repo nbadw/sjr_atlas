@@ -2,39 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Castle.ActiveRecord;
-using SJRAtlas.Models.Finders;
 
 namespace SJRAtlas.Models
 {
     [ActiveRecord("places")]
-    public class Place : ActiveRecordBase<Place>, IPlace, ICoordinateAware, IEntity
+    public class Place : ActiveRecordBase<Place>, IPlace, ICoordinateAware
     {
-        public Place() : this(new NullAtlasRepository())
-        {
-        }
-
-        public Place(IAtlasRepository repository)
-        {
-            if (repository == null)
-                throw new ArgumentNullException("repository");
-
-            this.repository = repository;
-        }
-
-        private IAtlasRepository repository;
-
-        public IAtlasRepository Repository
-        {
-            get { return repository; }
-            set 
-            {
-                if (value == null)
-                    throw new ArgumentNullException("repository");
-
-                repository = value; 
-            }
-        }
-
         #region ActiveRecord Properties
 
         private string cgndbKey;
@@ -175,9 +148,7 @@ namespace SJRAtlas.Models
                 if (!closestWatershedToPlaceAlreadyLoaded)
                 {
 
-                    closestWatershedToPlace = Repository.GetFinder<ClosestWatershedToPlaceFinder>()
-                        .FindByCgndbKey(CgndbKey);
-
+                    closestWatershedToPlace = ClosestWatershedToPlace.FindByCgndbKey(CgndbKey);
                     closestWatershedToPlaceAlreadyLoaded = true;
                 }
 
@@ -243,15 +214,5 @@ namespace SJRAtlas.Models
         }
 
         #endregion
-
-        #region IEntity Members
-
-        public object GetId()
-        {
-            return CgndbKey;
-        }
-
-        #endregion
-
     }
 }

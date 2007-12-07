@@ -13,7 +13,7 @@ namespace SJRAtlas.Models.Tests
         [SetUp]
         public void Setup()
         {
-            base.Init();
+            base.Setup();
             publication = CreatePublication();
         }
 
@@ -54,7 +54,7 @@ namespace SJRAtlas.Models.Tests
             Publication publication = CreatePublication();
             publication.CreateAndFlush();
             Metadata metadata = new Metadata();
-            metadata.MetadataOwner = publication;
+            metadata.Owner = publication;
             metadata.CreateAndFlush();
 
             Publication dbPublication = Publication.Find(publication.Id);

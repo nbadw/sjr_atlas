@@ -6,7 +6,7 @@ using System.Collections.Generic;
 namespace SJRAtlas.Models
 {
     [ActiveRecord("publications", DiscriminatorColumn="type", DiscriminatorType="String", DiscriminatorValue="Publication")]
-    public class Publication : ActiveRecordBase<Publication>, IPublication, IEntity, IMetadataAware
+    public class Publication : ActiveRecordBase<Publication>, IPublication, IMetadataAware
     {
         public static IList<IPublication> FindAllByQuery(string query)
         {

@@ -5,27 +5,74 @@ using Castle.ActiveRecord;
 
 namespace SJRAtlas.Models
 {
-    [ActiveRecord("auxDataTypes")]
+    [ActiveRecord("data_sets")]
     public class DataSet : ActiveRecordBase<DataSet>, IMetadataAware
     {
         private int id;
 
-        [PrimaryKey("DataTypeID")]
+        [PrimaryKey("id")]
         public int Id
         {
             get { return id; }
             set { id = value; }
         }
 
-        public SJRAtlas.Models.Presentation[] Presentations
+        private string title;
+
+        [Property("title")]
+        public string Title
         {
-            get
+            get { return title; }
+            set { title = value; }
+        }
+
+        private string abstractText;
+
+        [Property("abstract", ColumnType = "StringClob")]
+        public string Abstract
+        {
+            get { return abstractText; }
+            set { abstractText = value; }
+        }
+
+        private string author;
+
+        [Property("author")]
+        public string Author
+        {
+            get { return author; }
+            set { author = value; }
+        }
+
+        private string origin;
+
+        [Property("origin")]
+        public string Origin
+        {
+            get { return origin; }
+            set { origin = value; }
+        }
+
+        //private TimePeriod timePeriod;
+
+        //public TimePeriod MyProperty
+        //{
+        //    get { return timePeriod; }
+        //    set { timePeriod = value; }
+        //}
+        
+        private IList<Presentation> presentations;
+                
+        public IList<Presentation> Presentations
+        {
+            get 
             {
-                throw new System.NotImplementedException();
+                if (presentations == null)
+                    presentations = new List<Presentation>();
+
+                return presentations; 
             }
-            set
-            {
-            }
+            set { presentations = value; }
         }
 
         #region IMetadataAware Members

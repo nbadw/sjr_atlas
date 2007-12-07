@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Text;
 using Castle.ActiveRecord;
 using NHibernate.Expression;
+using System.Xml;
 
 namespace SJRAtlas.Models
 {
     [ActiveRecord("metadata")]
-    public class Metadata : ActiveRecordBase<Metadata>, IEntity
+    public class Metadata : ActiveRecordBase<Metadata>
     {
         private int id;
 
@@ -35,33 +36,25 @@ namespace SJRAtlas.Models
             get { return filename; }
             set { filename = value; }
         }
-
-        private IMetadataAware metadataOwner;
+        
+        private IMetadataAware owner;
 
         [Any(typeof(int), MetaType = typeof(string), TypeColumn = "metadata_aware_type", IdColumn = "metadata_aware_id", Cascade = CascadeEnum.SaveUpdate)]
         [Any.MetaValue("Publication", typeof(Publication))]
         [Any.MetaValue("PublishedMap", typeof(PublishedMap))]
         [Any.MetaValue("PublishedReport", typeof(PublishedReport))]
         [Any.MetaValue("DataSet", typeof(DataSet))]
-        public IMetadataAware MetadataOwner
+        [Any.MetaValue("InteractiveMap", typeof(InteractiveMap))]
+        public IMetadataAware Owner
         {
-            get { return metadataOwner; }
-            set { metadataOwner = value; }
+            get { return owner; }
+            set { owner = value; }
         }
-
-        #region IEntity Members
-
-        public object GetId()
-        {
-            return Id;
-        }
-
-        #endregion
 
         public static Metadata FindByOwner(IMetadataAware owner)
         {
             DetachedCriteria criteria = DetachedCriteria.For<Metadata>();
-            criteria.Add(Expression.Eq("MetadataOwner", owner));
+            criteria.Add(Expression.Eq("Owner", owner));
             return ActiveRecordMediator<Metadata>.FindOne(criteria);
         }
     }

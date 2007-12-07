@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Text;
 using NUnit.Framework;
 using Rhino.Mocks;
-using SJRAtlas.Models.Finders;
 
 namespace SJRAtlas.Models.Tests
 {
@@ -15,7 +14,7 @@ namespace SJRAtlas.Models.Tests
         [SetUp]
         public void Setup()
         {
-            base.Init();
+            base.Setup();
             mocks = new MockRepository();
         }
 
@@ -41,32 +40,18 @@ namespace SJRAtlas.Models.Tests
             Watershed watershed;
 
             watershed = new Watershed();
-            Assert.IsNotNull(watershed.Repository);
-            Assert.IsNotNull(watershed.Place);
-
-            IAtlasRepository repository = mocks.CreateMock<IAtlasRepository>();
-            watershed = new Watershed(repository);
-            Assert.AreEqual(repository, watershed.Repository);
             Assert.IsNotNull(watershed.Place);
 
             Place place = mocks.CreateMock<Place>();
-            watershed = new Watershed(repository, place);
-            Assert.AreEqual(repository, watershed.Repository);
+            watershed = new Watershed(place);
             Assert.AreEqual(place, watershed.Place);
-        }
-
-        [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void TestWatershedConstructorWhenRepositoryIsNull()
-        {
-            new Watershed(null);
         }
 
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
         public void TestWatershedConstructorWhenPlaceIsNull()
         {
-            new Watershed(mocks.CreateMock<IAtlasRepository>(), null);
+            new Watershed(null);
         }	
 
         [Test]
@@ -105,20 +90,11 @@ namespace SJRAtlas.Models.Tests
             properties.Add("Longitude", 7.3);
             properties.Add("NtsMap", "TestValue");
             properties.Add("Region", "NB");
-            properties.Add("Repository", mocks.CreateMock<IAtlasRepository>());
             properties.Add("StreamOrder", 1);
             properties.Add("UnitType", "TestValue");
 
             TestHelper.ErrorSummary errors = TestHelper.TestProperties(watershed, properties);
             Assert.IsEmpty(errors, "The following errors occurred during property testing:\n" + errors.GetSummary());
-        }
-
-        [Test]
-        public void TestWatershedConstructorSetsDefaultPlaceAndRepository()
-        {
-            Watershed watershed = new Watershed();
-            Assert.IsNotNull(watershed.Place);
-            Assert.IsNotNull(watershed.Repository);
         }
 
         [Test]
@@ -346,15 +322,6 @@ namespace SJRAtlas.Models.Tests
                 watershed.DrainageCode = drainageCode;
                 Assert.IsFalse(watershed.IsWithinBasin(), "IsWithinBasin should return false for value " + drainageCode);
             }
-        }
-
-
-        [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void TestRepositoryCannotBeSetToNull()
-        {
-            Watershed watershed = new Watershed();
-            watershed.Repository = null;
         }
 
         [Test]

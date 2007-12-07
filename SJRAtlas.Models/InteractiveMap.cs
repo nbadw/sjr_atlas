@@ -41,9 +41,14 @@ namespace SJRAtlas.Models
 
         #region IMetadataAware Members
 
+        private Metadata metadata;
+
         public Metadata GetMetadata()
         {
-            throw new Exception("The method or operation is not implemented.");
+            if (metadata == null)
+                metadata = Metadata.FindByOwner(this);
+
+            return metadata;
         }
 
         #endregion

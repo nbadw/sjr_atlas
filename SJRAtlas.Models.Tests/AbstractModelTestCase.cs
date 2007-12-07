@@ -2,7 +2,6 @@ using NUnit.Framework;
 using Castle.ActiveRecord;
 using Castle.ActiveRecord.Framework;
 using Castle.ActiveRecord.Framework.Config;
-using SJRAtlas.Models.Finders;
 using Rhino.Mocks;
 using System.Collections.Generic;
 
@@ -50,14 +49,14 @@ namespace SJRAtlas.Models.Tests
         }
 
         [SetUp]
-        public virtual void Init()
+        public virtual void Setup()
         {
             PrepareSchema();
             CreateScope();
         }
 
         [TearDown]
-        public virtual void Terminate()
+        public virtual void Teardown()
         {
             DisposeScope();
             DropSchema();

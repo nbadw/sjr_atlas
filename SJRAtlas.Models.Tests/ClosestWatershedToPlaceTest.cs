@@ -14,7 +14,7 @@ namespace SJRAtlas.Models.Tests
         [SetUp]
         public void Setup()
         {
-            base.Init();
+            base.Setup();
             mocks = new MockRepository();
             // save one entry in the database that has a place and a watershed attached
             ClosestWatershedToPlace closestWatershedToPlace = new ClosestWatershedToPlace();

@@ -67,7 +67,8 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Components\MetadataCategoriesComponent.cs" />
+    <Compile Include="Components\BasicInfoComponent.cs" />
+    <Compile Include="Components\PlaceInfoComponent.cs" />
     <Compile Include="Components\PlaceNameComponent.cs" />
     <Compile Include="Components\ResourceComponent.cs" />
     <Compile Include="Components\WaterBodyComponent.cs" />
@@ -85,19 +86,11 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\WaterBodyController.cs" />
     <Compile Include="Controllers\WatershedController.cs" />
-    <Compile Include="EasyMapLookup.cs" />
-    <Compile Include="Filters\LoadingFilter.cs" />
     <Compile Include="GlobalApplication.cs" />
     <Compile Include="Helpers\BreadCrumbHelper.cs" />
     <Compile Include="Helpers\ResourceHelper.cs" />
     <Compile Include="IJsonSerializable.cs" />
     <Compile Include="IXmlSerializable.cs" />
-    <Compile Include="Models\Atlas.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Atlas.actiw</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EasyMap.cs" />
     <Compile Include="Models\Error.cs" />
     <Compile Include="Models\Feedback.cs" />
     <Compile Include="Models\SearchOptions.cs" />
@@ -187,16 +180,17 @@
     <None Include="Content\javascripts\ibox\images\small\Thumbs.db" />
     <None Include="Content\javascripts\treeview\assets\skins\sam\Thumbs.db" />
     <None Include="Content\javascripts\treeview\README" />
-    <None Include="Models\Atlas.actiw">
-      <Generator>ActiveWriterCodeGenerator</Generator>
-      <LastGenOutput>Atlas.cs</LastGenOutput>
-    </None>
-    <None Include="Models\Atlas.actiw.diagram" />
-    <None Include="Views\components\metadatacategories\default.vm" />
-    <None Include="Views\components\placename\default.vm" />
-    <None Include="Views\components\resource\default.vm" />
-    <None Include="Views\components\waterbody\default.vm" />
-    <None Include="Views\components\watershed\default.vm" />
+    <None Include="Views\data_set\data_set.vm" />
+    <None Include="Views\interactive_map\interactive_map.vm" />
+    <None Include="Views\metadata\metadata.vm" />
+    <None Include="Views\place\info.vm" />
+    <None Include="Views\publication\publication.vm" />
+    <None Include="Views\search\results.vm" />
+    <None Include="Views\search\search_result.vm" />
+    <None Include="Views\shared\basic_map.vm" />
+    <None Include="Views\shared\basic_info.vm" />
+    <None Include="Views\waterbody\info.vm" />
+    <None Include="Views\watershed\info.vm" />
     <None Include="Views\feedback\emailsent.vm" />
     <None Include="Views\feedback\feedbackform.vm" />
     <None Include="Views\forms\index.vm" />
@@ -207,7 +201,7 @@
     <None Include="Views\metadata\view.vm" />
     <None Include="Views\feedback\index.vm" />
     <None Include="Views\layouts\sjratlas.vm" />
-    <None Include="Views\placename\view.vm" />
+    <None Include="Views\place\view.vm" />
     <None Include="Views\reports\index.vm" />
     <None Include="Views\rescues\problemsendingemail.vm" />
     <None Include="Views\rescues\friendlyerror.vm" />
@@ -224,21 +218,9 @@
     <None Include="Views\watershed\view.vm" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SJRAtlas.CGNS\SJRAtlas.CGNS.csproj">
-      <Project>{EFFBFE5A-24F2-41A0-AFCC-4748C854D35D}</Project>
-      <Name>SJRAtlas.CGNS</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SJRAtlas.Core\SJRAtlas.Core.csproj">
-      <Project>{81B151EF-4C5F-4E0B-82A5-A2276975693D}</Project>
-      <Name>SJRAtlas.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SJRAtlas.DataWarehouse\SJRAtlas.DataWarehouse.csproj">
-      <Project>{58FDF5DA-0B28-4D2C-8507-F36C7CF880FF}</Project>
-      <Name>SJRAtlas.DataWarehouse</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SJRAtlas.Metadata\SJRAtlas.Metadata.csproj">
-      <Project>{A77510F2-B5B1-452D-BA36-97FF08A675C2}</Project>
-      <Name>SJRAtlas.Metadata</Name>
+    <ProjectReference Include="..\SJRAtlas.Models\SJRAtlas.Models.csproj">
+      <Project>{43819902-84F0-47AB-B474-C1EF5E89ED8A}</Project>
+      <Name>SJRAtlas.Models</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

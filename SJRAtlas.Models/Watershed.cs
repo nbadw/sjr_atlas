@@ -3,31 +3,22 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
 using Castle.ActiveRecord;
-using SJRAtlas.Models.Finders;
 
 namespace SJRAtlas.Models
 {
     [ActiveRecord("tblDrainageUnit")]
     public class Watershed : ActiveRecordBase<Watershed>, IPlace, ICoordinateAware
     {
-        public Watershed() : this(new NullAtlasRepository(), new Place())
+        public Watershed() : this(new Place())
         {
         }
 
-        public Watershed(IAtlasRepository repository) : this(repository, new Place())
+        public Watershed(Place place)
         {
-        }
-
-        public Watershed(IAtlasRepository repository, Place place)
-        {
-            if (repository == null)
-                throw new ArgumentNullException("repository");
-
             if (place == null)
                 throw new ArgumentNullException("place");
 
             this.place = place;
-            this.place.Repository = repository;
             this.waterbodies = new List<WaterBody>();
             this.level1No = "00";
             this.level2No = "00";
@@ -38,12 +29,6 @@ namespace SJRAtlas.Models
             this.drainageCode = String.Format("{0}-{1}-{2}-{3}-{4}-{5}",
                                           Level1No, Level2No, Level3No,
                                           Level4No, Level5No, Level6No);
-        }
-
-        public IAtlasRepository Repository
-        {
-            get { return Place.Repository; }
-            set { Place.Repository = value; }
         }
 
         public string FlowsInto

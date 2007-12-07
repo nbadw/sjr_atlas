@@ -4,7 +4,6 @@ using Castle.Windsor.Configuration.Interpreters;
 using Castle.Core.Resource;
 using SJRAtlas.Site.Controllers;
 using Castle.Core.Logging;
-using SJRAtlas.Core;
 
 namespace SJRAtlas.Site
 {
