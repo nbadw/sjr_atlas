@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 namespace SJRAtlas.Models
 {
     public interface IPlace
@@ -18,7 +19,7 @@ namespace SJRAtlas.Models
         string NameStatus { get; set; }
         string NtsMap { get; set; }
         string Region { get; set; }
-        InteractiveMap[] RelatedInteractiveMaps { get; }
-        IPublication[] RelatedPublications { get; }
+        IList<InteractiveMap> RelatedInteractiveMaps { get; }
+        IList<IPublication> RelatedPublications { get; }
     }
 }

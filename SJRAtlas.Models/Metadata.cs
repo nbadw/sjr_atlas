@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Castle.ActiveRecord;
+using NHibernate.Expression;
 
 namespace SJRAtlas.Models
 {
@@ -38,8 +39,10 @@ namespace SJRAtlas.Models
         private IMetadataAware metadataOwner;
 
         [Any(typeof(int), MetaType = typeof(string), TypeColumn = "metadata_aware_type", IdColumn = "metadata_aware_id", Cascade = CascadeEnum.SaveUpdate)]
+        [Any.MetaValue("Publication", typeof(Publication))]
         [Any.MetaValue("PublishedMap", typeof(PublishedMap))]
         [Any.MetaValue("PublishedReport", typeof(PublishedReport))]
+        [Any.MetaValue("DataSet", typeof(DataSet))]
         public IMetadataAware MetadataOwner
         {
             get { return metadataOwner; }
@@ -54,5 +57,12 @@ namespace SJRAtlas.Models
         }
 
         #endregion
+
+        public static Metadata FindByOwner(IMetadataAware owner)
+        {
+            DetachedCriteria criteria = DetachedCriteria.For<Metadata>();
+            criteria.Add(Expression.Eq("MetadataOwner", owner));
+            return ActiveRecordMediator<Metadata>.FindOne(criteria);
+        }
     }
 }

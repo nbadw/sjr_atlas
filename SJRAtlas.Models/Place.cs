@@ -190,44 +190,54 @@ namespace SJRAtlas.Models
             }
         }
 
-        private InteractiveMap[] interactiveMaps;
+        private IList<InteractiveMap> interactiveMaps;
 
-        public InteractiveMap[] RelatedInteractiveMaps
+        public IList<InteractiveMap> RelatedInteractiveMaps
         {
             get 
             {
                 if (interactiveMaps == null)
                 {
-                    string query = String.Format("%{0}%", Name);
-                    InteractiveMapFinder finder = Repository.GetFinder<InteractiveMapFinder>();
-                    interactiveMaps = finder.FindAllByQuery(query);
+                    interactiveMaps = FindAllRelatedInteractiveMaps();                    
                 }
-
-                if (interactiveMaps == null)
-                    interactiveMaps = new InteractiveMap[0];
 
                 return interactiveMaps; 
             }
         }
 
-        private IPublication[] publications;
+        protected virtual IList<InteractiveMap> FindAllRelatedInteractiveMaps()
+        {
+            return InteractiveMap.FindAllByQuery(String.Format("%{0}%", Name));
+        }
 
-        public IPublication[] RelatedPublications
+        protected virtual IList<InteractiveMap> FindAllRelatedInteractiveMaps(string query)
+        {
+            return InteractiveMap.FindAllByQuery(query);
+        }
+
+        private IList<IPublication> publications;
+
+        public IList<IPublication> RelatedPublications
         {
             get 
             {
                 if (publications == null)
                 {
-                    string query = String.Format("%{0}%", Name);
-                    IPublicationFinder finder = Repository.GetFinder<IPublicationFinder>();
-                    publications = finder.FindAllByQuery(query);
+                    publications = FindAllRelatedPublications();
                 }
-
-                if (publications == null)
-                    publications = new IPublication[0];
 
                 return publications; 
             }
+        }
+
+        protected virtual IList<IPublication> FindAllRelatedPublications()
+        {
+            return FindAllRelatedPublications(String.Format("%{0}%", Name));
+        }
+
+        protected virtual IList<IPublication> FindAllRelatedPublications(string query)
+        {
+            return Publication.FindAllByQuery(query);
         }
 
         public bool IsWithinBasin()

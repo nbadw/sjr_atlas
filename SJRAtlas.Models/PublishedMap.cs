@@ -6,15 +6,7 @@ using Castle.ActiveRecord;
 namespace SJRAtlas.Models
 {
     [ActiveRecord(DiscriminatorValue="PublishedMap")]
-    public class PublishedMap : Publication, IMetadataAware
+    public class PublishedMap : Publication
     {
-        #region IMetadataAware Members
-
-        public Metadata GetMetadata()
-        {
-            throw new Exception("The method or operation is not implemented.");
-        }
-
-        #endregion
     }
 }

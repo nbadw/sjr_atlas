@@ -1,11 +1,21 @@
 using System;
 using Castle.ActiveRecord;
+using NHibernate.Expression;
+using System.Collections.Generic;
 
 namespace SJRAtlas.Models
 {
     [ActiveRecord("publications", DiscriminatorColumn="type", DiscriminatorType="String", DiscriminatorValue="Publication")]
-    public class Publication : ActiveRecordBase<Publication>, IPublication, IEntity
+    public class Publication : ActiveRecordBase<Publication>, IPublication, IEntity, IMetadataAware
     {
+        public static IList<IPublication> FindAllByQuery(string query)
+        {
+            DetachedCriteria criteria = DetachedCriteria.For<Publication>();
+            criteria.Add(Expression.Like("Title", query));
+            return ActiveRecordMediator<Publication>.FindAll(criteria,
+                new Order[] { Order.Asc("Title") });
+        }
+
         #region IPublication Members
 
         private int id;
@@ -69,8 +79,7 @@ namespace SJRAtlas.Models
         {
             get { return updatedAt; }
             set { updatedAt = value; }
-        }
-	
+        }	
 
         #endregion
 
@@ -79,6 +88,20 @@ namespace SJRAtlas.Models
         public object GetId()
         {
             return Id;
+        }
+
+        #endregion
+
+        #region IMetadataAware Members
+
+        private Metadata metadata;
+
+        public Metadata GetMetadata()
+        {
+            if (metadata == null)
+                metadata = Metadata.FindByOwner(this);
+
+            return metadata;
         }
 
         #endregion

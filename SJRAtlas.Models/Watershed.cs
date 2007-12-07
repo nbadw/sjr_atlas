@@ -8,7 +8,7 @@ using SJRAtlas.Models.Finders;
 namespace SJRAtlas.Models
 {
     [ActiveRecord("tblDrainageUnit")]
-    public class Watershed : ActiveRecordBase<Watershed>, IPlace, IWatershed, ICoordinateAware
+    public class Watershed : ActiveRecordBase<Watershed>, IPlace, ICoordinateAware
     {
         public Watershed() : this(new NullAtlasRepository(), new Place())
         {
@@ -407,44 +407,14 @@ namespace SJRAtlas.Models
             set { Place.Region = value; }
         }
 
-        private InteractiveMap[] interactiveMaps;
-
-        public InteractiveMap[] RelatedInteractiveMaps
+        public IList<InteractiveMap> RelatedInteractiveMaps
         {
-            get
-            {
-                if (interactiveMaps == null)
-                {
-                    string query = String.Format("%{0}%", Name);
-                    InteractiveMapFinder finder = Repository.GetFinder<InteractiveMapFinder>();
-                    interactiveMaps = finder.FindAllByQuery(query);
-                }
-
-                if (interactiveMaps == null)
-                    interactiveMaps = new InteractiveMap[0];
-
-                return interactiveMaps;
-            }
+            get { return Place.RelatedInteractiveMaps; }
         }
 
-        private IPublication[] publications;
-
-        public IPublication[] RelatedPublications
+        public IList<IPublication> RelatedPublications
         {
-            get
-            {
-                if (publications == null)
-                {
-                    string query = String.Format("%{0}%", Name);
-                    IPublicationFinder finder = Repository.GetFinder<IPublicationFinder>();
-                    publications = finder.FindAllByQuery(query);
-                }
-
-                if (publications == null)
-                    publications = new IPublication[0];
-
-                return publications;
-            }
+            get { return Place.RelatedPublications; }
         }
 
         #endregion

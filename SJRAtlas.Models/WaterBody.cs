@@ -6,7 +6,7 @@ using Castle.ActiveRecord;
 namespace SJRAtlas.Models
 {
     [ActiveRecord("tblWaterBody")]
-    public class WaterBody : ActiveRecordBase<WaterBody>, IWaterBody, IPlace, ICoordinateAware
+    public class WaterBody : ActiveRecordBase<WaterBody>, IPlace, ICoordinateAware
     {
         public WaterBody()
             : this(new NullAtlasRepository(), new Place(), new Watershed())
@@ -267,12 +267,12 @@ namespace SJRAtlas.Models
             set { Place.Region = value; }
         }
 
-        public InteractiveMap[] RelatedInteractiveMaps
+        public IList<InteractiveMap> RelatedInteractiveMaps
         {
             get { return Place.RelatedInteractiveMaps; }
         }
 
-        public IPublication[] RelatedPublications
+        public IList<IPublication> RelatedPublications
         {
             get { return Place.RelatedPublications; }
         }

@@ -6,20 +6,20 @@ using NUnit.Framework;
 namespace SJRAtlas.Models.Tests
 {
     [TestFixture]
-    public class PublicationTest
+    public class PublicationTest : AbstractModelTestCase
     {
-        private Publication publication;
+        protected Publication publication;
 
         [SetUp]
         public void Setup()
         {
-            publication = new Publication();
+            base.Init();
+            publication = CreatePublication();
         }
 
-        [TearDown]
-        public void Teardown()
+        protected virtual Publication CreatePublication()
         {
-
+            return new Publication();
         }
 
         [Test]
@@ -47,5 +47,18 @@ namespace SJRAtlas.Models.Tests
             publication.Id = id;
             Assert.AreEqual(id, publication.GetId());
         }
+
+        [Test]
+        public void TestGetMetadata()
+        {
+            Publication publication = CreatePublication();
+            publication.CreateAndFlush();
+            Metadata metadata = new Metadata();
+            metadata.MetadataOwner = publication;
+            metadata.CreateAndFlush();
+
+            Publication dbPublication = Publication.Find(publication.Id);
+            Assert.AreEqual(metadata, dbPublication.GetMetadata());
+        }	
     }
 }

@@ -6,8 +6,11 @@ using NUnit.Framework;
 namespace SJRAtlas.Models.Tests
 {
     [TestFixture]
-    public class PublishedReportTest
+    public class PublishedReportTest : PublicationTest
     {
-
+        protected override Publication CreatePublication()
+        {
+            return new PublishedReport();
+        }
     }
 }

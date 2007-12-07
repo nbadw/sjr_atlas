@@ -59,8 +59,6 @@
     <Compile Include="Finders\InteractiveMapFinder.cs" />
     <Compile Include="Finders\NullFinder.cs" />
     <Compile Include="IPlace.cs" />
-    <Compile Include="IWaterBody.cs" />
-    <Compile Include="IWatershed.cs" />
     <Compile Include="Publication.cs" />
     <Compile Include="AtlasRepository.cs" />
     <Compile Include="LatLngCoord.cs" />

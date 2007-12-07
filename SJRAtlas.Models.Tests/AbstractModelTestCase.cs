@@ -4,6 +4,7 @@ using Castle.ActiveRecord.Framework;
 using Castle.ActiveRecord.Framework.Config;
 using SJRAtlas.Models.Finders;
 using Rhino.Mocks;
+using System.Collections.Generic;
 
 namespace SJRAtlas.Models.Tests
 {
@@ -119,8 +120,8 @@ namespace SJRAtlas.Models.Tests
             Expect.Call(repository.GetFinder<IPublicationFinder>()).Return(finder);
             Expect.Call(finder.FindAllByQuery(null)).IgnoreArguments().Return(new IPublication[3]);
             mocks.ReplayAll();
-            IPublication[] publications = place.RelatedPublications;
-            Assert.AreEqual(3, publications.Length);
+            IList<IPublication> publications = place.RelatedPublications;
+            Assert.AreEqual(3, publications.Count);
             mocks.VerifyAll();
         }
 
@@ -130,9 +131,9 @@ namespace SJRAtlas.Models.Tests
             Expect.Call(repository.GetFinder<IPublicationFinder>()).Return(finder);
             Expect.Call(finder.FindAllByQuery(null)).IgnoreArguments().Return(null);
             mocks.ReplayAll();
-            IPublication[] publications = place.RelatedPublications;
+            IList<IPublication> publications = place.RelatedPublications;
             Assert.IsNotNull(publications);
-            Assert.IsEmpty(publications);
+            Assert.AreEqual(0, publications.Count);
             mocks.VerifyAll();
         }
 
@@ -142,8 +143,8 @@ namespace SJRAtlas.Models.Tests
             Expect.Call(repository.GetFinder<InteractiveMapFinder>()).Return(finder);
             Expect.Call(finder.FindAllByQuery(null)).IgnoreArguments().Return(new InteractiveMap[3]);
             mocks.ReplayAll();
-            InteractiveMap[] interactiveMaps = place.RelatedInteractiveMaps;
-            Assert.AreEqual(3, interactiveMaps.Length);
+            IList<InteractiveMap> maps = place.RelatedInteractiveMaps;
+            Assert.AreEqual(3, maps.Count);
             mocks.VerifyAll();
         }
 
@@ -153,9 +154,9 @@ namespace SJRAtlas.Models.Tests
             Expect.Call(repository.GetFinder<InteractiveMapFinder>()).Return(finder);
             Expect.Call(finder.FindAllByQuery(null)).IgnoreArguments().Return(null);
             mocks.ReplayAll();
-            InteractiveMap[] interactiveMaps = place.RelatedInteractiveMaps;
-            Assert.IsNotNull(interactiveMaps);
-            Assert.IsEmpty(interactiveMaps);
+            IList<InteractiveMap> maps = place.RelatedInteractiveMaps;
+            Assert.IsNotNull(maps);
+            Assert.AreEqual(0, maps.Count);
             mocks.VerifyAll();
         }
     }
