@@ -1,0 +1,16 @@
+2007-11-27 18:42:49,096 [TestRunnerThread] DEBUG Metadata.Indexer.Indexer - IMetadataAware match found: PublishedReports -> PublishedReport
+2007-11-27 18:42:49,206 [TestRunnerThread] DEBUG Metadata.Indexer.Indexer - IMetadataAware match found: NotIMetadataAware -> NotIMetadataAware
+2007-11-27 18:42:49,206 [TestRunnerThread] DEBUG Metadata.Indexer.Indexer - Creating metadata owner
+2007-11-27 18:42:49,299 [TestRunnerThread] DEBUG Metadata.Indexer.Indexer - IMetadataAware match found: PublishedReports -> PublishedReport
+2007-11-27 18:45:09,924 [TestRunnerThread] DEBUG Metadata.Indexer.Indexer - IMetadataAware match found: PublishedReports -> PublishedReport
+2007-11-27 18:45:10,018 [TestRunnerThread] DEBUG Metadata.Indexer.Indexer - IMetadataAware match found: NotIMetadataAware -> NotIMetadataAware
+2007-11-27 18:45:10,018 [TestRunnerThread] DEBUG Metadata.Indexer.Indexer - Creating metadata owner
+2007-11-27 18:45:10,065 [TestRunnerThread] DEBUG Metadata.Indexer.Indexer - IMetadataAware match found: PublishedReports -> PublishedReport
+2007-11-27 19:01:07,784 [TestRunnerThread] DEBUG Metadata.Indexer.Indexer - IMetadataAware match found: PublishedReports -> PublishedReport
+2007-11-27 19:01:07,831 [TestRunnerThread] DEBUG Metadata.Indexer.Indexer - IMetadataAware match found: PublishedReports -> PublishedReport
+2007-11-27 19:01:07,862 [TestRunnerThread] DEBUG Metadata.Indexer.Indexer - IMetadataAware match found: NotIMetadataAware -> NotIMetadataAware
+2007-11-27 19:01:07,862 [TestRunnerThread] DEBUG Metadata.Indexer.Indexer - Creating metadata owner
+2007-12-07 15:26:43,822 [TestRunnerThread] DEBUG Metadata.Indexer.Indexer - IMetadataAware match found: PublishedReports -> PublishedReport
+2007-12-07 15:26:43,916 [TestRunnerThread] DEBUG Metadata.Indexer.Indexer - IMetadataAware match found: NotIMetadataAware -> NotIMetadataAware
+2007-12-07 15:26:43,916 [TestRunnerThread] DEBUG Metadata.Indexer.Indexer - Creating metadata owner
+2007-12-07 15:26:43,947 [TestRunnerThread] DEBUG Metadata.Indexer.Indexer - IMetadataAware match found: PublishedReports -> PublishedReport
