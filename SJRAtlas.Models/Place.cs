@@ -198,21 +198,11 @@ namespace SJRAtlas.Models
             {
                 if (interactiveMaps == null)
                 {
-                    interactiveMaps = FindAllRelatedInteractiveMaps();                    
+                    interactiveMaps = InteractiveMap.FindAllByQuery(String.Format("%{0}%", Name));                    
                 }
 
                 return interactiveMaps; 
             }
-        }
-
-        protected virtual IList<InteractiveMap> FindAllRelatedInteractiveMaps()
-        {
-            return InteractiveMap.FindAllByQuery(String.Format("%{0}%", Name));
-        }
-
-        protected virtual IList<InteractiveMap> FindAllRelatedInteractiveMaps(string query)
-        {
-            return InteractiveMap.FindAllByQuery(query);
         }
 
         private IList<IPublication> publications;
@@ -223,21 +213,11 @@ namespace SJRAtlas.Models
             {
                 if (publications == null)
                 {
-                    publications = FindAllRelatedPublications();
+                    publications = Publication.FindAllByQuery(String.Format("%{0}%", Name));
                 }
 
                 return publications; 
             }
-        }
-
-        protected virtual IList<IPublication> FindAllRelatedPublications()
-        {
-            return FindAllRelatedPublications(String.Format("%{0}%", Name));
-        }
-
-        protected virtual IList<IPublication> FindAllRelatedPublications(string query)
-        {
-            return Publication.FindAllByQuery(query);
         }
 
         public bool IsWithinBasin()

@@ -267,17 +267,39 @@ namespace SJRAtlas.Models
             set { Place.Region = value; }
         }
 
+        private IList<InteractiveMap> interactiveMaps;
+
         public IList<InteractiveMap> RelatedInteractiveMaps
         {
-            get { return Place.RelatedInteractiveMaps; }
+            get
+            {
+                if (interactiveMaps == null)
+                {
+                    interactiveMaps = InteractiveMap.FindAllByQuery(String.Format("%{0}%", Name));
+                }
+
+                return interactiveMaps;
+            }
         }
+
+        private IList<IPublication> publications;
 
         public IList<IPublication> RelatedPublications
         {
-            get { return Place.RelatedPublications; }
+            get
+            {
+                if (publications == null)
+                {
+                    publications = Publication.FindAllByQuery(String.Format("%{0}%", Name));
+                }
+
+                return publications;
+            }
         }
 
         #endregion
+
+        
 
         #region ICoordinateAware Members
 

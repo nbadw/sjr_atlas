@@ -127,33 +127,55 @@ namespace SJRAtlas.Models.Tests
         [Test]
         public void TestRelatedPublications()
         {
+            string query = "place name is the default query";
             Place place = new Place();
-            place.Repository = mocks.CreateMock<IAtlasRepository>();
-            base.TestRelatedPublications(mocks, place, place.Repository);
+            place.Name = query;
+
+            Publication[] publications = new Publication[3];
+            for (int i = 0; i < publications.Length; i++)
+            {
+                publications[i] = new Publication();
+                publications[i].Title = "Publication where " + query + ": #" + i.ToString();
+                publications[i].CreateAndFlush();
+            }
+
+            Assert.AreEqual(publications.Length, place.RelatedPublications.Count);
         }
 
         [Test]
         public void TestRelatedPublicationsNeverReturnsNull()
         {
             Place place = new Place();
-            place.Repository = mocks.CreateMock<IAtlasRepository>();
-            base.TestRelatedPublicationsNeverReturnsNull(mocks, place, place.Repository);
+            IList<IPublication> publications = place.RelatedPublications;
+            Assert.IsNotNull(publications);
+            Assert.AreEqual(0, publications.Count);
         }
 
         [Test]
         public void TestRelatedInteractiveMaps()
         {
+            string query = "place name is the default query";
             Place place = new Place();
-            place.Repository = mocks.CreateMock<IAtlasRepository>();
-            base.TestRelatedInteractiveMaps(mocks, place, place.Repository);
+            place.Name = query;
+
+            InteractiveMap[] interactiveMaps = new InteractiveMap[3];
+            for (int i = 0; i < interactiveMaps.Length; i++)
+            {
+                interactiveMaps[i] = new InteractiveMap();
+                interactiveMaps[i].Title = "Interactive Map where " + query + ": #" + i.ToString();
+                interactiveMaps[i].CreateAndFlush();
+            }
+
+            Assert.AreEqual(interactiveMaps.Length, place.RelatedInteractiveMaps.Count);
         }
 
         [Test]
         public void TestRelatedInteractiveMapsNeverReturnsNull()
         {
             Place place = new Place();
-            place.Repository = mocks.CreateMock<IAtlasRepository>();
-            base.TestRelatedInteractiveMapsNeverReturnsNull(mocks, place, place.Repository);
+            IList<InteractiveMap> interativeMaps = place.RelatedInteractiveMaps;
+            Assert.IsNotNull(interativeMaps);
+            Assert.AreEqual(0, interativeMaps.Count);
         }
 
         [Test]

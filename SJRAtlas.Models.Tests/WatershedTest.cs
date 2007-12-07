@@ -178,33 +178,57 @@ namespace SJRAtlas.Models.Tests
         [Test]
         public void TestRelatedPublications()
         {
+            string query = "watershed name is the default query";
             Watershed watershed = new Watershed();
-            watershed.Repository = mocks.CreateMock<IAtlasRepository>();
-            base.TestRelatedPublications(mocks, watershed, watershed.Repository);
+            watershed.Name = query;
+            watershed.Place.Name = "this should not be searced on";
+
+            Publication[] publications = new Publication[3];
+            for (int i = 0; i < publications.Length; i++)
+            {
+                publications[i] = new Publication();
+                publications[i].Title = "Publication where " + query + ": #" + i.ToString();
+                publications[i].CreateAndFlush();
+            }
+
+            Assert.AreEqual(publications.Length, watershed.RelatedPublications.Count);
         }
 
         [Test]
         public void TestRelatedPublicationsNeverReturnsNull()
         {
             Watershed watershed = new Watershed();
-            watershed.Repository = mocks.CreateMock<IAtlasRepository>();
-            base.TestRelatedPublicationsNeverReturnsNull(mocks, watershed, watershed.Repository);
+            IList<IPublication> publications = watershed.RelatedPublications;
+            Assert.IsNotNull(publications);
+            Assert.AreEqual(0, publications.Count);
         }
 
         [Test]
         public void TestRelatedInteractiveMaps()
         {
+            string query = "place name is the default query";
             Watershed watershed = new Watershed();
-            watershed.Repository = mocks.CreateMock<IAtlasRepository>();
-            base.TestRelatedInteractiveMaps(mocks, watershed, watershed.Repository);
+            watershed.Name = query;
+            watershed.Place.Name = "this should not be searced on";
+
+            InteractiveMap[] interactiveMaps = new InteractiveMap[3];
+            for (int i = 0; i < interactiveMaps.Length; i++)
+            {
+                interactiveMaps[i] = new InteractiveMap();
+                interactiveMaps[i].Title = "Interactive Map where " + query + ": #" + i.ToString();
+                interactiveMaps[i].CreateAndFlush();
+            }
+
+            Assert.AreEqual(interactiveMaps.Length, watershed.RelatedInteractiveMaps.Count);
         }
 
         [Test]
         public void TestRelatedInteractiveMapsNeverReturnsNull()
         {
             Watershed watershed = new Watershed();
-            watershed.Repository = mocks.CreateMock<IAtlasRepository>();
-            base.TestRelatedInteractiveMapsNeverReturnsNull(mocks, watershed, watershed.Repository);
+            IList<InteractiveMap> interativeMaps = watershed.RelatedInteractiveMaps;
+            Assert.IsNotNull(interativeMaps);
+            Assert.AreEqual(0, interativeMaps.Count);
         }
 
         [Test]

@@ -113,51 +113,5 @@ namespace SJRAtlas.Models.Tests
             // Or to use the assembly that holds the ActiveRecord types
             ActiveRecordStarter.Initialize(System.Reflection.Assembly.Load("SJRAtlas.Models"), source);
         }
-
-        public void TestRelatedPublications(MockRepository mocks, IPlace place, IAtlasRepository repository)
-        {
-            IPublicationFinder finder = mocks.CreateMock<IPublicationFinder>();
-            Expect.Call(repository.GetFinder<IPublicationFinder>()).Return(finder);
-            Expect.Call(finder.FindAllByQuery(null)).IgnoreArguments().Return(new IPublication[3]);
-            mocks.ReplayAll();
-            IList<IPublication> publications = place.RelatedPublications;
-            Assert.AreEqual(3, publications.Count);
-            mocks.VerifyAll();
-        }
-
-        public void TestRelatedPublicationsNeverReturnsNull(MockRepository mocks, IPlace place, IAtlasRepository repository)
-        {
-            IPublicationFinder finder = mocks.CreateMock<IPublicationFinder>();
-            Expect.Call(repository.GetFinder<IPublicationFinder>()).Return(finder);
-            Expect.Call(finder.FindAllByQuery(null)).IgnoreArguments().Return(null);
-            mocks.ReplayAll();
-            IList<IPublication> publications = place.RelatedPublications;
-            Assert.IsNotNull(publications);
-            Assert.AreEqual(0, publications.Count);
-            mocks.VerifyAll();
-        }
-
-        public void TestRelatedInteractiveMaps(MockRepository mocks, IPlace place, IAtlasRepository repository)
-        {
-            InteractiveMapFinder finder = mocks.CreateMock<InteractiveMapFinder>();
-            Expect.Call(repository.GetFinder<InteractiveMapFinder>()).Return(finder);
-            Expect.Call(finder.FindAllByQuery(null)).IgnoreArguments().Return(new InteractiveMap[3]);
-            mocks.ReplayAll();
-            IList<InteractiveMap> maps = place.RelatedInteractiveMaps;
-            Assert.AreEqual(3, maps.Count);
-            mocks.VerifyAll();
-        }
-
-        public void TestRelatedInteractiveMapsNeverReturnsNull(MockRepository mocks, IPlace place, IAtlasRepository repository)
-        {
-            InteractiveMapFinder finder = mocks.CreateMock<InteractiveMapFinder>();
-            Expect.Call(repository.GetFinder<InteractiveMapFinder>()).Return(finder);
-            Expect.Call(finder.FindAllByQuery(null)).IgnoreArguments().Return(null);
-            mocks.ReplayAll();
-            IList<InteractiveMap> maps = place.RelatedInteractiveMaps;
-            Assert.IsNotNull(maps);
-            Assert.AreEqual(0, maps.Count);
-            mocks.VerifyAll();
-        }
     }
 }
