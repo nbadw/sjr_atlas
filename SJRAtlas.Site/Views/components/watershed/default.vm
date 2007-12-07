@@ -1,5 +1,0 @@
-<tr class="watershed">
-    <td>$Url.Link($name, "%{controller='watershed', action='view', querystring='id=$id'}", "%{title='Select This Location', class='results-url'}")</td>
-    <td>$drainage_code</td>
-    <td>$tributary_of</td>                         
-</tr>

@@ -1,6 +1,0 @@
-<div class="placename">
-$name, $region ($status_term Name)<br />
-Longitude: $longitude, Latitude: $latitude<br />
-View Location in Map<br />
-$Url.Link('Select This Location', "%{controller='placename', action='view', querystring='id=$id'}", "%{title='Select This Location', class='results-url'}")
-</div>
