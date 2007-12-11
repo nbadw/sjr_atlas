@@ -7,18 +7,10 @@ using Castle.ActiveRecord;
 namespace SJRAtlas.Models
 {
     [ActiveRecord("tblDrainageUnit")]
-    public class Watershed : ActiveRecordBase<Watershed>, IPlace, ICoordinateAware
+    public class Watershed : ActiveRecordBase<Watershed>
     {
-        public Watershed() : this(new Place())
+        public Watershed()
         {
-        }
-
-        public Watershed(Place place)
-        {
-            if (place == null)
-                throw new ArgumentNullException("place");
-
-            this.place = place;
             this.waterbodies = new List<WaterBody>();
             this.level1No = "00";
             this.level2No = "00";
@@ -131,13 +123,7 @@ namespace SJRAtlas.Models
         public Place Place
         {
             get { return place; }            
-            set             
-            { 
-                if(value == null)
-                    throw new ArgumentNullException("place");
-
-                place = value; 
-            }
+            set { place = value; }
         }
 
         private string drainsInto;
@@ -302,57 +288,7 @@ namespace SJRAtlas.Models
         }
 
         #endregion
-
-        #region IPlace Members
-
-        public string CgndbKey
-        {
-            get { return Place.CgndbKey; }
-            set { Place.CgndbKey = value; }
-        }
-
-        public string ConciseTerm
-        {
-            get { return Place.ConciseTerm; }
-            set { Place.ConciseTerm = value; }
-        }
-
-        public string ConciseType
-        {
-            get { return Place.ConciseType; }
-            set { Place.ConciseType = value; }
-        }
-
-        public string CoordAccM
-        {
-            get { return Place.CoordAccM; }
-            set { Place.CoordAccM = value; }
-        }
-
-        public string County
-        {
-            get { return Place.County; }
-            set { Place.County = value; }
-        }
-
-        public string Datum
-        {
-            get { return Place.Datum; }
-            set { Place.Datum = value; }
-        }
-
-        public string FeatureId
-        {
-            get { return Place.FeatureId; }
-            set { Place.FeatureId = value; }
-        }
-
-        public string GenericTerm
-        {
-            get { return Place.GenericTerm; }
-            set { Place.GenericTerm = value; }
-        }
-
+                
         public virtual bool IsWithinBasin()
         {
             if (DrainageCode == null)
@@ -361,37 +297,7 @@ namespace SJRAtlas.Models
             Regex re = new Regex(@"01-[\d]{2}-[\d]{2}-[\d]{2}-[\d]{2}-[\d]{2}");
             return re.IsMatch(DrainageCode);
         }
-
-        public double Latitude
-        {
-            get { return Place.Latitude; }
-            set { Place.Latitude = value; }
-        }
-
-        public double Longitude
-        {
-            get { return Place.Longitude; }
-            set { Place.Longitude = value; }
-        }
-
-        public string NameStatus
-        {
-            get { return Place.NameStatus; }
-            set { Place.NameStatus = value; }
-        }
-
-        public string NtsMap
-        {
-            get { return Place.NtsMap; }
-            set { Place.NtsMap = value; }
-        }
-
-        public string Region
-        {
-            get { return Place.Region; }
-            set { Place.Region = value; }
-        }
-
+                
         private IList<InteractiveMap> interactiveMaps;
 
         public IList<InteractiveMap> RelatedInteractiveMaps
@@ -407,9 +313,9 @@ namespace SJRAtlas.Models
             }
         }
 
-        private IList<IPublication> publications;
+        private IList<Publication> publications;
 
-        public IList<IPublication> RelatedPublications
+        public IList<Publication> RelatedPublications
         {
             get
             {
@@ -421,8 +327,6 @@ namespace SJRAtlas.Models
                 return publications;
             }
         }
-
-        #endregion
 
         #region ICoordinateAware Members
 

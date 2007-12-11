@@ -3,41 +3,27 @@ using System.Collections.Generic;
 using Castle.MonoRail.Framework;
 using System.Collections;
 using Castle.ActiveRecord.Queries;
+using SJRAtlas.Models;
 
 namespace SJRAtlas.Site.Controllers
 {
     [Layout("sjratlas"), Rescue("friendlyerror")]
     public class WaterBodyController : SJRAtlasController
     {
-        //public void View(string placename)
-        //{
-        //    View(AtlasUtils.CreateWaterBodyFromPlaceName(PlaceNameLookup.Find(placename)));
-        //}
+        public void View(string place)
+        {
+            if (place == null)
+                throw new ArgumentNullException("place");
 
-        //public void View(IWaterBody waterbody)
-        //{
-        //    if(waterbody == null)
-        //        throw new ArgumentNullException("waterbody", "The requested waterbody could not be found.");
-            
-        //    string metadataQuery = MetadataUtils.BuildDefaultQuery(waterbody.Name);
-        //    Logger.Debug("Searching metadata index for " + waterbody.Name + " using " + metadataQuery);
+            WaterBody waterbody = WaterBody.FindByCgndbKey(place);
+            IList<DataSet> datasets = waterbody.DataSets;
+            IList<InteractiveMap> interactiveMaps = waterbody.RelatedInteractiveMaps;
+            IList<Publication> publications = waterbody.RelatedPublications;
 
-        //    string datasetQuery = MetadataUtils.BuildGetByTitlesQuery(
-        //        AtlasUtils.DataSetTitles(waterbody));
-        //    Logger.Debug("Also searching for related datasets using " + datasetQuery);
-
-        //    IMetadata[] metadata = MetadataLookup.FindByQuery(metadataQuery);
-        //    IMetadata[] datasets = MetadataLookup.FindByQuery(datasetQuery);
-        //    metadata = MergeMetadata(metadata, datasets);
-
-        //    IEasyMap[] interactiveMaps = GetInteractiveMaps(metadata, true);
-
-        //    metadata = RemoveEasyMaps(metadata, interactiveMaps);
-           
-        //    PropertyBag["waterbody"] = waterbody;
-        //    PropertyBag["interactive_maps"] = interactiveMaps;
-        //    PropertyBag["metadata"] = metadata;
-        //}
+            PropertyBag["waterbody"] = waterbody;
+            PropertyBag["interactive_maps"] = interactiveMaps;
+            PropertyBag["metadata"] = metadata;
+        }
 
         //[AjaxAction]
         //public IDictionary AutoComplete(string query)

@@ -36,10 +36,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\SJRAtlas\SJRAtlas.Models\bin\Debug\log4net.dll</HintPath>
     </Reference>
-    <Reference Include="SJRAtlas.Models, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Atlas\SJRAtlas.Models\bin\Debug\SJRAtlas.Models.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -57,6 +53,10 @@
     <ProjectReference Include="..\Metadata.Indexer\Metadata.Indexer.csproj">
       <Project>{39BE68F4-3D4D-4257-9159-47DC68D6FEF7}</Project>
       <Name>Metadata.Indexer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SJRAtlas.Models\SJRAtlas.Models.csproj">
+      <Project>{43819902-84F0-47AB-B474-C1EF5E89ED8A}</Project>
+      <Name>SJRAtlas.Models</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

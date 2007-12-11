@@ -7,10 +7,10 @@ namespace SJRAtlas.Site.Components
     [ViewComponentDetails("place_info")]
     public class PlaceInfoComponent : ViewComponent
     {
-        private IPlace place;
+        private Place place;
 
         [ViewComponentParam(Required = true)]
-        public IPlace Place
+        public Place Place
         {
             get { return place; }
             set { place = value; }
@@ -21,7 +21,7 @@ namespace SJRAtlas.Site.Components
             if (place == null)
             {
                 throw new ViewComponentException("The ResourceComponent requires a view component " +
-                    "parameter named 'place' which should contain an 'IPlace' instance");
+                    "parameter named 'place' which should contain a 'Place' instance");
             }
             base.Initialize();
         }

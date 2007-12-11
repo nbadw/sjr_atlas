@@ -6,7 +6,7 @@ using Castle.ActiveRecord;
 namespace SJRAtlas.Models
 {
     [ActiveRecord("places")]
-    public class Place : ActiveRecordBase<Place>, IPlace, ICoordinateAware
+    public class Place : ActiveRecordBase<Place>
     {
         #region ActiveRecord Properties
 
@@ -176,9 +176,9 @@ namespace SJRAtlas.Models
             }
         }
 
-        private IList<IPublication> publications;
+        private IList<Publication> publications;
 
-        public IList<IPublication> RelatedPublications
+        public IList<Publication> RelatedPublications
         {
             get 
             {

@@ -12,43 +12,11 @@ namespace SJRAtlas.Models.Tests
         private MockRepository mocks;
 
         [SetUp]
-        public void Setup()
+        public override void Setup()
         {
             base.Setup();
             mocks = new MockRepository();
         }
-
-        [Test]
-        public void TestConstructors()
-        {
-            WaterBody waterbody;
-            Place place = mocks.CreateMock<Place>();
-            Watershed watershed = mocks.CreateMock<Watershed>();
-
-            waterbody = new WaterBody();
-            Assert.IsNotNull(waterbody.Place);
-            Assert.IsNotNull(waterbody.Watershed);
-
-            waterbody = new WaterBody(place, watershed);
-            Assert.AreEqual(place, waterbody.Place);
-            Assert.AreEqual(watershed, waterbody.Watershed);
-        }
-
-        [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void TestConstructorWhenNullPlaceIsPassed()
-        {
-            Watershed watershed = mocks.CreateMock<Watershed>();
-            new WaterBody(null, watershed);
-        }
-
-        [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void TestConstructorWhenNullWatershedIsPassed()
-        {
-            Place place = mocks.CreateMock<Place>();
-            new WaterBody(place, null);
-        }	
 
         [Test]
         public void FindWaterBody()
@@ -56,10 +24,6 @@ namespace SJRAtlas.Models.Tests
             int id = 37;
             WaterBody waterbody = new WaterBody();
             waterbody.Id = id;
-            waterbody.Place.CgndbKey = "ABCDE";
-            waterbody.Place.CreateAndFlush();
-            waterbody.Watershed.DrainageCode = "01-00-00-00-00-00";
-            waterbody.Watershed.CreateAndFlush();
             waterbody.CreateAndFlush();
             WaterBody dbWaterbody = WaterBody.Find(id);
             Assert.AreEqual(id, dbWaterbody.Id);
@@ -71,26 +35,12 @@ namespace SJRAtlas.Models.Tests
             WaterBody waterbody = new WaterBody();
             Dictionary<string, object> properties = new Dictionary<string, object>();
             properties.Add("Abbreviation", "ABBREV");
-            properties.Add("AltCgndbKey", "FGHIJ");
             properties.Add("AltName", "Another Name");
-            properties.Add("CgndbKey", "ABCDE");
             properties.Add("ComplexId", 12345);
-            properties.Add("County", "Northumberland");
-            properties.Add("ConciseTerm", "TestValue");
-            properties.Add("ConciseType", "TestValue");
-            properties.Add("CoordAccM", "TestValue");
-            properties.Add("Datum", "NAD83");
-            properties.Add("FeatureId", "TestValue");
             properties.Add("FlowsIntoWaterBodyId", 12345);
             properties.Add("FlowsIntoWaterBodyName", "TestValue");
-            properties.Add("GenericTerm", "TestValue");
             properties.Add("Id", 37);
             properties.Add("Name", "Saint John River");
-            properties.Add("NameStatus", "Official");
-            properties.Add("Latitude", 3.7);
-            properties.Add("Longitude", 7.3);
-            properties.Add("NtsMap", "TestValue");
-            properties.Add("Region", "NB");
             properties.Add("SurveyedInd", "TestValue");
             properties.Add("Type", "TestValue");
             TestHelper.ErrorSummary errors = TestHelper.TestProperties(waterbody, properties);
@@ -98,17 +48,18 @@ namespace SJRAtlas.Models.Tests
         }
 
         [Test]
-        public void TestBelongsToPlace()
+        public void TestPlace()
         {
             int id = 37;
             string cgndbKey = "ABCDE";
 
+            Place place = new Place();
+            place.CgndbKey = cgndbKey;
+            place.CreateAndFlush();
+
             WaterBody waterbody = new WaterBody();
             waterbody.Id = id;
-            waterbody.Place.CgndbKey = cgndbKey;
-            waterbody.Place.CreateAndFlush();
-            waterbody.Watershed.DrainageCode = "00-00-00-00-00-00";
-            waterbody.Watershed.CreateAndFlush();
+            waterbody.Place = place;
             waterbody.CreateAndFlush();
             
             WaterBody dbWaterbody = WaterBody.Find(id);
@@ -118,17 +69,39 @@ namespace SJRAtlas.Models.Tests
         }
 
         [Test]
+        public void TestAltPlace()
+        {
+            int id = 37;
+            string cgndbKey = "ABCDE";
+
+            Place place = new Place();
+            place.CgndbKey = cgndbKey;
+            place.CreateAndFlush();
+
+            WaterBody waterbody = new WaterBody();
+            waterbody.Id = id;
+            waterbody.AltPlace = place;
+            waterbody.CreateAndFlush();
+
+            WaterBody dbWaterbody = WaterBody.Find(id);
+            Assert.IsNotNull(dbWaterbody);
+            Assert.IsNotNull(dbWaterbody.AltPlace);
+            Assert.AreEqual(cgndbKey, dbWaterbody.AltPlace.CgndbKey);
+        }
+
+        [Test]
         public void TestBelongsToWatershed()
         {
             int id = 73;
             string drainageCode = "01-00-00-00-00-00";
 
+            Watershed watershed = new Watershed();
+            watershed.DrainageCode = drainageCode;
+            watershed.CreateAndFlush();
+
             WaterBody waterbody = new WaterBody();
             waterbody.Id = id;
-            waterbody.Place.CgndbKey = "ABCDE";
-            waterbody.Place.CreateAndFlush();
-            waterbody.Watershed.DrainageCode = drainageCode;
-            waterbody.Watershed.CreateAndFlush();
+            waterbody.Watershed = watershed;
             waterbody.CreateAndFlush();
 
             WaterBody dbWaterbody = WaterBody.Find(id);
@@ -143,7 +116,6 @@ namespace SJRAtlas.Models.Tests
             string query = "watershed name is the default query";
             WaterBody waterbody = new WaterBody();
             waterbody.Name = query;
-            waterbody.Place.Name = "this should not be searced on";
 
             Publication[] publications = new Publication[3];
             for (int i = 0; i < publications.Length; i++)
@@ -160,7 +132,7 @@ namespace SJRAtlas.Models.Tests
         public void TestRelatedPublicationsNeverReturnsNull()
         {
             WaterBody waterbody = new WaterBody();
-            IList<IPublication> publications = waterbody.RelatedPublications;
+            IList<Publication> publications = waterbody.RelatedPublications;
             Assert.IsNotNull(publications);
             Assert.AreEqual(0, publications.Count);
         }
@@ -171,7 +143,6 @@ namespace SJRAtlas.Models.Tests
             string query = "place name is the default query";
             WaterBody waterbody = new WaterBody();
             waterbody.Name = query;
-            waterbody.Place.Name = "this should not be searced on";
 
             InteractiveMap[] interactiveMaps = new InteractiveMap[3];
             for (int i = 0; i < interactiveMaps.Length; i++)
@@ -199,8 +170,9 @@ namespace SJRAtlas.Models.Tests
             double lat = 3.7;
             double lon = 7.3;
             WaterBody waterbody = new WaterBody();
-            waterbody.Latitude = lat;
-            waterbody.Longitude = lon;
+            waterbody.Place = new Place();
+            waterbody.Place.Latitude = lat;
+            waterbody.Place.Longitude = lon;
             LatLngCoord coordinate = waterbody.GetCoordinate();
             Assert.IsNotNull(coordinate);
             Assert.AreEqual(lat, coordinate.Latitude);
@@ -220,31 +192,11 @@ namespace SJRAtlas.Models.Tests
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void TestPlaceCannotBeSetToNull()
-        {
-            WaterBody waterbody = new WaterBody();
-            waterbody.Place = null;
-        }
-
-        [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void TestWatershedCannotBeSetToNull()
-        {
-            WaterBody waterbody = new WaterBody();
-            waterbody.Watershed = null;
-        }
-
-        [Test]
         public void TestRelatedDataSets()
         {
             int id = 50001;
             WaterBody waterbody = new WaterBody();
             waterbody.Id = id;
-            waterbody.Place.CgndbKey = "ABCDE";
-            waterbody.Place.CreateAndFlush();
-            waterbody.Watershed.DrainageCode = "01-00-00-00-00-00";
-            waterbody.Watershed.CreateAndFlush();
             waterbody.CreateAndFlush();
 
             DataSet dataset1 = new DataSet();

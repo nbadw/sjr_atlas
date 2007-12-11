@@ -9,11 +9,15 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Metadata.Indexer</RootNamespace>
     <AssemblyName>Metadata.Indexer</AssemblyName>
+    <!--
     <ManifestCertificateThumbprint>D0E522632478AAAB941FE45F8022D22547C272D7</ManifestCertificateThumbprint>
     <ManifestKeyFile>Metadata.Indexer_TemporaryKey.pfx</ManifestKeyFile>
+-->
     <GenerateManifests>true</GenerateManifests>
     <SignManifests>true</SignManifests>
     <IsWebBootstrapper>false</IsWebBootstrapper>
+    <StartupObject>
+    </StartupObject>
     <PublishUrl>C:\Documents and Settings\nbdata\Desktop\Indexer\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -24,11 +28,8 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <CreateWebPageOnPublish>false</CreateWebPageOnPublish>
     <ApplicationVersion>1.1.0.%2a</ApplicationVersion>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <StartupObject>
-    </StartupObject>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -55,10 +56,6 @@
     <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\ExternalLibraries\log4net.dll</HintPath>
-    </Reference>
-    <Reference Include="SJRAtlas.Models, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Atlas\SJRAtlas.Models\bin\Debug\SJRAtlas.Models.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
@@ -88,6 +85,12 @@
       <PublishState>Exclude</PublishState>
       <FileType>File</FileType>
     </PublishFile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SJRAtlas.Models\SJRAtlas.Models.csproj">
+      <Project>{43819902-84F0-47AB-B474-C1EF5E89ED8A}</Project>
+      <Name>SJRAtlas.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

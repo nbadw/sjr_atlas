@@ -47,7 +47,7 @@ namespace SJRAtlas.Site.Tests.Components
             double latitude = 65.0;
             double longitude = -65.0;
 
-            IPlace place = mocks.CreateMock<IPlace>();
+            Place place = mocks.CreateMock<Place>();
             component.Place = place;
             Expect.Call(place.GenericTerm).Return(genericTerm);
             Expect.Call(place.County).Return(county);

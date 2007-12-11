@@ -76,7 +76,7 @@
     <Compile Include="Controllers\AboutController.cs" />
     <Compile Include="Controllers\AgencyController.cs" />
     <Compile Include="Controllers\FeedbackController.cs" />
-    <Compile Include="Controllers\PlaceNameController.cs" />
+    <Compile Include="Controllers\PlaceController.cs" />
     <Compile Include="Controllers\ResourceController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\MetaDataController.cs" />
@@ -204,7 +204,7 @@
     <None Include="Views\place\view.vm" />
     <None Include="Views\reports\index.vm" />
     <None Include="Views\rescues\problemsendingemail.vm" />
-    <None Include="Views\rescues\friendlyerror.vm" />
+    <None Include="Views\rescues\error.vm" />
     <None Include="Views\rescues\generalerror.vm" />
     <None Include="Views\resource\tabular.vm" />
     <None Include="Views\search\advanced.vm" />

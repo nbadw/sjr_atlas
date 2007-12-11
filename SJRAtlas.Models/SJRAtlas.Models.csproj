@@ -54,15 +54,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClosestWatershedToPlace.cs" />
-    <Compile Include="IPlace.cs" />
     <Compile Include="Publication.cs" />
     <Compile Include="LatLngCoord.cs" />
     <Compile Include="DataSet.cs" />
     <Compile Include="GraphPresentation.cs" />
-    <Compile Include="ICoordinateAware.cs" />
     <Compile Include="IMetadataAware.cs" />
     <Compile Include="InteractiveMap.cs" />
-    <Compile Include="IPublication.cs" />
     <Compile Include="MapPresentation.cs" />
     <Compile Include="Metadata.cs" />
     <Compile Include="Place.cs" />

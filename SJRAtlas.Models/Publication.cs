@@ -6,9 +6,9 @@ using System.Collections.Generic;
 namespace SJRAtlas.Models
 {
     [ActiveRecord("publications", DiscriminatorColumn="type", DiscriminatorType="String", DiscriminatorValue="Publication")]
-    public class Publication : ActiveRecordBase<Publication>, IPublication, IMetadataAware
+    public class Publication : ActiveRecordBase<Publication>, IMetadataAware
     {
-        public static IList<IPublication> FindAllByQuery(string query)
+        public static IList<Publication> FindAllByQuery(string query)
         {
             DetachedCriteria criteria = DetachedCriteria.For<Publication>();
             criteria.Add(Expression.Like("Title", query));
@@ -16,7 +16,7 @@ namespace SJRAtlas.Models
                 new Order[] { Order.Asc("Title") });
         }
 
-        #region IPublication Members
+        #region ActiveRecord Properties
 
         private int id;
 
@@ -80,15 +80,6 @@ namespace SJRAtlas.Models
             get { return updatedAt; }
             set { updatedAt = value; }
         }	
-
-        #endregion
-
-        #region IEntity Members
-
-        public object GetId()
-        {
-            return Id;
-        }
 
         #endregion
 

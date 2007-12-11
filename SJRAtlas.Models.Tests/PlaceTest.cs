@@ -12,7 +12,7 @@ namespace SJRAtlas.Models.Tests
         private MockRepository mocks;
 
         [SetUp]
-        public void Setup()
+        public override void Setup()
         {
             base.Setup();
             mocks = new MockRepository();
@@ -97,7 +97,7 @@ namespace SJRAtlas.Models.Tests
         public void TestRelatedPublicationsNeverReturnsNull()
         {
             Place place = new Place();
-            IList<IPublication> publications = place.RelatedPublications;
+            IList<Publication> publications = place.RelatedPublications;
             Assert.IsNotNull(publications);
             Assert.AreEqual(0, publications.Count);
         }

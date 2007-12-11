@@ -6,25 +6,8 @@ using Castle.ActiveRecord;
 namespace SJRAtlas.Models
 {
     [ActiveRecord("tblWaterBody")]
-    public class WaterBody : ActiveRecordBase<WaterBody>, IPlace, ICoordinateAware
+    public class WaterBody : ActiveRecordBase<WaterBody>
     {
-        public WaterBody()
-            : this(new Place(), new Watershed())
-        {
-
-        }
-
-        public WaterBody(Place place, Watershed watershed)
-        {
-            if (place == null)
-                throw new ArgumentNullException("place");
-            if (watershed == null)
-                throw new ArgumentNullException("watershed");
-
-            this.watershed = watershed;
-            this.watershed.Place = place;
-        }
-
         #region ActiveRecord Properties
 
         private int id;
@@ -36,20 +19,22 @@ namespace SJRAtlas.Models
             set { id = value; }
         }
 
+        private Place place;
+
         [BelongsTo("CGNDB_Key")]
         public Place Place
         {
-            get { return Watershed.Place; }
-            set { Watershed.Place = value; }
+            get { return place; }
+            set { place = value; }
         }
 
-        private string altCgndbKey;
+        private Place altPlace;
 
-        [Property("CGNDB_Key_Alt", Length = 10)]
-        public string AltCgndbKey
+        [BelongsTo("CGNDB_Key_Alt")]
+        public Place AltPlace
         {
-            get { return altCgndbKey; }
-            set { altCgndbKey = value; }
+            get { return altPlace; }
+            set { altPlace = value; }
         }
 
         private Watershed watershed;
@@ -58,13 +43,7 @@ namespace SJRAtlas.Models
         public Watershed Watershed
         {
             get { return watershed; }
-            set 
-            {
-                if (value == null)
-                    throw new ArgumentNullException("watershed");
-
-                watershed = value; 
-            }
+            set { watershed = value; }
         }
 
         private string type;
@@ -165,91 +144,11 @@ namespace SJRAtlas.Models
         {
             get { return datasetList; }
             set { datasetList = value; }
-        }
-
-        #region IPlace Members
-
-        public string CgndbKey
-        {
-            get { return Place.CgndbKey; }
-            set { Place.CgndbKey = value; }
-        }
-
-        public string ConciseTerm
-        {
-            get { return Place.ConciseTerm; }
-            set { Place.ConciseTerm = value; }
-        }
-
-        public string ConciseType
-        {
-            get { return Place.ConciseType; }
-            set { Place.ConciseType = value; }
-        }
-
-        public string CoordAccM
-        {
-            get { return Place.CoordAccM; }
-            set { Place.CoordAccM = value; }
-        }
-
-        public string County
-        {
-            get { return Place.County; }
-            set { Place.County = value; }
-        }
-
-        public string Datum
-        {
-            get { return Place.Datum; }
-            set { Place.Datum = value; }
-        }
-
-        public string FeatureId
-        {
-            get { return Place.FeatureId; }
-            set { Place.FeatureId = value; }
-        }
-
-        public string GenericTerm
-        {
-            get { return Place.GenericTerm; }
-            set { Place.GenericTerm = value; }
-        }
+        }             
 
         public bool IsWithinBasin()
         {
             return Watershed.IsWithinBasin();
-        }
-
-        public double Latitude
-        {
-            get { return Place.Latitude; }
-            set { Place.Latitude = value; }
-        }
-
-        public double Longitude
-        {
-            get { return Place.Longitude; }
-            set { Place.Longitude = value; }
-        }
-
-        public string NameStatus
-        {
-            get { return Place.NameStatus; }
-            set { Place.NameStatus = value; }
-        }
-
-        public string NtsMap
-        {
-            get { return Place.NtsMap; }
-            set { Place.NtsMap = value; }
-        }
-
-        public string Region
-        {
-            get { return Place.Region; }
-            set { Place.Region = value; }
         }
 
         private IList<InteractiveMap> interactiveMaps;
@@ -267,9 +166,9 @@ namespace SJRAtlas.Models
             }
         }
 
-        private IList<IPublication> publications;
+        private IList<Publication> publications;
 
-        public IList<IPublication> RelatedPublications
+        public IList<Publication> RelatedPublications
         {
             get
             {
@@ -280,11 +179,7 @@ namespace SJRAtlas.Models
 
                 return publications;
             }
-        }
-
-        #endregion
-
-        
+        }        
 
         #region ICoordinateAware Members
 

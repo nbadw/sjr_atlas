@@ -12,7 +12,7 @@ namespace SJRAtlas.Models.Tests
         private MockRepository mocks;
 
         [SetUp]
-        public void Setup()
+        public override void Setup()
         {
             base.Setup();
             mocks = new MockRepository();
@@ -24,8 +24,6 @@ namespace SJRAtlas.Models.Tests
             string drainageCode = "01-02-03-04-05-06";
 
             Watershed watershed = new Watershed();
-            watershed.Place.CgndbKey = "ABCDE";
-            watershed.Place.CreateAndFlush();
             watershed.DrainageCode = drainageCode;
             watershed.CreateAndFlush();
 
@@ -35,43 +33,15 @@ namespace SJRAtlas.Models.Tests
         }
 
         [Test]
-        public void TestConstructors()
-        {
-            Watershed watershed;
-
-            watershed = new Watershed();
-            Assert.IsNotNull(watershed.Place);
-
-            Place place = mocks.CreateMock<Place>();
-            watershed = new Watershed(place);
-            Assert.AreEqual(place, watershed.Place);
-        }
-
-        [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void TestWatershedConstructorWhenPlaceIsNull()
-        {
-            new Watershed(null);
-        }	
-
-        [Test]
         public void TestProperties()
         {
             Watershed watershed = new Watershed();
             Dictionary<string, object> properties = new Dictionary<string, object>();
             properties.Add("AreaHA", float.MaxValue);
             properties.Add("AreaPercent", float.MaxValue);
-            properties.Add("BorderInd", "1");
-            properties.Add("CgndbKey", "ABCDE");                
-            properties.Add("County", "Northumberland");
-            properties.Add("ConciseTerm", "TestValue");
-            properties.Add("ConciseType", "TestValue");
-            properties.Add("CoordAccM", "TestValue");
-            properties.Add("Datum", "NAD83");
+            properties.Add("BorderInd", "1");    
             properties.Add("DrainageCode", "01-02-03-04-05-06");
             properties.Add("DrainsInto", "Bay of Fundy");
-            properties.Add("FeatureId", "TestValue");
-            properties.Add("GenericTerm", "TestValue");
             properties.Add("Level1No", "01");
             properties.Add("Level1Name", "Level1");
             properties.Add("Level2No", "02");
@@ -85,11 +55,6 @@ namespace SJRAtlas.Models.Tests
             properties.Add("Level6No", "06");
             properties.Add("Level6Name", "Level6");
             properties.Add("Name", "Saint John River");
-            properties.Add("NameStatus", "Official");
-            properties.Add("Latitude", 3.7);
-            properties.Add("Longitude", 7.3);
-            properties.Add("NtsMap", "TestValue");
-            properties.Add("Region", "NB");
             properties.Add("StreamOrder", 1);
             properties.Add("UnitType", "TestValue");
 
@@ -103,10 +68,13 @@ namespace SJRAtlas.Models.Tests
             string drainageCode = "01-02-03-04-05-06";
             string cgndbKey = "ABCDE";
 
+            Place place = new Place();
+            place.CgndbKey = cgndbKey;
+            place.CreateAndFlush();
+
             Watershed watershed = new Watershed();
-            watershed.Place.CgndbKey = cgndbKey;
-            watershed.Place.CreateAndFlush();
             watershed.DrainageCode = drainageCode;
+            watershed.Place = place;
             watershed.CreateAndFlush();
 
             Watershed dbWatershed = Watershed.Find(drainageCode);
@@ -123,21 +91,17 @@ namespace SJRAtlas.Models.Tests
             int id2 = 5678;
 
             Watershed watershed = new Watershed();
-            watershed.Place.CgndbKey = "ABCDE";
-            watershed.Place.CreateAndFlush();
             watershed.DrainageCode = drainageCode;
             watershed.CreateAndFlush();
 
             WaterBody waterBody1 = new WaterBody();
             waterBody1.Id = id1;
             waterBody1.Watershed = watershed;
-            waterBody1.Place = watershed.Place;
             waterBody1.CreateAndFlush();
 
             WaterBody waterBody2 = new WaterBody();
             waterBody2.Id = id2;
             waterBody2.Watershed = watershed;
-            waterBody2.Place = watershed.Place;
             waterBody2.CreateAndFlush();
 
             watershed.WaterBodies.Add(waterBody1);
@@ -157,7 +121,6 @@ namespace SJRAtlas.Models.Tests
             string query = "watershed name is the default query";
             Watershed watershed = new Watershed();
             watershed.Name = query;
-            watershed.Place.Name = "this should not be searced on";
 
             Publication[] publications = new Publication[3];
             for (int i = 0; i < publications.Length; i++)
@@ -174,7 +137,7 @@ namespace SJRAtlas.Models.Tests
         public void TestRelatedPublicationsNeverReturnsNull()
         {
             Watershed watershed = new Watershed();
-            IList<IPublication> publications = watershed.RelatedPublications;
+            IList<Publication> publications = watershed.RelatedPublications;
             Assert.IsNotNull(publications);
             Assert.AreEqual(0, publications.Count);
         }
@@ -185,7 +148,6 @@ namespace SJRAtlas.Models.Tests
             string query = "place name is the default query";
             Watershed watershed = new Watershed();
             watershed.Name = query;
-            watershed.Place.Name = "this should not be searced on";
 
             InteractiveMap[] interactiveMaps = new InteractiveMap[3];
             for (int i = 0; i < interactiveMaps.Length; i++)
@@ -322,14 +284,6 @@ namespace SJRAtlas.Models.Tests
                 watershed.DrainageCode = drainageCode;
                 Assert.IsFalse(watershed.IsWithinBasin(), "IsWithinBasin should return false for value " + drainageCode);
             }
-        }
-
-        [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void TestPlaceCannotBeSetToNull()
-        {
-            Watershed watershed = new Watershed();
-            watershed.Place = null;
         }
     }
 }

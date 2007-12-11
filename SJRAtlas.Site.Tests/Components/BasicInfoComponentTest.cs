@@ -47,7 +47,7 @@ namespace SJRAtlas.Site.Tests.Components
             string status = "OFFICIAL";
             string expectedTitle = String.Format("{0}, {1} ({2} Name)", name, region, status);
 
-            IPlace place = mocks.CreateMock<IPlace>();
+            Place place = mocks.CreateMock<Place>();
             component.Place = place;
             Expect.Call(place.Name).Return(name);
             Expect.Call(place.Region).Return(region);
@@ -63,28 +63,6 @@ namespace SJRAtlas.Site.Tests.Components
             Assert.IsFalse((bool)component.Context.ContextVars["is_a_waterbody"]);
             Assert.AreEqual("shared/basic_info", component.Context.ViewToRender);
             mocks.VerifyAll();
-        }
-
-        [Test]
-        public void TestRenderWhenIsAWatershed()
-        {
-            Watershed place = new Watershed();
-            component.Place = place;
-            PrepareViewComponent(component);
-            component.Render();
-            Assert.IsTrue((bool)component.Context.ContextVars["is_a_watershed"]);
-            Assert.IsFalse((bool)component.Context.ContextVars["is_a_waterbody"]);
-        }
-
-        [Test]
-        public void TestRenderWhenIsAWaterBody()
-        {
-            WaterBody place = new WaterBody();
-            component.Place = place;
-            PrepareViewComponent(component);
-            component.Render();
-            Assert.IsTrue((bool)component.Context.ContextVars["is_a_waterbody"]);
-            Assert.IsFalse((bool)component.Context.ContextVars["is_a_watershed"]);
         }	
     }
 }

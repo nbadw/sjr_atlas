@@ -4,7 +4,7 @@ namespace SJRAtlas.Site.Models
 {
     public partial class Error
     {
-        private Error[] innerExceptions;
+        //private Error[] innerExceptions;
 
         public void LoadChildren()
         {

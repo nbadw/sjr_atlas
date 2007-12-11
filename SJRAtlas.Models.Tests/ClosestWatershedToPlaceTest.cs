@@ -12,7 +12,7 @@ namespace SJRAtlas.Models.Tests
         private MockRepository mocks;
 
         [SetUp]
-        public void Setup()
+        public override void Setup()
         {
             base.Setup();
             mocks = new MockRepository();
