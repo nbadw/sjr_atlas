@@ -10,19 +10,18 @@ namespace SJRAtlas.Site.Controllers
     [Layout("sjratlas"), Rescue("friendlyerror")]
     public class WaterBodyController : SJRAtlasController
     {
-        public void View(string place)
+        public void View(string cgndbKey)
         {
-            if (place == null)
-                throw new ArgumentNullException("place");
+            if (cgndbKey == null)
+                throw new ArgumentNullException("cgndbKey");
 
-            WaterBody waterbody = WaterBody.FindByCgndbKey(place);
+            WaterBody waterbody = WaterBody.FindByCgndbKeyOrAltCgndbKey(cgndbKey);
             IList<DataSet> datasets = waterbody.DataSets;
             IList<InteractiveMap> interactiveMaps = waterbody.RelatedInteractiveMaps;
             IList<Publication> publications = waterbody.RelatedPublications;
 
             PropertyBag["waterbody"] = waterbody;
             PropertyBag["interactive_maps"] = interactiveMaps;
-            PropertyBag["metadata"] = metadata;
         }
 
         //[AjaxAction]

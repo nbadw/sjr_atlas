@@ -9,42 +9,45 @@ namespace SJRAtlas.Site.Controllers
     using SJRAtlas.Models;
 
     [Layout("sjratlas"), Rescue("generalerror")]
-    public class PlaceNameController : SJRAtlasController
+    public class PlaceController : SJRAtlasController
     {
         public void View(string id)
         {
             if (id == null)
                 throw new ArgumentNullException("id");
 
-            Place place = Place.Find(id);
+            Place place = AtlasMediator.Find<Place>(id);
             if (place.IsWithinBasin())
             {
-                if (AtlasUtils.IsWaterBody(placename))
-                {
-                    WaterBody.ExistsForCgndbKeyOrAltCgndbKey(place.CgndbKey);
+                if (AtlasMediator.WaterBodyExistsForCgndbKeyOrAltCgndbKey(place.CgndbKey))
+                {                    
                     Dictionary<string, string> parameters = new Dictionary<string, string>();
                     parameters.Add("place", place.CgndbKey);
                     Redirect("", "waterbody", "view", parameters);
                     return;
                 }
-
-                Watershed.ExistsForCgndbKey(place.CgndbKey);
-                if (watersheds != null && watersheds.Length == 1)
+                                
+                if (AtlasMediator.WatershedExistsForCgndbKey(place.CgndbKey))
                 {
-                    IWatershed watershed = watersheds[0];
                     Dictionary<string, string> parameters = new Dictionary<string, string>();
                     parameters.Add("place", place.CgndbKey);
                     Redirect("", "watershed", "view", parameters);
                     return;
                 }
             }
+                        
+            IList<InteractiveMap> interactiveMaps = place.RelatedInteractiveMaps;
 
-            // include basin maps
-            List<InteractiveMap> interactiveMaps = place.RelatedInteractiveMaps();
-            List<InteractiveMap> basinMaps = InteractiveMap.FindAllBasinMaps();
-            interactiveMaps.AddRange(basinMaps);
+            if (place.IsWithinBasin())
+            {
+                foreach (InteractiveMap basinMap in AtlasMediator.FindAllBasinMaps())
+                {
+                    if (!interactiveMaps.Contains(basinMap))
+                        interactiveMaps.Add(basinMap);
+                }
+            }
 
-            PropertyBag["place"] = placename;
+            PropertyBag["place"] = place;
             PropertyBag["interactive_maps"] = interactiveMaps;
             PropertyBag["publications"] = place.RelatedPublications;
         }
