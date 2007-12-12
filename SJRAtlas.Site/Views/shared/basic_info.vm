@@ -2,14 +2,8 @@
   <h3 class="title">$title</h3>
   <div class="tabs">
     #component(place with "place=$place")
-    
-    #if($is_a_watershed)
-      #component(watershed with "watershed=$place")
-    #end 
-    
-    #if($is_a_waterbody)
-        #component(waterbody with "waterbody=$place")
-    #end
+    #component(watershed with "watershed=$place")
+    #component(waterbody with "waterbody=$place")
   </div>   
   <div class="map">
     <div class="preview">MAP</div>
