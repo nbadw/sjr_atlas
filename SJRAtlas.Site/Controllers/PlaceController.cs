@@ -11,12 +11,12 @@ namespace SJRAtlas.Site.Controllers
     [Layout("sjratlas"), Rescue("generalerror")]
     public class PlaceController : SJRAtlasController
     {
-        public void View(string id)
+        public void View(string cgndbKey)
         {
-            if (id == null)
-                throw new ArgumentNullException("id");
+            if (cgndbKey == null)
+                throw new ArgumentNullException("cgndbKey");
 
-            Place place = AtlasMediator.Find<Place>(id);
+            Place place = AtlasMediator.Find<Place>(cgndbKey);
             if (place.IsWithinBasin())
             {
                 if (AtlasMediator.WaterBodyExistsForCgndbKeyOrAltCgndbKey(place.CgndbKey))

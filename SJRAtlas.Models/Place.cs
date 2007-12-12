@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Castle.ActiveRecord;
+using NHibernate.Expression;
 
 namespace SJRAtlas.Models
 {
@@ -163,7 +164,7 @@ namespace SJRAtlas.Models
 
         private IList<InteractiveMap> interactiveMaps;
 
-        public IList<InteractiveMap> RelatedInteractiveMaps
+        public virtual IList<InteractiveMap> RelatedInteractiveMaps
         {
             get 
             {
@@ -178,7 +179,7 @@ namespace SJRAtlas.Models
 
         private IList<Publication> publications;
 
-        public IList<Publication> RelatedPublications
+        public virtual IList<Publication> RelatedPublications
         {
             get 
             {
@@ -190,16 +191,6 @@ namespace SJRAtlas.Models
                 return publications; 
             }
         }
-
-        public bool IsWithinBasin()
-        {
-            if (ClosestWatershedToPlace == null)
-                return false;
-
-            return ClosestWatershedToPlace.IsWithinBasin();
-        }
-
-        #region ICoordinateAware Members
 
         private LatLngCoord coordinate;
 
@@ -213,6 +204,22 @@ namespace SJRAtlas.Models
             return coordinate;
         }
 
-        #endregion
+        public virtual bool IsWithinBasin()
+        {
+            if (ClosestWatershedToPlace == null)
+                return false;
+
+            return ClosestWatershedToPlace.IsWithinBasin();
+        }
+
+        public static IList<Place> FindAllByQuery(string query)
+        {
+            if (query == null)
+                throw new ArgumentNullException("query");
+
+            DetachedCriteria criteria = DetachedCriteria.For<Place>();
+            criteria.Add(Expression.Like("Name", query.Trim(), MatchMode.Start));
+            return Place.FindAll(criteria, new Order[] { Order.Asc("Name") });
+        }
     }
 }

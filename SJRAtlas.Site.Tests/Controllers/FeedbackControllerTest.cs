@@ -8,62 +8,54 @@ using Castle.Components.Validator;
 using Castle.Components.Common.EmailSender;
 using Rhino.Mocks;
 
-namespace SJRAtlas.Tests.Controllers
+namespace SJRAtlas.Site.Tests.Controllers
 {
     [TestFixture]
     public class FeedbackControllerTest : BaseControllerTest
     {
-        private FeedbackController controller;
-        private MockRepository mocks;
-
-        [SetUp]
-        public void Init()
-        {
-            mocks = new MockRepository();
-            controller = new FeedbackController();
-            PrepareController(controller, "feedback", "");
-        }
 
         [Test]
         public void TestValidationFailsAndFormIsDisplayedWithErrorMessages()
         {
-            Feedback feedback = new Feedback();
-            SimulateOneValidationErrorFor(controller, feedback);
-            controller.SubmitFeedback(feedback);
+            //Feedback feedback = new Feedback();
+            //SimulateOneValidationErrorFor(controller, feedback);
+            //controller.SubmitFeedback(feedback);
 
-            Assert.AreEqual("/feedback/feedbackform.rails", Response.RedirectedTo);
+            //Assert.AreEqual("/feedback/feedbackform.rails", Response.RedirectedTo);
 
-            Assert.IsNotNull(controller.Flash["feedback"]);
-            Assert.IsNotNull(controller.Flash["summary"]);
-            Assert.AreEqual(1, ((ErrorSummary)controller.Flash["summary"]).ErrorsCount);
+            //Assert.IsNotNull(controller.Flash["feedback"]);
+            //Assert.IsNotNull(controller.Flash["summary"]);
+            //Assert.AreEqual(1, ((ErrorSummary)controller.Flash["summary"]).ErrorsCount);
+            Assert.Fail();
         }
 
         [Test]
         public void TestFeedbackIsSavedToDatabaseAndThenEmailedSucceeds()
         {
-            Feedback feedback = mocks.CreateMock<Feedback>();
-            controller.FeedbackRecipients = new string[] { "recipient-01@test.com", "recipient-02@test.com", "recipient-03@test.com" };
+            //Feedback feedback = mocks.CreateMock<Feedback>();
+            //controller.FeedbackRecipients = new string[] { "recipient-01@test.com", "recipient-02@test.com", "recipient-03@test.com" };
 
-            feedback.CreateAndFlush();
-            LastCall.On(feedback).Repeat.Once();
-            Expect.Call(feedback.Subject).Repeat.Any().Return("Email Test");
-            Expect.Call(feedback.SenderName).Repeat.Any().Return("Test Sender");
+            //feedback.CreateAndFlush();
+            //LastCall.On(feedback).Repeat.Once();
+            //Expect.Call(feedback.Subject).Repeat.Any().Return("Email Test");
+            //Expect.Call(feedback.SenderName).Repeat.Any().Return("Test Sender");
 
-            mocks.ReplayAll();
+            //mocks.ReplayAll();
             
-            controller.SubmitFeedback(feedback);
+            //controller.SubmitFeedback(feedback);
 
-            Console.WriteLine(((Castle.MonoRail.Framework.Test.MockRailsEngineContext)Context).RenderedEmailTemplates[0].Name);
+            //Console.WriteLine(((Castle.MonoRail.Framework.Test.MockRailsEngineContext)Context).RenderedEmailTemplates[0].Name);
 
-            Assert.IsTrue(HasRenderedEmailTemplateNamed("feedback"));
-            Assert.AreEqual(@"feedback\EmailSent", controller.SelectedViewName);
-            Assert.AreEqual(controller.FeedbackRecipients.Length, MessagesSent.Length);
-            for (int i = 0; i < controller.FeedbackRecipients.Length; i++)
-            {
-                Assert.AreEqual(controller.FeedbackRecipients[i], MessagesSent[i].To);
-            }
+            //Assert.IsTrue(HasRenderedEmailTemplateNamed("feedback"));
+            //Assert.AreEqual(@"feedback\EmailSent", controller.SelectedViewName);
+            //Assert.AreEqual(controller.FeedbackRecipients.Length, MessagesSent.Length);
+            //for (int i = 0; i < controller.FeedbackRecipients.Length; i++)
+            //{
+            //    Assert.AreEqual(controller.FeedbackRecipients[i], MessagesSent[i].To);
+            //}
 
-            mocks.VerifyAll();
+            //mocks.VerifyAll();
+            Assert.Fail();
         }
 
         [Test]

@@ -6,258 +6,248 @@ namespace SJRAtlas.Site.Tests.Controllers
     using Rhino.Mocks;
     using System.Collections.Generic;
     using SJRAtlas.Site.Controllers;
+    using SJRAtlas.Models;
 
     [TestFixture]
     public class SearchControllerTest : BaseControllerTest
     {
-        //private MockRepository mocks;
-        //private SearchController controller;
-        //private IPlaceNameLookup placeNameLookup;
-        //private IMetadataLookup metadataLookup;
-        //private IWatershedLookup watershedLookup;
-        //private IEasyMapLookup easymapLookup;
+        private MockRepository mocks = new MockRepository();
 
-        //[SetUp]
-        //public void Setup()
-        //{
-        //    mocks = new MockRepository();
-        //    placeNameLookup = mocks.CreateMock<IPlaceNameLookup>();
-        //    metadataLookup = mocks.CreateMock<IMetadataLookup>();
-        //    watershedLookup = mocks.CreateMock<IWatershedLookup>();
-        //    easymapLookup = mocks.CreateMock<IEasyMapLookup>();
-        //    controller = new SearchController();
-        //    controller.PlaceNameLookup = placeNameLookup;
-        //    controller.WatershedLookup = watershedLookup;
-        //    controller.MetadataLookup = metadataLookup;
-        //    controller.EasyMapLookup = easymapLookup;
-        //    PrepareController(controller, "search", "");
-        //}
+        [Test]
+        public void TestQuickSearchWithNoTriggers()
+        {
+            SearchController controller = new SearchController();
+            PrepareController(controller, "search", "quick");
+            string query = "test";
+            controller.Quick(query);
+            Assert.AreEqual("/search/places.rails?q=" + query + "&", Response.RedirectedTo);
+        }
 
-        //[TearDown]
-        //public void Teardown()
-        //{
-        //}
+        [Test]
+        public void TestQuickSearchWithWatershedKeywordTriggers()
+        {
+            SearchController controller = new SearchController();
+            PrepareController(controller, "search", "quick");
+            string[] triggers = { "watershed", "basin", "catchment" };
+            string queryWithoutTrigger = "query for";
 
-        //[Test]
-        //public void TestQuickSearchWithNoTriggers()
-        //{
-        //    string query = "test";
-        //    controller.Quick(query);
-        //    Assert.AreEqual("/search/gazetteer.rails?q=" + query + "&", Response.RedirectedTo);
-        //}	
+            foreach (string trigger in triggers)
+            {
+                string queryWithTrigger = queryWithoutTrigger + " " + trigger;
+                controller.Quick(queryWithTrigger);
+                Assert.AreEqual("/search/watersheds.rails?q=" + queryWithoutTrigger + "&", Response.RedirectedTo, queryWithTrigger + " should have triggered watershed search");
+            }
+        }
 
-        //[Test]
-        //public void TestQuickSearchWithWatershedKeywordTriggers()
-        //{
-        //    string[] triggers = { "watershed", "basin", "catchment" };
-        //    string queryWithoutTrigger = "query for";
+        [Test]
+        public void TestAdvanced()
+        {
+            Assert.Fail();
+        }
 
-        //    foreach (string trigger in triggers)
-        //    {
-        //        string queryWithTrigger = queryWithoutTrigger + " " + trigger;
-        //        controller.Quick(queryWithTrigger);
-        //        Assert.AreEqual("/search/watershed.rails?q=" + queryWithoutTrigger + "&", Response.RedirectedTo, queryWithTrigger + " should have triggered watershed search");
-        //    }
-        //}
+        [Test]
+        public void TestTips()
+        {
+            SearchController controller = new SearchController();
+            PrepareController(controller, "search", "tips");
+            controller.Tips();
+            Assert.AreEqual(@"search\tips", controller.SelectedViewName);
+        }
 
-        //[Test]
-        //public void TestQuickSearchWithMetadataKeywordTrigger()
-        //{
-        //    string queryWithoutTrigger = "query for";
-        //    string queryWithTrigger = queryWithoutTrigger + " metadata";
-        //    controller.Quick(queryWithTrigger);
-        //    Assert.AreEqual("/search/metadata.rails?q=" + queryWithoutTrigger + "&", Response.RedirectedTo);
-        //}
+        [Test]
+        public void TestNoResults()
+        {
+            string query = "test";
+            SearchController controller = new SearchController();
+            PrepareController(controller, "search", "tips");
+            controller.NoResults(query);
+            Assert.AreEqual(query, controller.PropertyBag["query"]);
+            Assert.AreEqual(@"search\no-results", controller.SelectedViewName);
+        }	
 
-        //# region Gazetteer Search Tests
+        [Test]
+        public void TestSubmitAdvanced()
+        {
+            Assert.Fail();
+        }	
 
-        //[Test]
-        //public void TestGazetteerQuickSearch()
-        //{
-        //    string placename = "saint john";
-        //    controller.Quick(placename);
-        //    Assert.AreEqual("/search/gazetteer.rails?q=" + placename + "&", Response.RedirectedTo);
-        //}
+        # region Place Search Tests
 
-        //[Test]
-        //public void TestGazetteerSearchReturnsNoResultsAndRedirectsToMetadataSearch()
-        //{
-        //    string query = "test"; 
-        //    IPlaceName[] results = new IPlaceName[0];
+        [Test]
+        public void TestPlaceSearchRedirectsToWatershedSearchWhenNoResultsFound()
+        {
+            string query = "test";
+            AtlasMediator mediator = mocks.CreateMock<AtlasMediator>();
+            IList<Place> results = mocks.CreateMock<IList<Place>>();
 
-        //    Expect.Call(placeNameLookup.FindByQuery(query)).Return(results);
-        //    mocks.ReplayAll();
+            Expect.Call(mediator.FindAllPlacesByQuery(query)).Return(results);
+            Expect.Call(results.Count).Return(0);
+            mocks.ReplayAll();
 
-        //    controller.Gazetteer(query);
+            SearchController controller = new SearchController();
+            controller.AtlasMediator = mediator;
+            PrepareController(controller, "search", "places");
+            controller.Places(query);
 
-        //    mocks.VerifyAll();
-        //    Assert.AreEqual("/search/metadata.rails?q=" + query + "&", Response.RedirectedTo); 
-        //}
+            Assert.AreEqual("/search/watersheds.rails?q=" + query + "&", Response.RedirectedTo);
+            mocks.VerifyAll();
+        }
 
-        //[Test]
-        //public void TestGazetteerSearchReturnsMultipleResults()
-        //{
-        //    string query = "test";
-        //    IPlaceName[] results = new IPlaceName[2];
+        [Test]
+        public void TestPlaceSearchWhenMultipleResultsFound()
+        {
+            string query = "test";
+            AtlasMediator mediator = mocks.CreateMock<AtlasMediator>();
+            IList<Place> results = mocks.CreateMock<IList<Place>>();
 
-        //    Expect.Call(placeNameLookup.FindByQuery(query)).Return(results);
-        //    mocks.ReplayAll();
+            Expect.Call(mediator.FindAllPlacesByQuery(query)).Return(results);
+            Expect.Call(results.Count).Repeat.Twice().Return(2);
+            mocks.ReplayAll();
 
-        //    controller.Gazetteer(query);
+            SearchController controller = new SearchController();
+            controller.AtlasMediator = mediator;
+            PrepareController(controller, "search", "places");
+            controller.Places(query);
 
-        //    mocks.VerifyAll();
-        //    Assert.AreEqual(query, controller.PropertyBag["query"]);
-        //    Assert.IsNotNull(controller.PropertyBag["results"]);
-        //}
+            Assert.AreEqual(query, controller.PropertyBag["query"]);
+            Assert.AreEqual(results, controller.PropertyBag["results"]);
+            Assert.AreEqual(@"search\places", controller.SelectedViewName);
+            mocks.VerifyAll();
+        }
 
-        //[Test]
-        //[ExpectedException(typeof(Exception))]
-        //public void TestGazetteerSearchServiceIsDown()
-        //{
-        //    string query = "test";
-        //    Exception exception = new Exception("Service Unavailable");
+        [Test]
+        [ExpectedException(typeof(Exception))]
+        public void TestPlaceSearchDisplaysRescueWhenAnExceptionOccurs()
+        {
+            string query = "test";
+            AtlasMediator mediator = mocks.CreateMock<AtlasMediator>();
 
-        //    Expect.Call(placeNameLookup.FindByQuery(query)).Throw(exception);
-        //    mocks.ReplayAll();
+            Expect.Call(mediator.FindAllPlacesByQuery(query)).Throw(new Exception());
+            mocks.ReplayAll();
 
-        //    controller.Gazetteer(query);          
-        //}	
+            SearchController controller = new SearchController();
+            controller.AtlasMediator = mediator;
+            PrepareController(controller, "search", "places");
+            controller.Places(query);
 
-        //[Test]
-        //public void TestGazetteerSearchReturnsOneResultAndRedirectsToViewPlaceName()
-        //{
-        //    string query = "test";
-        //    string id = "ABCDE";
+            Assert.AreEqual(@"rescue\generalerror", controller.SelectedViewName);
+            mocks.VerifyAll();
+        }
 
-        //    IPlaceName placename = mocks.CreateMock<IPlaceName>();
-        //    IPlaceName[] results = new IPlaceName[] { placename };
+        [Test]
+        public void TestPlaceSearchRedirectsToPlaceViewWhenOnlyOneResultFound()
+        {
+            string query = "test";
+            string id = "ABCDE";
 
-        //    Expect.Call(placeNameLookup.FindByQuery(query)).Return(results);
-        //    Expect.Call(placename.Id).Return(id);
-        //    mocks.ReplayAll();
+            AtlasMediator mediator = mocks.CreateMock<AtlasMediator>();
+            IList<Place> results = mocks.CreateMock<IList<Place>>();
+            Place place = new Place();
+            place.CgndbKey = id;
 
-        //    controller.Gazetteer(query);
+            Expect.Call(mediator.FindAllPlacesByQuery(query)).Return(results);
+            Expect.Call(results.Count).Repeat.Twice().Return(1);
+            Expect.Call(results[0]).Return(place);
+            mocks.ReplayAll();
 
-        //    mocks.VerifyAll();
-        //    Assert.AreEqual("/placename/view.rails?id=" + id + "&", Response.RedirectedTo);
-        //}
-        //# endregion
+            SearchController controller = new SearchController();
+            controller.AtlasMediator = mediator;
+            PrepareController(controller, "search", "places");
+            controller.Places(query);
 
-        //# region Watershed Search Tests
+            Assert.AreEqual("/place/view.rails?cgndbKey=" + id + "&", Response.RedirectedTo);
+            mocks.VerifyAll();
+        }
 
-        //[Test]
-        //public void TestWatershedSearchReturnsMultipleResults()
-        //{
-        //    string query = "test";
-        //    IWatershed[] results = new IWatershed[2];
+        # endregion
 
-        //    Expect.Call(watershedLookup.FindAllByProperty("UnitName", query)).Return(results);
-        //    mocks.ReplayAll();
+        # region Watershed Search Tests
 
-        //    controller.Watershed(query);
+        [Test]
+        public void TestWatershedsSearchWhenMultipleResultsFound()
+        {
+            string query = "test";
+            AtlasMediator mediator = mocks.CreateMock<AtlasMediator>();
+            IList<Watershed> results = mocks.CreateMock<IList<Watershed>>();
 
-        //    mocks.VerifyAll();
-        //    Assert.AreEqual(query, controller.PropertyBag["query"]);
-        //    Assert.IsNotNull(controller.PropertyBag["watersheds"]);
-        //}
+            Expect.Call(mediator.FindAllWatershedsByQuery(query)).Return(results);
+            Expect.Call(results.Count).Repeat.Twice().Return(2);
+            mocks.ReplayAll();
 
-        //[Test]
-        //public void TestWatershedSearchReturnsOneResultAndRedirectsToViewWatershed()
-        //{
-        //    string query = "test";
-        //    string id = "00-00-00-00-00-00";
-        //    IWatershed watershed = mocks.CreateMock<IWatershed>();
-        //    IWatershed[] results = new IWatershed[] { watershed };
+            SearchController controller = new SearchController();
+            controller.AtlasMediator = mediator;
+            PrepareController(controller, "search", "watersheds");
+            controller.Watersheds(query);
 
-        //    Expect.Call(watershedLookup.FindAllByProperty("UnitName", query)).Return(results);
-        //    Expect.Call(watershed.Id).Return(id);
-        //    mocks.ReplayAll();
+            Assert.AreEqual(query, controller.PropertyBag["query"]);
+            Assert.AreEqual(results, controller.PropertyBag["results"]);
+            Assert.AreEqual(@"search\watersheds", controller.SelectedViewName);
+            mocks.VerifyAll();
+        }
 
-        //    controller.Watershed(query);
+        [Test]
+        public void TestWatershedsSearchRedirectsToWatershedViewWhenOnlyOneResultFound()
+        {
+            string query = "test";
+            string drainageCode = "01-02-03-04-05-06";
+            AtlasMediator mediator = mocks.CreateMock<AtlasMediator>();
+            IList<Watershed> results = mocks.CreateMock<IList<Watershed>>();
+            Watershed watershed = new Watershed();
+            watershed.DrainageCode = drainageCode;
 
-        //    mocks.VerifyAll();
-        //    Assert.AreEqual("/watershed/view.rails?id=" + id + "&", Response.RedirectedTo);
-        //}
+            Expect.Call(mediator.FindAllWatershedsByQuery(query)).Return(results);
+            Expect.Call(results.Count).Return(1);
+            Expect.Call(results[0]).Return(watershed);
+            mocks.ReplayAll();
 
-        //[Test]
-        //public void TestWatershedSearchReturnsNoResults()   
-        //{
-        //    string query = "watershed";
-        //    IWatershed[] results = new IWatershed[0];
+            SearchController controller = new SearchController();
+            controller.AtlasMediator = mediator;
+            PrepareController(controller, "search", "watersheds");
+            controller.Watersheds(query);
 
-        //    Expect.Call(watershedLookup.FindAllByProperty("UnitName", query)).Return(results);
-        //    mocks.ReplayAll();
+            Assert.AreEqual("/watershed/view.rails?drainageCode=" + drainageCode + "&", Response.RedirectedTo);
+            mocks.VerifyAll();
+        }
 
-        //    controller.Watershed(query);
+        [Test]
+        public void TestWatershedsSearchRedirectsToNoResultsFound()
+        {
+            string query = "test";
+            AtlasMediator mediator = mocks.CreateMock<AtlasMediator>();
+            IList<Watershed> results = mocks.CreateMock<IList<Watershed>>();
 
-        //    mocks.VerifyAll();
-        //    Assert.AreEqual(results, controller.PropertyBag["watersheds"]);
-        //    Assert.AreEqual(query, controller.PropertyBag["query"]);
-        //}
+            Expect.Call(mediator.FindAllWatershedsByQuery(query)).Return(results);
+            Expect.Call(results.Count).Repeat.Twice().Return(0);
+            mocks.ReplayAll();
 
-        //[Test]
-        //[ExpectedException(typeof(Exception))]
-        //public void TestWatershedSearchServiceIsDown()
-        //{
-        //    string query = "test";
-        //    Exception exception = new Exception("Service Unavailable");
-                        
-        //    Expect.Call(watershedLookup.FindAllByProperty("UnitName", query)).Throw(exception);
-        //    mocks.ReplayAll();
+            SearchController controller = new SearchController();
+            controller.AtlasMediator = mediator;
+            PrepareController(controller, "search", "watersheds");
+            controller.Watersheds(query);
 
-        //    controller.Watershed(query);   
-        //}
-	
-        //# endregion
+            Assert.AreEqual("/search/noresults.rails?q=" + query + "&", Response.RedirectedTo);
+            mocks.VerifyAll();
+        }
 
-        //# region Metadata Search Tests
+        [Test]
+        [ExpectedException(typeof(Exception))]
+        public void TestWatershedsSearchDisplaysRescueWhenAnExceptionOccurs()
+        {
+            string query = "test"; 
+            AtlasMediator mediator = mocks.CreateMock<AtlasMediator>();
 
-        //[Test]
-        //public void TestMetadataSearchReturnsOneOrMoreResults()
-        //{
-        //    string query = "test";
-        //    IMetadata[] results = new IMetadata[1];
+            Expect.Call(mediator.FindAllWatershedsByQuery(query)).Throw(new Exception());
+            mocks.ReplayAll();
 
-        //    Expect.Call(metadataLookup.FindByQuery(query)).Return(results);
-        //    mocks.ReplayAll();
+            SearchController controller = new SearchController();
+            controller.AtlasMediator = mediator;
+            PrepareController(controller, "search", "watersheds");
+            controller.Watersheds(query);
 
-        //    controller.Metadata(query);
+            Assert.AreEqual(@"rescue\generalerror", controller.SelectedViewName);
+            mocks.VerifyAll();
+        }
 
-        //    mocks.VerifyAll();
-        //    Assert.AreEqual(query, controller.PropertyBag["query"]);
-        //    Assert.IsNotNull(controller.PropertyBag["results"]);
-        //}
-
-        //[Test]
-        //public void TestMetadataSearchReturnsNoResults()
-        //{
-        //    string query = "test";
-        //    IMetadata[] results = new IMetadata[0];
-
-        //    Expect.Call(metadataLookup.FindByQuery(query)).Return(results);
-        //    mocks.ReplayAll();
-
-        //    controller.Metadata(query);
-
-        //    mocks.VerifyAll();
-        //    Assert.AreEqual(query, controller.PropertyBag["query"]);
-        //    Assert.IsNotNull(controller.PropertyBag["results"]);
-        //    Assert.AreEqual(0, ((IMetadata[])controller.PropertyBag["results"]).Length);
-        //}
-
-        //[Test]
-        //[ExpectedException(typeof(Exception))]
-        //public void TestMetadataSearchServiceIsDown()
-        //{
-        //    string query = "test";
-        //    Exception exception = new Exception("Service Unavailable");
-
-        //    Expect.Call(metadataLookup.FindByQuery(query)).Throw(exception);
-        //    mocks.ReplayAll();
-
-        //    controller.Metadata(query); 
-        //}	
-
-        //# endregion 
+        # endregion
     }
 }

@@ -212,5 +212,145 @@ namespace SJRAtlas.Models.Tests
             Assert.IsNotNull(waterbody);
             Assert.AreEqual(2, waterbody.DataSets.Length);
         }
+
+        [Test]
+        public void TestExistsForCgndbKeyOrAltCgndbKeyWhenWaterbodyHasCgndbKey()
+        {
+            string cgndbKey = "ABCDE";
+            
+            Place place = new Place();
+            place.CgndbKey = cgndbKey;
+            place.Create();
+            
+            WaterBody waterbody = new WaterBody();
+            waterbody.Place = place;
+            waterbody.Create();
+
+            Flush();
+
+            Assert.IsTrue(WaterBody.ExistsForCgndbKeyOrAltCgndbKey(cgndbKey));
+        }
+
+        [Test]
+        public void TestExistsForCgndbKeyOrAltCgndbKeyWhenWaterbodyHasAltCgndbKey()
+        {
+            string altCgndbKey = "ABCDE";
+
+            Place place = new Place();
+            place.CgndbKey = altCgndbKey;
+            place.Create();
+
+            WaterBody waterbody = new WaterBody();
+            waterbody.AltPlace = place;
+            waterbody.Create();
+
+            Flush();
+
+            Assert.IsTrue(WaterBody.ExistsForCgndbKeyOrAltCgndbKey(altCgndbKey));
+        }
+
+        [Test]
+        public void TestExistsForCgndbKeyOrAltCgndbKeyWhenWaterbodyHasBothKeys()
+        {
+            string cgndbKey = "ABCDE";
+            string altCgndbKey = "VWXYZ";
+
+            Place place = new Place();
+            place.CgndbKey = cgndbKey;
+            place.Create();
+
+            Place altPlace = new Place();
+            altPlace.CgndbKey = altCgndbKey;
+            altPlace.Create();
+
+            WaterBody waterbody = new WaterBody();
+            waterbody.Place = place;
+            waterbody.AltPlace = altPlace;
+            waterbody.Create();
+
+            Flush();
+
+            Assert.IsTrue(WaterBody.ExistsForCgndbKeyOrAltCgndbKey(cgndbKey));
+            Assert.IsTrue(WaterBody.ExistsForCgndbKeyOrAltCgndbKey(altCgndbKey));
+        }
+
+        [Test]
+        public void TestExistsForCgndbKeyOrAltCgndbKeyWhenNoMatchingWaterBody()
+        {
+            Assert.IsFalse(WaterBody.ExistsForCgndbKeyOrAltCgndbKey("ABCDE"));
+        }
+
+        [Test]
+        public void TestFindByCgndbKeyOrAltCgndbKeyWhenWaterbodyHasCgndbKey()
+        {
+            string cgndbKey = "ABCDE";
+
+            Place place = new Place();
+            place.CgndbKey = cgndbKey;
+            place.Create();
+
+            WaterBody waterbody = new WaterBody();
+            waterbody.Place = place;
+            waterbody.Create();
+
+            Flush();
+
+            WaterBody foundWaterbody = WaterBody.FindByCgndbKeyOrAltCgndbKey(cgndbKey);
+            Assert.AreEqual(waterbody, foundWaterbody);
+            Assert.AreEqual(place, foundWaterbody.Place);
+        }
+
+        [Test]
+        public void TestFindByCgndbKeyOrAltCgndbKeyWhenWaterbodyHasAltCgndbKey()
+        {
+            string altCgndbKey = "ABCDE";
+
+            Place place = new Place();
+            place.CgndbKey = altCgndbKey;
+            place.Create();
+
+            WaterBody waterbody = new WaterBody();
+            waterbody.AltPlace = place;
+            waterbody.Create();
+
+            Flush();
+
+            WaterBody foundWaterbody = WaterBody.FindByCgndbKeyOrAltCgndbKey(altCgndbKey);
+            Assert.AreEqual(waterbody, foundWaterbody);
+            Assert.AreEqual(place, foundWaterbody.AltPlace);
+        }
+
+        [Test]
+        public void TestFindByCgndbKeyOrAltCgndbKeyWhenWaterbodyHasBothKeys()
+        {
+            string cgndbKey = "ABCDE";
+            string altCgndbKey = "VWXYZ";
+
+            Place place = new Place();
+            place.CgndbKey = cgndbKey;
+            place.Create();
+
+            Place altPlace = new Place();
+            altPlace.CgndbKey = altCgndbKey;
+            altPlace.Create();
+
+            WaterBody waterbody = new WaterBody();
+            waterbody.Place = place;
+            waterbody.AltPlace = altPlace;
+            waterbody.Create();
+
+            Flush();
+
+            WaterBody foundWaterbody = WaterBody.FindByCgndbKeyOrAltCgndbKey(cgndbKey);
+            Assert.AreEqual(waterbody, foundWaterbody);
+            Assert.AreEqual(place, foundWaterbody.Place);
+            Assert.AreEqual(altPlace, foundWaterbody.AltPlace);
+        }
+
+        [Test]
+        public void TestFindByCgndbKeyOrAltCgndbKeyWhenNoMatchingWaterBody()
+        {
+            Assert.IsNull(WaterBody.FindByCgndbKeyOrAltCgndbKey("ABCDE"));
+        }	
     }
 }

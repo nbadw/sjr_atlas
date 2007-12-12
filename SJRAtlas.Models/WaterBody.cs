@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Castle.ActiveRecord;
+using NHibernate.Expression;
 
 namespace SJRAtlas.Models
 {
@@ -189,5 +190,27 @@ namespace SJRAtlas.Models
         }
 
         #endregion
+
+        public static WaterBody FindByCgndbKeyOrAltCgndbKey(string cgndbKey)
+        {
+            DetachedCriteria criteria = CreateCgndbOrAltCgndbKeyCriteria(cgndbKey);
+            return WaterBody.FindFirst(criteria);
+        }
+
+        public static bool ExistsForCgndbKeyOrAltCgndbKey(string cgndbKey)
+        {
+            DetachedCriteria criteria = CreateCgndbOrAltCgndbKeyCriteria(cgndbKey);
+            return WaterBody.Exists(criteria);
+        }
+
+        private static DetachedCriteria CreateCgndbOrAltCgndbKeyCriteria(string cgndbKey)
+        {
+            Place place = new Place();
+            place.CgndbKey = cgndbKey;
+            DetachedCriteria criteria = DetachedCriteria.For<WaterBody>();
+            criteria.Add(Expression.Or(Expression.Eq("Place", place),
+                Expression.Eq("AltPlace", place)));
+            return criteria;
+        }
     }
 }

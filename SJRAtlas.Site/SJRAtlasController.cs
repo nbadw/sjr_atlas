@@ -1,18 +1,37 @@
 using System;
 using Castle.Core.Logging;
 using Castle.MonoRail.Framework;
-using SJRAtlas.Site.Helpers;
 using System.Collections.Generic;
 using System.Collections;
 using System.Reflection;
 using SJRAtlas.Site.Models;
+using SJRAtlas.Models;
 
 namespace SJRAtlas.Site
 {
-    [Helper(typeof(BreadCrumbHelper), "BreadCrumbs")]
-    [Helper(typeof(ResourceHelper), "Resource")]
     public class SJRAtlasController : SmartDispatcherController
     {
+        public SJRAtlasController() : this(new AtlasMediator())
+        {
+
+        }
+
+        public SJRAtlasController(AtlasMediator atlasMediator)
+        {
+            if (atlasMediator == null)
+                throw new ArgumentNullException("atlasMediator");
+
+            this.atlasMediator = atlasMediator;
+        }
+
+        private AtlasMediator atlasMediator;
+
+        public AtlasMediator AtlasMediator
+        {
+            get { return atlasMediator; }
+            set { atlasMediator = value; }
+        }
+
         protected override void InvokeMethod(MethodInfo method, IRequest request, IDictionary actionArgs)
         {
             bool isAjaxAction = method.GetCustomAttributes(typeof(AjaxActionAttribute), false).Length > 0;

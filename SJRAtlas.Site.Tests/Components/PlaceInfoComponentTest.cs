@@ -14,12 +14,10 @@ namespace SJRAtlas.Site.Tests.Components
     public class PlaceInfoComponentTest : BaseViewComponentTest
     {
         private PlaceInfoComponent component;
-        private MockRepository mocks;
 
         [SetUp]
         public void Setup()
         {
-            mocks = new MockRepository();
             component = new PlaceInfoComponent();
         }
 
@@ -47,13 +45,12 @@ namespace SJRAtlas.Site.Tests.Components
             double latitude = 65.0;
             double longitude = -65.0;
 
-            Place place = mocks.CreateMock<Place>();
+            Place place = new Place();
             component.Place = place;
-            Expect.Call(place.GenericTerm).Return(genericTerm);
-            Expect.Call(place.County).Return(county);
-            Expect.Call(place.Latitude).Return(latitude);
-            Expect.Call(place.Longitude).Return(longitude);
-            mocks.ReplayAll();
+            place.GenericTerm = genericTerm;
+            place.County = county;
+            place.Latitude = latitude;
+            place.Longitude = longitude;
 
             PrepareViewComponent(component);
             component.Render();
@@ -63,7 +60,6 @@ namespace SJRAtlas.Site.Tests.Components
             Assert.AreEqual(latitude, component.Context.ContextVars["latitude"]);
             Assert.AreEqual(longitude, component.Context.ContextVars["longitude"]);
             Assert.AreEqual("place/info", component.Context.ViewToRender);
-            mocks.VerifyAll();
         }
     }
 }

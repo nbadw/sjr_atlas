@@ -151,5 +151,38 @@ namespace SJRAtlas.Models.Tests
             TestHelper.ErrorSummary errors = TestHelper.TestProperties(place, properties);
             Assert.IsEmpty(errors, "The following errors occurred during property testing:\n" + errors.GetSummary());
         }
+
+        [Test]
+        public void TestFindAllByQuery()
+        {
+            string[] placeNames = { "Saint", "Saint John", "Saint John River",
+                "Hammond River", "Fredericton", "Moncton", "Miramichi River" };
+            for(int i=0; i < placeNames.Length; i++)
+            {
+                Place place = new Place();
+                place.Name = placeNames[i];
+                // XXX: this is technically not a valid CGNDB Key but no validation is performed
+                place.CgndbKey = i.ToString();
+                place.Create();
+            }
+
+            Flush();
+
+            Assert.AreEqual(3, Place.FindAllByQuery("Saint").Count, "Query for 'Saint'");
+            Assert.AreEqual(3, Place.FindAllByQuery("saint").Count, "Query for 'saint'");
+            Assert.AreEqual(1, Place.FindAllByQuery("Fredericton").Count, "Query for 'Fredericton'");
+            Assert.AreEqual(2, Place.FindAllByQuery("M").Count, "Query for 'M' returned");
+            Assert.AreEqual(0, Place.FindAllByQuery("John").Count, "Query for 'John'");
+            Assert.AreEqual(0, Place.FindAllByQuery("River").Count, "Query for 'River'");
+            Assert.AreEqual(3, Place.FindAllByQuery(" Saint").Count, "Query for ' Saint'");
+            Assert.AreEqual(1, Place.FindAllByQuery("Hammond River ").Count, "Query for 'Hammond River '");
+        }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void TestFindAllByQueryThrowsArgumentNullExceptionWhenQueryIsNull()
+        {
+            Place.FindAllByQuery(null);
+        }	
     }
 }

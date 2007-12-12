@@ -10,7 +10,7 @@
     </ApplicationIcon>
     <AssemblyKeyContainerName>
     </AssemblyKeyContainerName>
-    <AssemblyName>SJRAtlas.Tests</AssemblyName>
+    <AssemblyName>SJRAtlas.Site.Tests</AssemblyName>
     <AssemblyOriginatorKeyFile>
     </AssemblyOriginatorKeyFile>
     <DefaultClientScript>JScript</DefaultClientScript>
@@ -18,7 +18,7 @@
     <DefaultTargetSchema>IE50</DefaultTargetSchema>
     <DelaySign>false</DelaySign>
     <OutputType>Library</OutputType>
-    <RootNamespace>SJRAtlas.Tests</RootNamespace>
+    <RootNamespace>SJRAtlas.Site.Tests</RootNamespace>
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
     <StartupObject>
     </StartupObject>
@@ -92,6 +92,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\External Libs\Castle Framework .NET-2.0\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="NHibernate, Version=1.2.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\External Libs\Castle Framework .NET-2.0\NHibernate.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.framework, Version=2.2.8.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL" />
     <Reference Include="Rhino.Mocks, Version=3.2.0.781, Culture=neutral, PublicKeyToken=0b3305902db7183f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -118,15 +122,15 @@
     </Compile>
     <Compile Include="Components\BasicInfoComponentTest.cs" />
     <Compile Include="Components\PlaceInfoComponentTest.cs" />
-    <Compile Include="Components\ResourceComponentTest.cs" />
-    <Compile Include="Controllers\AboutControllerTest.cs" />
+    <Compile Include="Controllers\AgencyControllerTest.cs" />
+    <Compile Include="Controllers\WaterBodyControllerTest.cs" />
     <Compile Include="Controllers\FeedbackControllerTest.cs" />
-    <Compile Include="Controllers\HomeControllerTest.cs" />
-    <Compile Include="Controllers\MetadataControllerTest.cs" />
+    <Compile Include="Controllers\SiteControllerTest.cs" />
     <Compile Include="Controllers\PlaceControllerTest.cs" />
     <Compile Include="Controllers\SearchControllerTest.cs" />
     <Compile Include="Controllers\WatershedControllerTest.cs" />
     <Compile Include="Models\FeedbackTest.cs" />
+    <Compile Include="SJRAtlasControllerTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SJRAtlas.Models\SJRAtlas.Models.csproj">

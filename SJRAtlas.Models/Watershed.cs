@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
 using Castle.ActiveRecord;
+using NHibernate.Expression;
 
 namespace SJRAtlas.Models
 {
@@ -336,5 +337,36 @@ namespace SJRAtlas.Models
         }
 
         #endregion
+
+        public static bool ExistsForCgndbKey(string cgndbKey)
+        {
+            DetachedCriteria criteria = CreateCriteriaForCgndbKey(cgndbKey);
+            return Watershed.Exists(criteria);
+        }
+
+        public static Watershed FindByCgndbKey(string cgndbKey)
+        {
+            DetachedCriteria criteria = CreateCriteriaForCgndbKey(cgndbKey);
+            return Watershed.FindFirst(criteria);
+        }
+
+        private static DetachedCriteria CreateCriteriaForCgndbKey(string cgndbKey)
+        {
+            Place place = new Place();
+            place.CgndbKey = cgndbKey;
+            DetachedCriteria criteria = DetachedCriteria.For<Watershed>();
+            criteria.Add(Expression.Eq("Place", place));
+            return criteria;
+        }
+
+        public static IList<Watershed> FindAllByQuery(string query)
+        {
+            if (query == null)
+                throw new ArgumentNullException("query");
+
+            DetachedCriteria criteria = DetachedCriteria.For<Watershed>();
+            criteria.Add(Expression.Like("Name", query.Trim(), MatchMode.Start));
+            return Watershed.FindAll(criteria, new Order[] { Order.Asc("Name") });
+        }
     }
 }

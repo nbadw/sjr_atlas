@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClosestWatershedToPlace.cs" />
+    <Compile Include="AtlasRepository.cs" />
     <Compile Include="Publication.cs" />
     <Compile Include="LatLngCoord.cs" />
     <Compile Include="DataSet.cs" />

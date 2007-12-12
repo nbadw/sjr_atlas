@@ -9,6 +9,11 @@ namespace SJRAtlas.Models
     [ActiveRecord("interactive_maps")]
     public class InteractiveMap : ActiveRecordBase<InteractiveMap>, IMetadataAware
     {
+        public InteractiveMap()
+        {
+            isBasinMap = false;
+        }
+
         public static IList<InteractiveMap> FindAllByQuery(string query)
         {
             DetachedCriteria criteria = DetachedCriteria.For<InteractiveMap>();
@@ -36,6 +41,15 @@ namespace SJRAtlas.Models
             get { return title; }
             set { title = value; }
         }
+
+        private bool isBasinMap;
+
+        [Property("is_basin_map")]
+	    public bool IsBasinMap
+	    {
+		    get { return isBasinMap;}
+		    set { isBasinMap = value;}
+	    }
         
         #endregion
 
@@ -52,5 +66,19 @@ namespace SJRAtlas.Models
         }
 
         #endregion
+
+        public static IList<InteractiveMap> FindAllBasinMaps()
+        {
+            DetachedCriteria criteria = DetachedCriteria.For<InteractiveMap>();
+            criteria.Add(Expression.Eq("IsBasinMap", true));
+            return InteractiveMap.FindAll(criteria, new Order[] { Order.Asc("Title") });
+        }
+
+        public static InteractiveMap FindByTitle(string title)
+        {
+            DetachedCriteria criteria = DetachedCriteria.For<InteractiveMap>();
+            criteria.Add(Expression.Eq("Title", title));
+            return InteractiveMap.FindFirst(criteria);
+        }
     }
 }

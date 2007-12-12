@@ -1,0 +1,72 @@
+#capturefor(headline)
+<h1>Information</h1>
+<p>You're currently viewing information on <span class="search_query">$place.Name, $place.Region</span>. 
+#end
+
+#capturefor(javascripts)
+<script type="text/javascript" language="javascript" src="$siteroot/Content/javascripts/yahoo-dom-event.js"></script>
+<script type="text/javascript" language="javascript" src="$siteroot/Content/javascripts/abstract.js" />
+#end
+
+<div id="content" class="clearfix">	
+	<div class="innerwrap">
+		<div class="textbox">
+		    <div id="view-place">
+		        #component(basic_info with "place=$place") 
+                
+                <div id="expanded-info">
+                    <div id="interactive-maps">
+                    #if($interactive_maps == null)
+                        <p>No Interactive Maps</p>
+                    #else
+                        #component(interactive_map with "maps=$interactive_maps")
+                    #end
+                    </div>
+
+                    <div id="publications">    
+                    #if($publications == null)
+                        <p>No Publications</p>
+                    #else
+                        #component(publication with "publications=$publications")
+                    #end
+                    </div>
+
+                    <div id="basic-map">
+                      #component(basic_map with "place=$place")     
+                    </div>
+                </div>
+
+            </div>
+		<!--				
+            <h1>$placename.Name, $placename.Region ($placename.StatusTerm Name)</h1>
+            <p>                        
+            Place Name Type: $placename.GenericTerm<br />
+            County: $!{placename.County}<br />
+            Longitude: $placename.Longitude<br />
+            Latitude: $placename.Latitude<br />
+            <a class="option" target="_blank" href="http://gis.mektekdev.com/demo/Default.aspx?resource=View_Location&markerPoint[0]=$placename.LongDec,$placename.LatDec&Units=Decimal Degrees&CoordSys=NAD83">View Location in Map</a><br />                   
+            </p> 
+            
+            <div id="interactive_maps">    
+                <h2 style="text-decoration: underline;">Interactive Maps</h2>                
+                <ul>
+                #if($interactive_maps.Length == 0)
+                    <p>No Interactive Maps Found</p>
+                #else
+                    #foreach( $map in $interactive_maps )
+                        <li style="clear: both;">
+                            <img class="thumbnail" alt="Map Preview" src="$!{map.Thumbnail}" />
+                            <h3><a target="_blank" href="http://gis.mektekdev.com/demo/Default.aspx?resource=$map.ResourceName&markerPoint[0]=$placename.LongDec,$placename.LatDec&Units=Decimal Degrees&CoordSys=NAD83">$map.Title</a></h3>
+                            <p class="description">$map.Description</p>
+                        </li>
+                    #end
+                #end  
+                </ul>
+            </div>
+            <div style="clear: both;"></div>
+            
+            #component(metadatacategories with "metadata=$metadata")     
+        </div>
+        -->
+	</div>
+</div>

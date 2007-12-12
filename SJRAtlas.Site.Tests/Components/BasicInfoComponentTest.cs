@@ -14,12 +14,10 @@ namespace SJRAtlas.Site.Tests.Components
     public class BasicInfoComponentTest : BaseViewComponentTest
     {
         private BasicInfoComponent component;
-        private MockRepository mocks;
 
         [SetUp]
         public void Setup()
         {
-            mocks = new MockRepository();
             component = new BasicInfoComponent();
         }
 
@@ -32,7 +30,7 @@ namespace SJRAtlas.Site.Tests.Components
         [Test]
         [ExpectedException(typeof(ViewComponentException),
             "The ResourceComponent requires a view component " +
-            "parameter named 'place' which should contain an 'IPlace' instance")]
+            "parameter named 'place' which should contain a 'Place' instance")]
         public void ThrowsExceptionIfNoPlaceParameterWasSupplied()
         {
             component.Place = null;
@@ -47,22 +45,18 @@ namespace SJRAtlas.Site.Tests.Components
             string status = "OFFICIAL";
             string expectedTitle = String.Format("{0}, {1} ({2} Name)", name, region, status);
 
-            Place place = mocks.CreateMock<Place>();
+            Place place = new Place();
             component.Place = place;
-            Expect.Call(place.Name).Return(name);
-            Expect.Call(place.Region).Return(region);
-            Expect.Call(place.NameStatus).Return(status);
-            mocks.ReplayAll();
+            place.Name = name;
+            place.Region = region;
+            place.NameStatus = status;
 
             PrepareViewComponent(component);
             component.Render();
 
             Assert.AreEqual(expectedTitle, component.Context.ContextVars["title"]);
             Assert.AreEqual(place, component.Context.ContextVars["place"]);
-            Assert.IsFalse((bool)component.Context.ContextVars["is_a_watershed"]);
-            Assert.IsFalse((bool)component.Context.ContextVars["is_a_waterbody"]);
             Assert.AreEqual("shared/basic_info", component.Context.ViewToRender);
-            mocks.VerifyAll();
         }	
     }
 }

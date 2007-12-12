@@ -6,6 +6,7 @@ using SJRAtlas.Models;
 
 namespace SJRAtlas.Site.Controllers
 {
+    [Layout("sjratlas"), Rescue("generalerror")]
     public class SiteController : SJRAtlasController
     {
         public void Index()
@@ -36,7 +37,7 @@ namespace SJRAtlas.Site.Controllers
 
         public void Reports()
         {
-            RenderView("maps");
+            RenderView("reports");
         }
 
         public void Maps()

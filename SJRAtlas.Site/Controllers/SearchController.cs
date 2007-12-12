@@ -7,165 +7,117 @@ namespace SJRAtlas.Site.Controllers
     using SJRAtlas.Site.Models;
     using System.Text.RegularExpressions;
     using System.Collections.Specialized;
+    using SJRAtlas.Models;
 
 	[Layout("sjratlas"), Rescue("generalerror")]
 	public class SearchController : SJRAtlasController
 	{
-        ////[Cache(System.Web.HttpCacheability.Server, Duration = 300, VaryByParams = "q")]
-        //public void Quick(string q)
-        //{
-        //    if (IsWatershedQuery(q))
-        //    {
-        //        Logger.Debug("Quick Search is redirecting to the Watershed Search");
-        //        q = new Regex(@"\swatershed$|\sbasin$|\scatchment$", RegexOptions.IgnoreCase).Replace(q, "");
-        //        RedirectToAction("watershed", "q=" + q);
-        //    }
-        //    else if (IsMetadataQuery(q))
-        //    {
-        //        Logger.Debug("Quick Search is redirecting to the Metadata Search");
-        //        q = new Regex(@".metadata$", RegexOptions.IgnoreCase).Replace(q, "");
-        //        RedirectToAction("metadata", "q=" + q);
-        //    }
-        //    else
-        //    {
-        //        Logger.Debug("Quick Search is redirecting to the Gazetteer Search");
-        //        RedirectToAction("gazetteer", "q=" + q);
-        //    }
-        //}
+        public void Quick(string q)
+        {
+            Regex triggerRegex = CreateWatershedTriggerRegex();
+            if (triggerRegex.IsMatch(q.Trim()))
+            {
+                Logger.Debug("Quick Search is redirecting to the Watershed Search");
+                q = triggerRegex.Replace(q, "");
+                RedirectToAction("watersheds", "q=" + q);
+                return;
+            }
+            else
+            {
+                Logger.Debug("Quick Search is redirecting to the Gazetteer Search");
+                RedirectToAction("places", "q=" + q);
+                return;
+            }
+        }
 
-        ////[Cache(System.Web.HttpCacheability.Server, Duration = 300, VaryByParams = "q")]
-        //[Rescue("servicedown", typeof(Exception))]
-        //public void Gazetteer(string q)
-        //{
-        //    PropertyBag["query"] = q;
-        //    try
-        //    {
-        //        IPlaceName[] results = PlaceNameLookup.FindByQuery(q);
+        public void Places(string q)
+        {
+            IList<Place> results = AtlasMediator.FindAllPlacesByQuery(q);
 
-        //        if (results.Length == 0)
-        //        {
-        //            // try the metadata search then...
-        //            RedirectToAction("metadata", "q=" + q);
-        //        }
-        //        else if (results.Length == 1)
-        //        {
-        //            NameValueCollection parameters = new NameValueCollection();
-        //            parameters.Add("id", results[0].Id);
-        //            Redirect("", "placename", "view", parameters);
-        //        }
+            if (results.Count == 0)
+            {
+                RedirectToAction("watersheds", "q=" + q);
+                return;
+            }
+            else if (results.Count == 1)
+            {
+                NameValueCollection parameters = new NameValueCollection();
+                parameters.Add("cgndbKey", results[0].CgndbKey);
+                Redirect("", "place", "view", parameters);
+                return;
+            }
 
-        //        double maxLatitude = double.NaN;
-        //        double minLatitude = double.NaN;
-        //        double maxLongitude = double.NaN;
-        //        double minLongitude = double.NaN;
-        //        foreach (IPlaceName place in results)
-        //        {
-        //            if (double.IsNaN(maxLatitude) || maxLatitude < place.LatDec)
-        //            {
-        //                maxLatitude = place.LatDec;
-        //            }
-        //            if (double.IsNaN(minLatitude) || minLatitude > place.LatDec)
-        //            {
-        //                minLatitude = place.LatDec;
-        //            }
-        //            if (double.IsNaN(maxLongitude) || maxLongitude < place.LongDec)
-        //            {
-        //                maxLongitude = place.LongDec;
-        //            }
-        //            if (double.IsNaN(minLongitude) || minLongitude > place.LongDec)
-        //            {
-        //                minLongitude = place.LongDec;
-        //            }
-        //        }
+            PropertyBag["results"] = results;
+            PropertyBag["query"] = q;
+        }
 
-        //        PropertyBag["results"] = results;
-        //        PropertyBag["max_lat"] = maxLatitude;
-        //        PropertyBag["min_lat"] = minLatitude;
-        //        PropertyBag["max_lon"] = maxLongitude;
-        //        PropertyBag["min_lon"] = minLongitude;
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        Logger.Error("Error in PlaceNameSearchService", e);
-        //        throw new Exception("Place name search is currently unavailable.", e);
-        //    }
-        //}
+        public void Watersheds(string q)
+        {
+            IList<Watershed> results = AtlasMediator.FindAllWatershedsByQuery(q);
 
-        ////[Cache(System.Web.HttpCacheability.Server, Duration = 300, VaryByParams = "q")]
-        //[Rescue("servicedown", typeof(Exception))]
-        //public void Watershed(string q)
-        //{
-        //    IWatershed[] results = WatershedLookup.FindAllByProperty("UnitName", q);
+            if (results.Count == 1)
+            {
+                NameValueCollection parameters = new NameValueCollection();
+                parameters.Add("drainageCode", results[0].DrainageCode);
+                Redirect("", "watershed", "view", parameters);
+                return;
+            }
 
-        //    if (results.Length == 1)
-        //    {
-        //        NameValueCollection parameters = new NameValueCollection();
-        //        parameters.Add("id", results[0].Id);                
-        //        Redirect("", "watershed", "view", parameters);
-        //    }
+            if(results.Count == 0)
+            {
+                NameValueCollection parameters = new NameValueCollection();
+                parameters.Add("q", q);
+                RedirectToAction("noresults", parameters);
+                return;
+            }
 
-        //    PropertyBag["query"] = q;
-        //    PropertyBag["watersheds"] = results;
-        //}
+            PropertyBag["query"] = q;
+            PropertyBag["results"] = results;
+        }
 
-        ////[Cache(System.Web.HttpCacheability.Server, Duration = 300, VaryByParams = "q")]
-        //[Rescue("servicedown", typeof(Exception))]
-        //public void Metadata(string q)
-        //{
-        //    IMetadata[] results = MetadataLookup.FindByQuery(q);
+        public void NoResults(string q)
+        {
+            PropertyBag["query"] = q;
+            RenderView("no-results");
+        }
 
-        //    PropertyBag["query"] = q;
-        //    PropertyBag["results"] = results;
-        //}
+        public void Advanced()
+        {
+            //Agency[] agencies = Agency.FindAll();
+            //List<string> agencyNames = new List<string>(agencies.Length);
+            //foreach (Agency agency in agencies)
+            //{
+            //    if (!String.IsNullOrEmpty(agency.Name))
+            //        agencyNames.Add(agency.Name);
+            //}
+            //agencyNames.Sort();
 
-        //public void Index()
-        //{
-        //    RedirectToAction("advanced");
-        //}
+            //PropertyBag["datasets"] = DataType.FindAll();
+            //PropertyBag["agencies"] = agencyNames;
+            //PropertyBag["optionstype"] = typeof(SearchOptions);
+        }
 
-        //public void Advanced()
-        //{
-        //    Agency[] agencies = Agency.FindAll();
-        //    List<string> agencyNames = new List<string>(agencies.Length);
-        //    foreach(Agency agency in agencies)
-        //    {
-        //        if(!String.IsNullOrEmpty(agency.Name))
-        //            agencyNames.Add(agency.Name);
-        //    }
-        //    agencyNames.Sort();
+        public void Tips()
+        {
+            RenderView("tips");
+        }
 
-        //    PropertyBag["datasets"] = DataType.FindAll();
-        //    PropertyBag["agencies"] = agencyNames;
-        //    PropertyBag["optionstype"] = typeof(SearchOptions);
-        //}
+        public void SubmitAdvanced([DataBind("options", Validate=true)] SearchOptions options)
+        {
+            //if (HasValidationError(options))
+            //{
+            //    Flash["options"] = options;
+            //    Flash["summary"] = GetErrorSummary(options);
+            //    RedirectToAction("advanced");
+            //    return;
+            //}
 
-        //public void Tips()
-        //{
-        //}
+            //RenderSharedView("shared/todo");
+        }
 
-        //public void SubmitAdvanced([DataBind("options", Validate=true)] SearchOptions options)
-        //{
-        //    if (HasValidationError(options))
-        //    {
-        //        Flash["options"] = options;
-        //        Flash["summary"] = GetErrorSummary(options);
-        //        RedirectToAction("advanced");
-        //        return;
-        //    }
-
-        //    RenderSharedView("shared/todo");
-        //}
-
-        //private bool IsWatershedQuery(string query)
-        //{
-        //    Regex watershed = new Regex(@"\swatershed$|\sbasin$|\scatchment$", RegexOptions.IgnoreCase);
-        //    return watershed.IsMatch(query.Trim());
-        //}
-
-        //private bool IsMetadataQuery(string query)
-        //{
-        //    Regex metadata = new Regex(@".metadata$", RegexOptions.IgnoreCase);
-        //    return metadata.IsMatch(query.Trim());
-        //}
+        private Regex CreateWatershedTriggerRegex()
+        {
+            return new Regex(@"\swatershed$|\sbasin$|\scatchment$", RegexOptions.IgnoreCase);
+        }
 	}
 }

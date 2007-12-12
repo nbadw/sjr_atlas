@@ -1,140 +1,202 @@
+using System;
+using Castle.MonoRail.TestSupport;
+using NUnit.Framework;
+using Rhino.Mocks;
+using System.Collections.Generic;
+using SJRAtlas.Site.Controllers;
+using SJRAtlas.Models;
+using Castle.ActiveRecord;
+using System.Collections;
+
 namespace SJRAtlas.Site.Tests.Controllers
 {
-    using System;
-    using Castle.MonoRail.TestSupport;
-    using NUnit.Framework;
-    using Rhino.Mocks;
-    using System.Collections.Generic;
-    using SJRAtlas.Site.Controllers;
-
     [TestFixture]
-    public class PlacenameControllerTest : BaseControllerTest
+    public class PlaceControllerTest : BaseControllerTest
     {
-        //private MockRepository mocks;
-        //private PlaceNameController controller;
-        //private IPlaceNameLookup pnss;
-        //private IMetadataLookup mss;
-        //private IWatershedLookup wss;
-        //private IEasyMapLookup emf;
-        //private IAtlasUtils utils;
+        private MockRepository mocks = new MockRepository();
 
-        //[SetUp]
-        //public void Setup()
-        //{
-        //    mocks = new MockRepository();
-        //    pnss = mocks.CreateMock<IPlaceNameLookup>();
-        //    mss = mocks.CreateMock<IMetadataLookup>();
-        //    emf = mocks.CreateMock<IEasyMapLookup>();
-        //    utils = mocks.CreateMock<IAtlasUtils>();
-        //    controller = new PlaceNameController();
-        //    controller.PlaceNameLookup = pnss;
-        //    controller.WatershedLookup = wss;
-        //    controller.MetadataLookup = mss;
-        //    controller.EasyMapLookup = emf;
-        //    controller.AtlasUtils = utils;
-        //    PrepareController(controller, "placename", "");
-        //}
+        [Test]
+        public void TestViewPlace()
+        {
+            string id = "ABCDE";
+            AtlasMediator mediator = mocks.CreateMock<AtlasMediator>();
+            Place place = mocks.CreateMock<Place>();
 
-        //[Test]
-        //public void TestViewPlaceName()
-        //{
-        //    string id = "ABCDE";
-        //    string name = "test";
-        //    IPlaceName placename = mocks.CreateMock<IPlaceName>();
+            Expect.Call(mediator.Find<Place>(id)).Return(place);
+            Expect.Call(place.IsWithinBasin()).Repeat.Any().Return(false);
+            Expect.Call(place.RelatedInteractiveMaps).Return(mocks.CreateMock<IList<InteractiveMap>>());
+            Expect.Call(place.RelatedPublications).Return(mocks.CreateMock<IList<Publication>>());
+            mocks.ReplayAll();
 
-        //    Expect.Call(pnss.Find(id)).Return(placename);
-        //    Expect.Call(placename.Name).Return(name);
-        //    Expect.Call(mss.FindByQuery(name)).Return(new IMetadata[0]);
-        //    Expect.Call(emf.FindAll()).Return(new IEasyMap[0]);
-        //    Expect.Call(utils.IsWithinBasin(placename)).Return(false);
-        //    mocks.ReplayAll();
+            PlaceController controller = new PlaceController();
+            controller.AtlasMediator = mediator;
+            PrepareController(controller, "place", "view");
+            controller.View(id);
 
-        //    controller.View(id);
+            Assert.AreEqual(place, controller.PropertyBag["place"]);
+            Assert.IsNotNull(controller.PropertyBag["interactive_maps"]);
+            Assert.IsNotNull(controller.PropertyBag["publications"]);
+            Assert.AreEqual(@"place\view", controller.SelectedViewName);
+            mocks.VerifyAll();
 
-        //    mocks.VerifyAll();
-        //    Assert.IsNotNull(controller.PropertyBag["placename"]);
-        //    Assert.IsNotNull(controller.PropertyBag["reports"]);
-        //    Assert.IsNotNull(controller.PropertyBag["easymaps"]);
-        //}
+        }
 
-        //[Test]
-        //[ExpectedException(typeof(ArgumentNullException))]
-        //public void TestViewPlaceNameWithBadId()
-        //{
-        //    string id = "ABCDE";
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void TestViewPlaceThrowsExceptionWhenCgndbKeyParameterIsNull()
+        {
+            AtlasMediator mediator = mocks.CreateMock<AtlasMediator>();
+            PlaceController controller = new PlaceController();
+            controller.AtlasMediator = mediator;
+            PrepareController(controller, "place", "view");
+            controller.View(null);
+        }
 
-        //    Expect.Call(pnss.Find(id)).Return(null);
-        //    mocks.ReplayAll();
+        [Test]
+        [ExpectedException(typeof(NotFoundException))]
+        public void TestViewPlaceThrowsExceptionWhenPlaceDoesNotExist()
+        {
+            string id = "ABCDE";
+            AtlasMediator mediator = mocks.CreateMock<AtlasMediator>();
 
-        //    controller.View(id);
-        //}
+            Expect.Call(mediator.Find<Place>(id)).Throw(new NotFoundException("Record Not Found"));
+            mocks.ReplayAll();
 
-        //[Test]
-        //public void TestViewPlaceNameWhenWithinBasin()
-        //{
-        //    string id = "ABCDE";
-        //    string name = "test";
-        //    IPlaceName placename = mocks.CreateMock<IPlaceName>();
+            PlaceController controller = new PlaceController();
+            controller.AtlasMediator = mediator;
+            PrepareController(controller, "place", "view");
+            controller.View(id);
 
-        //    Expect.Call(pnss.Find(id)).Return(placename);
-        //    Expect.Call(placename.Name).Return(name);
-        //    Expect.Call(mss.FindByQuery(name)).Return(new IMetadata[0]);
-        //    Expect.Call(emf.FindAll()).Return(new IEasyMap[0]);
-        //    mocks.ReplayAll();
+            mocks.VerifyAll();
+        }
 
-        //    controller.View(id);
+        [Test]
+        public void TestViewPlaceWhenPlaceIsWithinBasinRetrievesBasinMaps()
+        {
+            string id = "ABCDE";
+            AtlasMediator mediator = mocks.CreateMock<AtlasMediator>();
+            Place place = mocks.CreateMock<Place>();
+            place.CgndbKey = id;
+            IList<InteractiveMap> basinMaps = new List<InteractiveMap>();
 
-        //    mocks.VerifyAll();
-        //    Assert.IsNotNull(controller.PropertyBag["placename"]);
-        //    Assert.IsNotNull(controller.PropertyBag["reports"]);
-        //    Assert.IsNotNull(controller.PropertyBag["data"]);
-        //    Assert.IsNotNull(controller.PropertyBag["easymaps"]);
-        //}
+            Expect.Call(mediator.Find<Place>(id)).Return(place);
+            Expect.Call(place.IsWithinBasin()).Repeat.Twice().Return(true);
+            Expect.Call(mediator.WaterBodyExistsForCgndbKeyOrAltCgndbKey(id)).Return(false);
+            Expect.Call(mediator.WatershedExistsForCgndbKey(id)).Return(false); 
+            Expect.Call(place.RelatedInteractiveMaps).Return(mocks.CreateMock<IList<InteractiveMap>>());
+            Expect.Call(place.RelatedPublications).Return(mocks.CreateMock<IList<Publication>>());            
+            Expect.Call(mediator.FindAllBasinMaps()).Return(basinMaps);
+            mocks.ReplayAll();
 
-        //[Test]
-        //public void TestPlaceNameLookupFails()
-        //{
-        //    // test code goes here
-        //    Assert.Fail();
-        //}	
+            PlaceController controller = new PlaceController();
+            controller.AtlasMediator = mediator;
+            PrepareController(controller, "view", "place");
+            controller.View(id);
+            mocks.VerifyAll();
+        }
 
-        //[Test]
-        //public void TestRedirectsToWaterBodyViewWhenPlaceNameIsWaterBody()
-        //{
-        //    string id = "ABCDE";
-            
-        //    IPlaceName placename = mocks.CreateMock<IPlaceName>();
-        //    Expect.Call(pnss.Find(id)).Return(placename);
-        //    Expect.Call(placename.Id).Return(id);
-        //    Expect.Call(utils.IsWithinBasin(placename)).Return(true);
-        //    Expect.Call(utils.IsWaterBody(placename)).Return(true);
-            
-        //    mocks.ReplayAll();
-        //    controller.View(id);
-        //    mocks.VerifyAll();
-            
-        //    Assert.AreEqual("/waterbody/view.rails?placename=" + id + "&", Response.RedirectedTo);
-        //}
+        [Test]
+        public void TestViewPlaceWhenPlaceIsNotWithinBasinDoesNotRetrieveBasinMaps()
+        {
+            string id = "ABCDE";
+            AtlasMediator mediator = mocks.CreateMock<AtlasMediator>();
+            Place place = mocks.CreateMock<Place>();
+            place.CgndbKey = id;
+            IList<InteractiveMap> basinMaps = new List<InteractiveMap>();
 
-        //[Test]
-        //public void TestRedirectsToWatershedViewWhenPlaceNameIsWatershed()
-        //{
-        //    string id = "ABCDE";
+            Expect.Call(mediator.Find<Place>(id)).Return(place);
+            Expect.Call(place.IsWithinBasin()).Repeat.Twice().Return(false);
+            Expect.Call(place.RelatedInteractiveMaps).Return(mocks.CreateMock<IList<InteractiveMap>>());
+            Expect.Call(place.RelatedPublications).Return(mocks.CreateMock<IList<Publication>>());
+            mocks.ReplayAll();
 
-        //    IPlaceName placename = mocks.CreateMock<IPlaceName>();
-        //    Expect.Call(pnss.Find(id)).Return(placename);
-        //    Expect.Call(placename.Id).Return(id);
-        //    Expect.Call(utils.IsWithinBasin(placename)).Return(true);
-        //    Expect.Call(utils.IsWaterBody(placename)).Return(false);
-        //    Expect.Call(utils.IsWatershed(placename)).Return(true);
+            PlaceController controller = new PlaceController();
+            controller.AtlasMediator = mediator;
+            PrepareController(controller, "view", "place");
+            controller.View(id);
+            mocks.VerifyAll();
+        }
 
-        //    mocks.ReplayAll();
-        //    controller.View(id);
-        //    mocks.VerifyAll();
+        [Test]
+        public void TestViewPlaceWhenPlaceIsWithinBasinMergesBasinMapsWithRelatedInteractiveMaps()
+        {
+            string id = "ABCDE";
+            AtlasMediator mediator = mocks.CreateMock<AtlasMediator>();
+            Place place = mocks.CreateMock<Place>();
+            place.CgndbKey = id;
+            InteractiveMap duplicateMap = mocks.DynamicMock<InteractiveMap>();
 
-        //    Assert.AreEqual("/watershed/view.rails?placename=" + id + "&", Response.RedirectedTo);        
-        //}
-	
-	
+            IList<InteractiveMap> basinMaps = new List<InteractiveMap>();
+            basinMaps.Add(mocks.DynamicMock<InteractiveMap>());
+            basinMaps.Add(duplicateMap);
+
+            IList<InteractiveMap> relatedMaps = new List<InteractiveMap>();
+            relatedMaps.Add(mocks.DynamicMock<InteractiveMap>());
+            relatedMaps.Add(duplicateMap);
+
+            Expect.Call(mediator.Find<Place>(id)).Return(place);
+            Expect.Call(place.IsWithinBasin()).Repeat.Twice().Return(true);
+            Expect.Call(mediator.WaterBodyExistsForCgndbKeyOrAltCgndbKey(id)).Return(false);
+            Expect.Call(mediator.WatershedExistsForCgndbKey(id)).Return(false);
+            Expect.Call(place.RelatedInteractiveMaps).Return(relatedMaps);
+            Expect.Call(place.RelatedPublications).Return(mocks.CreateMock<IList<Publication>>());
+            Expect.Call(mediator.FindAllBasinMaps()).Return(basinMaps);
+            mocks.ReplayAll();
+
+            PlaceController controller = new PlaceController();
+            controller.AtlasMediator = mediator;
+            PrepareController(controller, "view", "place");
+            controller.View(id);
+            Assert.AreEqual(3, ((IList<InteractiveMap>)controller.
+                PropertyBag["interactive_maps"]).Count);
+            mocks.VerifyAll();
+        }
+
+        [Test]
+        public void TestRedirectsToWaterBodyViewWhenPlaceNameIsWaterBody()
+        {
+            string id = "ABCDE";
+            AtlasMediator mediator = mocks.CreateMock<AtlasMediator>();
+            Place place = mocks.CreateMock<Place>();
+            place.CgndbKey = id;
+            IList<InteractiveMap> basinMaps = new List<InteractiveMap>();
+
+            Expect.Call(mediator.Find<Place>(id)).Return(place);
+            Expect.Call(place.IsWithinBasin()).Return(true);
+            Expect.Call(mediator.WaterBodyExistsForCgndbKeyOrAltCgndbKey(id)).Return(true);            
+            mocks.ReplayAll();
+
+            PlaceController controller = new PlaceController();
+            controller.AtlasMediator = mediator;
+            PrepareController(controller, "view", "place");
+            controller.View(id);
+            Assert.IsTrue(Response.WasRedirected);
+            Assert.AreEqual("/waterbody/view.rails?place=" + id + "&", Response.RedirectedTo);
+            mocks.VerifyAll();
+        }
+
+        [Test]
+        public void TestRedirectsToWatershedViewWhenPlaceNameIsWatershed()
+        {
+            string id = "ABCDE";
+            AtlasMediator mediator = mocks.CreateMock<AtlasMediator>();
+            Place place = mocks.CreateMock<Place>();
+            place.CgndbKey = id;
+            IList<InteractiveMap> basinMaps = new List<InteractiveMap>();
+
+            Expect.Call(mediator.Find<Place>(id)).Return(place);
+            Expect.Call(place.IsWithinBasin()).Return(true);
+            Expect.Call(mediator.WaterBodyExistsForCgndbKeyOrAltCgndbKey(id)).Return(false);
+            Expect.Call(mediator.WatershedExistsForCgndbKey(id)).Return(true);
+            mocks.ReplayAll();
+
+            PlaceController controller = new PlaceController();
+            controller.AtlasMediator = mediator;
+            PrepareController(controller, "view", "place");
+            controller.View(id);
+            Assert.IsTrue(Response.WasRedirected);
+            Assert.AreEqual("/watershed/view.rails?place=" + id + "&", Response.RedirectedTo);
+            mocks.VerifyAll();
+        }
     }
 }

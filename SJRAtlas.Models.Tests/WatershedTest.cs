@@ -285,5 +285,88 @@ namespace SJRAtlas.Models.Tests
                 Assert.IsFalse(watershed.IsWithinBasin(), "IsWithinBasin should return false for value " + drainageCode);
             }
         }
+
+        [Test]
+        public void TestFindByCgndbKey()
+        {
+            string cgndbKey = "ABCDE";
+            Place place = new Place();
+            place.CgndbKey = cgndbKey;
+            place.Create();
+
+            Watershed watershed = new Watershed();
+            watershed.DrainageCode = "01-02-03-04-05-06";
+            watershed.Place = place;
+            watershed.Create();
+
+            Flush();
+
+            Watershed foundWatershed = Watershed.FindByCgndbKey(cgndbKey);
+            Assert.AreEqual(watershed, foundWatershed);
+            Assert.AreEqual(place, foundWatershed.Place);
+        }
+
+        [Test]
+        public void TestFindByCgndbKeyWhenNoMatchingRecord()
+        {
+            Assert.IsNull(Watershed.FindByCgndbKey("ABCDE"));
+        }
+
+        [Test]
+        public void TestExistsForCgndbKey()
+        {
+            string cgndbKey = "ABCDE";
+            Place place = new Place();
+            place.CgndbKey = cgndbKey;
+            place.Create();
+
+            Watershed watershed = new Watershed();
+            watershed.DrainageCode = "01-02-03-04-05-06";
+            watershed.Place = place;
+            watershed.Create();
+
+            Flush();
+
+            Assert.IsTrue(Watershed.ExistsForCgndbKey(cgndbKey));
+        }
+
+        [Test]
+        public void TestExistsForCgndbKeyWhenNoMatchingRecord()
+        {
+            Assert.IsFalse(Watershed.ExistsForCgndbKey("ABCDE"));
+        }
+
+        [Test]
+        public void TestFindAllByQuery()
+        {
+            string[] unitNames = { "Saint", "Saint John", "Saint John River",
+                "Hammond River", "Fredericton", "Moncton", "Miramichi River" };
+            for (int i = 0; i < unitNames.Length; i++)
+            {
+                Watershed watershed = new Watershed();
+                watershed.Name = unitNames[i];
+                // XXX: this is technically not a valid Drainage Code but no validation is performed
+                watershed.DrainageCode = i.ToString();
+                watershed.Create();
+            }
+
+            Flush();
+
+            Assert.AreEqual(3, Watershed.FindAllByQuery("Saint").Count, "Query for 'Saint'");
+            Assert.AreEqual(3, Watershed.FindAllByQuery("saint").Count, "Query for 'saint'");
+            Assert.AreEqual(1, Watershed.FindAllByQuery("Fredericton").Count, "Query for 'Fredericton'");
+            Assert.AreEqual(2, Watershed.FindAllByQuery("M").Count, "Query for 'M' returned");
+            Assert.AreEqual(0, Watershed.FindAllByQuery("John").Count, "Query for 'John'");
+            Assert.AreEqual(0, Watershed.FindAllByQuery("River").Count, "Query for 'River'");
+            Assert.AreEqual(3, Watershed.FindAllByQuery(" Saint").Count, "Query for ' Saint'");
+            Assert.AreEqual(1, Watershed.FindAllByQuery("Hammond River ").Count, "Query for 'Hammond River '");
+        }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void TestFindAllByQueryThrowsArgumentNullExceptionWhenQueryIsNull()
+        {
+            Watershed.FindAllByQuery(null);
+        }	
     }
 }

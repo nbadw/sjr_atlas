@@ -74,8 +74,75 @@ namespace SJRAtlas.Models.Tests
             Dictionary<string, object> properties = new Dictionary<string, object>();
             properties.Add("Title", "New Map Title");
             properties.Add("Id", 3);
+            properties.Add("IsBasinMap", true);
             TestHelper.ErrorSummary summary = TestHelper.TestProperties(map, properties);
             Assert.IsEmpty(summary, "The following errors occured while testing InteractiveMap properties:\n" + summary.GetSummary());
+        }
+
+        [Test]
+        public void TestFindAllBasinMaps()
+        {
+            InteractiveMap[] testMaps = new InteractiveMap[7];
+            for (int i = 0; i < testMaps.Length; i++)
+            {
+                testMaps[i] = new InteractiveMap();
+                testMaps[i].Create();
+            }
+            testMaps[1].IsBasinMap = true;
+            testMaps[3].IsBasinMap = true;
+            testMaps[5].IsBasinMap = true;
+            Flush();
+
+            Assert.AreEqual(3, InteractiveMap.FindAllBasinMaps().Count);
+        }
+
+        [Test]
+        public void TestFindByTitle()
+        {
+            string testTitle = "title that matches exactly";
+
+            InteractiveMap matchingMap = new InteractiveMap();
+            matchingMap.Title = testTitle;
+            matchingMap.Create();
+
+            InteractiveMap almostExact = new InteractiveMap();
+            almostExact.Title = testTitle + " but not quite";
+            almostExact.Create();
+
+            InteractiveMap notEvenClose = new InteractiveMap();
+            notEvenClose.Title = "not even close to the title";
+            notEvenClose.Create();
+
+            Flush();
+
+            Assert.AreEqual(matchingMap, InteractiveMap.FindByTitle(testTitle));
+        }
+
+        [Test]
+        public void TestFindByTitleWhenNoMatchingTitle()
+        {
+            string testTitle = "title that does not exist";
+            Assert.IsNull(InteractiveMap.FindByTitle(testTitle));
+        }
+
+        [Test]
+        public void TestFindByTitleWhenTwoTitlesMatch()
+        {
+            string testTitle = "title that matches exactly";
+
+            InteractiveMap firstMatchingMap = new InteractiveMap();
+            firstMatchingMap.Title = testTitle;
+            firstMatchingMap.Create();
+
+            InteractiveMap secondMatchingMap = new InteractiveMap();
+            secondMatchingMap.Title = testTitle;
+            secondMatchingMap.Create();
+
+            Flush();
+
+            InteractiveMap returnedMap = InteractiveMap.FindByTitle(testTitle);
+            Assert.AreEqual(firstMatchingMap, returnedMap);
+            Assert.AreNotEqual(secondMatchingMap, returnedMap);
         }	
     }
 }

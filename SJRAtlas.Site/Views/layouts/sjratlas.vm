@@ -82,7 +82,7 @@ $!{header}
 	<div class="innerwrap">
 		<div class="textbox">			    
 	        <div id="breadcrumbs">
-	            Location: $BreadCrumbs.CrumbPath()	                      
+	            Location:                      
 	        </div>
 	        <div style="clear: both;"></div>
 	    	    
