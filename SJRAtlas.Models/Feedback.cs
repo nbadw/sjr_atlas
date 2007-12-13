@@ -2,7 +2,7 @@ using System;
 using Castle.ActiveRecord;
 using Castle.Components.Validator;
 
-namespace SJRAtlas.Site.Models
+namespace SJRAtlas.Models
 {
     [ActiveRecord("feedback")]
     public class Feedback : ActiveRecordValidationBase<Feedback>

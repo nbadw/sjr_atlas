@@ -55,7 +55,9 @@
   <ItemGroup>
     <Compile Include="AbstractModelTestCase.cs" />
     <Compile Include="ClosestWatershedToPlaceTest.cs" />
+    <Compile Include="AgencyTest.cs" />
     <Compile Include="DataSetTest.cs" />
+    <Compile Include="FeedbackTest.cs" />
     <Compile Include="InteractiveMapTest.cs" />
     <Compile Include="LatLngCoordinateTest.cs" />
     <Compile Include="MetadataTest.cs" />

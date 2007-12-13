@@ -12,6 +12,11 @@ namespace SJRAtlas.Models
             return (T)ActiveRecordBase<T>.Find(id);
         }
 
+        public static IList<T> FindAll<T>() where T : ActiveRecordBase<T>
+        {
+            return (IList<T>)ActiveRecordBase<T>.FindAll();
+        }
+
         public virtual IList<InteractiveMap> FindAllBasinMaps()
         {
             return InteractiveMap.FindAllBasinMaps();

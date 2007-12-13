@@ -32,6 +32,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\External Libs\Castle Framework .NET-2.0\Castle.ActiveRecord.dll</HintPath>
     </Reference>
+    <Reference Include="Castle.Components.Validator, Version=0.0.1.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\External Libs\Castle Framework .NET-2.0\Castle.Components.Validator.dll</HintPath>
+    </Reference>
     <Reference Include="NHibernate, Version=1.2.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\External Libs\Castle Framework .NET-2.0\NHibernate.dll</HintPath>
@@ -41,8 +45,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Agency.cs" />
     <Compile Include="ClosestWatershedToPlace.cs" />
     <Compile Include="AtlasRepository.cs" />
+    <Compile Include="Feedback.cs" />
     <Compile Include="Publication.cs" />
     <Compile Include="LatLngCoord.cs" />
     <Compile Include="DataSet.cs" />

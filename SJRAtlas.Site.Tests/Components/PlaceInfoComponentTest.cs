@@ -30,7 +30,7 @@ namespace SJRAtlas.Site.Tests.Components
         [Test]
         [ExpectedException(typeof(ViewComponentException),
             "The ResourceComponent requires a view component " +
-            "parameter named 'place' which should contain an 'IPlace' instance")]
+            "parameter named 'place' which should contain a 'Place' instance")]
         public void ThrowsExceptionIfNoPlaceParameterWasSupplied()
         {
             component.Place = null;

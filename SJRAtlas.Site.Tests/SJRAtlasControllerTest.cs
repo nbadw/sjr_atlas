@@ -10,6 +10,10 @@ namespace SJRAtlas.Site.Tests.Controllers
     [TestFixture]
     public class SJRAtlasControllerTest : BaseControllerTest
     {
-        
+        [Test]
+        public void TestEmailSentToAdminWhenAnErrorOccurs()
+        {
+            Assert.Ignore();
+        }	
     }
 }

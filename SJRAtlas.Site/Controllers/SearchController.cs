@@ -83,18 +83,20 @@ namespace SJRAtlas.Site.Controllers
 
         public void Advanced()
         {
-            //Agency[] agencies = Agency.FindAll();
-            //List<string> agencyNames = new List<string>(agencies.Length);
-            //foreach (Agency agency in agencies)
-            //{
-            //    if (!String.IsNullOrEmpty(agency.Name))
-            //        agencyNames.Add(agency.Name);
-            //}
-            //agencyNames.Sort();
+            IList<Agency> agencies = AtlasMediator.FindAll<Agency>();
+            IList<DataSet> datasets = AtlasMediator.FindAll<DataSet>();
 
-            //PropertyBag["datasets"] = DataType.FindAll();
-            //PropertyBag["agencies"] = agencyNames;
-            //PropertyBag["optionstype"] = typeof(SearchOptions);
+            List<string> agencyNames = new List<string>(agencies.Count);
+            foreach (Agency agency in agencies)
+            {
+                if (!String.IsNullOrEmpty(agency.Name))
+                    agencyNames.Add(agency.Name);
+            }
+            agencyNames.Sort();
+
+            PropertyBag["datasets"] = datasets;
+            PropertyBag["agencies"] = agencyNames;
+            PropertyBag["optionstype"] = typeof(SearchOptions);
         }
 
         public void Tips()
@@ -104,15 +106,15 @@ namespace SJRAtlas.Site.Controllers
 
         public void SubmitAdvanced([DataBind("options", Validate=true)] SearchOptions options)
         {
-            //if (HasValidationError(options))
-            //{
-            //    Flash["options"] = options;
-            //    Flash["summary"] = GetErrorSummary(options);
-            //    RedirectToAction("advanced");
-            //    return;
-            //}
+            if (HasValidationError(options))
+            {
+                Flash["options"] = options;
+                Flash["summary"] = GetErrorSummary(options);
+                RedirectToAction("advanced");
+                return;
+            }
 
-            //RenderSharedView("shared/todo");
+            RenderSharedView("shared/todo");
         }
 
         private Regex CreateWatershedTriggerRegex()

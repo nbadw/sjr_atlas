@@ -1,7 +1,7 @@
 using System;
 using NUnit.Framework;
 
-namespace SJRAtlas.Site.Tests.Models
+namespace SJRAtlas.Tests.Models
 {
     [TestFixture]
     public class FeedbackTest
@@ -9,19 +9,19 @@ namespace SJRAtlas.Site.Tests.Models
         [Test]
         public void TestCRUD()
         {
-
+            Assert.Ignore();
         }
 
         [Test]
         public void TestInvalidEmail()
         {
-
+            Assert.Ignore();
         }
 
         [Test]
         public void TestEmptyMessage()
         {
-
+            Assert.Ignore();
         }
          
     }

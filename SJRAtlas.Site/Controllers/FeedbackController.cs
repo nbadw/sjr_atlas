@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using SJRAtlas.Site.Models;
 using Castle.MonoRail.Framework;
 using Castle.Components.Common.EmailSender;
 using Castle.Components.Validator;
+using SJRAtlas.Models;
 
 namespace SJRAtlas.Site.Controllers
 {
