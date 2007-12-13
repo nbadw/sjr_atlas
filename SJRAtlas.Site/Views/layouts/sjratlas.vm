@@ -53,12 +53,12 @@ $!{header}
 	<div class="innerwrap yui-gc">
 		<div id="tabs" class="yui-u first">
 			<ul>			
-			    <li id="home-tab">$Url.Link('Home', "%{controller='home', action='index'}")</li>
-				<li id="maps-tab">$Url.Link('Maps', "%{controller='maps', action='index'}")</li>
-                <li id="search-tab">$Url.Link('Search', "%{controller='search', action='index'}")</li>
-                <li id="forms-tab">$Url.Link('Forms', "%{controller='forms', action='index'}")</li>                
-                <li id="reports-tab">$Url.Link('Reports', "%{controller='reports', action='index'}")</li> 
-                <li id="about-tab">$Url.Link('About', "%{controller='about', action='index'}")</li>                
+			    <li id="home-tab">$Url.Link('Home', "%{controller='site', action='index'}")</li>
+				<li id="maps-tab">$Url.Link('Maps', "%{controller='site', action='maps'}")</li>
+                <li id="search-tab">$Url.Link('Search', "%{controller='site', action='search'}")</li>
+                <li id="forms-tab">$Url.Link('Forms', "%{controller='site', action='forms'}")</li>                
+                <li id="reports-tab">$Url.Link('Reports', "%{controller='site', action='reports'}")</li> 
+                <li id="about-tab">$Url.Link('About', "%{controller='site', action='about'}")</li>                
 			</ul>
 		</div>
 		<div id="quick-search" class="yui-u">

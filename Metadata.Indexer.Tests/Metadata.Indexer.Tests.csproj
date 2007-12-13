@@ -30,11 +30,11 @@
   <ItemGroup>
     <Reference Include="Castle.ActiveRecord, Version=0.0.1.3, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\SJRAtlas\SJRAtlas.Models\bin\Debug\Castle.ActiveRecord.dll</HintPath>
+      <HintPath>..\External Libs\Castle Framework .NET-2.0\Castle.ActiveRecord.dll</HintPath>
     </Reference>
     <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\SJRAtlas\SJRAtlas.Models\bin\Debug\log4net.dll</HintPath>
+      <HintPath>..\External Libs\Castle Framework .NET-2.0\log4net.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework, Version=2.4.3.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -64,6 +64,9 @@
     <Content Include="TestData\NotMetadataDirectory\file-outside-metadata-directory-root.xml" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\Metadata.Indexer\Metadata.Indexer.csproj">
       <Project>{39BE68F4-3D4D-4257-9159-47DC68D6FEF7}</Project>
       <Name>Metadata.Indexer</Name>
@@ -72,9 +75,6 @@
       <Project>{43819902-84F0-47AB-B474-C1EF5E89ED8A}</Project>
       <Name>SJRAtlas.Models</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

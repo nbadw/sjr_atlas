@@ -16422,3 +16422,448 @@ The email address appears to be invalid
 2007-11-16 14:37:26,885 [19] INFO  NHibernate.Loader.Loader - SELECT this_.DataTypeID as DataTypeID38_0_, this_.DataName as DataName38_0_, this_.MetadataFileName as Metadata3_38_0_, this_.AquaticActivityCd as AquaticA4_38_0_, this_.TimeSeriesInd as TimeSeri5_38_0_, this_.Map as Map38_0_, this_.SpatialData as SpatialD7_38_0_, this_.TabularData as TabularD8_38_0_, this_.Graph as Graph38_0_, this_.SummaryReport as Summary10_38_0_ FROM dbo.auxDataTypes this_
 2007-11-16 15:02:02,916 [19] INFO  SJRAtlas.Site.GlobalApplication - ###### SJRATLAS APPLICATION ENDED ######
 2007-11-16 15:02:02,916 [19] INFO  Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - AR Facility is being disposed.
+2007-12-12 23:11:57,640 [8] DEBUG Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - Initializing AR Facility
+2007-12-12 23:11:57,765 [8] DEBUG Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - Loading model assembly 'SJRAtlas.Site' for AR
+2007-12-12 23:11:57,765 [8] DEBUG Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - Loading model assembly 'SJRAtlas.DataWarehouse' for AR
+2007-12-12 23:13:54,656 [8] DEBUG Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - Initializing AR Facility
+2007-12-12 23:13:54,656 [8] DEBUG Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - Loading model assembly 'SJRAtlas.Models' for AR
+2007-12-12 23:13:54,656 [8] INFO  Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - No Transaction Manager registered on Kernel, registering AR Transaction Manager
+2007-12-12 23:13:54,656 [8] INFO  Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - Initializing ActiveRecord Framework
+2007-12-12 23:13:54,734 [8] DEBUG Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - Is Debug enabled True
+2007-12-12 23:13:54,734 [8] DEBUG Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - ThreadScopeInfo Castle.ActiveRecord.Framework.Scopes.WebThreadScopeInfo
+2007-12-12 23:13:54,734 [8] DEBUG Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - NamingStrategy 
+2007-12-12 23:13:54,734 [8] DEBUG Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - SessionFactoryHolder Castle.ActiveRecord.Framework.SessionFactoryHolder
+2007-12-12 23:13:54,750 [8] INFO  Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - Registering SessionFactoryHolder named 'activerecord.sessionfactoryholder': Castle.ActiveRecord.Framework.SessionFactoryHolder
+2007-12-12 23:13:54,781 [8] INFO  NHibernate.Cfg.Environment - NHibernate 1.2.0.4000 (1.2.0.4000)
+2007-12-12 23:13:54,781 [8] INFO  NHibernate.Cfg.Environment - nhibernate section not found in application configuration file
+2007-12-12 23:13:54,812 [8] INFO  NHibernate.Cfg.Environment - Bytecode provider name : lcg
+2007-12-12 23:13:54,828 [8] INFO  NHibernate.Cfg.Environment - Using reflection optimizer
+2007-12-12 23:13:54,828 [8] INFO  Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - Registering SessionFactory named 'activerecord.sessionfactory' for the root type Castle.ActiveRecord.ActiveRecordBase: Castle.ActiveRecord.Framework.SessionFactoryHolder
+2007-12-12 23:13:55,078 [8] INFO  NHibernate.Dialect.Dialect - Using dialect: NHibernate.Dialect.MsSql2000Dialect
+2007-12-12 23:13:55,218 [8] INFO  NHibernate.Cfg.HbmBinder - Mapping class: SJRAtlas.Models.ClosestWatershedToPlace -> closest_watershed_to_place
+2007-12-12 23:13:55,296 [8] INFO  NHibernate.Dialect.Dialect - Using dialect: NHibernate.Dialect.MsSql2000Dialect
+2007-12-12 23:13:55,296 [8] INFO  NHibernate.Cfg.HbmBinder - Mapping class: SJRAtlas.Models.InteractiveMap -> interactive_maps
+2007-12-12 23:13:55,296 [8] INFO  NHibernate.Dialect.Dialect - Using dialect: NHibernate.Dialect.MsSql2000Dialect
+2007-12-12 23:13:55,296 [8] INFO  NHibernate.Cfg.HbmBinder - Mapping class: SJRAtlas.Models.Publication -> publications
+2007-12-12 23:13:55,296 [8] INFO  NHibernate.Cfg.HbmBinder - Mapping subclass: SJRAtlas.Models.PublishedReport -> publications
+2007-12-12 23:13:55,312 [8] INFO  NHibernate.Cfg.HbmBinder - Mapping subclass: SJRAtlas.Models.PublishedMap -> publications
+2007-12-12 23:13:55,312 [8] INFO  NHibernate.Dialect.Dialect - Using dialect: NHibernate.Dialect.MsSql2000Dialect
+2007-12-12 23:13:55,312 [8] INFO  NHibernate.Cfg.HbmBinder - Mapping class: SJRAtlas.Models.WaterBody -> tblWaterBody
+2007-12-12 23:13:55,328 [8] INFO  NHibernate.Cfg.HbmBinder - Mapping collection: SJRAtlas.Models.WaterBody.DataSetList -> auxWaterBody_DataType_XRef
+2007-12-12 23:13:55,328 [8] INFO  NHibernate.Dialect.Dialect - Using dialect: NHibernate.Dialect.MsSql2000Dialect
+2007-12-12 23:13:55,328 [8] INFO  NHibernate.Cfg.HbmBinder - Mapping class: SJRAtlas.Models.Place -> places
+2007-12-12 23:13:55,343 [8] INFO  NHibernate.Dialect.Dialect - Using dialect: NHibernate.Dialect.MsSql2000Dialect
+2007-12-12 23:13:55,343 [8] INFO  NHibernate.Cfg.HbmBinder - Mapping class: SJRAtlas.Models.Metadata -> metadata
+2007-12-12 23:13:55,343 [8] INFO  NHibernate.Dialect.Dialect - Using dialect: NHibernate.Dialect.MsSql2000Dialect
+2007-12-12 23:13:55,343 [8] INFO  NHibernate.Cfg.HbmBinder - Mapping class: SJRAtlas.Models.Watershed -> tblDrainageUnit
+2007-12-12 23:13:55,375 [8] INFO  NHibernate.Dialect.Dialect - Using dialect: NHibernate.Dialect.MsSql2000Dialect
+2007-12-12 23:13:55,375 [8] INFO  NHibernate.Cfg.HbmBinder - Mapping class: SJRAtlas.Models.DataSet -> data_sets
+2007-12-12 23:14:39,468 [8] DEBUG Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - Initializing AR Facility
+2007-12-12 23:14:39,468 [8] DEBUG Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - Loading model assembly 'SJRAtlas.Models' for AR
+2007-12-12 23:14:39,468 [8] INFO  Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - No Transaction Manager registered on Kernel, registering AR Transaction Manager
+2007-12-12 23:14:39,468 [8] INFO  Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - Initializing ActiveRecord Framework
+2007-12-12 23:14:39,468 [8] DEBUG Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - Is Debug enabled True
+2007-12-12 23:14:39,468 [8] DEBUG Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - ThreadScopeInfo Castle.ActiveRecord.Framework.Scopes.WebThreadScopeInfo
+2007-12-12 23:14:39,468 [8] DEBUG Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - NamingStrategy 
+2007-12-12 23:14:39,468 [8] DEBUG Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - SessionFactoryHolder Castle.ActiveRecord.Framework.SessionFactoryHolder
+2007-12-12 23:14:39,468 [8] INFO  Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - Registering SessionFactoryHolder named 'activerecord.sessionfactoryholder': Castle.ActiveRecord.Framework.SessionFactoryHolder
+2007-12-12 23:14:39,468 [8] INFO  Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - Registering SessionFactory named 'activerecord.sessionfactory' for the root type Castle.ActiveRecord.ActiveRecordBase: Castle.ActiveRecord.Framework.SessionFactoryHolder
+2007-12-12 23:14:39,484 [8] INFO  NHibernate.Dialect.Dialect - Using dialect: NHibernate.Dialect.MsSql2000Dialect
+2007-12-12 23:14:39,484 [8] INFO  NHibernate.Cfg.HbmBinder - Mapping class: SJRAtlas.Models.ClosestWatershedToPlace -> closest_watershed_to_place
+2007-12-12 23:14:39,500 [8] INFO  NHibernate.Dialect.Dialect - Using dialect: NHibernate.Dialect.MsSql2000Dialect
+2007-12-12 23:14:39,500 [8] INFO  NHibernate.Cfg.HbmBinder - Mapping class: SJRAtlas.Models.InteractiveMap -> interactive_maps
+2007-12-12 23:14:39,500 [8] INFO  NHibernate.Dialect.Dialect - Using dialect: NHibernate.Dialect.MsSql2000Dialect
+2007-12-12 23:14:39,500 [8] INFO  NHibernate.Cfg.HbmBinder - Mapping class: SJRAtlas.Models.Publication -> publications
+2007-12-12 23:14:39,500 [8] INFO  NHibernate.Cfg.HbmBinder - Mapping subclass: SJRAtlas.Models.PublishedReport -> publications
+2007-12-12 23:14:39,500 [8] INFO  NHibernate.Cfg.HbmBinder - Mapping subclass: SJRAtlas.Models.PublishedMap -> publications
+2007-12-12 23:14:39,500 [8] INFO  NHibernate.Dialect.Dialect - Using dialect: NHibernate.Dialect.MsSql2000Dialect
+2007-12-12 23:14:39,500 [8] INFO  NHibernate.Cfg.HbmBinder - Mapping class: SJRAtlas.Models.WaterBody -> tblWaterBody
+2007-12-12 23:14:39,500 [8] INFO  NHibernate.Cfg.HbmBinder - Mapping collection: SJRAtlas.Models.WaterBody.DataSetList -> auxWaterBody_DataType_XRef
+2007-12-12 23:14:39,500 [8] INFO  NHibernate.Dialect.Dialect - Using dialect: NHibernate.Dialect.MsSql2000Dialect
+2007-12-12 23:14:39,500 [8] INFO  NHibernate.Cfg.HbmBinder - Mapping class: SJRAtlas.Models.Place -> places
+2007-12-12 23:14:39,515 [8] INFO  NHibernate.Dialect.Dialect - Using dialect: NHibernate.Dialect.MsSql2000Dialect
+2007-12-12 23:14:39,515 [8] INFO  NHibernate.Cfg.HbmBinder - Mapping class: SJRAtlas.Models.Metadata -> metadata
+2007-12-12 23:14:39,515 [8] INFO  NHibernate.Dialect.Dialect - Using dialect: NHibernate.Dialect.MsSql2000Dialect
+2007-12-12 23:14:39,515 [8] INFO  NHibernate.Cfg.HbmBinder - Mapping class: SJRAtlas.Models.Watershed -> tblDrainageUnit
+2007-12-12 23:14:39,531 [8] INFO  NHibernate.Dialect.Dialect - Using dialect: NHibernate.Dialect.MsSql2000Dialect
+2007-12-12 23:14:39,531 [8] INFO  NHibernate.Cfg.HbmBinder - Mapping class: SJRAtlas.Models.DataSet -> data_sets
+2007-12-12 23:15:34,703 [8] DEBUG Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - Initializing AR Facility
+2007-12-12 23:15:34,703 [8] DEBUG Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - Loading model assembly 'SJRAtlas.Models' for AR
+2007-12-12 23:15:34,703 [8] INFO  Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - No Transaction Manager registered on Kernel, registering AR Transaction Manager
+2007-12-12 23:15:34,703 [8] INFO  Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - Initializing ActiveRecord Framework
+2007-12-12 23:15:34,703 [8] DEBUG Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - Is Debug enabled True
+2007-12-12 23:15:34,703 [8] DEBUG Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - ThreadScopeInfo Castle.ActiveRecord.Framework.Scopes.WebThreadScopeInfo
+2007-12-12 23:15:34,703 [8] DEBUG Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - NamingStrategy 
+2007-12-12 23:15:34,703 [8] DEBUG Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - SessionFactoryHolder Castle.ActiveRecord.Framework.SessionFactoryHolder
+2007-12-12 23:15:34,703 [8] INFO  Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - Registering SessionFactoryHolder named 'activerecord.sessionfactoryholder': Castle.ActiveRecord.Framework.SessionFactoryHolder
+2007-12-12 23:15:34,703 [8] INFO  Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - Registering SessionFactory named 'activerecord.sessionfactory' for the root type Castle.ActiveRecord.ActiveRecordBase: Castle.ActiveRecord.Framework.SessionFactoryHolder
+2007-12-12 23:15:34,718 [8] INFO  NHibernate.Dialect.Dialect - Using dialect: NHibernate.Dialect.MsSql2000Dialect
+2007-12-12 23:15:34,718 [8] INFO  NHibernate.Cfg.HbmBinder - Mapping class: SJRAtlas.Models.ClosestWatershedToPlace -> closest_watershed_to_place
+2007-12-12 23:15:34,734 [8] INFO  NHibernate.Dialect.Dialect - Using dialect: NHibernate.Dialect.MsSql2000Dialect
+2007-12-12 23:15:34,734 [8] INFO  NHibernate.Cfg.HbmBinder - Mapping class: SJRAtlas.Models.InteractiveMap -> interactive_maps
+2007-12-12 23:15:34,734 [8] INFO  NHibernate.Dialect.Dialect - Using dialect: NHibernate.Dialect.MsSql2000Dialect
+2007-12-12 23:15:34,734 [8] INFO  NHibernate.Cfg.HbmBinder - Mapping class: SJRAtlas.Models.Publication -> publications
+2007-12-12 23:15:34,734 [8] INFO  NHibernate.Cfg.HbmBinder - Mapping subclass: SJRAtlas.Models.PublishedReport -> publications
+2007-12-12 23:15:34,734 [8] INFO  NHibernate.Cfg.HbmBinder - Mapping subclass: SJRAtlas.Models.PublishedMap -> publications
+2007-12-12 23:15:34,734 [8] INFO  NHibernate.Dialect.Dialect - Using dialect: NHibernate.Dialect.MsSql2000Dialect
+2007-12-12 23:15:34,734 [8] INFO  NHibernate.Cfg.HbmBinder - Mapping class: SJRAtlas.Models.WaterBody -> tblWaterBody
+2007-12-12 23:15:34,734 [8] INFO  NHibernate.Cfg.HbmBinder - Mapping collection: SJRAtlas.Models.WaterBody.DataSetList -> auxWaterBody_DataType_XRef
+2007-12-12 23:15:34,734 [8] INFO  NHibernate.Dialect.Dialect - Using dialect: NHibernate.Dialect.MsSql2000Dialect
+2007-12-12 23:15:34,734 [8] INFO  NHibernate.Cfg.HbmBinder - Mapping class: SJRAtlas.Models.Place -> places
+2007-12-12 23:15:34,750 [8] INFO  NHibernate.Dialect.Dialect - Using dialect: NHibernate.Dialect.MsSql2000Dialect
+2007-12-12 23:15:34,750 [8] INFO  NHibernate.Cfg.HbmBinder - Mapping class: SJRAtlas.Models.Metadata -> metadata
+2007-12-12 23:15:34,750 [8] INFO  NHibernate.Dialect.Dialect - Using dialect: NHibernate.Dialect.MsSql2000Dialect
+2007-12-12 23:15:34,750 [8] INFO  NHibernate.Cfg.HbmBinder - Mapping class: SJRAtlas.Models.Watershed -> tblDrainageUnit
+2007-12-12 23:15:34,750 [8] INFO  NHibernate.Dialect.Dialect - Using dialect: NHibernate.Dialect.MsSql2000Dialect
+2007-12-12 23:15:34,750 [8] INFO  NHibernate.Cfg.HbmBinder - Mapping class: SJRAtlas.Models.DataSet -> data_sets
+2007-12-12 23:15:34,750 [8] DEBUG SJRAtlas.Site.SJRAtlasContainer - Registering Controller SJRAtlas.Site.Controllers.WaterBodyController as waterbody.controller
+2007-12-12 23:15:34,765 [8] DEBUG SJRAtlas.Site.SJRAtlasContainer - Registering Controller SJRAtlas.Site.Controllers.SiteController as site.controller
+2007-12-12 23:15:34,765 [8] DEBUG SJRAtlas.Site.SJRAtlasContainer - Registering Controller SJRAtlas.Site.Controllers.PlaceController as place.controller
+2007-12-12 23:15:34,765 [8] DEBUG SJRAtlas.Site.SJRAtlasContainer - Registering Controller SJRAtlas.Site.Controllers.FeedbackController as feedback.controller
+2007-12-12 23:15:34,765 [8] DEBUG SJRAtlas.Site.SJRAtlasContainer - Registering Controller SJRAtlas.Site.Controllers.AgencyController as agency.controller
+2007-12-12 23:15:34,765 [8] DEBUG SJRAtlas.Site.SJRAtlasContainer - Registering Controller SJRAtlas.Site.Controllers.WatershedController as watershed.controller
+2007-12-12 23:15:34,765 [8] DEBUG SJRAtlas.Site.SJRAtlasContainer - Registering Controller SJRAtlas.Site.Controllers.SearchController as search.controller
+2007-12-12 23:15:34,796 [8] INFO  SJRAtlas.Site.GlobalApplication - ##### SJRATLAS APPLICATION STARTED #####
+2007-12-12 23:15:34,812 [8] DEBUG Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - Initializing AR Facility
+2007-12-12 23:15:34,812 [8] DEBUG Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - Loading model assembly 'SJRAtlas.Models' for AR
+2007-12-12 23:15:34,812 [8] INFO  Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - No Transaction Manager registered on Kernel, registering AR Transaction Manager
+2007-12-12 23:15:34,812 [8] INFO  Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - Initializing ActiveRecord Framework
+2007-12-12 23:15:34,812 [8] DEBUG Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - Is Debug enabled True
+2007-12-12 23:15:34,812 [8] DEBUG Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - ThreadScopeInfo Castle.ActiveRecord.Framework.Scopes.WebThreadScopeInfo
+2007-12-12 23:15:34,812 [8] DEBUG Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - NamingStrategy 
+2007-12-12 23:15:34,812 [8] DEBUG Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - SessionFactoryHolder Castle.ActiveRecord.Framework.SessionFactoryHolder
+2007-12-12 23:15:34,812 [8] INFO  Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - Registering SessionFactoryHolder named 'activerecord.sessionfactoryholder': Castle.ActiveRecord.Framework.SessionFactoryHolder
+2007-12-12 23:15:34,812 [8] INFO  Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - Registering SessionFactory named 'activerecord.sessionfactory' for the root type Castle.ActiveRecord.ActiveRecordBase: Castle.ActiveRecord.Framework.SessionFactoryHolder
+2007-12-12 23:15:34,828 [8] INFO  NHibernate.Dialect.Dialect - Using dialect: NHibernate.Dialect.MsSql2000Dialect
+2007-12-12 23:15:34,828 [8] INFO  NHibernate.Cfg.HbmBinder - Mapping class: SJRAtlas.Models.ClosestWatershedToPlace -> closest_watershed_to_place
+2007-12-12 23:15:34,828 [8] INFO  NHibernate.Dialect.Dialect - Using dialect: NHibernate.Dialect.MsSql2000Dialect
+2007-12-12 23:15:34,828 [8] INFO  NHibernate.Cfg.HbmBinder - Mapping class: SJRAtlas.Models.InteractiveMap -> interactive_maps
+2007-12-12 23:15:34,828 [8] INFO  NHibernate.Dialect.Dialect - Using dialect: NHibernate.Dialect.MsSql2000Dialect
+2007-12-12 23:15:34,828 [8] INFO  NHibernate.Cfg.HbmBinder - Mapping class: SJRAtlas.Models.Publication -> publications
+2007-12-12 23:15:34,828 [8] INFO  NHibernate.Cfg.HbmBinder - Mapping subclass: SJRAtlas.Models.PublishedReport -> publications
+2007-12-12 23:15:34,828 [8] INFO  NHibernate.Cfg.HbmBinder - Mapping subclass: SJRAtlas.Models.PublishedMap -> publications
+2007-12-12 23:15:34,843 [8] INFO  NHibernate.Dialect.Dialect - Using dialect: NHibernate.Dialect.MsSql2000Dialect
+2007-12-12 23:15:34,843 [8] INFO  NHibernate.Cfg.HbmBinder - Mapping class: SJRAtlas.Models.WaterBody -> tblWaterBody
+2007-12-12 23:15:34,843 [8] INFO  NHibernate.Cfg.HbmBinder - Mapping collection: SJRAtlas.Models.WaterBody.DataSetList -> auxWaterBody_DataType_XRef
+2007-12-12 23:15:34,843 [8] INFO  NHibernate.Dialect.Dialect - Using dialect: NHibernate.Dialect.MsSql2000Dialect
+2007-12-12 23:15:34,843 [8] INFO  NHibernate.Cfg.HbmBinder - Mapping class: SJRAtlas.Models.Place -> places
+2007-12-12 23:15:34,843 [8] INFO  NHibernate.Dialect.Dialect - Using dialect: NHibernate.Dialect.MsSql2000Dialect
+2007-12-12 23:15:34,843 [8] INFO  NHibernate.Cfg.HbmBinder - Mapping class: SJRAtlas.Models.Metadata -> metadata
+2007-12-12 23:15:34,843 [8] INFO  NHibernate.Dialect.Dialect - Using dialect: NHibernate.Dialect.MsSql2000Dialect
+2007-12-12 23:15:34,843 [8] INFO  NHibernate.Cfg.HbmBinder - Mapping class: SJRAtlas.Models.Watershed -> tblDrainageUnit
+2007-12-12 23:15:34,843 [8] INFO  NHibernate.Dialect.Dialect - Using dialect: NHibernate.Dialect.MsSql2000Dialect
+2007-12-12 23:15:34,843 [8] INFO  NHibernate.Cfg.HbmBinder - Mapping class: SJRAtlas.Models.DataSet -> data_sets
+2007-12-12 23:15:34,843 [8] DEBUG SJRAtlas.Site.SJRAtlasContainer - Registering Controller SJRAtlas.Site.Controllers.WaterBodyController as waterbody.controller
+2007-12-12 23:15:34,843 [8] DEBUG SJRAtlas.Site.SJRAtlasContainer - Registering Controller SJRAtlas.Site.Controllers.SiteController as site.controller
+2007-12-12 23:15:34,843 [8] DEBUG SJRAtlas.Site.SJRAtlasContainer - Registering Controller SJRAtlas.Site.Controllers.PlaceController as place.controller
+2007-12-12 23:15:34,843 [8] DEBUG SJRAtlas.Site.SJRAtlasContainer - Registering Controller SJRAtlas.Site.Controllers.FeedbackController as feedback.controller
+2007-12-12 23:15:34,843 [8] DEBUG SJRAtlas.Site.SJRAtlasContainer - Registering Controller SJRAtlas.Site.Controllers.AgencyController as agency.controller
+2007-12-12 23:15:34,843 [8] DEBUG SJRAtlas.Site.SJRAtlasContainer - Registering Controller SJRAtlas.Site.Controllers.WatershedController as watershed.controller
+2007-12-12 23:15:34,843 [8] DEBUG SJRAtlas.Site.SJRAtlasContainer - Registering Controller SJRAtlas.Site.Controllers.SearchController as search.controller
+2007-12-12 23:16:57,562 [8] INFO  SJRAtlas.Site.GlobalApplication - ###### SJRATLAS APPLICATION ENDED ######
+2007-12-12 23:16:57,562 [8] INFO  Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - AR Facility is being disposed.
+2007-12-12 23:17:10,781 [8] DEBUG Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - Initializing AR Facility
+2007-12-12 23:17:10,812 [8] DEBUG Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - Loading model assembly 'SJRAtlas.Models' for AR
+2007-12-12 23:17:10,812 [8] INFO  Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - No Transaction Manager registered on Kernel, registering AR Transaction Manager
+2007-12-12 23:17:10,828 [8] INFO  Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - Initializing ActiveRecord Framework
+2007-12-12 23:17:10,875 [8] DEBUG Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - Is Debug enabled True
+2007-12-12 23:17:10,875 [8] DEBUG Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - ThreadScopeInfo Castle.ActiveRecord.Framework.Scopes.WebThreadScopeInfo
+2007-12-12 23:17:10,875 [8] DEBUG Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - NamingStrategy 
+2007-12-12 23:17:10,875 [8] DEBUG Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - SessionFactoryHolder Castle.ActiveRecord.Framework.SessionFactoryHolder
+2007-12-12 23:17:10,890 [8] INFO  Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - Registering SessionFactoryHolder named 'activerecord.sessionfactoryholder': Castle.ActiveRecord.Framework.SessionFactoryHolder
+2007-12-12 23:17:10,937 [8] INFO  NHibernate.Cfg.Environment - NHibernate 1.2.0.4000 (1.2.0.4000)
+2007-12-12 23:17:10,937 [8] INFO  NHibernate.Cfg.Environment - nhibernate section not found in application configuration file
+2007-12-12 23:17:11,031 [8] INFO  NHibernate.Cfg.Environment - Bytecode provider name : lcg
+2007-12-12 23:17:11,046 [8] INFO  NHibernate.Cfg.Environment - Using reflection optimizer
+2007-12-12 23:17:11,062 [8] INFO  Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - Registering SessionFactory named 'activerecord.sessionfactory' for the root type Castle.ActiveRecord.ActiveRecordBase: Castle.ActiveRecord.Framework.SessionFactoryHolder
+2007-12-12 23:17:11,234 [8] INFO  NHibernate.Dialect.Dialect - Using dialect: NHibernate.Dialect.MsSql2000Dialect
+2007-12-12 23:17:11,312 [8] INFO  NHibernate.Cfg.HbmBinder - Mapping class: SJRAtlas.Models.Publication -> publications
+2007-12-12 23:17:11,343 [8] INFO  NHibernate.Cfg.HbmBinder - Mapping subclass: SJRAtlas.Models.PublishedMap -> publications
+2007-12-12 23:17:11,343 [8] INFO  NHibernate.Cfg.HbmBinder - Mapping subclass: SJRAtlas.Models.PublishedReport -> publications
+2007-12-12 23:17:11,359 [8] INFO  NHibernate.Dialect.Dialect - Using dialect: NHibernate.Dialect.MsSql2000Dialect
+2007-12-12 23:17:11,359 [8] INFO  NHibernate.Cfg.HbmBinder - Mapping class: SJRAtlas.Models.Place -> places
+2007-12-12 23:17:11,359 [8] INFO  NHibernate.Dialect.Dialect - Using dialect: NHibernate.Dialect.MsSql2000Dialect
+2007-12-12 23:17:11,359 [8] INFO  NHibernate.Cfg.HbmBinder - Mapping class: SJRAtlas.Models.Metadata -> metadata
+2007-12-12 23:17:11,375 [8] INFO  NHibernate.Dialect.Dialect - Using dialect: NHibernate.Dialect.MsSql2000Dialect
+2007-12-12 23:17:11,375 [8] INFO  NHibernate.Cfg.HbmBinder - Mapping class: SJRAtlas.Models.Watershed -> tblDrainageUnit
+2007-12-12 23:17:11,421 [8] INFO  NHibernate.Dialect.Dialect - Using dialect: NHibernate.Dialect.MsSql2000Dialect
+2007-12-12 23:17:11,421 [8] INFO  NHibernate.Cfg.HbmBinder - Mapping class: SJRAtlas.Models.DataSet -> data_sets
+2007-12-12 23:17:11,421 [8] INFO  NHibernate.Dialect.Dialect - Using dialect: NHibernate.Dialect.MsSql2000Dialect
+2007-12-12 23:17:11,421 [8] INFO  NHibernate.Cfg.HbmBinder - Mapping class: SJRAtlas.Models.ClosestWatershedToPlace -> closest_watershed_to_place
+2007-12-12 23:17:11,437 [8] INFO  NHibernate.Dialect.Dialect - Using dialect: NHibernate.Dialect.MsSql2000Dialect
+2007-12-12 23:17:11,437 [8] INFO  NHibernate.Cfg.HbmBinder - Mapping class: SJRAtlas.Models.InteractiveMap -> interactive_maps
+2007-12-12 23:17:11,437 [8] INFO  NHibernate.Dialect.Dialect - Using dialect: NHibernate.Dialect.MsSql2000Dialect
+2007-12-12 23:17:11,437 [8] INFO  NHibernate.Cfg.HbmBinder - Mapping class: SJRAtlas.Models.WaterBody -> tblWaterBody
+2007-12-12 23:17:11,437 [8] INFO  NHibernate.Cfg.HbmBinder - Mapping collection: SJRAtlas.Models.WaterBody.DataSetList -> auxWaterBody_DataType_XRef
+2007-12-12 23:17:11,453 [8] DEBUG SJRAtlas.Site.SJRAtlasContainer - Registering Controller SJRAtlas.Site.Controllers.WaterBodyController as waterbody.controller
+2007-12-12 23:17:11,453 [8] DEBUG SJRAtlas.Site.SJRAtlasContainer - Registering Controller SJRAtlas.Site.Controllers.SiteController as site.controller
+2007-12-12 23:17:11,453 [8] DEBUG SJRAtlas.Site.SJRAtlasContainer - Registering Controller SJRAtlas.Site.Controllers.PlaceController as place.controller
+2007-12-12 23:17:11,453 [8] DEBUG SJRAtlas.Site.SJRAtlasContainer - Registering Controller SJRAtlas.Site.Controllers.FeedbackController as feedback.controller
+2007-12-12 23:17:11,453 [8] DEBUG SJRAtlas.Site.SJRAtlasContainer - Registering Controller SJRAtlas.Site.Controllers.AgencyController as agency.controller
+2007-12-12 23:17:11,453 [8] DEBUG SJRAtlas.Site.SJRAtlasContainer - Registering Controller SJRAtlas.Site.Controllers.WatershedController as watershed.controller
+2007-12-12 23:17:11,453 [8] DEBUG SJRAtlas.Site.SJRAtlasContainer - Registering Controller SJRAtlas.Site.Controllers.SearchController as search.controller
+2007-12-12 23:17:11,453 [8] INFO  SJRAtlas.Site.GlobalApplication - ##### SJRATLAS APPLICATION STARTED #####
+2007-12-12 23:17:11,468 [8] DEBUG Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - Initializing AR Facility
+2007-12-12 23:17:11,468 [8] DEBUG Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - Loading model assembly 'SJRAtlas.Models' for AR
+2007-12-12 23:17:11,468 [8] INFO  Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - No Transaction Manager registered on Kernel, registering AR Transaction Manager
+2007-12-12 23:17:11,468 [8] INFO  Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - Initializing ActiveRecord Framework
+2007-12-12 23:17:11,468 [8] DEBUG Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - Is Debug enabled True
+2007-12-12 23:17:11,468 [8] DEBUG Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - ThreadScopeInfo Castle.ActiveRecord.Framework.Scopes.WebThreadScopeInfo
+2007-12-12 23:17:11,468 [8] DEBUG Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - NamingStrategy 
+2007-12-12 23:17:11,468 [8] DEBUG Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - SessionFactoryHolder Castle.ActiveRecord.Framework.SessionFactoryHolder
+2007-12-12 23:17:11,468 [8] INFO  Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - Registering SessionFactoryHolder named 'activerecord.sessionfactoryholder': Castle.ActiveRecord.Framework.SessionFactoryHolder
+2007-12-12 23:17:11,468 [8] INFO  Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - Registering SessionFactory named 'activerecord.sessionfactory' for the root type Castle.ActiveRecord.ActiveRecordBase: Castle.ActiveRecord.Framework.SessionFactoryHolder
+2007-12-12 23:17:11,484 [8] INFO  NHibernate.Dialect.Dialect - Using dialect: NHibernate.Dialect.MsSql2000Dialect
+2007-12-12 23:17:11,484 [8] INFO  NHibernate.Cfg.HbmBinder - Mapping class: SJRAtlas.Models.Publication -> publications
+2007-12-12 23:17:11,484 [8] INFO  NHibernate.Cfg.HbmBinder - Mapping subclass: SJRAtlas.Models.PublishedMap -> publications
+2007-12-12 23:17:11,484 [8] INFO  NHibernate.Cfg.HbmBinder - Mapping subclass: SJRAtlas.Models.PublishedReport -> publications
+2007-12-12 23:17:11,484 [8] INFO  NHibernate.Dialect.Dialect - Using dialect: NHibernate.Dialect.MsSql2000Dialect
+2007-12-12 23:17:11,484 [8] INFO  NHibernate.Cfg.HbmBinder - Mapping class: SJRAtlas.Models.Place -> places
+2007-12-12 23:17:11,500 [8] INFO  NHibernate.Dialect.Dialect - Using dialect: NHibernate.Dialect.MsSql2000Dialect
+2007-12-12 23:17:11,500 [8] INFO  NHibernate.Cfg.HbmBinder - Mapping class: SJRAtlas.Models.Metadata -> metadata
+2007-12-12 23:17:11,500 [8] INFO  NHibernate.Dialect.Dialect - Using dialect: NHibernate.Dialect.MsSql2000Dialect
+2007-12-12 23:17:11,500 [8] INFO  NHibernate.Cfg.HbmBinder - Mapping class: SJRAtlas.Models.Watershed -> tblDrainageUnit
+2007-12-12 23:17:11,500 [8] INFO  NHibernate.Dialect.Dialect - Using dialect: NHibernate.Dialect.MsSql2000Dialect
+2007-12-12 23:17:11,500 [8] INFO  NHibernate.Cfg.HbmBinder - Mapping class: SJRAtlas.Models.DataSet -> data_sets
+2007-12-12 23:17:11,500 [8] INFO  NHibernate.Dialect.Dialect - Using dialect: NHibernate.Dialect.MsSql2000Dialect
+2007-12-12 23:17:11,500 [8] INFO  NHibernate.Cfg.HbmBinder - Mapping class: SJRAtlas.Models.ClosestWatershedToPlace -> closest_watershed_to_place
+2007-12-12 23:17:11,500 [8] INFO  NHibernate.Dialect.Dialect - Using dialect: NHibernate.Dialect.MsSql2000Dialect
+2007-12-12 23:17:11,500 [8] INFO  NHibernate.Cfg.HbmBinder - Mapping class: SJRAtlas.Models.InteractiveMap -> interactive_maps
+2007-12-12 23:17:11,515 [8] INFO  NHibernate.Dialect.Dialect - Using dialect: NHibernate.Dialect.MsSql2000Dialect
+2007-12-12 23:17:11,515 [8] INFO  NHibernate.Cfg.HbmBinder - Mapping class: SJRAtlas.Models.WaterBody -> tblWaterBody
+2007-12-12 23:17:11,515 [8] INFO  NHibernate.Cfg.HbmBinder - Mapping collection: SJRAtlas.Models.WaterBody.DataSetList -> auxWaterBody_DataType_XRef
+2007-12-12 23:17:11,515 [8] DEBUG SJRAtlas.Site.SJRAtlasContainer - Registering Controller SJRAtlas.Site.Controllers.WaterBodyController as waterbody.controller
+2007-12-12 23:17:11,515 [8] DEBUG SJRAtlas.Site.SJRAtlasContainer - Registering Controller SJRAtlas.Site.Controllers.SiteController as site.controller
+2007-12-12 23:17:11,515 [8] DEBUG SJRAtlas.Site.SJRAtlasContainer - Registering Controller SJRAtlas.Site.Controllers.PlaceController as place.controller
+2007-12-12 23:17:11,515 [8] DEBUG SJRAtlas.Site.SJRAtlasContainer - Registering Controller SJRAtlas.Site.Controllers.FeedbackController as feedback.controller
+2007-12-12 23:17:11,515 [8] DEBUG SJRAtlas.Site.SJRAtlasContainer - Registering Controller SJRAtlas.Site.Controllers.AgencyController as agency.controller
+2007-12-12 23:17:11,515 [8] DEBUG SJRAtlas.Site.SJRAtlasContainer - Registering Controller SJRAtlas.Site.Controllers.WatershedController as watershed.controller
+2007-12-12 23:17:11,515 [8] DEBUG SJRAtlas.Site.SJRAtlasContainer - Registering Controller SJRAtlas.Site.Controllers.SearchController as search.controller
+2007-12-12 23:17:51,328 [14] INFO  SJRAtlas.Site.GlobalApplication - ###### SJRATLAS APPLICATION ENDED ######
+2007-12-12 23:17:51,328 [14] INFO  Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - AR Facility is being disposed.
+2007-12-12 23:18:03,765 [14] DEBUG Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - Initializing AR Facility
+2007-12-12 23:18:03,781 [14] DEBUG Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - Loading model assembly 'SJRAtlas.Models' for AR
+2007-12-12 23:18:03,781 [14] INFO  Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - No Transaction Manager registered on Kernel, registering AR Transaction Manager
+2007-12-12 23:18:03,781 [14] INFO  Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - Initializing ActiveRecord Framework
+2007-12-12 23:18:03,843 [14] DEBUG Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - Is Debug enabled True
+2007-12-12 23:18:03,843 [14] DEBUG Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - ThreadScopeInfo Castle.ActiveRecord.Framework.Scopes.WebThreadScopeInfo
+2007-12-12 23:18:03,843 [14] DEBUG Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - NamingStrategy 
+2007-12-12 23:18:03,843 [14] DEBUG Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - SessionFactoryHolder Castle.ActiveRecord.Framework.SessionFactoryHolder
+2007-12-12 23:18:03,859 [14] INFO  Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - Registering SessionFactoryHolder named 'activerecord.sessionfactoryholder': Castle.ActiveRecord.Framework.SessionFactoryHolder
+2007-12-12 23:18:03,968 [14] INFO  NHibernate.Cfg.Environment - NHibernate 1.2.0.4000 (1.2.0.4000)
+2007-12-12 23:18:03,968 [14] INFO  NHibernate.Cfg.Environment - nhibernate section not found in application configuration file
+2007-12-12 23:18:04,000 [14] INFO  NHibernate.Cfg.Environment - Bytecode provider name : lcg
+2007-12-12 23:18:04,031 [14] INFO  NHibernate.Cfg.Environment - Using reflection optimizer
+2007-12-12 23:18:04,031 [14] INFO  Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - Registering SessionFactory named 'activerecord.sessionfactory' for the root type Castle.ActiveRecord.ActiveRecordBase: Castle.ActiveRecord.Framework.SessionFactoryHolder
+2007-12-12 23:18:04,171 [14] INFO  NHibernate.Dialect.Dialect - Using dialect: NHibernate.Dialect.MsSql2000Dialect
+2007-12-12 23:18:04,234 [14] INFO  NHibernate.Cfg.HbmBinder - Mapping class: SJRAtlas.Models.DataSet -> data_sets
+2007-12-12 23:18:04,281 [14] INFO  NHibernate.Dialect.Dialect - Using dialect: NHibernate.Dialect.MsSql2000Dialect
+2007-12-12 23:18:04,281 [14] INFO  NHibernate.Cfg.HbmBinder - Mapping class: SJRAtlas.Models.Publication -> publications
+2007-12-12 23:18:04,281 [14] INFO  NHibernate.Cfg.HbmBinder - Mapping subclass: SJRAtlas.Models.PublishedReport -> publications
+2007-12-12 23:18:04,281 [14] INFO  NHibernate.Cfg.HbmBinder - Mapping subclass: SJRAtlas.Models.PublishedMap -> publications
+2007-12-12 23:18:04,296 [14] INFO  NHibernate.Dialect.Dialect - Using dialect: NHibernate.Dialect.MsSql2000Dialect
+2007-12-12 23:18:04,296 [14] INFO  NHibernate.Cfg.HbmBinder - Mapping class: SJRAtlas.Models.ClosestWatershedToPlace -> closest_watershed_to_place
+2007-12-12 23:18:04,296 [14] INFO  NHibernate.Dialect.Dialect - Using dialect: NHibernate.Dialect.MsSql2000Dialect
+2007-12-12 23:18:04,296 [14] INFO  NHibernate.Cfg.HbmBinder - Mapping class: SJRAtlas.Models.InteractiveMap -> interactive_maps
+2007-12-12 23:18:04,312 [14] INFO  NHibernate.Dialect.Dialect - Using dialect: NHibernate.Dialect.MsSql2000Dialect
+2007-12-12 23:18:04,312 [14] INFO  NHibernate.Cfg.HbmBinder - Mapping class: SJRAtlas.Models.WaterBody -> tblWaterBody
+2007-12-12 23:18:04,312 [14] INFO  NHibernate.Cfg.HbmBinder - Mapping collection: SJRAtlas.Models.WaterBody.DataSetList -> auxWaterBody_DataType_XRef
+2007-12-12 23:18:04,328 [14] INFO  NHibernate.Dialect.Dialect - Using dialect: NHibernate.Dialect.MsSql2000Dialect
+2007-12-12 23:18:04,343 [14] INFO  NHibernate.Cfg.HbmBinder - Mapping class: SJRAtlas.Models.Place -> places
+2007-12-12 23:18:04,343 [14] INFO  NHibernate.Dialect.Dialect - Using dialect: NHibernate.Dialect.MsSql2000Dialect
+2007-12-12 23:18:04,343 [14] INFO  NHibernate.Cfg.HbmBinder - Mapping class: SJRAtlas.Models.Metadata -> metadata
+2007-12-12 23:18:04,359 [14] INFO  NHibernate.Dialect.Dialect - Using dialect: NHibernate.Dialect.MsSql2000Dialect
+2007-12-12 23:18:04,359 [14] INFO  NHibernate.Cfg.HbmBinder - Mapping class: SJRAtlas.Models.Watershed -> tblDrainageUnit
+2007-12-12 23:18:04,359 [14] DEBUG SJRAtlas.Site.SJRAtlasContainer - Registering Controller SJRAtlas.Site.Controllers.WaterBodyController as waterbody.controller
+2007-12-12 23:18:04,375 [14] DEBUG SJRAtlas.Site.SJRAtlasContainer - Registering Controller SJRAtlas.Site.Controllers.SiteController as site.controller
+2007-12-12 23:18:04,375 [14] DEBUG SJRAtlas.Site.SJRAtlasContainer - Registering Controller SJRAtlas.Site.Controllers.PlaceController as place.controller
+2007-12-12 23:18:04,375 [14] DEBUG SJRAtlas.Site.SJRAtlasContainer - Registering Controller SJRAtlas.Site.Controllers.FeedbackController as feedback.controller
+2007-12-12 23:18:04,375 [14] DEBUG SJRAtlas.Site.SJRAtlasContainer - Registering Controller SJRAtlas.Site.Controllers.AgencyController as agency.controller
+2007-12-12 23:18:04,375 [14] DEBUG SJRAtlas.Site.SJRAtlasContainer - Registering Controller SJRAtlas.Site.Controllers.WatershedController as watershed.controller
+2007-12-12 23:18:04,375 [14] DEBUG SJRAtlas.Site.SJRAtlasContainer - Registering Controller SJRAtlas.Site.Controllers.SearchController as search.controller
+2007-12-12 23:18:04,375 [14] INFO  SJRAtlas.Site.GlobalApplication - ##### SJRATLAS APPLICATION STARTED #####
+2007-12-12 23:18:04,390 [14] DEBUG Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - Initializing AR Facility
+2007-12-12 23:18:04,390 [14] DEBUG Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - Loading model assembly 'SJRAtlas.Models' for AR
+2007-12-12 23:18:04,390 [14] INFO  Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - No Transaction Manager registered on Kernel, registering AR Transaction Manager
+2007-12-12 23:18:04,390 [14] INFO  Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - Initializing ActiveRecord Framework
+2007-12-12 23:18:04,390 [14] DEBUG Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - Is Debug enabled True
+2007-12-12 23:18:04,390 [14] DEBUG Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - ThreadScopeInfo Castle.ActiveRecord.Framework.Scopes.WebThreadScopeInfo
+2007-12-12 23:18:04,390 [14] DEBUG Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - NamingStrategy 
+2007-12-12 23:18:04,390 [14] DEBUG Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - SessionFactoryHolder Castle.ActiveRecord.Framework.SessionFactoryHolder
+2007-12-12 23:18:04,390 [14] INFO  Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - Registering SessionFactoryHolder named 'activerecord.sessionfactoryholder': Castle.ActiveRecord.Framework.SessionFactoryHolder
+2007-12-12 23:18:04,390 [14] INFO  Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - Registering SessionFactory named 'activerecord.sessionfactory' for the root type Castle.ActiveRecord.ActiveRecordBase: Castle.ActiveRecord.Framework.SessionFactoryHolder
+2007-12-12 23:18:04,406 [14] INFO  NHibernate.Dialect.Dialect - Using dialect: NHibernate.Dialect.MsSql2000Dialect
+2007-12-12 23:18:04,406 [14] INFO  NHibernate.Cfg.HbmBinder - Mapping class: SJRAtlas.Models.DataSet -> data_sets
+2007-12-12 23:18:04,406 [14] INFO  NHibernate.Dialect.Dialect - Using dialect: NHibernate.Dialect.MsSql2000Dialect
+2007-12-12 23:18:04,406 [14] INFO  NHibernate.Cfg.HbmBinder - Mapping class: SJRAtlas.Models.Publication -> publications
+2007-12-12 23:18:04,406 [14] INFO  NHibernate.Cfg.HbmBinder - Mapping subclass: SJRAtlas.Models.PublishedReport -> publications
+2007-12-12 23:18:04,406 [14] INFO  NHibernate.Cfg.HbmBinder - Mapping subclass: SJRAtlas.Models.PublishedMap -> publications
+2007-12-12 23:18:04,406 [14] INFO  NHibernate.Dialect.Dialect - Using dialect: NHibernate.Dialect.MsSql2000Dialect
+2007-12-12 23:18:04,421 [14] INFO  NHibernate.Cfg.HbmBinder - Mapping class: SJRAtlas.Models.ClosestWatershedToPlace -> closest_watershed_to_place
+2007-12-12 23:18:04,421 [14] INFO  NHibernate.Dialect.Dialect - Using dialect: NHibernate.Dialect.MsSql2000Dialect
+2007-12-12 23:18:04,421 [14] INFO  NHibernate.Cfg.HbmBinder - Mapping class: SJRAtlas.Models.InteractiveMap -> interactive_maps
+2007-12-12 23:18:04,421 [14] INFO  NHibernate.Dialect.Dialect - Using dialect: NHibernate.Dialect.MsSql2000Dialect
+2007-12-12 23:18:04,421 [14] INFO  NHibernate.Cfg.HbmBinder - Mapping class: SJRAtlas.Models.WaterBody -> tblWaterBody
+2007-12-12 23:18:04,421 [14] INFO  NHibernate.Cfg.HbmBinder - Mapping collection: SJRAtlas.Models.WaterBody.DataSetList -> auxWaterBody_DataType_XRef
+2007-12-12 23:18:04,421 [14] INFO  NHibernate.Dialect.Dialect - Using dialect: NHibernate.Dialect.MsSql2000Dialect
+2007-12-12 23:18:04,421 [14] INFO  NHibernate.Cfg.HbmBinder - Mapping class: SJRAtlas.Models.Place -> places
+2007-12-12 23:18:04,437 [14] INFO  NHibernate.Dialect.Dialect - Using dialect: NHibernate.Dialect.MsSql2000Dialect
+2007-12-12 23:18:04,437 [14] INFO  NHibernate.Cfg.HbmBinder - Mapping class: SJRAtlas.Models.Metadata -> metadata
+2007-12-12 23:18:04,437 [14] INFO  NHibernate.Dialect.Dialect - Using dialect: NHibernate.Dialect.MsSql2000Dialect
+2007-12-12 23:18:04,437 [14] INFO  NHibernate.Cfg.HbmBinder - Mapping class: SJRAtlas.Models.Watershed -> tblDrainageUnit
+2007-12-12 23:18:04,437 [14] DEBUG SJRAtlas.Site.SJRAtlasContainer - Registering Controller SJRAtlas.Site.Controllers.WaterBodyController as waterbody.controller
+2007-12-12 23:18:04,437 [14] DEBUG SJRAtlas.Site.SJRAtlasContainer - Registering Controller SJRAtlas.Site.Controllers.SiteController as site.controller
+2007-12-12 23:18:04,437 [14] DEBUG SJRAtlas.Site.SJRAtlasContainer - Registering Controller SJRAtlas.Site.Controllers.PlaceController as place.controller
+2007-12-12 23:18:04,437 [14] DEBUG SJRAtlas.Site.SJRAtlasContainer - Registering Controller SJRAtlas.Site.Controllers.FeedbackController as feedback.controller
+2007-12-12 23:18:04,437 [14] DEBUG SJRAtlas.Site.SJRAtlasContainer - Registering Controller SJRAtlas.Site.Controllers.AgencyController as agency.controller
+2007-12-12 23:18:04,437 [14] DEBUG SJRAtlas.Site.SJRAtlasContainer - Registering Controller SJRAtlas.Site.Controllers.WatershedController as watershed.controller
+2007-12-12 23:18:04,437 [14] DEBUG SJRAtlas.Site.SJRAtlasContainer - Registering Controller SJRAtlas.Site.Controllers.SearchController as search.controller
+2007-12-12 23:20:27,093 [14] INFO  SJRAtlas.Site.Controllers.SiteController - Ajax Action Requested
+2007-12-12 23:20:27,156 [14] INFO  NHibernate.Cfg.Configuration - processing one-to-many association mappings
+2007-12-12 23:20:27,156 [14] INFO  NHibernate.Cfg.HbmBinder - mapping collection: SJRAtlas.Models.Watershed.WaterBodies -> tblWaterBody
+2007-12-12 23:20:27,156 [14] INFO  NHibernate.Cfg.Configuration - processing one-to-one association property references
+2007-12-12 23:20:27,156 [14] INFO  NHibernate.Cfg.Configuration - processing foreign key constraints
+2007-12-12 23:20:27,171 [14] INFO  NHibernate.Dialect.Dialect - Using dialect: NHibernate.Dialect.MsSql2000Dialect
+2007-12-12 23:20:27,171 [14] INFO  NHibernate.Connection.ConnectionProviderFactory - Initializing connection provider: NHibernate.Connection.DriverConnectionProvider
+2007-12-12 23:20:27,171 [14] INFO  NHibernate.Connection.ConnectionProvider - Configuring ConnectionProvider
+2007-12-12 23:20:27,171 [14] INFO  NHibernate.Driver.DriverBase - setting ADO.NET command timeout to 5000 seconds
+2007-12-12 23:20:27,171 [14] INFO  NHibernate.Cfg.SettingsFactory - Optimize cache for minimal puts: False
+2007-12-12 23:20:27,171 [14] INFO  NHibernate.Cfg.SettingsFactory - Connection release mode: auto
+2007-12-12 23:20:27,171 [14] INFO  NHibernate.Cfg.SettingsFactory - Query translator: NHibernate.Hql.Classic.ClassicQueryTranslatorFactory
+2007-12-12 23:20:27,171 [14] INFO  NHibernate.Cfg.SettingsFactory - Query language substitutions: {}
+2007-12-12 23:20:27,171 [14] INFO  NHibernate.Cfg.SettingsFactory - cache provider: NHibernate.Cache.NoCacheProvider, NHibernate, Version=1.2.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4
+2007-12-12 23:20:27,171 [14] INFO  NHibernate.Cfg.SettingsFactory - Using Isolation Level: ReadCommitted
+2007-12-12 23:20:27,187 [14] INFO  NHibernate.Impl.SessionFactoryImpl - building session factory
+2007-12-12 23:20:27,281 [14] INFO  NHibernate.Impl.SessionFactoryObjectFactory - no name configured
+2007-12-12 23:20:27,562 [14] INFO  NHibernate.Loader.Loader - SELECT top 1 this_.id as id12_0_, this_.title as title12_0_, this_.is_basin_map as is3_12_0_ FROM interactive_maps this_ WHERE this_.title = @p0
+2007-12-12 23:20:45,359 [14] WARN  NHibernate.Util.ADOExceptionReporter - NHibernate.ADOException: cannot open connection ---> System.Data.SqlClient.SqlException: An error has occurred while establishing a connection to the server.  When connecting to SQL Server 2005, this failure may be caused by the fact that under the default settings SQL Server does not allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
+   at System.Data.SqlClient.TdsParser.Connect(ServerInfo serverInfo, SqlInternalConnectionTds connHandler, Boolean ignoreSniOpenTimeout, Int64 timerExpire, Boolean encrypt, Boolean trustServerCert, Boolean integratedSecurity, SqlConnection owningObject)
+   at System.Data.SqlClient.SqlInternalConnectionTds.AttemptOneLogin(ServerInfo serverInfo, String newPassword, Boolean ignoreSniOpenTimeout, Int64 timerExpire, SqlConnection owningObject)
+   at System.Data.SqlClient.SqlInternalConnectionTds.LoginNoFailover(String host, String newPassword, Boolean redirectedUserInstance, SqlConnection owningObject, SqlConnectionString connectionOptions, Int64 timerStart)
+   at System.Data.SqlClient.SqlInternalConnectionTds.OpenLoginEnlist(SqlConnection owningObject, SqlConnectionString connectionOptions, String newPassword, Boolean redirectedUserInstance)
+   at System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, Object providerInfo, String newPassword, SqlConnection owningObject, Boolean redirectedUserInstance)
+   at System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection)
+   at System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnection owningConnection, DbConnectionPool pool, DbConnectionOptions options)
+   at System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject)
+   at System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject)
+   at System.Data.ProviderBase.DbConnectionPool.GetConnection(DbConnection owningObject)
+   at System.Data.ProviderBase.DbConnectionFactory.GetConnection(DbConnection owningConnection)
+   at System.Data.ProviderBase.DbConnectionClosed.OpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at NHibernate.Connection.DriverConnectionProvider.GetConnection()
+   at NHibernate.Impl.SessionFactoryImpl.OpenConnection()
+   --- End of inner exception stack trace ---
+   at NHibernate.Impl.SessionFactoryImpl.OpenConnection()
+   at NHibernate.Impl.ConnectionManager.GetConnection()
+   at NHibernate.Impl.BatcherImpl.Prepare(IDbCommand cmd)
+   at NHibernate.Impl.BatcherImpl.ExecuteReader(IDbCommand cmd)
+   at NHibernate.Loader.Loader.GetResultSet(IDbCommand st, RowSelection selection, ISessionImplementor session)
+2007-12-12 23:20:45,390 [14] ERROR NHibernate.Util.ADOExceptionReporter - cannot open connection
+2007-12-12 23:20:45,390 [14] WARN  NHibernate.Util.ADOExceptionReporter - System.Data.SqlClient.SqlException: An error has occurred while establishing a connection to the server.  When connecting to SQL Server 2005, this failure may be caused by the fact that under the default settings SQL Server does not allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
+   at System.Data.SqlClient.TdsParser.Connect(ServerInfo serverInfo, SqlInternalConnectionTds connHandler, Boolean ignoreSniOpenTimeout, Int64 timerExpire, Boolean encrypt, Boolean trustServerCert, Boolean integratedSecurity, SqlConnection owningObject)
+   at System.Data.SqlClient.SqlInternalConnectionTds.AttemptOneLogin(ServerInfo serverInfo, String newPassword, Boolean ignoreSniOpenTimeout, Int64 timerExpire, SqlConnection owningObject)
+   at System.Data.SqlClient.SqlInternalConnectionTds.LoginNoFailover(String host, String newPassword, Boolean redirectedUserInstance, SqlConnection owningObject, SqlConnectionString connectionOptions, Int64 timerStart)
+   at System.Data.SqlClient.SqlInternalConnectionTds.OpenLoginEnlist(SqlConnection owningObject, SqlConnectionString connectionOptions, String newPassword, Boolean redirectedUserInstance)
+   at System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, Object providerInfo, String newPassword, SqlConnection owningObject, Boolean redirectedUserInstance)
+   at System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection)
+   at System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnection owningConnection, DbConnectionPool pool, DbConnectionOptions options)
+   at System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject)
+   at System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject)
+   at System.Data.ProviderBase.DbConnectionPool.GetConnection(DbConnection owningObject)
+   at System.Data.ProviderBase.DbConnectionFactory.GetConnection(DbConnection owningConnection)
+   at System.Data.ProviderBase.DbConnectionClosed.OpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at NHibernate.Connection.DriverConnectionProvider.GetConnection()
+   at NHibernate.Impl.SessionFactoryImpl.OpenConnection()
+2007-12-12 23:20:45,390 [14] ERROR NHibernate.Util.ADOExceptionReporter - An error has occurred while establishing a connection to the server.  When connecting to SQL Server 2005, this failure may be caused by the fact that under the default settings SQL Server does not allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server)
+2007-12-12 23:20:45,437 [14] ERROR SJRAtlas.Site.Controllers.SiteController - Controller Error
+System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. ---> Castle.ActiveRecord.Framework.ActiveRecordException: Could not perform SlicedFindAll for InteractiveMap ---> NHibernate.ADOException: cannot open connection ---> System.Data.SqlClient.SqlException: An error has occurred while establishing a connection to the server.  When connecting to SQL Server 2005, this failure may be caused by the fact that under the default settings SQL Server does not allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
+   at System.Data.SqlClient.TdsParser.Connect(ServerInfo serverInfo, SqlInternalConnectionTds connHandler, Boolean ignoreSniOpenTimeout, Int64 timerExpire, Boolean encrypt, Boolean trustServerCert, Boolean integratedSecurity, SqlConnection owningObject)
+   at System.Data.SqlClient.SqlInternalConnectionTds.AttemptOneLogin(ServerInfo serverInfo, String newPassword, Boolean ignoreSniOpenTimeout, Int64 timerExpire, SqlConnection owningObject)
+   at System.Data.SqlClient.SqlInternalConnectionTds.LoginNoFailover(String host, String newPassword, Boolean redirectedUserInstance, SqlConnection owningObject, SqlConnectionString connectionOptions, Int64 timerStart)
+   at System.Data.SqlClient.SqlInternalConnectionTds.OpenLoginEnlist(SqlConnection owningObject, SqlConnectionString connectionOptions, String newPassword, Boolean redirectedUserInstance)
+   at System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, Object providerInfo, String newPassword, SqlConnection owningObject, Boolean redirectedUserInstance)
+   at System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection)
+   at System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnection owningConnection, DbConnectionPool pool, DbConnectionOptions options)
+   at System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject)
+   at System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject)
+   at System.Data.ProviderBase.DbConnectionPool.GetConnection(DbConnection owningObject)
+   at System.Data.ProviderBase.DbConnectionFactory.GetConnection(DbConnection owningConnection)
+   at System.Data.ProviderBase.DbConnectionClosed.OpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at NHibernate.Connection.DriverConnectionProvider.GetConnection()
+   at NHibernate.Impl.SessionFactoryImpl.OpenConnection()
+   --- End of inner exception stack trace ---
+   at NHibernate.Impl.SessionFactoryImpl.OpenConnection()
+   at NHibernate.Impl.ConnectionManager.GetConnection()
+   at NHibernate.Impl.BatcherImpl.Prepare(IDbCommand cmd)
+   at NHibernate.Impl.BatcherImpl.ExecuteReader(IDbCommand cmd)
+   at NHibernate.Loader.Loader.GetResultSet(IDbCommand st, RowSelection selection, ISessionImplementor session)
+   at NHibernate.Loader.Loader.DoQuery(ISessionImplementor session, QueryParameters queryParameters, Boolean returnProxies)
+   at NHibernate.Loader.Loader.DoQueryAndInitializeNonLazyCollections(ISessionImplementor session, QueryParameters queryParameters, Boolean returnProxies)
+   at NHibernate.Loader.Loader.DoList(ISessionImplementor session, QueryParameters queryParameters)
+   at NHibernate.Loader.Loader.ListIgnoreQueryCache(ISessionImplementor session, QueryParameters queryParameters)
+   at NHibernate.Loader.Loader.List(ISessionImplementor session, QueryParameters queryParameters, ISet querySpaces, IType[] resultTypes)
+   at NHibernate.Loader.Criteria.CriteriaLoader.List(ISessionImplementor session)
+   at NHibernate.Impl.SessionImpl.Find(CriteriaImpl criteria, IList results)
+   at NHibernate.Impl.SessionImpl.Find(CriteriaImpl criteria)
+   at NHibernate.Impl.CriteriaImpl.List()
+   at Castle.ActiveRecord.ActiveRecordBase.SlicedFindAll(Type targetType, Int32 firstResult, Int32 maxResults, Order[] orders, DetachedCriteria criteria) in c:\src\castle\ActiveRecord\Castle.ActiveRecord\Framework\ActiveRecordBase.cs:line 1333
+   --- End of inner exception stack trace ---
+   at Castle.ActiveRecord.ActiveRecordBase.SlicedFindAll(Type targetType, Int32 firstResult, Int32 maxResults, Order[] orders, DetachedCriteria criteria) in c:\src\castle\ActiveRecord\Castle.ActiveRecord\Framework\ActiveRecordBase.cs:line 1345
+   at Castle.ActiveRecord.ActiveRecordBase.FindFirst(Type targetType, DetachedCriteria detachedCriteria, Order[] orders) in c:\src\castle\ActiveRecord\Castle.ActiveRecord\Framework\ActiveRecordBase.cs:line 1178
+   at Castle.ActiveRecord.ActiveRecordBase`1.FindFirst(DetachedCriteria criteria, Order[] orders) in c:\src\castle\ActiveRecord\Castle.ActiveRecord\Framework\ActiveRecordBase.Generic.cs:line 460
+   at SJRAtlas.Models.InteractiveMap.FindByTitle(String title) in C:\Documents and Settings\colin\My Documents\Visual Studio 2005\Projects\Atlas\trunk\SJRAtlas.Models\InteractiveMap.cs:line 81
+   at SJRAtlas.Models.AtlasMediator.FindInteractiveMapByTitle(String title) in C:\Documents and Settings\colin\My Documents\Visual Studio 2005\Projects\Atlas\trunk\SJRAtlas.Models\AtlasRepository.cs:line 32
+   at SJRAtlas.Site.Controllers.SiteController.Index() in C:\Documents and Settings\colin\My Documents\Visual Studio 2005\Projects\Atlas\trunk\SJRAtlas.Site\Controllers\SiteController.cs:line 21
+   --- End of inner exception stack trace ---
+   at System.RuntimeMethodHandle._InvokeMethodFast(Object target, Object[] arguments, SignatureStruct& sig, MethodAttributes methodAttributes, RuntimeTypeHandle typeOwner)
+   at System.RuntimeMethodHandle.InvokeMethodFast(Object target, Object[] arguments, Signature sig, MethodAttributes methodAttributes, RuntimeTypeHandle typeOwner)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture, Boolean skipVisibilityChecks)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at System.Reflection.MethodBase.Invoke(Object obj, Object[] parameters)
+   at SJRAtlas.Site.SJRAtlasController.InvokeMethod(MethodInfo method, IRequest request, IDictionary actionArgs) in C:\Documents and Settings\colin\My Documents\Visual Studio 2005\Projects\Atlas\trunk\SJRAtlas.Site\SJRAtlasController.cs:line 46
+2007-12-12 23:20:47,359 [4] DEBUG Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - Initializing AR Facility
+2007-12-12 23:20:47,359 [4] DEBUG Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - Loading model assembly 'SJRAtlas.Models' for AR
+2007-12-12 23:20:47,359 [4] INFO  Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - No Transaction Manager registered on Kernel, registering AR Transaction Manager
+2007-12-12 23:20:47,359 [4] INFO  Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - Initializing ActiveRecord Framework
+2007-12-12 23:20:47,359 [4] DEBUG Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - Is Debug enabled True
+2007-12-12 23:20:47,359 [4] DEBUG Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - ThreadScopeInfo Castle.ActiveRecord.Framework.Scopes.WebThreadScopeInfo
+2007-12-12 23:20:47,359 [4] DEBUG Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - NamingStrategy 
+2007-12-12 23:20:47,359 [4] DEBUG Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - SessionFactoryHolder Castle.ActiveRecord.Framework.SessionFactoryHolder
+2007-12-12 23:20:47,359 [4] INFO  Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - Registering SessionFactoryHolder named 'activerecord.sessionfactoryholder': Castle.ActiveRecord.Framework.SessionFactoryHolder
+2007-12-12 23:20:47,359 [4] INFO  Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - Registering SessionFactory named 'activerecord.sessionfactory' for the root type Castle.ActiveRecord.ActiveRecordBase: Castle.ActiveRecord.Framework.SessionFactoryHolder
+2007-12-12 23:20:47,437 [4] INFO  NHibernate.Dialect.Dialect - Using dialect: NHibernate.Dialect.MsSql2000Dialect
+2007-12-12 23:20:47,437 [4] INFO  NHibernate.Cfg.HbmBinder - Mapping class: SJRAtlas.Models.DataSet -> data_sets
+2007-12-12 23:20:47,453 [4] INFO  NHibernate.Dialect.Dialect - Using dialect: NHibernate.Dialect.MsSql2000Dialect
+2007-12-12 23:20:47,453 [4] INFO  NHibernate.Cfg.HbmBinder - Mapping class: SJRAtlas.Models.Publication -> publications
+2007-12-12 23:20:47,453 [4] INFO  NHibernate.Cfg.HbmBinder - Mapping subclass: SJRAtlas.Models.PublishedReport -> publications
+2007-12-12 23:20:47,453 [4] INFO  NHibernate.Cfg.HbmBinder - Mapping subclass: SJRAtlas.Models.PublishedMap -> publications
+2007-12-12 23:20:47,453 [4] INFO  NHibernate.Dialect.Dialect - Using dialect: NHibernate.Dialect.MsSql2000Dialect
+2007-12-12 23:20:47,453 [4] INFO  NHibernate.Cfg.HbmBinder - Mapping class: SJRAtlas.Models.ClosestWatershedToPlace -> closest_watershed_to_place
+2007-12-12 23:20:47,468 [4] INFO  NHibernate.Dialect.Dialect - Using dialect: NHibernate.Dialect.MsSql2000Dialect
+2007-12-12 23:20:47,468 [4] INFO  NHibernate.Cfg.HbmBinder - Mapping class: SJRAtlas.Models.InteractiveMap -> interactive_maps
+2007-12-12 23:20:47,468 [4] INFO  NHibernate.Dialect.Dialect - Using dialect: NHibernate.Dialect.MsSql2000Dialect
+2007-12-12 23:20:47,468 [4] INFO  NHibernate.Cfg.HbmBinder - Mapping class: SJRAtlas.Models.WaterBody -> tblWaterBody
+2007-12-12 23:20:47,468 [4] INFO  NHibernate.Cfg.HbmBinder - Mapping collection: SJRAtlas.Models.WaterBody.DataSetList -> auxWaterBody_DataType_XRef
+2007-12-12 23:20:47,468 [4] INFO  NHibernate.Dialect.Dialect - Using dialect: NHibernate.Dialect.MsSql2000Dialect
+2007-12-12 23:20:47,468 [4] INFO  NHibernate.Cfg.HbmBinder - Mapping class: SJRAtlas.Models.Place -> places
+2007-12-12 23:20:47,468 [4] INFO  NHibernate.Dialect.Dialect - Using dialect: NHibernate.Dialect.MsSql2000Dialect
+2007-12-12 23:20:47,468 [4] INFO  NHibernate.Cfg.HbmBinder - Mapping class: SJRAtlas.Models.Metadata -> metadata
+2007-12-12 23:20:47,484 [4] INFO  NHibernate.Dialect.Dialect - Using dialect: NHibernate.Dialect.MsSql2000Dialect
+2007-12-12 23:20:47,484 [4] INFO  NHibernate.Cfg.HbmBinder - Mapping class: SJRAtlas.Models.Watershed -> tblDrainageUnit
+2007-12-12 23:20:47,484 [4] DEBUG SJRAtlas.Site.SJRAtlasContainer - Registering Controller SJRAtlas.Site.Controllers.WaterBodyController as waterbody.controller
+2007-12-12 23:20:47,484 [4] DEBUG SJRAtlas.Site.SJRAtlasContainer - Registering Controller SJRAtlas.Site.Controllers.SiteController as site.controller
+2007-12-12 23:20:47,484 [4] DEBUG SJRAtlas.Site.SJRAtlasContainer - Registering Controller SJRAtlas.Site.Controllers.PlaceController as place.controller
+2007-12-12 23:20:47,484 [4] DEBUG SJRAtlas.Site.SJRAtlasContainer - Registering Controller SJRAtlas.Site.Controllers.FeedbackController as feedback.controller
+2007-12-12 23:20:47,484 [4] DEBUG SJRAtlas.Site.SJRAtlasContainer - Registering Controller SJRAtlas.Site.Controllers.AgencyController as agency.controller
+2007-12-12 23:20:47,484 [4] DEBUG SJRAtlas.Site.SJRAtlasContainer - Registering Controller SJRAtlas.Site.Controllers.WatershedController as watershed.controller
+2007-12-12 23:20:47,484 [4] DEBUG SJRAtlas.Site.SJRAtlasContainer - Registering Controller SJRAtlas.Site.Controllers.SearchController as search.controller
+2007-12-12 23:21:01,734 [3] INFO  SJRAtlas.Site.GlobalApplication - ###### SJRATLAS APPLICATION ENDED ######
+2007-12-12 23:21:01,734 [3] INFO  Castle.Facilities.ActiveRecordIntegration.ActiveRecordFacility - AR Facility is being disposed.
