@@ -16,7 +16,7 @@
                 
                 <div id="expanded-info">
                     <div id="interactive-maps">
-                    #if($interactive_maps == null)
+                    #if($interactive_maps.Count == 0)
                         <p>No Interactive Maps</p>
                     #else
                         #component(interactive_map with "maps=$interactive_maps")
@@ -24,7 +24,7 @@
                     </div>
 
                     <div id="publications">    
-                    #if($publications == null)
+                    #if($publications.Count == 0)
                         <p>No Publications</p>
                     #else
                         #component(publication with "publications=$publications")

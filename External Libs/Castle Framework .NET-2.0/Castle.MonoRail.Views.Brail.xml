@@ -4,6 +4,11 @@
         <name>Castle.MonoRail.Views.Brail</name>
     </assembly>
     <members>
+        <member name="T:Castle.MonoRail.Views.Brail.Macros.ComponentNaming">
+            <summary>
+            we need to have a unique name, because of MR 371, nested components should not use the same name.
+            </summary>
+        </member>
         <member name="F:Castle.MonoRail.Views.Brail.BooViewEngine.compilations">
             <summary>
             This field holds all the cache of all the 
@@ -21,12 +26,28 @@
             This is used to add a reference to the common scripts for each compiled scripts
             </summary>
         </member>
-        <member name="M:Castle.MonoRail.Views.Brail.BooViewEngine.ResolveTemplateName(System.String,System.String)">
+        <member name="M:Castle.MonoRail.Views.Brail.BooViewEngine.RenderStaticWithinLayout(System.String,Castle.MonoRail.Framework.IEngineContext,Castle.MonoRail.Framework.IController,Castle.MonoRail.Framework.IControllerContext)">
             <summary>
-            Resolves the template name into a  file name.
+            Wraps the specified content in the layout using the
+            context to output the result.
+            </summary>
+            <param name="contents"></param>
+            <param name="context"></param>
+            <param name="controller"></param>
+            <param name="controllerContext"></param>
+        </member>
+        <member name="M:Castle.MonoRail.Views.Brail.BooViewEngine.GetCompiledScriptInstance(System.String,System.IO.TextWriter,Castle.MonoRail.Framework.IEngineContext,Castle.MonoRail.Framework.IController,Castle.MonoRail.Framework.IControllerContext)">
+            <summary>
+            This takes a filename and return an instance of the view ready to be used.
+            If the file does not exist, an exception is raised
+            The cache is checked to see if the file has already been compiled, and it had been
+            a check is made to see that the compiled instance is newer then the file's modification date.
+            If the file has not been compiled, or the version on disk is newer than the one in memory, a new
+            version is compiled.
+            Finally, an instance is created and returned	
             </summary>
         </member>
-        <member name="M:Castle.MonoRail.Views.Brail.BooViewEngine.DoCompile(System.Collections.Generic.ICollection{Boo.Lang.Compiler.ICompilerInput},System.String)">
+        <member name="M:Castle.MonoRail.Views.Brail.BooViewEngine.DoCompile(System.Collections.Generic.IEnumerable{Boo.Lang.Compiler.ICompilerInput},System.String)">
             <summary>
             Perform the actual compilation of the scripts
             Things to note here:
@@ -36,6 +57,7 @@
             * The ProcessMethodBodiesWithDuckTyping is replaced with ReplaceUknownWithParameters
               this allows to use naked parameters such as (output context.IsLocal) without using 
               any special syntax
+            * The FixTryGetParameterConditionalChecks is run afterward, to transform "if ?Error" to "if not ?Error isa IgnoreNull"
             * The ExpandDuckTypedExpressions is replace with a derived step that allows the use of Dynamic Proxy assemblies
             * The IntroduceGlobalNamespaces step is removed, to allow to use common variables such as 
               date and list without accidently using the Boo.Lang.BuiltIn versions
@@ -51,14 +73,14 @@
              resources usage, etc. 
              </summary>
         </member>
+        <member name="F:Castle.MonoRail.Views.Brail.BrailBase._dsl">
+            <summary>
+            Reference to the DSL service
+            </summary>
+        </member>
         <member name="F:Castle.MonoRail.Views.Brail.BrailBase.childOutput">
             <summary>
             This is used by layout scripts only, for outputing the child's content
-            </summary>
-        </member>
-        <member name="F:Castle.MonoRail.Views.Brail.BrailBase.viewComponentsParameters">
-            <summary>
-            used to hold the ComponentParams from the view, so their views/sections could access them
             </summary>
         </member>
         <member name="F:Castle.MonoRail.Views.Brail.BrailBase.parent">
@@ -66,12 +88,12 @@
             usually used by the layout to refer to its view, or a subview to its parent
             </summary>
         </member>
-        <member name="F:Castle.MonoRail.Views.Brail.BrailBase._dsl">
+        <member name="F:Castle.MonoRail.Views.Brail.BrailBase.viewComponentsParameters">
             <summary>
-            Reference to the DSL service
+            used to hold the ComponentParams from the view, so their views/sections could access them
             </summary>
         </member>
-        <member name="M:Castle.MonoRail.Views.Brail.BrailBase.#ctor(Castle.MonoRail.Views.Brail.BooViewEngine,System.IO.TextWriter,Castle.MonoRail.Framework.IRailsEngineContext,Castle.MonoRail.Framework.Controller)">
+        <member name="M:Castle.MonoRail.Views.Brail.BrailBase.#ctor(Castle.MonoRail.Views.Brail.BooViewEngine,System.IO.TextWriter,Castle.MonoRail.Framework.IEngineContext,Castle.MonoRail.Framework.IController,Castle.MonoRail.Framework.IControllerContext)">
             <summary>
             Initializes a new instance of the <see cref="T:Castle.MonoRail.Views.Brail.BrailBase"/> class.
             </summary>
@@ -79,6 +101,7 @@
             <param name="output">The output.</param>
             <param name="context">The context.</param>
             <param name="__controller">The controller.</param>
+            <param name="__controllerContext">The __controller context.</param>
         </member>
         <member name="M:Castle.MonoRail.Views.Brail.BrailBase.Run">
             <summary>
@@ -162,6 +185,12 @@
             behavior from components call RenderText() or RenderSection()
             </summary>
         </member>
+        <member name="M:Castle.MonoRail.Views.Brail.BrailBase.OutputEscaped(System.Object)">
+            <summary>
+            Will output the given value as escaped HTML
+            </summary>
+            <param name="toOutput"></param>
+        </member>
         <member name="M:Castle.MonoRail.Views.Brail.BrailBase.AddProperty(System.String,System.Object)">
             <summary>
             Note that this will overwrite any existing property.
@@ -182,14 +211,15 @@
             </summary>
             <param name="propertiesToRemove">The properties to remove.</param>
         </member>
-        <member name="M:Castle.MonoRail.Views.Brail.BrailBase.InitProperties(Castle.MonoRail.Framework.IRailsEngineContext,Castle.MonoRail.Framework.Controller)">
+        <member name="M:Castle.MonoRail.Views.Brail.BrailBase.InitProperties(Castle.MonoRail.Framework.IEngineContext,Castle.MonoRail.Framework.IController,Castle.MonoRail.Framework.IControllerContext)">
             <summary>
             Initialize all the properties that a script may need
             One thing to note here is that resources are wrapped in ResourceToDuck wrapper
             to enable easy use by the script
             </summary>
-            <param name="myContext"></param>
-            <param name="myController"></param>
+            <param name="myContext">My context.</param>
+            <param name="myController">My controller.</param>
+            <param name="controllerContext">The controller context.</param>
         </member>
         <member name="P:Castle.MonoRail.Views.Brail.BrailBase.ScriptDirectory">
              <summary>
@@ -233,10 +263,27 @@
             </summary>
             <value>The properties.</value>
         </member>
+        <member name="M:Castle.MonoRail.Views.Brail.BrailJSElementGenerator.#ctor(Castle.MonoRail.Framework.JSGeneration.IJSCodeGenerator,Castle.MonoRail.Framework.JSGeneration.IJSElementGenerator,System.Object[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:Castle.MonoRail.Views.Brail.BrailJSElementGenerator"/> class.
+            </summary>
+            <param name="codeGen">The code gen.</param>
+            <param name="elementGenerator">The element generator.</param>
+            <param name="extensions">The extensions.</param>
+        </member>
         <member name="T:Castle.MonoRail.Views.Brail.BrailJSGenerator">
             <summary>
             
             </summary>
+        </member>
+        <member name="M:Castle.MonoRail.Views.Brail.BrailJSGenerator.#ctor(Castle.MonoRail.Framework.JSGeneration.IJSCodeGenerator,Castle.MonoRail.Framework.JSGeneration.IJSGenerator,System.Object[],System.Object[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:Castle.MonoRail.Views.Brail.BrailJSGenerator"/> class.
+            </summary>
+            <param name="codeGen">The code gen.</param>
+            <param name="generator">The generator.</param>
+            <param name="extensions">The extensions.</param>
+            <param name="elementExtensions">The element extensions.</param>
         </member>
         <member name="M:Castle.MonoRail.Views.Brail.BrailJSGenerator.QuackGet(System.String,System.Object[])">
             <summary>
@@ -261,14 +308,6 @@
             <param name="method">The method name.</param>
             <param name="args">The method arguments.</param>
             <returns>value back to the template</returns>
-        </member>
-        <member name="M:Castle.MonoRail.Views.Brail.BrailJSGenerator.ToString">
-            <summary>
-            Delegates to the generator
-            </summary>
-            <returns>
-            A <see cref="T:System.String"></see> that represents the current <see cref="T:System.Object"></see>.
-            </returns>
         </member>
         <member name="M:Castle.MonoRail.Views.Brail.BrailPreProcessor.GetExpressionsPositions(System.String)">
             <summary>
@@ -311,6 +350,23 @@
             The code is mostly taken fro Boo.Lang.Runtime.RuntimeServices, and modified to understand that when the type is from DP, is should
             use DeclareOnly
             </summary>
+        </member>
+        <member name="T:Castle.MonoRail.Views.Brail.FixTryGetParameterConditionalChecks">
+            <summary>
+            We need to handle the following code:
+            if ?Error:
+            end
+            
+            However, because ?Op will return an IgnoreNull object, we can't just
+            use the default boo behavior, but need to fix it up
+            </summary>
+        </member>
+        <member name="T:Castle.MonoRail.Views.Brail.ReplaceUknownWithParameters">
+            <summary>
+             Replace any uknown identifier with a call to GetParameter('unknown')
+             this mean that unknonw identifier in scripts will only fail in run time if they
+             were not defined by the controller.
+             </summary>
         </member>
     </members>
 </doc>

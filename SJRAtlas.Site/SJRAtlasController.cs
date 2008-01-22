@@ -32,6 +32,7 @@ namespace SJRAtlas.Site
             set { atlasMediator = value; }
         }
 
+        /*
         protected override void InvokeMethod(MethodInfo method, IRequest request, IDictionary actionArgs)
         {
             bool isAjaxAction = method.GetCustomAttributes(typeof(AjaxActionAttribute), false).Length > 0;
@@ -89,5 +90,6 @@ namespace SJRAtlas.Site
                 throw e;
             }
         }
+         **/
     }
 }

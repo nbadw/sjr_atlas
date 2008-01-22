@@ -17,18 +17,18 @@ namespace SJRAtlas.Site.Tests.Controllers
         public void TestIndexAction()
         {
             AtlasMediator mediator = mocks.CreateMock<AtlasMediator>();
-            IList<InteractiveMap> mapResult = new List<InteractiveMap>();
+            IList<InteractiveMap> interactiveMaps = mocks.CreateMock<IList<InteractiveMap>>();
 
-            Expect.Call(mediator.FindInteractiveMapByTitle("")).IgnoreArguments().
-                Repeat.Times(6).Return(new InteractiveMap());
+            Expect.Call(mediator.FindAllInteractiveMapsByTitles(null)).IgnoreArguments()
+                .Return(interactiveMaps);
             mocks.ReplayAll();
 
             SiteController controller = new SiteController();
             controller.AtlasMediator = mediator;
             PrepareController(controller, "site", "index");
             controller.Index();
-            
-            Assert.IsNotNull(controller.PropertyBag["interactive_maps"]);
+
+            Assert.AreEqual(interactiveMaps, controller.PropertyBag["interactive_maps"]);
             Assert.AreEqual(@"site\index", controller.SelectedViewName);
             mocks.VerifyAll();
         }
@@ -63,10 +63,23 @@ namespace SJRAtlas.Site.Tests.Controllers
         [Test]
         public void TestMaps()
         {
+            AtlasMediator mediator = mocks.CreateMock<AtlasMediator>();
+            IList<InteractiveMap> interactiveMaps = mocks.CreateMock<IList<InteractiveMap>>();
+            IList<PublishedMap> publishedMaps = mocks.CreateMock<IList<PublishedMap>>();
+
+            Expect.Call(mediator.FindAll<InteractiveMap>()).Return(interactiveMaps);
+            Expect.Call(mediator.FindAllPublishedMaps()).Return(publishedMaps);
+            mocks.ReplayAll();
+
             SiteController controller = new SiteController();
+            controller.AtlasMediator = mediator;
             PrepareController(controller, "site", "maps");
             controller.Maps();
+
+            Assert.AreEqual(interactiveMaps, controller.PropertyBag["interactive_maps"]);
+            Assert.AreEqual(publishedMaps, controller.PropertyBag["published_maps"]);
             Assert.AreEqual(@"site\maps", controller.SelectedViewName);
+            mocks.VerifyAll();
         }
     }
 }

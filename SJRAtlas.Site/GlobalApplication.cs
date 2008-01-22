@@ -13,9 +13,10 @@ namespace SJRAtlas.Site
 
 		public GlobalApplication() 
         {
-            container = new SJRAtlasContainer();     
-            logger = (container[typeof(ILoggerFactory)] as ILoggerFactory).Create(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
             instance = this;
+            container = new SJRAtlasContainer();
+            //IWindsorContainer container = new RhinoContainer("Windsor.boo");
+            logger = (container[typeof(ILoggerFactory)] as ILoggerFactory).Create(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         }
 
 		public void Application_OnStart()

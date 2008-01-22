@@ -75,6 +75,11 @@ namespace SJRAtlas.Models.Tests
             properties.Add("Title", "New Map Title");
             properties.Add("Id", 3);
             properties.Add("IsBasinMap", true);
+            properties.Add("ServiceName", "new service");
+            properties.Add("ThumbnailUrl", "http://location.to.thumbnail");
+            properties.Add("LargeThumbnailUrl", "http://location.to.larger.thumbnail");
+            properties.Add("CreatedAt", DateTime.Now);
+            properties.Add("UpdatedAt", DateTime.Now);
             TestHelper.ErrorSummary summary = TestHelper.TestProperties(map, properties);
             Assert.IsEmpty(summary, "The following errors occured while testing InteractiveMap properties:\n" + summary.GetSummary());
         }

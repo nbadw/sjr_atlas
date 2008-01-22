@@ -13,14 +13,14 @@
                 <h2>Interactive Maps</h2>
                 <div id="xeasymaps">
                     <ul>
-                    #foreach( $map in $maps )
+                    #foreach( $map in $interactive_maps )
                         <li class="xeasymap">
-                            <h4 class="title"><a target="_blank" href="http://gis.mektekdev.com/demo/Default.aspx?resource=$map.ResourceName">$map.Title</a></h4>
+                            <h4 class="title"><a target="_blank" href="http://gis.mektekdev.com/demo/Default.aspx?resource=$map.ServiceName">$map.Title</a></h4>
                         </li>
                     #end
                     </ul>
                 </div>
-                <p>Looking for <a href="/maps/index.rails">more maps</a>?</p>                    
+                <p>Looking for $Url.Link('more maps', "%{controller='site', action='maps'}")</a>?</p>                    
             </div>
             <div class="yui-u">
                 <h2>Quick Search</h2>                <p>Enter a place name, lake or stream name, data set name, or other text string to search for maps, reports, data and other information. See also: $Url.Link('Search Tips', "%{controller='search', action='tips'}")</p>

@@ -12,7 +12,7 @@ namespace SJRAtlas.Models
             return (T)ActiveRecordBase<T>.Find(id);
         }
 
-        public static IList<T> FindAll<T>() where T : ActiveRecordBase<T>
+        public virtual IList<T> FindAll<T>() where T : ActiveRecordBase<T>
         {
             return (IList<T>)ActiveRecordBase<T>.FindAll();
         }
@@ -37,6 +37,11 @@ namespace SJRAtlas.Models
             return InteractiveMap.FindByTitle(title);
         }
 
+        public virtual IList<InteractiveMap> FindAllInteractiveMapsByTitles(params string[] titles)
+        {
+            return InteractiveMap.FindAllByTitles(titles);
+        }
+
         public virtual IList<Place> FindAllPlacesByQuery(string query)
         {
             return Place.FindAllByQuery(query);
@@ -45,6 +50,17 @@ namespace SJRAtlas.Models
         public virtual IList<Watershed> FindAllWatershedsByQuery(string query)
         {
             return Watershed.FindAllByQuery(query);
+        }
+
+        public virtual IList<PublishedMap> FindAllPublishedMaps()
+        {
+            IList<Publication> publications = PublishedMap.FindAll();
+            List<PublishedMap> publishedMaps = new List<PublishedMap>(publications.Count);
+            foreach (Publication publication in publications)
+            {
+                publishedMaps.Add((PublishedMap)publication);
+            }
+            return publishedMaps;
         }
     }
 }

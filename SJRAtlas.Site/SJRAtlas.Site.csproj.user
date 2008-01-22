@@ -13,7 +13,7 @@
           <NativeDebugging>False</NativeDebugging>
           <SQLDebugging>False</SQLDebugging>
           <PublishCopyOption>ProjectFiles</PublishCopyOption>
-          <PublishTargetLocation>ftp://dev-server/Inetpub/atlas-site/</PublishTargetLocation>
+          <PublishTargetLocation>http://localhost/Atlas/</PublishTargetLocation>
           <PublishDeleteAllFiles>False</PublishDeleteAllFiles>
           <PublishCopyAppData>True</PublishCopyAppData>
           <ExternalProgram>

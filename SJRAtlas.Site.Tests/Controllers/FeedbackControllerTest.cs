@@ -66,7 +66,7 @@ namespace SJRAtlas.Site.Tests.Controllers
 
         private void SimulateOneValidationErrorFor(SmartDispatcherController controller, object instance)
         {
-            controller.ValidationSummaryPerInstance.Add(instance, CreateDummyErrorSummaryWithOneError());
+            //controller.ValidationSummaryPerInstance.Add(instance, CreateDummyErrorSummaryWithOneError());
         }
 
         private ErrorSummary CreateDummyErrorSummaryWithOneError()

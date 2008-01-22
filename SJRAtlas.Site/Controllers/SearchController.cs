@@ -25,6 +25,7 @@ namespace SJRAtlas.Site.Controllers
             else
             {
                 Logger.Debug("Quick Search is redirecting to the Gazetteer Search");
+                //RedirectToRoute("/search/places/" + q);
                 RedirectToAction("places", "q=" + q);
                 return;
             }
@@ -49,6 +50,7 @@ namespace SJRAtlas.Site.Controllers
 
             PropertyBag["results"] = results;
             PropertyBag["query"] = q;
+            RenderView("places");
         }
 
         public void Watersheds(string q)

@@ -100,36 +100,9 @@
             <param name="propName">the property or field to set</param>
             <param name="value">the value to set the property or field to.</param>
         </member>
-        <member name="T:Castle.MonoRail.Framework.Views.NVelocity.JSGeneration.JSCollectionGeneratorDuck">
-            <summary>
-            Pendent
-            </summary>
-        </member>
-        <member name="M:Castle.MonoRail.Framework.Views.NVelocity.JSGeneration.JSCollectionGeneratorDuck.GetInvoke(System.String)">
-            <summary>
-            Defines the behavior when a property is read
-            </summary>
-            <param name="propName">Property name.</param>
-            <returns>value back to the template</returns>
-        </member>
-        <member name="M:Castle.MonoRail.Framework.Views.NVelocity.JSGeneration.JSCollectionGeneratorDuck.SetInvoke(System.String,System.Object)">
-            <summary>
-            Defines the behavior when a property is written
-            </summary>
-            <param name="propName">Property name.</param>
-            <param name="value">The value to assign.</param>
-        </member>
-        <member name="M:Castle.MonoRail.Framework.Views.NVelocity.JSGeneration.JSCollectionGeneratorDuck.Invoke(System.String,System.Object[])">
-            <summary>
-            Invokes the specified method.
-            </summary>
-            <param name="method">The method name.</param>
-            <param name="args">The method arguments.</param>
-            <returns>value back to the template</returns>
-        </member>
         <member name="T:Castle.MonoRail.Framework.Views.NVelocity.JSGeneration.JSElementGeneratorDuck">
             <summary>
-            
+            Pendent
             </summary>
         </member>
         <member name="M:Castle.MonoRail.Framework.Views.NVelocity.JSGeneration.JSElementGeneratorDuck.GetInvoke(System.String)">
@@ -159,11 +132,14 @@
             
             </summary>
         </member>
-        <member name="M:Castle.MonoRail.Framework.Views.NVelocity.JSGeneration.JSGeneratorDuck.#ctor(Castle.MonoRail.Framework.Helpers.IJSGenerator)">
+        <member name="M:Castle.MonoRail.Framework.Views.NVelocity.JSGeneration.JSGeneratorDuck.#ctor(Castle.MonoRail.Framework.JSGeneration.IJSCodeGenerator,Castle.MonoRail.Framework.JSGeneration.IJSGenerator,System.Object[],System.Object[])">
             <summary>
             Initializes a new instance of the <see cref="T:Castle.MonoRail.Framework.Views.NVelocity.JSGeneration.JSGeneratorDuck"/> class.
             </summary>
+            <param name="codeGen">The code gen.</param>
             <param name="generator">The generator.</param>
+            <param name="extensions">The extensions.</param>
+            <param name="elementExtensions">The element extensions.</param>
         </member>
         <member name="M:Castle.MonoRail.Framework.Views.NVelocity.JSGeneration.JSGeneratorDuck.GetInvoke(System.String)">
             <summary>
@@ -186,6 +162,15 @@
             <param name="method">The method name.</param>
             <param name="args">The method arguments.</param>
             <returns>value back to the template</returns>
+        </member>
+        <member name="M:Castle.MonoRail.Framework.Views.NVelocity.JSGeneration.JSGeneratorDuck.CreateJSElementGeneratorProxy(Castle.MonoRail.Framework.JSGeneration.IJSCodeGenerator,Castle.MonoRail.Framework.JSGeneration.IJSElementGenerator,System.Object[])">
+            <summary>
+            Creates a JS element generator.
+            </summary>
+            <param name="codeGen">The code gen.</param>
+            <param name="elementGenerator">The element generator.</param>
+            <param name="elementExtensions">The element extensions.</param>
+            <returns></returns>
         </member>
         <member name="T:Castle.MonoRail.Framework.Views.NVelocity.CustomDirectiveManager">
             <summary>
@@ -311,31 +296,15 @@
             </para>
             </summary>
         </member>
-        <member name="M:Castle.MonoRail.Framework.Views.NVelocity.NVelocityViewEngine.#ctor">
+        <member name="M:Castle.MonoRail.Framework.Views.NVelocity.NVelocityViewEngine.Process(System.String,System.IO.TextWriter,Castle.MonoRail.Framework.IEngineContext,Castle.MonoRail.Framework.IController,Castle.MonoRail.Framework.IControllerContext)">
             <summary>
-            Creates a new <see cref="T:Castle.MonoRail.Framework.Views.NVelocity.NVelocityViewEngine"/> instance.
+            Pendent.
             </summary>
-        </member>
-        <member name="M:Castle.MonoRail.Framework.Views.NVelocity.NVelocityViewEngine.HasTemplate(System.String)">
-            <summary>
-            Evaluates whether the specified template exists.
-            </summary>
-            <param name="templateName"></param>
-            <returns><c>true</c> if it exists</returns>
-        </member>
-        <member name="M:Castle.MonoRail.Framework.Views.NVelocity.NVelocityViewEngine.Process(Castle.MonoRail.Framework.IRailsEngineContext,Castle.MonoRail.Framework.Controller,System.String)">
-            <summary>
-            Processes the specified context.
-            </summary>
+            <param name="output">The output.</param>
             <param name="context">The context.</param>
             <param name="controller">The controller.</param>
+            <param name="controllerContext">The controller context.</param>
             <param name="viewName">Name of the view.</param>
-        </member>
-        <member name="M:Castle.MonoRail.Framework.Views.NVelocity.NVelocityViewEngine.Process(System.IO.TextWriter,Castle.MonoRail.Framework.IRailsEngineContext,Castle.MonoRail.Framework.Controller,System.String)">
-            <summary>
-            Processes the view - using the templateName to obtain the correct template
-            and writes the results to the System.TextWriter. No layout is applied!
-            </summary>
         </member>
         <member name="M:Castle.MonoRail.Framework.Views.NVelocity.NVelocityViewEngine.InitializeVelocityProperties(Commons.Collections.ExtendedProperties)">
             <summary>
@@ -343,16 +312,6 @@
             allow this logic to be overrided.
             </summary>
             <param name="props">The <see cref="T:Commons.Collections.ExtendedProperties"/> collection to populate.</param>
-        </member>
-        <member name="M:Castle.MonoRail.Framework.Views.NVelocity.NVelocityViewEngine.ResolveTemplateName(System.String)">
-            <summary>
-            Resolves the template name into a velocity template file name.
-            </summary>
-        </member>
-        <member name="M:Castle.MonoRail.Framework.Views.NVelocity.NVelocityViewEngine.ResolveJSTemplateName(System.String)">
-            <summary>
-            Resolves the template name into a velocity JS template file name.
-            </summary>
         </member>
         <member name="M:Castle.MonoRail.Framework.Views.NVelocity.NVelocityViewEngine.ResolveLayoutTemplateName(System.String)">
             <summary>

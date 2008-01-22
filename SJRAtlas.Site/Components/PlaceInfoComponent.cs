@@ -28,6 +28,11 @@ namespace SJRAtlas.Site.Components
 
         public override void Render()
         {
+            PropertyBag["cgndb_key"] = Place.CgndbKey;
+            PropertyBag["name"] = Place.Name;
+            PropertyBag["region"] = Place.Region;
+            PropertyBag["status_term"] = Place.NameStatus;
+
             PropertyBag["type"] = Place.GenericTerm;
             PropertyBag["county"] = Place.County;
             PropertyBag["latitude"] = Place.Latitude;

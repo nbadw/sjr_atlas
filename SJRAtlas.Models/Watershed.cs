@@ -69,15 +69,6 @@ namespace SJRAtlas.Models
             }
         }
 
-        private IList<WaterBody> waterbodies;
-
-        [HasMany(typeof(WaterBody), Cascade = ManyRelationCascadeEnum.SaveUpdate)]
-        public IList<WaterBody> WaterBodies
-        {
-            get { return waterbodies; }
-            set { waterbodies = value; }
-        }
-
         private DataSet[] datasets;
 
         public DataSet[] DataSets
@@ -125,6 +116,15 @@ namespace SJRAtlas.Models
         {
             get { return place; }            
             set { place = value; }
+        }
+
+        private IList<WaterBody> waterbodies;
+
+        [HasMany(typeof(WaterBody), Cascade = ManyRelationCascadeEnum.SaveUpdate, Lazy = true)]
+        public IList<WaterBody> WaterBodies
+        {
+            get { return waterbodies; }
+            set { waterbodies = value; }
         }
 
         private string drainsInto;

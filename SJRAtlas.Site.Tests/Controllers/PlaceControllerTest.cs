@@ -171,7 +171,7 @@ namespace SJRAtlas.Site.Tests.Controllers
             PrepareController(controller, "view", "place");
             controller.View(id);
             Assert.IsTrue(Response.WasRedirected);
-            Assert.AreEqual("/waterbody/view.rails?place=" + id + "&", Response.RedirectedTo);
+            Assert.AreEqual("/waterbody/view.rails?cgndbKey=" + id, Response.RedirectedTo);
             mocks.VerifyAll();
         }
 
@@ -195,7 +195,7 @@ namespace SJRAtlas.Site.Tests.Controllers
             PrepareController(controller, "view", "place");
             controller.View(id);
             Assert.IsTrue(Response.WasRedirected);
-            Assert.AreEqual("/watershed/view.rails?place=" + id + "&", Response.RedirectedTo);
+            Assert.AreEqual("/watershed/view.rails?cgndbKey=" + id, Response.RedirectedTo);
             mocks.VerifyAll();
         }
     }

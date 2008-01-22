@@ -3,52 +3,49 @@ using System.Collections.Generic;
 using Castle.Core.Logging;
 using Castle.MonoRail.Framework;
 using SJRAtlas.Models;
+using NHibernate.Expression;
 
 namespace SJRAtlas.Site.Controllers
 {
-    [Layout("sjratlas"), Rescue("generalerror")]
+    [Layout("sjratlas")]
+    [Rescue("generalerror")]
+    [DefaultAction("Index")]
     public class SiteController : SJRAtlasController
     {
         public void Index()
         {
-            string[] mapsToDisplay = {
+            Logger.Debug("Site/Index action called");
+            string[] mapTitles = {
                     "Saint John River Basin", "Major Landowners Map", "Land Use",
-                    "Topographic Map", "Lake Depths Map","Watershed Maps" };
-
-            IList<InteractiveMap> maps = new List<InteractiveMap>(mapsToDisplay.Length);
-            foreach (string title in mapsToDisplay)
-            {
-                maps.Add(AtlasMediator.FindInteractiveMapByTitle(title));
-            }
-
+                    "Topographic Map", "Lake Depths Map", "Watershed Maps" };
+            IList<InteractiveMap> maps = AtlasMediator.FindAllInteractiveMapsByTitles(mapTitles);
             PropertyBag["interactive_maps"] = maps;
             RenderView("index");
         }
 
         public void About()
         {
+            Logger.Debug("Site/Maps action called");
             RenderView("about");
         }
 
         public void Forms()
         {
+            Logger.Debug("Site/Maps action called");
             RenderView("forms");
         }
 
         public void Reports()
         {
+            Logger.Debug("Site/Maps action called");
             RenderView("reports");
         }
 
         public void Maps()
-        {
-            //Logger.Info("Maps/Index action called");
-            //// Grab all the easy maps
-            //IEasyMap[] maps = EasyMapLookup.FindAll();
-            //IMetadata[] mapMetadata = MetadataLookup.FindByType(MetadataType.Maps);
-            //AttachMetadataToMaps(maps, mapMetadata);
-            //PropertyBag["maps"] = maps;
-            //PropertyBag["published_maps"] = RemoveEasyMaps(mapMetadata, maps);
+        {            
+            Logger.Debug("Site/Maps action called");
+            PropertyBag["interactive_maps"] = AtlasMediator.FindAll<InteractiveMap>();
+            PropertyBag["published_maps"] = AtlasMediator.FindAllPublishedMaps();
             RenderView("maps");
         }
     }

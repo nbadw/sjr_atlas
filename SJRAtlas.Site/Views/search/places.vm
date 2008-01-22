@@ -14,7 +14,7 @@
 var map;
 var markers = new Object();
 #foreach($result in $results)
-markers['$result.Id'] = new GMarker(new GLatLng($result.LatDec, $result.LongDec));
+markers['$result.Id'] = new GMarker(new GLatLng($result.Latitude, $result.Longitude));
 #end
 
 function load()
@@ -27,8 +27,8 @@ function load()
         
         // create the map
         map = new GMap2(map_element);
-        var bounds = new GLatLngBounds(new GLatLng($min_lat, $min_lon), new GLatLng($max_lat, $max_lon));                    
-        map.setCenter(bounds.getCenter(), map.getBoundsZoomLevel(bounds, new GSize($map_width, $map_height)));
+        //var bounds = new GLatLngBounds(new GLatLng($min_lat, $min_lon), new GLatLng($max_lat, $max_lon));                    
+        //map.setCenter(bounds.getCenter(), map.getBoundsZoomLevel(bounds, new GSize($map_width, $map_height)));
         map.addControl(new GLargeMapControl());
         
         // add marker overlays
@@ -71,7 +71,7 @@ evt.addListener(document.body, 'unload', unload);
             <div class="yui-u first">
                 <h2>Which Location Did You Mean?</h2>
                 #foreach($result in $results)
-                    #component(placename with "placename=$result")
+                    #component(place_info with "place=$result")
                 #end                    
             </div>
             <div class="yui-u">

@@ -23,7 +23,7 @@
                     </div> 
                     <div id="easymaps">                    
                         <ul>
-                        #foreach( $map in $maps )
+                        #foreach( $map in $interactive_maps )
                             <li class="easymap" onmouseover="show_large_preview('$!{map.LargeThumbnail}');" onmouseout="remove_large_preview();">
                                 <img class="thumbnail" alt="Map Preview" src="$!{map.Thumbnail}" />
                                 <h4 class="title"><a target="_blank" href="http://gis.mektekdev.com/demo/Default.aspx?resource=$map.ResourceName">$map.Title</a></h4>

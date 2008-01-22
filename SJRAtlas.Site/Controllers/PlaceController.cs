@@ -22,7 +22,7 @@ namespace SJRAtlas.Site.Controllers
                 if (AtlasMediator.WaterBodyExistsForCgndbKeyOrAltCgndbKey(place.CgndbKey))
                 {                    
                     Dictionary<string, string> parameters = new Dictionary<string, string>();
-                    parameters.Add("place", place.CgndbKey);
+                    parameters.Add("cgndbKey", place.CgndbKey);
                     Redirect("", "waterbody", "view", parameters);
                     return;
                 }
@@ -30,7 +30,7 @@ namespace SJRAtlas.Site.Controllers
                 if (AtlasMediator.WatershedExistsForCgndbKey(place.CgndbKey))
                 {
                     Dictionary<string, string> parameters = new Dictionary<string, string>();
-                    parameters.Add("place", place.CgndbKey);
+                    parameters.Add("cgndbKey", place.CgndbKey);
                     Redirect("", "watershed", "view", parameters);
                     return;
                 }
