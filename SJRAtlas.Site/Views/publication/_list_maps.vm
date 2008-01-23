@@ -1,0 +1,3 @@
+#foreach( $publication in $published_maps )
+    #component(publication with "Publication=$publication")
+#end

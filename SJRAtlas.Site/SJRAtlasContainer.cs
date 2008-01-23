@@ -5,7 +5,6 @@ using Castle.Core.Resource;
 using SJRAtlas.Site.Controllers;
 using Castle.Core.Logging;
 using Castle.MonoRail.WindsorExtension;
-using Castle.MonoRail.Framework.Routing;
 
 namespace SJRAtlas.Site
 {
@@ -43,20 +42,22 @@ namespace SJRAtlas.Site
             }
         }
 
-        protected virtual void RegisterRoutes()
-        {
-            RoutingModuleEx.Engine.Add(
-                new PatternRoute("/search/<action>/[params]").
-                DefaultForController().Is("search").
-                DefaultForArea().IsEmpty.
-                DefaultForAction().Is("advanced")
-            );
-            RoutingModuleEx.Engine.Add(
-                new PatternRoute("/<action>").
-                DefaultForController().Is("site").
-                DefaultForArea().IsEmpty.
-                DefaultForAction().Is("index")
-            );
-        }
+        //protected virtual void RegisterRoutes()
+        //{
+        //    RoutingModuleEx.Engine.Add(
+        //        new PatternRoute("/search/<action>/[q]").
+        //        DefaultForController().Is("search").
+        //        DefaultForArea().IsEmpty.
+        //        DefaultForAction().Is("advanced")
+        //    );
+        //    RoutingModuleEx.Engine.Add(
+        //        new PatternRoute("/<controller>/<action>/<id>"));
+        //    RoutingModuleEx.Engine.Add(
+        //        new PatternRoute("/<action>").
+        //        DefaultForController().Is("site").
+        //        DefaultForArea().IsEmpty.
+        //        DefaultForAction().Is("index")
+        //    );
+        //}
     }
 }

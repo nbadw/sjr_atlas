@@ -13,8 +13,6 @@ namespace SJRAtlas.Models
         public InteractiveMap()
         {
             isBasinMap = false;
-            createdAt = DateTime.Now;
-            updatedAt = DateTime.Now;
         }
 
         public static IList<InteractiveMap> FindAllByQuery(string query)
@@ -23,6 +21,14 @@ namespace SJRAtlas.Models
             criteria.Add(Expression.Like("Title", query));
             return ActiveRecordMediator<InteractiveMap>.FindAll(criteria, 
                 new Order[] { Order.Asc("Title") });
+        }
+
+        protected override bool BeforeSave(IDictionary state)
+        {
+            if ((DateTime)state["CreatedAt"] == DateTime.MinValue)
+                state["CreatedAt"] = DateTime.Now;
+            state["UpdatedAt"] = DateTime.Now;
+            return true;
         }
 
         #region ActiveRecord Properties

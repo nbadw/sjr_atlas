@@ -33,11 +33,11 @@
             <summary>
             Called during Velocity merge if a reference is null
             </summary>
-            <param name="type">Class that is causing the exception</param>
+            <param name="claz">Class that is causing the exception</param>
             <param name="method">method called that causes the exception</param>
             <param name="e">Exception thrown by the method</param>
             <returns>Object to return as method result</returns>
-            <exception cref="T:System.Exception">exception to be wrapped and propagated to app</exception>
+            <exception cref="T:System.Exception">exception to be wrapped and propogated to app</exception>
         </member>
         <member name="M:NVelocity.App.Events.EventCartridge.AttachToContext(NVelocity.Context.IContext)">
             <summary>
@@ -56,6 +56,15 @@
             
              </version>
         </member>
+        <member name="T:NVelocity.App.Events.MethodExceptionEventHandler">
+            <summary>
+            Called when a method throws an exception.  This gives the
+            application a chance to deal with it and either
+            return something nice, or throw.
+            
+            Please return what you want rendered into the output stream.
+            </summary>
+        </member>
         <member name="T:NVelocity.App.Events.NullSetEventHandler">
             <summary>
             Lets an app approve / veto writing a log message when RHS of #set() is null.
@@ -63,12 +72,19 @@
         </member>
         <member name="P:NVelocity.App.Events.NullSetEventArgs.LHS">
             <summary>
-            Reference literal of left-hand-side of set statement
+            reference literal of left-hand-side of set statement
             </summary>
         </member>
         <member name="P:NVelocity.App.Events.NullSetEventArgs.RHS">
             <summary>
             reference literal of right-hand-side of set statement
+            </summary>
+        </member>
+        <member name="T:NVelocity.App.Events.ReferenceInsertionEventHandler">
+            <summary>
+            Reference 'Stream insertion' event handler.  Called with object
+            that will be inserted into stream via value.toString().
+            Make sure you return an Object that will toString() without throwing an exception.
             </summary>
         </member>
         <member name="T:NVelocity.App.Tools.VelocityFormatter">
@@ -91,7 +107,7 @@
         </member>
         <member name="M:NVelocity.App.Tools.VelocityFormatter.#ctor(NVelocity.Context.IContext)">
             <summary>
-            Constructor needs a backPointer to the context.
+            Constructor needs a backpointer to the context.
             </summary>
             <param name="context">A Context.</param>
         </member>
@@ -142,11 +158,11 @@
         <member name="M:NVelocity.App.Tools.VelocityFormatter.FormatArray(System.Object,System.String,System.String)">
             <summary>
             Formats an array into the form
-            "A&lt;delim&gt;B&lt;finalDelimiter&gt;C".
+            "A&lt;delim&gt;B&lt;finaldelim&gt;C".
             </summary>
             <param name="array">An Object.</param>
             <param name="delim">A String.</param>
-            <param name="finalDelimiter">A String.</param>
+            <param name="finaldelim">A String.</param>
             <returns>A String.</returns>
         </member>
         <member name="M:NVelocity.App.Tools.VelocityFormatter.FormatVector(System.Collections.IList)">
@@ -167,28 +183,28 @@
         <member name="M:NVelocity.App.Tools.VelocityFormatter.FormatVector(System.Collections.IList,System.String,System.String)">
             <summary>
             Formats a list into the form
-            "Adelim&gt;B&lt;finalDelimiter&gt;C".
+            "Adelim&gt;B&lt;finaldelim&gt;C".
             </summary>
             <param name="list">A list.</param>
             <param name="delim">A String.</param>
-            <param name="finalDelimiter">A String.</param>
+            <param name="finaldelim">A String.</param>
             <returns>A String.</returns>
         </member>
         <member name="M:NVelocity.App.Tools.VelocityFormatter.LimitLen(System.Int32,System.String)">
             <summary>
-            Limits 'string' to 'maximumLength' characters.  If the string gets
+            Limits 'string' to 'maxlen' characters.  If the string gets
             curtailed, "..." is appended to it.
             </summary>
-            <param name="maximumLength">An int with the maximum length.</param>
+            <param name="maxlen">An int with the maximum length.</param>
             <param name="value">A String.</param>
             <returns>A String.</returns>
         </member>
         <member name="M:NVelocity.App.Tools.VelocityFormatter.LimitLen(System.Int32,System.String,System.String)">
             <summary>
-            Limits 'string' to 'maximumLength' character.  If the string gets
+            Limits 'string' to 'maxlen' character.  If the string gets
             curtailed, 'suffix' is appended to it.
             </summary>
-            <param name="maximumLength">An int with the maximum length.</param>
+            <param name="maxlen">An int with the maximum length.</param>
             <param name="value">A String.</param>
             <param name="suffix">A String.</param>
             <returns>A String.</returns>
@@ -201,10 +217,10 @@
             
             <code>
             &lt;table&gt;
-            $formatter.makeAlternator("rowColor", "#c0c0c0", "#e0e0e0")
+            $formatter.makeAlternator("rowcolor", "#c0c0c0", "#e0e0e0")
             #foreach $item in $items
-            &lt;tr&gt;&lt;td bgcolor="$rowColor"&gt;$item.Name&lt;/td&gt;&lt;/tr&gt;
-            $rowColor.alternate()
+            &lt;tr&gt;&lt;td bgcolor="$rowcolor"&gt;$item.Name&lt;/td&gt;&lt;/tr&gt;
+            $rowcolor.alternate()
             #end
             &lt;/table&gt;
             </code>
@@ -282,7 +298,7 @@
         <member name="M:NVelocity.App.Tools.VelocityFormatter.VelocityAutoAlternator.ToString">
             <summary>
             Returns the current alternate, and automatically alternates
-            to the next alternate in its sequence (triggered upon
+            to the next alternate in its sequence (trigged upon
             rendering).
             </summary>
             <returns>The current alternate in the sequence.</returns>
@@ -463,7 +479,7 @@
             <param name="context">context to use in rendering input string</param>
             <param name="writer"> Writer in which to render the output</param>
             <param name="logTag"> string to be used as the template name for log messages in case of error</param>
-            <param name="inString">input string containing the VTL to be rendered</param>
+            <param name="instring">input string containing the VTL to be rendered</param>
             <returns>true if successful, false otherwise.  If false, see Velocity runtime log</returns>
         </member>
         <member name="M:NVelocity.App.Velocity.Evaluate(NVelocity.Context.IContext,System.IO.TextWriter,System.String,System.IO.Stream)">
@@ -492,7 +508,7 @@
         </member>
         <member name="M:NVelocity.App.Velocity.InvokeVelocimacro(System.String,System.String,System.String[],NVelocity.Context.IContext,System.IO.TextWriter)">
             <summary>
-            Invokes a currently registered Velocimacro with the parameters provided
+            Invokes a currently registered Velocimacro with the parms provided
             and places the rendered stream into the writer.
             
             Note : currently only accepts args to the VM if they are in the context.
@@ -560,7 +576,7 @@
         </member>
         <member name="M:NVelocity.App.Velocity.ResourceExists(System.String)">
             <summary>
-            <p>Determines whether a resource is accessible via the
+            <p>Determines whether a resource is accessable via the
             currently configured resource loaders. <see cref="T:NVelocity.Runtime.Resource.Resource"/>
             is the generic description of templates, static content, etc.</p>
             
@@ -600,15 +616,15 @@
         <member name="M:NVelocity.App.Velocity.SetApplicationAttribute(System.Object,System.Object)">
             <summary>
             <p>
-            Set the an ApplicationAttribute, which is an Object
-            set by the application which is accessible from
+            Set the an ApplicationAttribue, which is an Object
+            set by the application which is accessable from
             any component of the system that gets a RuntimeServices.
             This allows communication between the application
             environment and custom pluggable components of the
             Velocity engine, such as loaders and loggers.
             </p>
             <p>
-            Note that there is no enforcement or rules for the key
+            Note that there is no enfocement or rules for the key
             used - it is up to the application developer.  However, to
             help make the intermixing of components possible, using
             the target Class name (e.g.  com.foo.bar ) as the key
@@ -691,7 +707,7 @@
             initialize the Velocity runtime engine, using default properties
             plus the properties in the passed in java.util.Properties object
             </summary>
-            <param name="p"> Properties object containing initialization properties</param>
+            <param name="p"> Proprties object containing initialization properties</param>
         </member>
         <member name="M:NVelocity.App.VelocityEngine.SetProperty(System.String,System.Object)">
             <summary>
@@ -707,7 +723,7 @@
             <summary>
             Clear a Velocity Runtime property.
             </summary>
-            <param name="key">key of property to clear</param>
+            <param name="key">ley of property to clear</param>
         </member>
         <member name="M:NVelocity.App.VelocityEngine.GetProperty(System.String)">
             <summary>
@@ -727,7 +743,7 @@
             <param name="context">context to use in rendering input string</param>
             <param name="writer"> Writer in which to render the output</param>
             <param name="logTag"> string to be used as the template name for log messages in case of error</param>
-            <param name="inString">input string containing the VTL to be rendered</param>
+            <param name="instring">input string containing the VTL to be rendered</param>
             <returns>true if successful, false otherwise.  If false, see Velocity runtime log</returns>
         </member>
         <member name="M:NVelocity.App.VelocityEngine.Evaluate(NVelocity.Context.IContext,System.IO.TextWriter,System.String,System.IO.Stream)">
@@ -756,7 +772,7 @@
         </member>
         <member name="M:NVelocity.App.VelocityEngine.InvokeVelocimacro(System.String,System.String,System.String[],NVelocity.Context.IContext,System.IO.TextWriter)">
             <summary>
-            Invokes a currently registered Velocimacro with the parameters provided
+            Invokes a currently registered Velocimacro with the parms provided
             and places the rendered stream into the writer.
             Note : currently only accepts args to the VM if they are in the context.
             </summary>
@@ -827,7 +843,7 @@
         </member>
         <member name="M:NVelocity.App.VelocityEngine.TemplateExists(System.String)">
             <summary>
-            Determines if a template is accessible via the currently
+            Determines if a template is accessable via the currently
             configured resource loaders.
             <br/><br/>
             Note that the current implementation will <b>not</b>
@@ -835,10 +851,10 @@
             cannot be used to pre-load the resource cache, as the
             previous implementation did as a side-effect.
             <br/><br/>
-            The previous implementation exhibited extreme laziness and
+            The previous implementation exhibited extreme lazyness and
             sloth, and the author has been flogged.
             </summary>
-            <param name="templateName"> name of the template to search for
+            <param name="templateName"> name of the temlpate to search for
             </param>
             <returns>true if found, false otherwise
             </returns>
@@ -871,15 +887,15 @@
         <member name="M:NVelocity.App.VelocityEngine.SetApplicationAttribute(System.Object,System.Object)">
             <summary>
             <p>
-            Set the an ApplicationAttribute, which is an Object
-            set by the application which is accessible from
+            Set the an ApplicationAttribue, which is an Object
+            set by the application which is accessable from
             any component of the system that gets a RuntimeServices.
             This allows communication between the application
             environment and custom pluggable components of the
             Velocity engine, such as loaders and loggers.
             </p>
             <p>
-            Note that there is no enforcement or rules for the key
+            Note that there is no enfocement or rules for the key
             used - it is up to the application developer.  However, to
             help make the intermixing of components possible, using
             the target Class name (e.g.  com.foo.bar ) as the key
@@ -999,7 +1015,7 @@
         </member>
         <member name="F:Commons.Collections.ExtendedProperties.isInitialized">
             <summary>
-            Has this configuration been initialized.
+            Has this configuration been intialized.
             </summary>
         </member>
         <member name="F:Commons.Collections.ExtendedProperties.include">
@@ -1038,6 +1054,13 @@
             <param name="defaultFile">File to load defaults from.</param>
             <exception cref="T:System.IO.IOException"/>
         </member>
+        <member name="M:Commons.Collections.ExtendedProperties.Init(Commons.Collections.ExtendedProperties)">
+            <summary>
+            Private initializer method that sets up the generic
+            resources.
+            </summary>
+            <exception cref="T:System.IO.IOException">if there was an I/O problem.</exception>
+        </member>
         <member name="M:Commons.Collections.ExtendedProperties.IsInitialized">
             <summary>
             Indicate to client code whether property
@@ -1051,7 +1074,7 @@
             </summary>
             <param name="input">An InputStream.
             </param>
-            <param name="encoding">An encoding.
+            <param name="enc">An encoding.
             </param>
             <exception cref="T:System.IO.IOException"/>
         </member>
@@ -1088,7 +1111,7 @@
         </member>
         <member name="M:Commons.Collections.ExtendedProperties.AddPropertyDirect(System.String,System.Object)">
              <summary>   Adds a key/value pair to the map.  This routine does
-             no magic morphing.  It ensures the keyList is maintained
+             no magic morphing.  It ensures the keylist is maintained
              *
              </summary>
              <param name="key">key to use for mapping
@@ -1101,7 +1124,7 @@
              <summary>  Sets a string property w/o checking for commas - used
              internally when a property has been broken up into
              strings that could contain escaped commas to prevent
-             the inadvertent vectorization.
+             the inadvertant vectorization.
             
              Thanks to Leon Messerschmidt for this one.
             
@@ -1113,10 +1136,10 @@
             to clearProperty(key), addProperty(key,value).
             </summary>
             <param name="key"></param>
-            <param name="value"></param>
+            <param name="value_"></param>
         </member>
         <member name="M:Commons.Collections.ExtendedProperties.Save(System.IO.TextWriter,System.String)">
-            <summary> Save the properties to the given outputStream.
+            <summary> Save the properties to the given outputstream.
             </summary>
             <param name="output">An OutputStream.
             </param>
@@ -1326,7 +1349,7 @@
              boolean status is ignored.
              *
              </summary>
-             <param name="value">The value to test for boolean state.
+             <param name="value_">The value to test for boolean state.
              </param>
              <returns><code>true</code> or <code>false</code> if the supplied
              text maps to a boolean value, or <code>null</code> otherwise.
@@ -1537,6 +1560,38 @@
             <param name="p">properties object to convert into a ExtendedProperties object.</param>
             <returns>ExtendedProperties configuration created from the properties object.</returns>
         </member>
+        <member name="T:Commons.Collections.KeyedList">
+             <summary>
+            Using The KeyedList
+            Using the KeyedList is just like using a Hashtable, except that when you enumerate through the list, the entries are in the same order as when they were added to the list.  Believe me, I needed this capability!
+            
+            using System;
+            using System.Collections;
+            
+            namespace KeyedListTest {
+                class ConsoleApp {
+            	[STAThread]
+            	static void Main(string[] args) {
+            	    KeyedList k=new KeyedList();
+            	    k.Add("One", 1);
+            	    k.Add("Two", 2);
+            	    k.Add("Three", 3);
+            	    k.Add("Four", 4);
+            	    k.Add("Five", 5);
+            	    k.Add("Six", 6);
+            	    k.Add("Seven", 7);
+            	    k.Add("Eight", 8);
+            	    k.Add("Nine", 9);
+            	    k.Add("Ten", 10);
+            
+            	    foreach(DictionaryEntry entry in k) {
+            		Console.WriteLine(entry.Key+": "+entry.Value.ToString());
+            	    }
+            	}
+                }
+            }
+             </summary>
+        </member>
         <member name="T:Commons.Collections.LRUMap">
             <summary>
             A keyed list with a fixed maximum size which removes
@@ -1600,6 +1655,12 @@
             Constructor.
             </summary>
             <param name="str">A String</param>
+        </member>
+        <member name="M:Commons.Collections.PropertiesTokenizer.HasMoreTokens">
+            <summary> Check whether the object has more tokens.
+            </summary>
+            <returns>True if the object has more tokens.
+            </returns>
         </member>
         <member name="M:Commons.Collections.PropertiesTokenizer.NextToken">
             <summary>
@@ -1814,20 +1875,6 @@
             <summary>  the chained Context if any
             </summary>
         </member>
-        <member name="M:NVelocity.Context.AbstractContext.#ctor">
-            <summary>  default CTOR
-            </summary>
-        </member>
-        <member name="M:NVelocity.Context.AbstractContext.#ctor(NVelocity.Context.IContext)">
-             <summary>  Chaining constructor accepts a Context argument.
-             It will relay get() operations into this Context
-             in the even the 'local' get() returns null.
-            
-             </summary>
-             <param name="inner">context to be chained
-            
-             </param>
-        </member>
         <member name="M:NVelocity.Context.AbstractContext.InternalGet(System.String)">
             
              <summary>  Implement to return a value from the context storage.
@@ -1854,7 +1901,7 @@
              </summary>
              <param name="key">key with which to associate the value
              </param>
-             <param name="value">value to be associated with the key
+             <param name="value_">value to be associated with the key
              </param>
              <returns>previously stored value if exists, or null
             
@@ -1889,7 +1936,7 @@
         </member>
         <member name="M:NVelocity.Context.AbstractContext.InternalRemove(System.Object)">
             
-             <summary>  Implement to remove an item from your storage.
+             <summary>  I mplement to remove an item from your storage.
              <br/><br/>
              Currently, this method is not used internally by
              the Velocity core.
@@ -1901,13 +1948,27 @@
             
              </returns>
         </member>
+        <member name="M:NVelocity.Context.AbstractContext.#ctor">
+            <summary>  default CTOR
+            </summary>
+        </member>
+        <member name="M:NVelocity.Context.AbstractContext.#ctor(NVelocity.Context.IContext)">
+             <summary>  Chaining constructor accepts a Context argument.
+             It will relay get() operations into this Context
+             in the even the 'local' get() returns null.
+            
+             </summary>
+             <param name="inner">context to be chained
+            
+             </param>
+        </member>
         <member name="M:NVelocity.Context.AbstractContext.Put(System.String,System.Object)">
              <summary> Adds a name/value pair to the context.
             
              </summary>
              <param name="key">  The name to key the provided value with.
              </param>
-             <param name="value">The corresponding value.
+             <param name="value_">The corresponding value.
              </param>
              <returns>Object that was replaced in the the Context if
              applicable or null if not.
@@ -1989,9 +2050,9 @@
         </member>
         <member name="M:NVelocity.Context.IInternalContextAdapter.Remove(System.Object)">
             <summary>
-            Need to define this method here otherwise since both <see cref="T:System.Collections.IDictionary"/> and <see cref="T:NVelocity.Context.IContext"/> 
+            Need to define this method here otherwise since both IDicationary and IContext
             contains a Remove(Object key) method we will need to cast the object to either interface
-            before calling this method, for backward compatibility we make the IContext.Remove the default
+            before calling this method, for backward compabillity we make the IContext.Remove the default
             </summary>
             <param name="key"></param>
             <returns></returns>
@@ -2018,7 +2079,7 @@
              *
              This class ensures that an InternalContextBase is available for internal
              use.  If an application constructs their own Context-implementing
-             object w/o sub-classing AbstractContext, it may be that support for
+             object w/o subclassing AbstractContext, it may be that support for
              InternalContext is not available.  Therefore, InternalContextAdapter will
              create an InternalContextBase if necessary for this support.  Note that
              if this is necessary, internal information such as node-cache data will be
@@ -2038,7 +2099,7 @@
              <summary>  the user data Context that we are wrapping
              </summary>
         </member>
-        <member name="F:NVelocity.Context.InternalContextAdapterImpl.internalHousekeepingContext">
+        <member name="F:NVelocity.Context.InternalContextAdapterImpl.icb">
             
              <summary>  the ICB we are wrapping.  We may need to make one
              if the user data context implementation doesn't
@@ -2048,7 +2109,7 @@
              rather than piecing things together
              </summary>
         </member>
-        <member name="F:NVelocity.Context.InternalContextAdapterImpl.internalEventContext">
+        <member name="F:NVelocity.Context.InternalContextAdapterImpl.iec">
             <summary>  The InternalEventContext that we are wrapping.  If
             the context passed to us doesn't support it, no
             biggie.  We don't make it for them - since its a
@@ -2092,11 +2153,11 @@
             
              </version>
         </member>
-        <member name="F:NVelocity.Context.VMContext.vmProxyHash">
+        <member name="F:NVelocity.Context.VMContext.vmproxyhash">
             <summary>container for our VMProxy Objects
             </summary>
         </member>
-        <member name="F:NVelocity.Context.VMContext.localContext">
+        <member name="F:NVelocity.Context.VMContext.localcontext">
             <summary>container for any local or constant VMProxy items
             </summary>
         </member>
@@ -2108,7 +2169,7 @@
             <summary>context that we are wrapping
             </summary>
         </member>
-        <member name="F:NVelocity.Context.VMContext.localContextScope">
+        <member name="F:NVelocity.Context.VMContext.localcontextscope">
             <summary>support for local context scope feature, where all references are local
             </summary>
         </member>
@@ -2136,7 +2197,7 @@
              </summary>
              <param name="key">name of item to set
              </param>
-             <param name="value">object to set to key
+             <param name="value_">object to set to key
              </param>
              <returns>old stored object
             
@@ -2325,7 +2386,7 @@
              1) The included source material can only come from somewhere in
              the TemplateRoot tree for security reasons. There is no way
              around this.  If you want to include content from elsewhere on
-             your disk, use a link from somewhere under Template Root to that
+             your disk, use a link from somwhere under Template Root to that
              content.
              
              2) By default, there is no output to the render stream in the event of
@@ -2450,7 +2511,7 @@
         </member>
         <member name="M:NVelocity.Runtime.Directive.Macro.processAndRegister(NVelocity.Runtime.IRuntimeServices,NVelocity.Runtime.Parser.Node.INode,System.String)">
              <summary>
-             Used by Parser.java to process VMs within the parsing process
+             Used by Parser.java to process VMs withing the parsing process
             
              processAndRegister() doesn't actually render the macro to the output
              Processes the macro body into the internal representation used by the
@@ -2460,7 +2521,7 @@
         </member>
         <member name="M:NVelocity.Runtime.Directive.Macro.getArgArray(NVelocity.Runtime.Parser.Node.INode)">
             <summary>  creates an array containing the literal
-            strings in the macro argument
+            strings in the macro arguement
             </summary>
         </member>
         <member name="M:NVelocity.Runtime.Directive.Macro.getASTAsStringArray(NVelocity.Runtime.Parser.Node.INode)">
@@ -2476,7 +2537,7 @@
             1) The parsed source material can only come from somewhere in
             the TemplateRoot tree for security reasons. There is no way
             around this.  If you want to include content from elsewhere on
-            your disk, use a link from somewhere under Template Root to that
+            your disk, use a link from somwhere under Template Root to that
             content.
             
             2) There is a limited parse depth.  It is set as a property
@@ -2541,7 +2602,7 @@
         <member name="M:NVelocity.Runtime.Directive.VelocimacroProxy.Init(NVelocity.Runtime.IRuntimeServices,NVelocity.Context.IInternalContextAdapter,NVelocity.Runtime.Parser.Node.INode)">
             <summary>
             The major meat of VelocimacroProxy, init() checks the # of arguments, 
-            patches the macro body, renders the macro into an AST, and then initiates 
+            patches the macro body, renders the macro into an AST, and then inits 
             the AST, so it is ready for quick rendering.  Note that this is only 
             AST dependant stuff. Not context.
             </summary>
@@ -2586,12 +2647,12 @@
         </member>
         <member name="P:NVelocity.Runtime.Directive.VelocimacroProxy.NumArgs">
             <summary>
-            Returns the number of arguments needed for this VM
+            Returns the number of ars needed for this VM
             </summary>
         </member>
-        <member name="P:NVelocity.Runtime.Directive.VelocimacroProxy.MacroBody">
+        <member name="P:NVelocity.Runtime.Directive.VelocimacroProxy.Macrobody">
             <summary>
-            Sets the original macro body.  This is simply the cat of the 
+            Sets the orignal macro body.  This is simply the cat of the 
             macroArray, but the Macro object creates this once during parsing, 
             and everyone shares it.
             
@@ -2663,7 +2724,7 @@
             <summary>reference for the object if we proxy for a static arg like an NumberLiteral
             </summary>
         </member>
-        <member name="F:NVelocity.Runtime.Directive.VMProxyArg.userContext">
+        <member name="F:NVelocity.Runtime.Directive.VMProxyArg.usercontext">
             <summary>not used in this impl : carries the appropriate user context
             </summary>
         </member>
@@ -2705,7 +2766,7 @@
              </param>
         </member>
         <member name="M:NVelocity.Runtime.Directive.VMProxyArg.isConstant">
-             <summary>  tells if arg we are proxying for is
+             <summary>  tells if arg we are poxying for is
              dynamic or constant.
              *
              </summary>
@@ -2728,7 +2789,7 @@
         <member name="M:NVelocity.Runtime.Directive.VMProxyArg.getObject(NVelocity.Context.IInternalContextAdapter)">
              <summary>  returns the value of the reference.  Generally, this is only
              called for dynamic proxies, as the static ones should have
-             been stored in the VMContext's localContext store
+             been stored in the VMContext's localcontext store
              *
              </summary>
              <param name="context">Context to use for getting current value
@@ -2739,7 +2800,7 @@
              </returns>
         </member>
         <member name="M:NVelocity.Runtime.Directive.VMProxyArg.setup">
-            <summary>  does the housekeeping upon creating.  If a dynamic type
+            <summary>  does the housekeeping upon creationg.  If a dynamic type
             it needs to make an AST for further get()/set() operations
             Anything else is constant.
             </summary>
@@ -2748,7 +2809,7 @@
             <summary>  not used in current impl
             *
             Constructor for alternate impl where VelProxy class would make new
-            VMProxyArg objects, and use this constructor to avoid re-parsing the
+            VMProxyArg objects, and use this contructor to avoid reparsing the
             reference args
             *
             that impl also had the VMProxyArg carry it's context
@@ -3167,7 +3228,7 @@
             
             Method support for identifiers :  $foo
             
-            mainly used by ASTReference
+            mainly used by ASTRefrence
             
             Introspection is now moved to 'just in time' or at render / execution
             time. There are many reasons why this has to be done, but the
@@ -3272,12 +3333,14 @@
             an empty string "" if the method returns void
             </summary>
         </member>
-        <member name="M:NVelocity.Runtime.Parser.Node.ASTMethod.PerformIntrospection(NVelocity.Context.IInternalContextAdapter,System.Type,System.Object[])">
+        <member name="M:NVelocity.Runtime.Parser.Node.ASTMethod.doIntrospection(NVelocity.Context.IInternalContextAdapter,System.Type)">
              <summary>
-             does the introspection of the class for the method needed.
+             does the instrospection of the class for the method needed.
+             Note, as this calls value() on the args if any, this must
+             only be called at execute() / render() time.
             
              NOTE: this will try to flip the case of the first character for
-             convince (compatibility with Java version).  If there are no arguments,
+             convience (compatability with Java version).  If there are no arguments,
              it will also try to find a property with the same name (also flipping first character).
              </summary>
         </member>
@@ -3568,7 +3631,7 @@
             <see cref="M:System.Type.GetDefaultMembers"/>.
             </remarks>
         </member>
-        <member name="F:NVelocity.Runtime.Parser.Node.GetExecutor.arguments">
+        <member name="F:NVelocity.Runtime.Parser.Node.GetExecutor.args">
             <summary>
             Container to hold the 'key' part of get(key).
             </summary>
@@ -3699,11 +3762,6 @@
             affect the lexer's operation.
             </summary>
         </member>
-        <member name="P:NVelocity.Runtime.Parser.ICharStream.CurrentCharacter">
-            <summary>
-            The currenct character.
-            </summary>
-        </member>
         <member name="P:NVelocity.Runtime.Parser.ICharStream.Column">
             <summary>
             Gets the column.
@@ -3786,7 +3844,7 @@
         <member name="F:NVelocity.Runtime.Parser.ParseException.currentToken">
             <summary> This is the last token that has been consumed successfully.  If
             this object has been created due to a parse error, the token
-            following this token will (therefore) be the first error token.
+            followng this token will (therefore) be the first error token.
             </summary>
         </member>
         <member name="F:NVelocity.Runtime.Parser.ParseException.expectedTokenSequences">
@@ -3801,7 +3859,7 @@
             defined in the generated ...Constants interface.
             </summary>
         </member>
-        <member name="M:NVelocity.Runtime.Parser.ParseException.AddEscapes(System.String)">
+        <member name="M:NVelocity.Runtime.Parser.ParseException.add_escapes(System.String)">
             <summary> This method has the standard behavior when this object has been
             created using the standard constructors.  Otherwise, it uses
             "currentToken" and "expectedTokenSequences" to generate a parse
@@ -3957,61 +4015,6 @@
             purposes.
             </summary>
         </member>
-        <member name="M:NVelocity.Runtime.Parser.ParserState.NodeCreated">
-            <summary>
-            Determines whether the current node was actually closed and
-            pushed.  This should only be called in the final user action of a
-            node scope.
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:NVelocity.Runtime.Parser.ParserState.Reset">
-            <summary>
-            Call this to reinitialize the node stack.  It is called automatically by the parser's ReInit() method.
-            </summary>
-        </member>
-        <member name="M:NVelocity.Runtime.Parser.ParserState.PushNode(NVelocity.Runtime.Parser.Node.INode)">
-            <summary>
-            Pushes a node on to the stack. 
-            </summary>
-        </member>
-        <member name="M:NVelocity.Runtime.Parser.ParserState.PopNode">
-            <summary>
-            Returns the node on the top of the stack, and remove it from the	stack. 
-            </summary>
-        </member>
-        <member name="M:NVelocity.Runtime.Parser.ParserState.PeekNode">
-            <summary>
-            Returns the node currently on the top of the stack.
-            </summary>
-        </member>
-        <member name="M:NVelocity.Runtime.Parser.ParserState.NodeArity">
-            <summary>
-            Returns the number of children on the stack in the current node scope.
-            </summary>
-        </member>
-        <member name="M:NVelocity.Runtime.Parser.ParserState.CloseNodeScope(NVelocity.Runtime.Parser.Node.INode,System.Int32)">
-            <summary>
-            A definite node is constructed from a specified number of
-            children.  That number of nodes are popped from the stack and
-            made the children of the definite node.  Then the definite node
-            is pushed on to the stack.
-            </summary>
-        </member>
-        <member name="M:NVelocity.Runtime.Parser.ParserState.CloseNodeScope(NVelocity.Runtime.Parser.Node.INode,System.Boolean)">
-            <summary>
-            A conditional node is constructed if its condition is true.  All
-            the nodes that have been pushed since the node was opened are
-            made children of the the conditional node, which is then pushed
-            on to the stack.  If the condition is false the node is not
-            constructed and they are left on the stack.
-            </summary>
-        </member>
-        <member name="P:NVelocity.Runtime.Parser.ParserState.RootNode">
-            <summary>
-            Returns the root node of the AST.  It only makes sense to call this after a successful parse.  
-            </summary>
-        </member>
         <member name="M:NVelocity.Runtime.Parser.ParserTokenManager.StateStackPop">
               pushes the current state onto the 'state stack',
               and maintains the parens counts
@@ -4037,7 +4040,7 @@
         <member name="M:NVelocity.Runtime.Parser.ParserTreeConstants.#ctor">
             <summary>
             private constructor as class is meant to hold constants only.
-            Class was originally an interface in Java, but as C# does not support Fields in an interface and
+            Class was orginally an interface in Java, but as C# does not support Fields in an interface and
             the jjtNodeName field, I converted it to a class with no constructor.
             </summary>
         </member>
@@ -4119,7 +4122,7 @@
             can create and return subclass objects based on the value of ofKind.
             Simply add the cases to the switch for all those special cases.
             For example, if you have a subclass of Token called IDToken that
-            you want to create if ofKind is ID, simply add something like :
+            you want to create if ofKind is ID, simlpy add something like :
             
             <c>case MyParserConstants.ID : return new IDToken();</c>
             
@@ -4128,11 +4131,11 @@
             </summary>
         </member>
         <member name="F:NVelocity.Runtime.Parser.TokenMgrError.LEXICAL_ERROR">
-            <summary> Lexical error occurred.
+            <summary> Lexical error occured.
             </summary>
         </member>
         <member name="F:NVelocity.Runtime.Parser.TokenMgrError.STATIC_LEXER_ERROR">
-            <summary> An attempt was made to create a second instance of a static token manager.
+            <summary> An attempt wass made to create a second instance of a static token manager.
             </summary>
         </member>
         <member name="F:NVelocity.Runtime.Parser.TokenMgrError.INVALID_LEXICAL_STATE">
@@ -4149,20 +4152,20 @@
             </summary>
         </member>
         <member name="M:NVelocity.Runtime.Parser.TokenMgrError.AddEscapes(System.String)">
-            <summary> Replaces unprintable characters by their escaped (or unicode escaped)
+            <summary> Replaces unprintable characters by their espaced (or unicode escaped)
             equivalents in the given string
             </summary>
         </member>
-        <member name="M:NVelocity.Runtime.Parser.TokenMgrError.LexicalError(System.Boolean,System.Int32,System.Int32,System.String,System.Char)">
+        <member name="M:NVelocity.Runtime.Parser.TokenMgrError.LexicalError(System.Boolean,System.Int32,System.Int32,System.Int32,System.String,System.Char)">
             <summary> Returns a detailed message for the Error when it is thrown by the
             token manager to indicate a lexical error.
             Parameters :
-            EOFSeen     : indicates if EOF caused the lexical error
-            curLexState : lexical state in which this error occurred
-            errorLine   : line number when the error occurred
-            errorColumn : column number when the error occurred
-            errorAfter  : prefix that was seen before this error occurred
-            currentCharacter     : the offending character
+            EOFSeen     : indicates if EOF caused the lexicl error
+            curLexState : lexical state in which this error occured
+            errorLine   : line number when the error occured
+            errorColumn : column number when the error occured
+            errorAfter  : prefix that was seen before this error occured
+            curchar     : the offending character
             Note: You can customize the lexical error message by modifying this method.
             </summary>
         </member>
@@ -4216,7 +4219,7 @@
         </member>
         <member name="F:NVelocity.Runtime.Resource.Loader.ResourceLoader.className">
             <summary>
-            Class name for this loader, for logging/debugging
+            Class name for this loader, for logging/debuggin
             purposes.
             </summary>
         </member>
@@ -4264,30 +4267,6 @@
             would like the Runtime to cache templates that
             have been created with InputStreams provided
             by this loader.
-            </summary>
-        </member>
-        <member name="M:NVelocity.Runtime.Resource.Loader.AssemblyRelativeResourceLoader.Init(Commons.Collections.ExtendedProperties)">
-            <summary> 
-            Initialize the template loader with a
-            a resources class.
-            </summary>
-        </member>
-        <member name="M:NVelocity.Runtime.Resource.Loader.AssemblyRelativeResourceLoader.GetResourceStream(System.String)">
-            
-             <summary> Get the InputStream that the Runtime will parse
-             to create a template.
-             </summary>
-        </member>
-        <member name="M:NVelocity.Runtime.Resource.Loader.AssemblyRelativeResourceLoader.IsSourceModified(NVelocity.Runtime.Resource.Resource)">
-            <summary> Given a template, check to see if the source of InputStream
-            has been modified.
-            </summary>
-        </member>
-        <member name="M:NVelocity.Runtime.Resource.Loader.AssemblyRelativeResourceLoader.GetLastModified(NVelocity.Runtime.Resource.Resource)">
-            <summary> Get the last modified time of the InputStream source
-            that was used to create the template. We need the template
-            here because we have to extract the name of the template
-            in order to locate the InputStream source.
             </summary>
         </member>
         <member name="M:NVelocity.Runtime.Resource.Loader.AssemblyResourceLoader.Init(Commons.Collections.ExtendedProperties)">
@@ -4486,7 +4465,7 @@
         </member>
         <member name="P:NVelocity.Runtime.Resource.Resource.LastModified">
             <summary>
-            Return the lastModified time of this
+            Return the lastModifed time of this
             template.
             
             Set the last modified time for this
@@ -4581,7 +4560,7 @@
              Default implementation of the resource cache for the default
              ResourceManager.  The cache uses a <i>least recently used</i> (LRU)
              algorithm, with a maximum size specified via the
-             <code>resource.manager.cache.size</code> property (identified by the
+             <code>resource.manager.cache.size</code> property (idenfied by the
              {@link
              org.apache.velocity.runtime.RuntimeConstants#RESOURCE_MANAGER_CACHE_SIZE}
              constant).  This property get be set to <code>0</code> or less for
@@ -4601,7 +4580,7 @@
             Cache storage, assumed to be thread-safe.
             </summary>
         </member>
-        <member name="F:NVelocity.Runtime.Resource.ResourceCacheImpl.runtimeServices">
+        <member name="F:NVelocity.Runtime.Resource.ResourceCacheImpl.rsvc">
             <summary>
             Runtime services, generally initialized by the
             <code>initialize()</code> method.
@@ -4719,8 +4698,8 @@
         <member name="M:NVelocity.Runtime.Resource.ResourceManagerImpl.AssembleResourceLoaderInitializers">
             <summary>
             This will produce a List of Hashtables, each
-            hashtable contains the initialization info for
-            a particular resource loader. This Hashtable
+            hashtable contains the intialization info for
+            a particular resource loader. This Hastable
             will be passed in when initializing the
             the template loader.
             </summary>
@@ -4997,7 +4976,7 @@
             <author> <a href="mailto:geirm@optonline.net">Geir Magnusson Jr.</a></author>
             <version> $Id: VMReferenceMungeVisitor.cs,v 1.3 2003/10/27 13:54:11 corts Exp $</version>
         </member>
-        <member name="F:NVelocity.Runtime.Visitor.VMReferenceMungeVisitor.argumentMap">
+        <member name="F:NVelocity.Runtime.Visitor.VMReferenceMungeVisitor.argmap">
             <summary>
             Map containing VM arg to instance-use reference
             Passed in with CTOR
@@ -5120,14 +5099,14 @@
             PARSER_POOL_SIZE property appropriately for their
             application.  We will revisit this.
             </remarks>
-            <param name="reader">inputStream retrieved by a resource loader</param>
+            <param name="reader">inputstream retrieved by a resource loader</param>
             <param name="templateName">name of the template being parsed</param>
         </member>
         <member name="M:NVelocity.Runtime.IRuntimeServices.Parse(System.IO.TextReader,System.String,System.Boolean)">
             <summary>
             Parse the input and return the root of the AST node structure.
             </summary>
-            <param name="reader">inputStream retrieved by a resource loader</param>
+            <param name="reader">inputstream retrieved by a resource loader</param>
             <param name="templateName">name of the template being parsed</param>
             <param name="dumpNamespace">flag to dump the Velocimacro namespace for this template</param>
         </member>
@@ -5307,11 +5286,11 @@
         </member>
         <member name="P:NVelocity.Runtime.IRuntimeServices.Uberspect">
             Returns the configured class introspection/reflection
-            implementation.
+            implemenation.
         </member>
         <member name="P:NVelocity.Runtime.IRuntimeServices.Introspector">
             Returns the configured method introspection/reflection
-            implementation.
+            implemenation.
         </member>
         <member name="T:NVelocity.Runtime.RuntimeConstants">
             <summary>
@@ -5443,7 +5422,7 @@
         </member>
         <member name="F:NVelocity.Runtime.RuntimeInstance.applicationAttributes">
             <summary>
-            Opaque reference to something specified by the 
+            Opaque reference to something specificed by the 
             application for use in application supplied/specified
             pluggable components.
             </summary>
@@ -6159,11 +6138,11 @@
             
              </version>
         </member>
-        <member name="F:NVelocity.Runtime.VelocimacroFactory.runtimeServices">
+        <member name="F:NVelocity.Runtime.VelocimacroFactory.rsvc">
             <summary>  runtime services for this instance
             </summary>
         </member>
-        <member name="F:NVelocity.Runtime.VelocimacroFactory.velocimacroManager">
+        <member name="F:NVelocity.Runtime.VelocimacroFactory.vmManager">
             <summary>  VMManager : deal with namespace management
             and actually keeps all the VM definitions
             </summary>
@@ -6177,7 +6156,7 @@
             <summary>  controls if new VMs can be added.  Set by
             VM_PERM_ALLOW_INLINE  Note the assumption that only
             through inline defs can this happen.
-            additions through auto-loaded VMs is allowed
+            additions through autoloaded VMs is allowed
             </summary>
         </member>
         <member name="F:NVelocity.Runtime.VelocimacroFactory.templateLocal">
@@ -6223,7 +6202,7 @@
              </summary>
              <param name="name">Name of VM to add
              </param>
-             <param name="sourceTemplate">Source template that contains the definition of the VM
+             <param name="sourceTemplate">Source template that contains the defintion of the VM
              </param>
              <returns>true if it is allowed to be added, false otherwise
             
@@ -6248,7 +6227,7 @@
             </summary>
         </member>
         <member name="M:NVelocity.Runtime.VelocimacroFactory.DumpVMNamespace(System.String)">
-            <summary>  tells the velocimacroManager to dump the specified namespace
+            <summary>  tells the vmManager to dump the specified namespace
             </summary>
         </member>
         <member name="T:NVelocity.Runtime.VelocimacroFactory.Twonk">
@@ -6272,7 +6251,7 @@
             <summary>  get the switch for automatic reloading of
             global library-based VMs
             </summary>
-            <summary> small container class to hold the duple
+            <summary> small continer class to hold the duple
             of a template and modification time.
             We keep the modification time so we can
             'override' it on a reload to prevent
@@ -6304,7 +6283,7 @@
             </summary>
         </member>
         <member name="F:NVelocity.Runtime.VelocimacroManager.libraryMap">
-            <summary>map of names of library templates/namespaces</summary>
+            <summary>map of names of library tempates/namespaces</summary>
         </member>
         <member name="M:NVelocity.Runtime.VelocimacroManager.#ctor(NVelocity.Runtime.IRuntimeServices)">
             <summary> Adds the global namespace to the hash.</summary>
@@ -6426,7 +6405,7 @@
              </param>
              <param name="type">the data type
              </param>
-             <param name="value">the data
+             <param name="value_">the data
             
              </param>
         </member>
@@ -6453,7 +6432,7 @@
             Creates and returns an object of the specified classname.
             The object must have a valid default constructor.
             </summary>
-            <param name="className">the fully qualified class name of the object</param>
+            <param name="clazz">the fully qualified class name of the object</param>
             <returns>an instance of the specified class or null if the class
             could not be instantiated.</returns>
         </member>
@@ -6611,7 +6590,7 @@
              The first time the Introspector sees a
              class it creates a class method map for the
              class in question. Basically the class method map
-             is a Hashtable where Method objects are keyed by a
+             is a Hastable where Method objects are keyed by a
              concatenation of the method name and the names of
              classes that make up the parameters.
             
@@ -6636,7 +6615,7 @@
              The first time the Introspector sees a
              class it creates a class method map for the
              class in question. Basically the class method map
-             is a Hashtable where Method objects are keyed by a
+             is a Hastable where Method objects are keyed by a
              concatenation of the method name and the names of
              classes that make up the parameters.
             
@@ -6696,7 +6675,7 @@
             </summary>
         </member>
         <member name="M:NVelocity.Util.Introspection.Introspector.#ctor(NVelocity.Runtime.IRuntimeLogger)">
-            <summary>  Receives our RuntimeServices object
+            <summary>  Recieves our RuntimeServices object
             </summary>
         </member>
         <member name="M:NVelocity.Util.Introspection.Introspector.GetMethod(System.Type,System.String,System.Object[])">
@@ -6759,8 +6738,8 @@
             </version>
         </member>
         <member name="M:NVelocity.Util.Introspection.IVelMethod.Invoke(System.Object,System.Object[])">
-            <summary>  invocation method - called when the method invocation should be
-            performed and a value returned
+            <summary>  invocation method - called when the method invocationshould be
+            preformed and a value returned
             </summary>
         </member>
         <member name="P:NVelocity.Util.Introspection.IVelMethod.Cacheable">
@@ -6794,7 +6773,7 @@
         <member name="M:NVelocity.Util.Introspection.IVelPropertyGet.Invoke(System.Object)">
             <summary>
             invocation method - called when the 'get action' should be
-            performed and a value returned
+            preformed and a value returned
             </summary>
         </member>
         <member name="P:NVelocity.Util.Introspection.IVelPropertyGet.Cacheable">
@@ -6994,7 +6973,7 @@
             uberspector
             </summary>
         </member>
-        <member name="F:NVelocity.Util.Introspection.UberspectImpl.runtimeLogger">
+        <member name="F:NVelocity.Util.Introspection.UberspectImpl.rlog">
             <summary>
             Our runtime logger.
             </summary>
@@ -7048,7 +7027,7 @@
             The pool will ignore overflow and return null if empty.
             </summary>
         </member>
-        <member name="F:NVelocity.Util.SimplePool`1.maximum">
+        <member name="F:NVelocity.Util.SimplePool`1.max">
             <summary>  max amount of objects to be managed
             set via CTOR
             </summary>
@@ -7068,7 +7047,12 @@
             Get an object from the pool, null if the pool is empty.
             </summary>
         </member>
-        <member name="P:NVelocity.Util.SimplePool`1.Maximum">
+        <member name="M:NVelocity.Util.SimplePool`1.getPool">
+            <summary>
+            for testing purposes, so we can examine the pool
+            </summary>
+        </member>
+        <member name="P:NVelocity.Util.SimplePool`1.Max">
             <summary>
             Return the size of the pool
             </summary>
@@ -7186,6 +7170,11 @@
             </code>
             </summary>
         </member>
+        <member name="M:NVelocity.Template.#ctor">
+            <summary>
+            Default constructor.
+            </summary>
+        </member>
         <member name="M:NVelocity.Template.Process">
             <summary>
             Gets the named resource as a stream, parses and inits.
@@ -7205,7 +7194,7 @@
             <summary> 
             initializes the document.  init() is not longer
             dependant upon context, but we need to let the
-            init() carry the template name down through for VM
+            init() carry the template name down throught for VM
             namespace features
             </summary>
         </member>
@@ -7217,7 +7206,7 @@
             Throws IOException if failure is due to a file related
             issue, and Exception otherwise
             </summary>
-            <param name="context">Context with data elements accessed by template</param>
+            <param name="context">Conext with data elements accessed by template</param>
             <param name="writer">writer for rendered template</param>
             <exception cref="T:NVelocity.Exception.ResourceNotFoundException">
             if template not found from any available source.
@@ -7231,7 +7220,7 @@
         </member>
         <member name="T:NVelocity.VelocityContext">
             <summary>
-            General purpose implementation of the application Context
+            General purpose implemention of the application Context
             interface for general application use.  This class should
             be used in place of the original Context class.
             This context implementation cannot be shared between threads

@@ -20,7 +20,7 @@ namespace SJRAtlas.Site.Tests.Controllers
             PrepareController(controller, "search", "quick");
             string query = "test";
             controller.Quick(query);
-            Assert.AreEqual("/search/places.rails?q=" + query, Response.RedirectedTo);
+            Assert.AreEqual("/search/places.rails?q=" + query + "&", Response.RedirectedTo);
         }
 
         [Test]
@@ -35,7 +35,7 @@ namespace SJRAtlas.Site.Tests.Controllers
             {
                 string queryWithTrigger = queryWithoutTrigger + " " + trigger;
                 controller.Quick(queryWithTrigger);
-                Assert.AreEqual("/search/watersheds.rails?q=" + queryWithoutTrigger, Response.RedirectedTo, queryWithTrigger + " should have triggered watershed search");
+                Assert.AreEqual("/search/watersheds.rails?q=" + queryWithoutTrigger + "&", Response.RedirectedTo, queryWithTrigger + " should have triggered watershed search");
             }
         }
 
@@ -89,7 +89,7 @@ namespace SJRAtlas.Site.Tests.Controllers
             PrepareController(controller, "search", "places");
             controller.Places(query);
 
-            Assert.AreEqual("/search/watersheds.rails?q=" + query, Response.RedirectedTo);
+            Assert.AreEqual("/search/watersheds.rails?q=" + query + "&", Response.RedirectedTo);
             mocks.VerifyAll();
         }
 
@@ -155,7 +155,7 @@ namespace SJRAtlas.Site.Tests.Controllers
             PrepareController(controller, "search", "places");
             controller.Places(query);
 
-            Assert.AreEqual("/place/view.rails?cgndbKey=" + id, Response.RedirectedTo);
+            Assert.AreEqual("/place/view.rails?cgndbKey=" + id + "&", Response.RedirectedTo);
             mocks.VerifyAll();
         }
 
@@ -205,7 +205,7 @@ namespace SJRAtlas.Site.Tests.Controllers
             PrepareController(controller, "search", "watersheds");
             controller.Watersheds(query);
 
-            Assert.AreEqual("/watershed/view.rails?drainageCode=" + drainageCode, Response.RedirectedTo);
+            Assert.AreEqual("/watershed/view.rails?drainageCode=" + drainageCode + "&", Response.RedirectedTo);
             mocks.VerifyAll();
         }
 
@@ -225,7 +225,7 @@ namespace SJRAtlas.Site.Tests.Controllers
             PrepareController(controller, "search", "watersheds");
             controller.Watersheds(query);
 
-            Assert.AreEqual("/search/noresults.rails?q=" + query, Response.RedirectedTo);
+            Assert.AreEqual("/search/noresults.rails?q=" + query + "&", Response.RedirectedTo);
             mocks.VerifyAll();
         }
 

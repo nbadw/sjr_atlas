@@ -6,9 +6,11 @@ using System.Collections;
 using System.Reflection;
 using SJRAtlas.Site.Models;
 using SJRAtlas.Models;
+using SJRAtlas.Site.Helpers;
 
 namespace SJRAtlas.Site
 {
+    [Helper(typeof(MapHelper))]
     public class SJRAtlasController : SmartDispatcherController
     {
         public SJRAtlasController() : this(new AtlasMediator())

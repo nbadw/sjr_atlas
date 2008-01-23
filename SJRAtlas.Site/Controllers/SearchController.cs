@@ -25,7 +25,6 @@ namespace SJRAtlas.Site.Controllers
             else
             {
                 Logger.Debug("Quick Search is redirecting to the Gazetteer Search");
-                //RedirectToRoute("/search/places/" + q);
                 RedirectToAction("places", "q=" + q);
                 return;
             }

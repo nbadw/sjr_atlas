@@ -39,7 +39,7 @@ namespace SJRAtlas.Models
         private string summary;
 
         [Property("summary")]
-        public string Abstract
+        public string Summary
         {
             get { return summary; }
             set { summary = value; }

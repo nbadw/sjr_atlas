@@ -24,8 +24,8 @@ namespace SJRAtlas.Site.Tests.Controllers
 
             Expect.Call(mediator.Find<Place>(id)).Return(place);
             Expect.Call(place.IsWithinBasin()).Repeat.Any().Return(false);
-            Expect.Call(place.RelatedInteractiveMaps).Return(mocks.CreateMock<IList<InteractiveMap>>());
-            Expect.Call(place.RelatedPublications).Return(mocks.CreateMock<IList<Publication>>());
+            Expect.Call(place.RelatedInteractiveMaps).Return(new List<InteractiveMap>());
+            Expect.Call(place.RelatedPublications).Return(new List<Publication>());
             mocks.ReplayAll();
 
             PlaceController controller = new PlaceController();
@@ -35,7 +35,8 @@ namespace SJRAtlas.Site.Tests.Controllers
 
             Assert.AreEqual(place, controller.PropertyBag["place"]);
             Assert.IsNotNull(controller.PropertyBag["interactive_maps"]);
-            Assert.IsNotNull(controller.PropertyBag["publications"]);
+            Assert.IsNotNull(controller.PropertyBag["published_maps"]);
+            Assert.IsNotNull(controller.PropertyBag["published_reports"]);
             Assert.AreEqual(@"place\view", controller.SelectedViewName);
             mocks.VerifyAll();
 
@@ -83,8 +84,8 @@ namespace SJRAtlas.Site.Tests.Controllers
             Expect.Call(place.IsWithinBasin()).Repeat.Twice().Return(true);
             Expect.Call(mediator.WaterBodyExistsForCgndbKeyOrAltCgndbKey(id)).Return(false);
             Expect.Call(mediator.WatershedExistsForCgndbKey(id)).Return(false); 
-            Expect.Call(place.RelatedInteractiveMaps).Return(mocks.CreateMock<IList<InteractiveMap>>());
-            Expect.Call(place.RelatedPublications).Return(mocks.CreateMock<IList<Publication>>());            
+            Expect.Call(place.RelatedInteractiveMaps).Return(new List<InteractiveMap>());
+            Expect.Call(place.RelatedPublications).Return(new List<Publication>());            
             Expect.Call(mediator.FindAllBasinMaps()).Return(basinMaps);
             mocks.ReplayAll();
 
@@ -106,8 +107,8 @@ namespace SJRAtlas.Site.Tests.Controllers
 
             Expect.Call(mediator.Find<Place>(id)).Return(place);
             Expect.Call(place.IsWithinBasin()).Repeat.Twice().Return(false);
-            Expect.Call(place.RelatedInteractiveMaps).Return(mocks.CreateMock<IList<InteractiveMap>>());
-            Expect.Call(place.RelatedPublications).Return(mocks.CreateMock<IList<Publication>>());
+            Expect.Call(place.RelatedInteractiveMaps).Return(new List<InteractiveMap>());
+            Expect.Call(place.RelatedPublications).Return(new List<Publication>());
             mocks.ReplayAll();
 
             PlaceController controller = new PlaceController();
@@ -139,7 +140,7 @@ namespace SJRAtlas.Site.Tests.Controllers
             Expect.Call(mediator.WaterBodyExistsForCgndbKeyOrAltCgndbKey(id)).Return(false);
             Expect.Call(mediator.WatershedExistsForCgndbKey(id)).Return(false);
             Expect.Call(place.RelatedInteractiveMaps).Return(relatedMaps);
-            Expect.Call(place.RelatedPublications).Return(mocks.CreateMock<IList<Publication>>());
+            Expect.Call(place.RelatedPublications).Return(new List<Publication>());
             Expect.Call(mediator.FindAllBasinMaps()).Return(basinMaps);
             mocks.ReplayAll();
 
@@ -171,7 +172,7 @@ namespace SJRAtlas.Site.Tests.Controllers
             PrepareController(controller, "view", "place");
             controller.View(id);
             Assert.IsTrue(Response.WasRedirected);
-            Assert.AreEqual("/waterbody/view.rails?cgndbKey=" + id, Response.RedirectedTo);
+            Assert.AreEqual("/waterbody/view.rails?cgndbKey=" + id + "&", Response.RedirectedTo);
             mocks.VerifyAll();
         }
 
@@ -195,7 +196,7 @@ namespace SJRAtlas.Site.Tests.Controllers
             PrepareController(controller, "view", "place");
             controller.View(id);
             Assert.IsTrue(Response.WasRedirected);
-            Assert.AreEqual("/watershed/view.rails?cgndbKey=" + id, Response.RedirectedTo);
+            Assert.AreEqual("/watershed/view.rails?cgndbKey=" + id + "&", Response.RedirectedTo);
             mocks.VerifyAll();
         }
     }

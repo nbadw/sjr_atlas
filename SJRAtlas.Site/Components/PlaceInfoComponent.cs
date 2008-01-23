@@ -32,7 +32,7 @@ namespace SJRAtlas.Site.Components
             PropertyBag["name"] = Place.Name;
             PropertyBag["region"] = Place.Region;
             PropertyBag["status_term"] = Place.NameStatus;
-
+            PropertyBag["coordinate"] = Place.GetCoordinate();
             PropertyBag["type"] = Place.GenericTerm;
             PropertyBag["county"] = Place.County;
             PropertyBag["latitude"] = Place.Latitude;

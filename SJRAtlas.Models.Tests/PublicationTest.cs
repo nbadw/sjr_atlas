@@ -28,7 +28,7 @@ namespace SJRAtlas.Models.Tests
             Dictionary<string, object> properties = new Dictionary<string, object>();
             properties["Id"] = 1000;
             properties["Title"] = "test title";
-            properties["Abstract"] = "just a simple abstract";
+            properties["Summary"] = "just a simple summary";
             properties["Author"] = "Colin";
             properties["File"] = "c:/path/to/file";
             properties["CreatedAt"] = new DateTime(2007, 1, 1);

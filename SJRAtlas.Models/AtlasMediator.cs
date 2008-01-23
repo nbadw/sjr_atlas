@@ -55,10 +55,11 @@ namespace SJRAtlas.Models
         public virtual IList<PublishedMap> FindAllPublishedMaps()
         {
             IList<Publication> publications = PublishedMap.FindAll();
-            List<PublishedMap> publishedMaps = new List<PublishedMap>(publications.Count);
+            List<PublishedMap> publishedMaps = new List<PublishedMap>();
             foreach (Publication publication in publications)
             {
-                publishedMaps.Add((PublishedMap)publication);
+                if(publication is PublishedMap)
+                    publishedMaps.Add((PublishedMap)publication);
             }
             return publishedMaps;
         }

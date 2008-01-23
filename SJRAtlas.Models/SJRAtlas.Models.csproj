@@ -59,7 +59,7 @@
   <ItemGroup>
     <Compile Include="Agency.cs" />
     <Compile Include="ClosestWatershedToPlace.cs" />
-    <Compile Include="AtlasRepository.cs" />
+    <Compile Include="AtlasMediator.cs" />
     <Compile Include="Feedback.cs" />
     <Compile Include="Publication.cs" />
     <Compile Include="LatLngCoord.cs" />

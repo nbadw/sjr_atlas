@@ -36,7 +36,7 @@ namespace SJRAtlas.Site.Controllers
                 }
             }
                         
-            IList<InteractiveMap> interactiveMaps = place.RelatedInteractiveMaps;
+            IList<InteractiveMap> interactiveMaps = new List<InteractiveMap>(place.RelatedInteractiveMaps);
 
             if (place.IsWithinBasin())
             {
@@ -47,9 +47,21 @@ namespace SJRAtlas.Site.Controllers
                 }
             }
 
+            IList<Publication> publications = place.RelatedPublications;
+            List<PublishedMap> publishedMaps = new List<PublishedMap>();
+            List<PublishedReport> publishedReports = new List<PublishedReport>();
+            foreach (Publication publication in publications)
+            {
+                if (publication is PublishedMap)
+                    publishedMaps.Add((PublishedMap)publication);
+                else if (publication is PublishedReport)
+                    publishedReports.Add((PublishedReport)publication);
+            }
+
             PropertyBag["place"] = place;
             PropertyBag["interactive_maps"] = interactiveMaps;
-            PropertyBag["publications"] = place.RelatedPublications;
+            PropertyBag["published_maps"] = publishedMaps;
+            PropertyBag["published_reports"] = publishedReports;
         }
     }
 }

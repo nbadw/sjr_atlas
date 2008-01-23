@@ -4,6 +4,41 @@
         <name>Castle.MonoRail.WindsorExtension</name>
     </assembly>
     <members>
+        <member name="T:Castle.MonoRail.WindsorExtension.ControllerTreeAccessor">
+            <summary>
+            Bridge between the windsor controlled controller tree and
+            the monorail service provider.
+            </summary>
+        </member>
+        <member name="M:Castle.MonoRail.WindsorExtension.ControllerTreeAccessor.#ctor">
+            <summary>
+            Construct the controller tree accessor
+            </summary>
+        </member>
+        <member name="M:Castle.MonoRail.WindsorExtension.ControllerTreeAccessor.AddController(System.String,System.String,System.Type)">
+            <summary>
+            Register a controller on the tree. If the specified
+            area name matches the current node, the controller is
+            register on the node itself, otherwise on the right or 
+            on the left node.
+            </summary>
+            <remarks>
+            Note that the controller is an <c>object</c>. That allows
+            different implementation of a controller factory to register
+            different representation of what a controller is (a name, a descriptor etc)
+            </remarks>
+            <param name="areaName">The area name, or <c>String.Empty</c></param>
+            <param name="controllerName">The controller name</param>
+            <param name="controller">The controller representation</param>
+        </member>
+        <member name="M:Castle.MonoRail.WindsorExtension.ControllerTreeAccessor.GetController(System.String,System.String)">
+            <summary>
+            Returns a controller previously registered. 
+            </summary>
+            <param name="areaName">The area name, or <c>String.Empty</c></param>
+            <param name="controllerName">The controller name</param>
+            <returns>The controller representation or null</returns>
+        </member>
         <member name="T:Castle.MonoRail.WindsorExtension.DefaultWizardPageFactory">
             <summary>
             Default implementation of <see cref="T:Castle.MonoRail.WindsorExtension.IWizardPageFactory"/>

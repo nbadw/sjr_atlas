@@ -1,0 +1,3 @@
+#foreach( $interactive_map in $interactive_maps )
+    #component(interactive_map with "InteractiveMap=$interactive_map" "Coordinate=$place.GetCoordinate()")
+#end
