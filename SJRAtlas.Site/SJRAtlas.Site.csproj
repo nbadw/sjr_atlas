@@ -109,10 +109,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\External Libs\Castle Framework .NET-2.0\NVelocity.dll</HintPath>
     </Reference>
-    <Reference Include="Rhino.Commons, Version=1.5.1081.0, Culture=neutral, PublicKeyToken=0b3305902db7183f, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\External Libs\RhinoTools\Rhino.Commons\Rhino.Commons.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Web" />
@@ -142,18 +138,21 @@
     <Compile Include="Components\WaterBodyComponent.cs" />
     <Compile Include="Components\WatershedComponent.cs" />
     <Compile Include="Controllers\AgencyController.cs" />
+    <Compile Include="Controllers\PresentationController.cs" />
     <Compile Include="Controllers\FeedbackController.cs" />
     <Compile Include="Controllers\PlaceController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\SiteController.cs" />
     <Compile Include="Controllers\WaterBodyController.cs" />
     <Compile Include="Controllers\WatershedController.cs" />
+    <Compile Include="DefaultPresentationViewResolver.cs" />
     <Compile Include="GlobalApplication.cs" />
     <Compile Include="Helpers\MapHelper.cs" />
+    <Compile Include="IPresentationViewResolver.cs" />
     <Compile Include="Models\SearchOptions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SJRAtlasContainer.cs" />
-    <Compile Include="SJRAtlasController.cs" />
+    <Compile Include="WebApplicationContainer.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\images\ajax-loader.gif" />

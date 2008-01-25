@@ -8,17 +8,17 @@ using SJRAtlas.Site.Models;
 using SJRAtlas.Models;
 using SJRAtlas.Site.Helpers;
 
-namespace SJRAtlas.Site
+namespace SJRAtlas.Site.Controllers
 {
     [Helper(typeof(MapHelper))]
-    public class SJRAtlasController : SmartDispatcherController
+    public class BaseController : SmartDispatcherController
     {
-        public SJRAtlasController() : this(new AtlasMediator())
+        public BaseController() : this(new AtlasMediator())
         {
 
         }
 
-        public SJRAtlasController(AtlasMediator atlasMediator)
+        public BaseController(AtlasMediator atlasMediator)
         {
             if (atlasMediator == null)
                 throw new ArgumentNullException("atlasMediator");

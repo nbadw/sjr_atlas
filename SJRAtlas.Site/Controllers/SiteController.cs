@@ -10,7 +10,7 @@ namespace SJRAtlas.Site.Controllers
     [Layout("sjratlas")]
     [Rescue("generalerror")]
     [DefaultAction("Index")]
-    public class SiteController : SJRAtlasController
+    public class SiteController : BaseController
     {
         public void Index()
         {

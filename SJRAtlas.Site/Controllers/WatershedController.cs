@@ -11,7 +11,7 @@ namespace SJRAtlas.Site.Controllers
     using Castle.ActiveRecord.Queries;
 
     [Layout("sjratlas"), Rescue("generalerror")]
-    public class WatershedController : SJRAtlasController
+    public class WatershedController : BaseController
     {
         ////[Cache(System.Web.HttpCacheability.Server, Duration = 300, VaryByParams = "id")]
         //public void View(string id)

@@ -8,7 +8,7 @@ using SJRAtlas.Models;
 namespace SJRAtlas.Site.Controllers
 {
     [Layout("sjratlas"), Rescue("friendlyerror")]
-    public class WaterBodyController : SJRAtlasController
+    public class WaterBodyController : BaseController
     {
         public void View(string cgndbKey)
         {

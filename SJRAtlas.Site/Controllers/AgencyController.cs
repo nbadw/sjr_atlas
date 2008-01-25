@@ -4,7 +4,7 @@ using System.Collections;
 
 namespace SJRAtlas.Site.Controllers
 {
-    public class AgencyController : SJRAtlasController
+    public class AgencyController : BaseController
     {
         //[AjaxAction]
         //public IDictionary List(string drainageCode, string waterbodyId, string aquaticSiteId)

@@ -8,11 +8,11 @@ using Castle.MonoRail.WindsorExtension;
 
 namespace SJRAtlas.Site
 {
-    public class SJRAtlasContainer : WindsorContainer
+    public class WebApplicationContainer : WindsorContainer
     {
         private ILogger logger;
 
-        public SJRAtlasContainer()
+        public WebApplicationContainer()
             : base(new XmlInterpreter(new ConfigResource()))
         {
             logger = (this[typeof(ILoggerFactory)] as ILoggerFactory).Create(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
@@ -32,7 +32,7 @@ namespace SJRAtlas.Site
             Type[] controllerTypes = System.Reflection.Assembly.GetCallingAssembly().GetTypes();
             foreach (Type type in controllerTypes)
             {
-                if (!type.Equals(typeof(SJRAtlasController)) && type.IsSubclassOf(typeof(Castle.MonoRail.Framework.Controller)))
+                if (!type.Equals(typeof(BaseController)) && type.IsSubclassOf(typeof(Castle.MonoRail.Framework.Controller)))
                 {
                     string id = type.Name.ToLower().Replace("controller", "");
                     logger.Debug("Registering Controller " + type.ToString() + " as " + id + ".controller");

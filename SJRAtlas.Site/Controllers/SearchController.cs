@@ -10,7 +10,7 @@ namespace SJRAtlas.Site.Controllers
     using SJRAtlas.Models;
 
 	[Layout("sjratlas"), Rescue("generalerror")]
-	public class SearchController : SJRAtlasController
+	public class SearchController : BaseController
 	{
         public void Quick(string q)
         {

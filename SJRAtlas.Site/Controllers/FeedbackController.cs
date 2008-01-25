@@ -9,7 +9,7 @@ using SJRAtlas.Models;
 namespace SJRAtlas.Site.Controllers
 {
     [Layout("sjratlas"), Rescue("generalerror")]
-    public class FeedbackController : SJRAtlasController
+    public class FeedbackController : BaseController
     {
         [AjaxAction]
         public void FeedbackForm()

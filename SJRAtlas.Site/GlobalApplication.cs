@@ -14,7 +14,7 @@ namespace SJRAtlas.Site
 		public GlobalApplication() 
         {
             instance = this;
-            container = new SJRAtlasContainer();
+            container = new WebApplicationContainer();
             logger = (container[typeof(ILoggerFactory)] as ILoggerFactory).Create(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         }
 

@@ -75,6 +75,7 @@
     <Compile Include="PublishedMap.cs" />
     <Compile Include="PublishedReport.cs" />
     <Compile Include="SummaryReportPresentation.cs" />
+    <Compile Include="TabularPresentation.cs" />
     <Compile Include="WaterBody.cs" />
     <Compile Include="Watershed.cs" />
   </ItemGroup>

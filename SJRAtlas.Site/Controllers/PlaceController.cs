@@ -9,7 +9,7 @@ namespace SJRAtlas.Site.Controllers
     using SJRAtlas.Models;
 
     [Layout("sjratlas"), Rescue("generalerror")]
-    public class PlaceController : SJRAtlasController
+    public class PlaceController : BaseController
     {
         public void View(string cgndbKey)
         {
