@@ -139,8 +139,8 @@ namespace SJRAtlas.Models
 
         private IList<DataSet> datasetList = new List<DataSet>();
 
-        [HasAndBelongsToMany(typeof(DataSet), Table = "auxWaterBody_DataType_XRef",
-            ColumnKey = "WaterBodyID", ColumnRef = "DataTypeID")]
+        [HasAndBelongsToMany(typeof(DataSet), Table = "data_sets_waterbodies",
+            ColumnKey = "waterbody_id", ColumnRef = "data_set_id")]
         public IList<DataSet> DataSetList
         {
             get { return datasetList; }
@@ -186,7 +186,7 @@ namespace SJRAtlas.Models
 
         public LatLngCoord GetCoordinate()
         {
-            return Place.GetCoordinate();
+            return Place != null ? Place.GetCoordinate() : null;
         }
 
         #endregion

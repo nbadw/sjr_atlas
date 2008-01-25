@@ -8,20 +8,22 @@
 
 <div id="content" class="clearfix">	
 	<div class="innerwrap">
-	    <div class="textbox yui-gb">		
+	    <div class="textbox yui-gb">
+	    		
             <div class="yui-u first">                    
                 <h2>Interactive Maps</h2>
-                <div id="xeasymaps">
+                <div>
                     <ul>
                     #foreach( $map in $interactive_maps )
-                        <li class="xeasymap">
-                            <h4 class="title"><a target="_blank" href="http://gis.mektekdev.com/demo/Default.aspx?resource=$map.ServiceName">$map.Title</a></h4>
+                        <li class="interactive-map">
+                            <h4 class="title">$MapHelper.ApplicationLink($map.Title, $map.ServiceName)</h4>
                         </li>
                     #end
                     </ul>
                 </div>
                 <p>Looking for $Url.Link('more maps', "%{controller='site', action='maps'}")</a>?</p>                    
             </div>
+            
             <div class="yui-u">
                 <h2>Quick Search</h2>                <p>Enter a place name, lake or stream name, data set name, or other text string to search for maps, reports, data and other information. See also: $Url.Link('Search Tips', "%{controller='search', action='tips'}")</p>
                                <form id="secondary_search_form" action="$siteroot/search/quick.rails" method="get">
@@ -38,9 +40,11 @@
 	                <li><a href="http://geodiscover.cgdi.ca/gdp/index.jsp?language=en">GeoConnections GeoPortal</a></li>
 	            </ul>               
             </div>
+            
             <div class="yui-u">
                 <h2>Links</h2>                <ul>                                   <li><a href="http://www.weatheroffice.ec.gc.ca/forecast/canada/index_e.html?id=NB">Environment Canada's Weather Forecast</a></li>                    <li><a href="http://www.lau.chs-shc.gc.ca/cgi-bin/tide-shc.cgi?queryType=showRegion&language=english&region=5">Fisheries & Oceans Canada's Tide Tables</a></li>                    <li><a href="http://www.gnb.ca/public/fire-feu/index-e.asp">NB Natural Resource's Forest Fire Index</a></li>                    <li><a href="http://www.atl.ec.gc.ca/airquality/index_e.html">Environment Canada's Air Quality Services</a></li>                    <li><a href="http://www.hc-sc.gc.ca/index_e.html">Health Canada Health Advisories, Warnings & Recalls</a></li>                    <li><a href="http://www.gnb.ca/public/info-e.asp">NB Public Safety Alerts & Preparedness Information</a></li>                </ul>    
             </div>
+            
         </div>
     </div>
 </div>

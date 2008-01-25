@@ -180,6 +180,14 @@ namespace SJRAtlas.Models.Tests
         }
 
         [Test]
+        public void TestGetCoordinateReturnsNullWhenPlaceIsNull()
+        {
+            WaterBody waterbody = new WaterBody();
+            Assert.IsNull(waterbody.Place);
+            Assert.IsNull(waterbody.GetCoordinate());
+        }	
+
+        [Test]
         public void TestIsWithinBasin()
         {
             WaterBody waterbody = new WaterBody();

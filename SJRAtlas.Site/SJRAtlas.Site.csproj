@@ -129,14 +129,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Components\BasicInfoComponent.cs" />
-    <Compile Include="Components\DataSetsComponent.cs" />
+    <Compile Include="Components\DataSetComponent.cs" />
     <Compile Include="Components\InteractiveMapComponent.cs" />
     <Compile Include="Components\PlaceInfoComponent.cs" />
-    <Compile Include="Components\PlaceNameComponent.cs" />
     <Compile Include="Components\PublicationComponent.cs" />
     <Compile Include="Components\ResourceComponent.cs" />
-    <Compile Include="Components\WaterBodyComponent.cs" />
-    <Compile Include="Components\WatershedComponent.cs" />
+    <Compile Include="Components\WaterBodyInfoComponent.cs" />
+    <Compile Include="Components\WatershedInfoComponent.cs" />
     <Compile Include="Controllers\AgencyController.cs" />
     <Compile Include="Controllers\PresentationController.cs" />
     <Compile Include="Controllers\FeedbackController.cs" />
@@ -237,6 +236,7 @@
     <None Include="Content\javascripts\treeview\assets\skins\sam\Thumbs.db" />
     <None Include="Content\javascripts\treeview\README" />
     <None Include="Views\data_set\data_set.vm" />
+    <None Include="Views\data_set\_list.vm" />
     <None Include="Views\interactive_map\_list.vm" />
     <None Include="Views\interactive_map\interactive_map.vm" />
     <None Include="Views\metadata\metadata.vm" />

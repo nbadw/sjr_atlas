@@ -6,9 +6,7 @@ using SJRAtlas.Models;
 using NHibernate.Expression;
 
 namespace SJRAtlas.Site.Controllers
-{
-    [Layout("sjratlas")]
-    [Rescue("generalerror")]
+{    
     [DefaultAction("Index")]
     public class SiteController : BaseController
     {

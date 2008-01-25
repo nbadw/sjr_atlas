@@ -1,52 +1,25 @@
+using System;
+using SJRAtlas.Models;
+using System.Collections.Generic;
+
 namespace SJRAtlas.Site.Controllers
 {
-    using System;
-
-    using Castle.MonoRail.Framework;
-    using System.Collections.Generic;
-    using SJRAtlas.Site.Models;
-    using Castle.Core.Logging;
-    using System.Reflection;
-    using System.Collections;
-    using Castle.ActiveRecord.Queries;
-
-    [Layout("sjratlas"), Rescue("generalerror")]
     public class WatershedController : BaseController
     {
-        ////[Cache(System.Web.HttpCacheability.Server, Duration = 300, VaryByParams = "id")]
-        //public void View(string id)
-        //{
-        //    View(WatershedLookup.Find(id));
-        //}
-
-        //[Rescue("friendlyerror", typeof(ArgumentNullException))]
-        //public void View(IWatershed watershed)
-        //{
-        //    if (watershed == null)
-        //        throw new ArgumentNullException("watershed", "The requested watershed could not be found.");
-
-        //    if (watershed.CgndbKey != null)
-        //        watershed.PlaceName = PlaceNameLookup.Find(watershed.CgndbKey);
-
-        //    string metadataQuery = MetadataUtils.BuildDefaultQuery(watershed.Name);
-        //    Logger.Debug("Searching metadata index for " + watershed.Name + " using " + metadataQuery);
-
-        //    string datasetQuery = MetadataUtils.BuildGetByTitlesQuery(
-        //        AtlasUtils.DataSetTitles(watershed));
-        //    Logger.Debug("Also searching for related datasets using " + datasetQuery);
-
-        //    IMetadata[] metadata = MetadataLookup.FindByQuery(metadataQuery);
-        //    IMetadata[] datasets = MetadataLookup.FindByQuery(datasetQuery);
-        //    metadata = MergeMetadata(metadata, datasets);
-
-        //    IEasyMap[] interactiveMaps = GetInteractiveMaps(metadata, AtlasUtils.IsWithinBasin(watershed));
+        public void View(string cgndbKey)
+        {
+            Watershed watershed = AtlasMediator.FindWatershedByCgndbKey(cgndbKey);
+            IList<InteractiveMap> interactiveMaps = watershed.IsWithinBasin() ?
+                AddFullBasinInteractiveMaps(watershed.RelatedInteractiveMaps) :
+                watershed.RelatedInteractiveMaps;
+            IList<Publication> publications = watershed.RelatedPublications;
             
-        //    metadata = RemoveEasyMaps(metadata, interactiveMaps);
-
-        //    PropertyBag["watershed"] = watershed;
-        //    PropertyBag["interactive_maps"] = interactiveMaps;
-        //    PropertyBag["metadata"] = metadata;
-        //}
+            PropertyBag["watershed"] = watershed;
+            PropertyBag["interactive_maps"] = interactiveMaps;
+            PropertyBag["published_maps"] = GetPublicationsByType<PublishedMap>(publications);
+            PropertyBag["published_reports"] = GetPublicationsByType<PublishedReport>(publications);
+            PropertyBag["datasets"] = watershed.DataSets;
+        }
 
         //[AjaxAction]
         //public IWatershed[] List(string code)

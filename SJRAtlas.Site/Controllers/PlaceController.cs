@@ -17,51 +17,33 @@ namespace SJRAtlas.Site.Controllers
                 throw new ArgumentNullException("cgndbKey");
 
             Place place = AtlasMediator.Find<Place>(cgndbKey);
-            if (place.IsWithinBasin())
-            {
-                if (AtlasMediator.WaterBodyExistsForCgndbKeyOrAltCgndbKey(place.CgndbKey))
-                {                    
-                    Dictionary<string, string> parameters = new Dictionary<string, string>();
-                    parameters.Add("cgndbKey", place.CgndbKey);
-                    Redirect("", "waterbody", "view", parameters);
-                    return;
-                }
-                                
-                if (AtlasMediator.WatershedExistsForCgndbKey(place.CgndbKey))
-                {
-                    Dictionary<string, string> parameters = new Dictionary<string, string>();
-                    parameters.Add("cgndbKey", place.CgndbKey);
-                    Redirect("", "watershed", "view", parameters);
-                    return;
-                }
-            }
-                        
-            IList<InteractiveMap> interactiveMaps = new List<InteractiveMap>(place.RelatedInteractiveMaps);
 
-            if (place.IsWithinBasin())
+            if (place.IsWithinBasin() &&
+                AtlasMediator.WaterBodyExistsForCgndbKeyOrAltCgndbKey(place.CgndbKey))
             {
-                foreach (InteractiveMap basinMap in AtlasMediator.FindAllBasinMaps())
-                {
-                    if (!interactiveMaps.Contains(basinMap))
-                        interactiveMaps.Add(basinMap);
-                }
+                Dictionary<string, string> parameters = new Dictionary<string, string>();
+                parameters.Add("cgndbKey", place.CgndbKey);
+                Redirect("", "waterbody", "view", parameters);
+                return;
+            }
+            
+            if (AtlasMediator.WatershedExistsForCgndbKey(place.CgndbKey))
+            {
+                Dictionary<string, string> parameters = new Dictionary<string, string>();
+                parameters.Add("cgndbKey", place.CgndbKey);
+                Redirect("", "watershed", "view", parameters);
+                return;
             }
 
+            IList<InteractiveMap> interactiveMaps = place.IsWithinBasin() ?
+                AddFullBasinInteractiveMaps(place.RelatedInteractiveMaps) :
+                place.RelatedInteractiveMaps;
             IList<Publication> publications = place.RelatedPublications;
-            List<PublishedMap> publishedMaps = new List<PublishedMap>();
-            List<PublishedReport> publishedReports = new List<PublishedReport>();
-            foreach (Publication publication in publications)
-            {
-                if (publication is PublishedMap)
-                    publishedMaps.Add((PublishedMap)publication);
-                else if (publication is PublishedReport)
-                    publishedReports.Add((PublishedReport)publication);
-            }
 
             PropertyBag["place"] = place;
             PropertyBag["interactive_maps"] = interactiveMaps;
-            PropertyBag["published_maps"] = publishedMaps;
-            PropertyBag["published_reports"] = publishedReports;
+            PropertyBag["published_maps"] = GetPublicationsByType<PublishedMap>(publications);
+            PropertyBag["published_reports"] = GetPublicationsByType<PublishedReport>(publications); ;
         }
     }
 }

@@ -7,7 +7,6 @@ using SJRAtlas.Models;
 
 namespace SJRAtlas.Site.Controllers
 {
-    [Layout("sjratlas"), Rescue("friendlyerror")]
     public class WaterBodyController : BaseController
     {
         public void View(string cgndbKey)
@@ -16,12 +15,15 @@ namespace SJRAtlas.Site.Controllers
                 throw new ArgumentNullException("cgndbKey");
 
             WaterBody waterbody = WaterBody.FindByCgndbKeyOrAltCgndbKey(cgndbKey);
+            IList<InteractiveMap> interactiveMaps = AddFullBasinInteractiveMaps(waterbody.RelatedInteractiveMaps);
+            IList<Publication> publications = waterbody.RelatedPublications; 
             IList<DataSet> datasets = waterbody.DataSets;
-            IList<InteractiveMap> interactiveMaps = waterbody.RelatedInteractiveMaps;
-            IList<Publication> publications = waterbody.RelatedPublications;
 
             PropertyBag["waterbody"] = waterbody;
             PropertyBag["interactive_maps"] = interactiveMaps;
+            PropertyBag["published_maps"] = GetPublicationsByType<PublishedMap>(publications);
+            PropertyBag["published_reports"] = GetPublicationsByType<PublishedReport>(publications);
+            PropertyBag["datasets"] = datasets;
         }
 
         //[AjaxAction]

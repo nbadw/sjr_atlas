@@ -50,12 +50,17 @@ namespace SJRAtlas.Site.Helpers
                 
         public string ApplicationLink(string innerContent, IDictionary parameters)
         {
-            return ApplicationLink(innerContent, DefaultServiceName, parameters);            
+            return ApplicationLink(innerContent, DefaultServiceName, parameters, null);            
         }
 
         public string ApplicationLink(string innerContent, IDictionary parameters, IDictionary anchorAttributes)
         {
             return ApplicationLink(innerContent, DefaultServiceName, parameters, anchorAttributes);
+        }
+
+        public string ApplicationLink(string innerContent, string serviceName)
+        {
+            return ApplicationLink(innerContent, serviceName, null, null);
         }
 
         public string ApplicationLink(string innerContent, string serviceName, IDictionary parameters)
@@ -65,6 +70,11 @@ namespace SJRAtlas.Site.Helpers
 
         public string ApplicationLink(string innerContent, string serviceName, IDictionary parameters, IDictionary anchorAttributes)
         {
+            if (parameters == null)
+                parameters = DictHelper.Create();
+            if (anchorAttributes == null)
+                anchorAttributes = DictHelper.Create();
+
             return String.Format("<a href=\"{0}\" {1}>{2}</a>", UrlFor(serviceName, parameters), GetAttributes(anchorAttributes), innerContent);
         }
 

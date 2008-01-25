@@ -10,6 +10,8 @@ using SJRAtlas.Site.Helpers;
 
 namespace SJRAtlas.Site.Controllers
 {
+    [Layout("sjratlas")]
+    [Rescue("generalerror")]
     [Helper(typeof(MapHelper))]
     public class BaseController : SmartDispatcherController
     {
@@ -32,6 +34,28 @@ namespace SJRAtlas.Site.Controllers
         {
             get { return atlasMediator; }
             set { atlasMediator = value; }
+        }
+
+        protected IList<InteractiveMap> AddFullBasinInteractiveMaps(IList<InteractiveMap> relatedInteractiveMaps)
+        {
+            IList<InteractiveMap> interactiveMaps = new List<InteractiveMap>(relatedInteractiveMaps);
+            foreach (InteractiveMap basinMap in AtlasMediator.FindAllBasinMaps())
+            {
+                if (!interactiveMaps.Contains(basinMap))
+                    interactiveMaps.Add(basinMap);
+            }
+            return interactiveMaps;
+        }
+
+        protected IList<T> GetPublicationsByType<T>(IList<Publication> publications) where T : Publication
+        {
+            IList<T> publicationsByType = new List<T>();
+            foreach (Publication publication in publications)
+            {
+                if (publication is T)
+                    publicationsByType.Add((T)publication);
+            }
+            return publicationsByType;
         }
 
         /*

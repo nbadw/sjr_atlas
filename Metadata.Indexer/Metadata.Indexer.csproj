@@ -53,6 +53,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\External Libs\Castle Framework .NET-2.0\Castle.ActiveRecord.dll</HintPath>
     </Reference>
+    <Reference Include="ESRI.ArcGIS.ADF.ArcGISServer, Version=9.2.3.1380, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
     <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\External Libs\Castle Framework .NET-2.0\log4net.dll</HintPath>

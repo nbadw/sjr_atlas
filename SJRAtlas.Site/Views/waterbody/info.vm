@@ -1,6 +1,12 @@
-<div class="placename">
-$name, $region ($status_term Name)<br />
-Longitude: $longitude, Latitude: $latitude<br />
-View Location in Map<br />
-$Url.Link('Select This Location', "%{controller='placename', action='view', querystring='id=$id'}", "%{title='Select This Location', class='results-url'}")
+<div class="waterbody">
+    <span style="font-weight: bold;">
+    $Url.Link("$name, $region", "%{controller='waterbody', action='view', querystring='cgndbKey=$cgndb_key'}", "%{title='Select This Location', class='results-url'}")
+    </span>($status_term Name)<br />
+    Place Name Type: $!{type}<br />
+    County: $!{county}<br />
+    Latitude: $!{latitude}<br />
+    Longitude: $!{longitude}<br />
+    Drainage Code: $!{drainage_code}<br />
+    Flows Into: $!{flows_into}<br />
+    $MapHelper.ApplicationLink("View Location In Map", "%{coordinate=$coordinate, cgns='true'}", "%{onclick='view_location(\"$cgndb_key\"); return false;'}")
 </div>

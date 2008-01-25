@@ -1,6 +1,6 @@
 #capturefor(headline)
-<h1>Information</h1>
-<p>You're currently viewing information on <span class="search_query">$place.Name, $place.Region</span>. 
+    <h1>Place Information</h1>
+    #component(place_info with "Place=$place")
 #end
 
 #capturefor(javascripts)
@@ -10,37 +10,33 @@
 
 <div id="content" class="clearfix">	
 	<div class="innerwrap">
-		<div class="textbox">
-		    <div id="view-place">
-		        #component(place_info with "Place=$place")
-                
-                <div id="expanded-info">
-                    <div id="interactive-maps">
-                        <h2>Interactive Maps</h2>
-                        #if($interactive_maps.Count == 0)
-                            <p>No Interactive Maps</p>
-                        #else
-                            #parse("interactive_map/_list.vm")                        
-                        #end
-                    </div>
+		<div class="textbox">   
+            <div id="expanded-info">
+                <div id="interactive-maps">
+                    <h2>Interactive Maps</h2>
+                    #if($interactive_maps.Count == 0)
+                        <p>No Interactive Maps</p>
+                    #else
+                        #parse("interactive_map/_list.vm")                        
+                    #end
+                </div>
 
-                    <div id="published-maps">  
-                        <h2>Published Maps</h2>  
-                        #if($published_maps.Count == 0)
-                            <p>No Published Maps</p>
-                        #else
-                            #parse("publication/_list_maps.vm")
-                        #end
-                    </div>
-                    
-                    <div id="published-reports">  
-                        <h2>Published Reports</h2>  
-                        #if($published_reports.Count == 0)
-                            <p>No Published Reports</p>
-                        #else
-                            #parse("publication/_list_reports.vm")
-                        #end
-                    </div>
+                <div id="published-maps">  
+                    <h2>Published Maps</h2>  
+                    #if($published_maps.Count == 0)
+                        <p>No Published Maps</p>
+                    #else
+                        #parse("publication/_list_maps.vm")
+                    #end
+                </div>
+                
+                <div id="published-reports">  
+                    <h2>Published Reports</h2>  
+                    #if($published_reports.Count == 0)
+                        <p>No Published Reports</p>
+                    #else
+                        #parse("publication/_list_reports.vm")
+                    #end
                 </div>
             </div>
         </div>

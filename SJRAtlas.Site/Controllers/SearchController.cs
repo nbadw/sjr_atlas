@@ -1,15 +1,11 @@
+using System;
+using System.Collections.Generic;
+using SJRAtlas.Models;
+using System.Text.RegularExpressions;
+using System.Collections.Specialized;
+
 namespace SJRAtlas.Site.Controllers
 {
-	using System;
-
-	using Castle.MonoRail.Framework;
-    using System.Collections.Generic;
-    using SJRAtlas.Site.Models;
-    using System.Text.RegularExpressions;
-    using System.Collections.Specialized;
-    using SJRAtlas.Models;
-
-	[Layout("sjratlas"), Rescue("generalerror")]
 	public class SearchController : BaseController
 	{
         public void Quick(string q)
@@ -97,7 +93,7 @@ namespace SJRAtlas.Site.Controllers
 
             PropertyBag["datasets"] = datasets;
             PropertyBag["agencies"] = agencyNames;
-            PropertyBag["optionstype"] = typeof(SearchOptions);
+            //PropertyBag["optionstype"] = typeof(SearchOptions);
         }
 
         public void Tips()
@@ -105,18 +101,18 @@ namespace SJRAtlas.Site.Controllers
             RenderView("tips");
         }
 
-        public void SubmitAdvanced([DataBind("options", Validate=true)] SearchOptions options)
-        {
-            if (HasValidationError(options))
-            {
-                Flash["options"] = options;
-                Flash["summary"] = GetErrorSummary(options);
-                RedirectToAction("advanced");
-                return;
-            }
+        //public void SubmitAdvanced([DataBind("options", Validate=true)] SearchOptions options)
+        //{
+        //    if (HasValidationError(options))
+        //    {
+        //        Flash["options"] = options;
+        //        Flash["summary"] = GetErrorSummary(options);
+        //        RedirectToAction("advanced");
+        //        return;
+        //    }
 
-            RenderSharedView("shared/todo");
-        }
+        //    RenderSharedView("shared/todo");
+        //}
 
         private Regex CreateWatershedTriggerRegex()
         {

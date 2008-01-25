@@ -14,45 +14,39 @@
 <div id="content" class="clearfix">	
 	<div class="innerwrap">
 		<div class="textbox yui-gc">		
-                <div class="yui-u first"> 
+                <div class="yui-u first">                 
                     <div id="map-controls">
-                        <a href="#easymaps" class="active toggle">Interactive Maps</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+                        <a href="#interactive-maps" class="active toggle">Interactive Maps</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
                         <a href="#published-maps" class="toggle">Published Maps</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
                         <a href="#advancedmap" class="toggle">Advanced Map</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
                         <a href="#help" class="toggle">Help</a>
                     </div> 
-                    <div id="easymaps">                    
-                        <ul>
-                        #foreach( $map in $interactive_maps )
-                            <li class="easymap" onmouseover="show_large_preview('$!{map.LargeThumbnail}');" onmouseout="remove_large_preview();">
-                                <img class="thumbnail" alt="Map Preview" src="$!{map.Thumbnail}" />
-                                <h4 class="title"><a target="_blank" href="http://gis.mektekdev.com/demo/Default.aspx?resource=$map.ResourceName">$map.Title</a></h4>
-                                <p>$map.Description</p>
-                            </li>
+                    
+                    <div id="interactive-maps">
+                        #if($interactive_maps.Count == 0)
+                            <p>No Interactive Maps</p>
+                        #else
+                            #parse("interactive_map/_list.vm")                        
                         #end
-                        </ul>
                     </div>
-                    <div id="published-maps" style="display:none;">
-                    #if($published_maps.Length == 0)
-                        <p>No Published Maps Found</p>
-                    #else
-                        #foreach( $map in $published_maps )
-                            <li>
-                                <h4 class="title"><a href="$Resource.Href($map.DefaultLink)">$map.Title</a></h4>
-                                <p class="abstract">$map.Abstract</p>
-                                <p class="origin"><b>Origin:</b> $map.Origin</p>
-                                <p class="published"><b>Published:</b> $map.TimePeriod</p>
-                            </li>
+                    
+                    <div id="published-maps" style="display: none;">  
+                        #if($published_maps.Count == 0)
+                            <p>No Published Maps</p>
+                        #else
+                            #parse("publication/_list_maps.vm")
                         #end
-                    #end  
                     </div>
+                    
                     <div id="advancedmap" style="display:none;">
                         about advanced map...
                     </div>
+                    
                     <div id="help" style="display:none;">
                         Please see: <a href="$siteroot/Content/SJR Atlas User Manual - Release 1.pdf">SJR Atlas User Manual - Release 1</a>
                     </div>                    
                 </div>
+                
                 <div class="yui-u">
                     <h2>Preview Screenshot</h2>
                     <div id="map-preview">
@@ -60,6 +54,7 @@
                         <img style="display: none;" id="large-preview-img" src="" />
                     </div>                   
                 </div>
+                
             </div>                  
         </div>
 	</div>

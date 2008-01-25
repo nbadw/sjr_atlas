@@ -120,7 +120,7 @@ namespace SJRAtlas.Models
 
         private IList<WaterBody> waterbodies;
 
-        [HasMany(typeof(WaterBody), Cascade = ManyRelationCascadeEnum.SaveUpdate, Lazy = true)]
+        [HasMany(typeof(WaterBody), Cascade = ManyRelationCascadeEnum.SaveUpdate)]
         public IList<WaterBody> WaterBodies
         {
             get { return waterbodies; }
@@ -333,7 +333,7 @@ namespace SJRAtlas.Models
 
         public LatLngCoord GetCoordinate()
         {
-            return Place.GetCoordinate();
+            return Place != null ? Place.GetCoordinate() : null;
         }
 
         #endregion

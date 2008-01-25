@@ -257,6 +257,14 @@ namespace SJRAtlas.Models.Tests
         }
 
         [Test]
+        public void TestGetCoordinateReturnsNullWhenPlaceIsNull()
+        {
+            Watershed watershed = new Watershed();
+            Assert.IsNull(watershed.Place);
+            Assert.IsNull(watershed.GetCoordinate());
+        }	
+
+        [Test]
         public void TestIsWithinBasin()
         {
             string drainageCode = "01-00-00-00-00-00";

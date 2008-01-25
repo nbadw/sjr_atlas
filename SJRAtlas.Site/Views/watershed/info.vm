@@ -1,5 +1,12 @@
-<tr class="watershed">
-    <td>$Url.Link($name, "%{controller='watershed', action='view', querystring='id=$id'}", "%{title='Select This Location', class='results-url'}")</td>
-    <td>$drainage_code</td>
-    <td>$tributary_of</td>                         
-</tr>
+<div class="watershed">
+    <span style="font-weight: bold;">
+    $Url.Link("$name, $region", "%{controller='watershed', action='view', querystring='cgndbKey=$cgndb_key'}", "%{title='Select This Location', class='results-url'}")
+    </span>($status_term Name)<br />
+    Place Name Type: $!{type}<br />
+    County: $!{county}<br />
+    Latitude: $!{latitude}<br />
+    Longitude: $!{longitude}<br />
+    Drainage Code: $!{drainage_code}<br />
+    Flows Into: $!{flows_into}<br />
+    $MapHelper.ApplicationLink("View Location In Map", "%{coordinate=$coordinate, cgns='true'}", "%{onclick='view_location(\"$cgndb_key\"); return false;'}")
+</div>

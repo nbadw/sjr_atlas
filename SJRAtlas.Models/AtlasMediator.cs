@@ -63,5 +63,10 @@ namespace SJRAtlas.Models
             }
             return publishedMaps;
         }
+
+        public virtual Watershed FindWatershedByCgndbKey(string cgndbKey)
+        {
+            return Watershed.FindByCgndbKey(cgndbKey);
+        }
     }
 }

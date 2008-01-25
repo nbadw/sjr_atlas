@@ -9,24 +9,23 @@ namespace SJRAtlas.Site.Controllers
 {
     public class PresentationController : BaseController
     {        
-        public PresentationController(IPresentationViewResolver presentationViewResolver)
+        public PresentationController()
         {
-            this.presentationViewResolver = presentationViewResolver;   
+             
         }
 
-        private IPresentationViewResolver presentationViewResolver;
+        private IPresentationViewHandler presentationViewHandler;
 
-        public IPresentationViewResolver PresentationViewResolver
+        public IPresentationViewHandler PresentationViewHandler
         {
-            get { return presentationViewResolver; }
-            set { presentationViewResolver = value; }
-        }
-	
+            get { return presentationViewHandler; }
+            set { presentationViewHandler = value; }
+        }	
 
         public void View(int id)
         {
-            Presentation presentation = AtlasMediator.Find<Presentation>(id);
-            RenderSharedView(PresentationViewResolver.GetViewFor(presentation));
+            Presentation presentation = AtlasMediator.Find<Presentation>(id);            
+            PresentationViewHandler.RenderViewFor(presentation, Context);
         }
     }
 }

@@ -3,8 +3,8 @@
 <p>You've searched for: <span class="search_query">&ldquo;$!{query}&rdquo;</span>. Please select one of the below locations to continue.</p>
 #end
 
-#set($map_width  = 500)
-#set($map_height = 500)
+#set($map_width  = 265)
+#set($map_height = 265)
 
 #capturefor(javascripts)
 <script type="text/javascript" language="javascript" src="$siteroot/Content/javascripts/yahoo-dom-event.js"></script>
@@ -23,7 +23,6 @@ function load()
     {
         // if browser is compatible, display the map element
         var map_element = dom.get('gmap');
-        
         dom.setStyle(map_element, 'display', 'block');
         
         // create the map
@@ -68,26 +67,26 @@ evt.addListener(document.body, 'unload', unload);
 
 <div id="content" class="clearfix">	
 	<div class="innerwrap">
-		<div class="textbox yui-gd">		
+		<div class="textbox yui-gc">		
             <div class="yui-u first">
                 <h2>Which Location Did You Mean?</h2>
-                #foreach($result in $results)
-                    #component(place_info with "place=$result")
-                #end   
-                
+                <div id="search-results">
+                    #foreach($result in $results)
+                        #component(place_info with "place=$result")
+                    #end                    
+                </div>
+            </div>
+            <div class="yui-u">
+                <div id="gmap" style="display: none; width: ${map_width}px; height: ${map_height}px; margin-bottom: 1em;">                    
+                </div>
+            
                 <h2>Need Help?</h2>
                 <p>You've searched the Atlas for: <span class="search_query">&ldquo;$!{query}&rdquo;</span>.</p>
                 <p>If you haven't found what you are looking for you may also want to try the following:</p>
                 <ul>
                     <li>$Url.Link('Advanced Search', "%{controller='search', action='advanced'}")</li>
                     <li>$Url.Link('Search Tips', "%{controller='search', action='tips'}")</li>
-                </ul>                 
-            </div>
-            
-            
-            <div class="yui-u">
-                <div id="gmap" style="display: none; width: 100%; height: 100%;">                    
-                </div>
+                </ul>
             </div>               
         </div>
 	</div>

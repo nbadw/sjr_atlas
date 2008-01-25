@@ -150,5 +150,8 @@ div.query-results table tr.odd  { background: #eee; }
 #interactive-maps h2,
 #published-maps h2,
 #published-reports h2 { text-decoration: underline; margin: 1.5em 0 0.8em; }
-.interactive-map { clear: both; }
+.interactive-map,
+.publication { clear: both; margin-bottom: 1em; }
 .publication > * { margin-bottom: 0; }
+
+#search-results .place { margin-bottom: 1em; }
