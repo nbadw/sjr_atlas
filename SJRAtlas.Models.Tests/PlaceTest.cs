@@ -103,31 +103,69 @@ namespace SJRAtlas.Models.Tests
         }
 
         [Test]
-        public void TestRelatedInteractiveMaps()
+        public void TestRelatedInteractiveMapsWhenIsNotWithinBasin()
         {
             string query = "place name is the default query";
             Place place = new Place();
             place.Name = query;
+            
+            ClosestWatershedToPlace cwtp = mocks.CreateMock<ClosestWatershedToPlace>();
+            place.ClosestWatershedToPlace = cwtp;
+
+            Expect.Call(cwtp.IsWithinBasin()).Return(false).Repeat.AtLeastOnce();
+            mocks.ReplayAll();
 
             InteractiveMap[] interactiveMaps = new InteractiveMap[3];
             for (int i = 0; i < interactiveMaps.Length; i++)
             {
                 interactiveMaps[i] = new InteractiveMap();
                 interactiveMaps[i].Title = "Interactive Map where " + query + ": #" + i.ToString();
+                interactiveMaps[i].IsBasinMap = (i % 2) == 0 ? true : false; // even to true, odd to false
                 interactiveMaps[i].CreateAndFlush();
             }
 
+            Assert.IsFalse(place.IsWithinBasin());
             Assert.AreEqual(interactiveMaps.Length, place.RelatedInteractiveMaps.Count);
+            mocks.VerifyAll();
         }
 
         [Test]
         public void TestRelatedInteractiveMapsNeverReturnsNull()
         {
             Place place = new Place();
+            place.CgndbKey = "ABCDE";
+            place.CreateAndFlush();
             IList<InteractiveMap> interativeMaps = place.RelatedInteractiveMaps;
             Assert.IsNotNull(interativeMaps);
             Assert.AreEqual(0, interativeMaps.Count);
         }
+
+        [Test]
+        public void TestRelatedInteractiveMapsWhenIsWithinBasin()
+        {
+            string query = "place name is the default query";
+            Place place = new Place();
+            place.Name = query;
+
+            ClosestWatershedToPlace cwtp = mocks.CreateMock<ClosestWatershedToPlace>();
+            place.ClosestWatershedToPlace = cwtp;
+
+            Expect.Call(cwtp.IsWithinBasin()).Return(true).Repeat.AtLeastOnce();
+            mocks.ReplayAll();
+
+            InteractiveMap[] interactiveMaps = new InteractiveMap[3];
+            for (int i = 0; i < interactiveMaps.Length; i++)
+            {
+                interactiveMaps[i] = new InteractiveMap();
+                interactiveMaps[i].Title = "Interactive Map where " + query + ": #" + i.ToString();
+                interactiveMaps[i].IsBasinMap = (i % 2) == 0 ? true : false; // even to true, odd to false
+                interactiveMaps[i].CreateAndFlush();
+            }
+
+            Assert.IsTrue(place.IsWithinBasin());
+            Assert.AreEqual(2, place.RelatedInteractiveMaps.Count);
+            mocks.VerifyAll();
+        }	
 
         [Test]
         public void TestProperties()

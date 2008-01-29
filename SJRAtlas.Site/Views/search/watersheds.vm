@@ -12,14 +12,24 @@
                     <p>Sorry, No Watersheds Found.</p>                
                 #else                    
                     <table style="width: 100%;">
-                        <tr>
-                            <th style="font-weight: bold;">Water Body</th>
-                            <th style="font-weight: bold;">Drainage Code</th>
-                            <th style="font-weight: bold;">Tributary Of</th>
-                        </tr>
+                        <thead>
+                            <tr>
+                                <th style="font-weight: bold;">Name</th>
+                                <th style="font-weight: bold;">Drainage Code</th>
+                                <th style="font-weight: bold;">Flows Into</th>
+                            </tr>
+                        </thead>
+                        <tbody>                        
                         #foreach( $result in $results )
-                            #component(watershed_info with "Watershed=$result")                       
+                            <tr class="watershed-result">
+                                <td class="name">
+                                    $Url.Link($result.Name, "%{controller='watershed', action='view', querystring='drainageCode=$result.DrainageCode'}")
+                                </td>
+                                <td class="drainage-code">$result.DrainageCode</td>
+                                <td class="flows-into">$result.FlowsInto</td>
+                            </tr>                      
                         #end
+                        </tbody>
                     </table>
                 #end
             </div>

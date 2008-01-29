@@ -1,5 +1,5 @@
 <div class="interactive-map">
     <img class="thumbnail" alt="Map Preview" src="$!{thumbnail_url}">
-    <h3>$MapHelper.ApplicationLink($title, $service_name, "%{cgns='true', coordinate=$coordinate}")</h3>
+    <h3>$Atlas.MapLink($title, $service_name, "%{cgns='true', coordinate=$coordinate}")</h3>
     <p class="description">$!{description}</p>
 </div>

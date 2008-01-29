@@ -61,17 +61,12 @@ namespace SJRAtlas.Models
         //    set { timePeriod = value; }
         //}
         
-        private IList<Presentation> presentations;
+        private IList<Presentation> presentations = new List<Presentation>();
                 
+        [HasMany(typeof(Presentation), Table="presentations", ColumnKey="data_set_id")]
         public IList<Presentation> Presentations
         {
-            get 
-            {
-                if (presentations == null)
-                    presentations = new List<Presentation>();
-
-                return presentations; 
-            }
+            get { return presentations; }
             set { presentations = value; }
         }
 

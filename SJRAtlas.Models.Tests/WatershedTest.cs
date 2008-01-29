@@ -143,21 +143,45 @@ namespace SJRAtlas.Models.Tests
         }
 
         [Test]
-        public void TestRelatedInteractiveMaps()
+        public void TestRelatedInteractiveMapsWhenIsNotWithinBasin()
         {
             string query = "place name is the default query";
             Watershed watershed = new Watershed();
             watershed.Name = query;
+            watershed.DrainageCode = "10-11-12-13-14-15";
 
             InteractiveMap[] interactiveMaps = new InteractiveMap[3];
             for (int i = 0; i < interactiveMaps.Length; i++)
             {
                 interactiveMaps[i] = new InteractiveMap();
                 interactiveMaps[i].Title = "Interactive Map where " + query + ": #" + i.ToString();
+                interactiveMaps[i].IsBasinMap = (i % 2) == 0 ? true : false; // even to true, odd to false
                 interactiveMaps[i].CreateAndFlush();
             }
 
+            Assert.IsFalse(watershed.IsWithinBasin());
             Assert.AreEqual(interactiveMaps.Length, watershed.RelatedInteractiveMaps.Count);
+        }
+
+        [Test]
+        public void TestRelatedInteractiveMapsWhenIsWithinBasin()
+        {
+            string query = "place name is the default query";
+            Watershed watershed = new Watershed();
+            watershed.Name = query;
+            watershed.DrainageCode = "01-02-03-04-05-06";
+
+            InteractiveMap[] interactiveMaps = new InteractiveMap[3];
+            for (int i = 0; i < interactiveMaps.Length; i++)
+            {
+                interactiveMaps[i] = new InteractiveMap();
+                interactiveMaps[i].Title = "Interactive Map where " + query + ": #" + i.ToString();
+                interactiveMaps[i].IsBasinMap = (i % 2) == 0 ? true : false; // even to true, odd to false
+                interactiveMaps[i].CreateAndFlush();
+            }
+
+            Assert.IsTrue(watershed.IsWithinBasin());
+            Assert.AreEqual(2, watershed.RelatedInteractiveMaps.Count);
         }
 
         [Test]
@@ -172,17 +196,15 @@ namespace SJRAtlas.Models.Tests
         [Test]
         public void TestFindRelatedDataSets()
         {
-            WaterBody waterBody1 = mocks.CreateMock<WaterBody>();
-            WaterBody waterBody2 = mocks.CreateMock<WaterBody>();
-            Expect.Call(waterBody1.DataSets).Return(new DataSet[2]);
-            Expect.Call(waterBody2.DataSets).Return(new DataSet[3]);
-            mocks.ReplayAll();
+            WaterBody waterBody1 = new WaterBody();
+            WaterBody waterBody2 = new WaterBody();
+            waterBody1.DataSets = new List<DataSet>(new DataSet[] { new DataSet(), new DataSet() });
+            waterBody2.DataSets = new List<DataSet>(new DataSet[] { new DataSet(), new DataSet(), new DataSet() });
 
             Watershed watershed = new Watershed();
             watershed.WaterBodies.Add(waterBody1);
             watershed.WaterBodies.Add(waterBody2);
-            Assert.AreEqual(5, watershed.DataSets.Length);
-            mocks.VerifyAll();
+            Assert.AreEqual(5, watershed.DataSets.Count);
         }
 
         [Test]

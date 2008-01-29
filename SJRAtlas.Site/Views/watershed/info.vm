@@ -8,5 +8,5 @@
     Longitude: $!{longitude}<br />
     Drainage Code: $!{drainage_code}<br />
     Flows Into: $!{flows_into}<br />
-    $MapHelper.ApplicationLink("View Location In Map", "%{coordinate=$coordinate, cgns='true'}", "%{onclick='view_location(\"$cgndb_key\"); return false;'}")
+    $Atlas.MapLink("View Location In Map", "%{coordinate=$coordinate, cgns='true'}", "%{onclick='view_location(\"$cgndb_key\"); return false;'}")
 </div>

@@ -15,7 +15,7 @@ namespace SJRAtlas.Site.Controllers
                 throw new ArgumentNullException("cgndbKey");
 
             WaterBody waterbody = WaterBody.FindByCgndbKeyOrAltCgndbKey(cgndbKey);
-            IList<InteractiveMap> interactiveMaps = AddFullBasinInteractiveMaps(waterbody.RelatedInteractiveMaps);
+            IList<InteractiveMap> interactiveMaps = waterbody.RelatedInteractiveMaps;
             IList<Publication> publications = waterbody.RelatedPublications; 
             IList<DataSet> datasets = waterbody.DataSets;
 

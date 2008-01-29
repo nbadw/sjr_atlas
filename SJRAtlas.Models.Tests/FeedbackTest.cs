@@ -1,7 +1,7 @@
 using System;
 using NUnit.Framework;
 
-namespace SJRAtlas.Tests.Models
+namespace SJRAtlas.Models.Tests
 {
     [TestFixture]
     public class FeedbackTest

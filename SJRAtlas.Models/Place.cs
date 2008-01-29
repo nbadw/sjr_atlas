@@ -148,7 +148,6 @@ namespace SJRAtlas.Models
             {
                 if (!closestWatershedToPlaceAlreadyLoaded)
                 {
-
                     closestWatershedToPlace = ClosestWatershedToPlace.FindByCgndbKey(CgndbKey);
                     closestWatershedToPlaceAlreadyLoaded = true;
                 }
@@ -170,7 +169,10 @@ namespace SJRAtlas.Models
             {
                 if (interactiveMaps == null)
                 {
-                    interactiveMaps = InteractiveMap.FindAllByQuery(String.Format("%{0}%", Name));                    
+                    string query = String.Format("%{0}%", Name);
+                    interactiveMaps = IsWithinBasin() ?
+                        InteractiveMap.FindAllWithFullBasinCoverageByQuery(query) :
+                        InteractiveMap.FindAllByQuery(query);
                 }
 
                 return interactiveMaps; 

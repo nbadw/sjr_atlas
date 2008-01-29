@@ -2,5 +2,7 @@
   <h3>$!{title}</h3>
   <p class="abstract">$!{abstract}</p>
   <p class="origin">Origin: $!{origin}</p>  
-  
+  <div class="presentations">
+    $Atlas.PresentationLinks($presentations)
+  </div>
 </div>

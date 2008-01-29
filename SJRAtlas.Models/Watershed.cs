@@ -69,9 +69,9 @@ namespace SJRAtlas.Models
             }
         }
 
-        private DataSet[] datasets;
+        private IList<DataSet> datasets;
 
-        public DataSet[] DataSets
+        public IList<DataSet> DataSets
         {
             get
             {
@@ -80,9 +80,13 @@ namespace SJRAtlas.Models
                     List<DataSet> collectedDataSets = new List<DataSet>();
                     foreach (WaterBody waterbody in WaterBodies)
                     {
-                        collectedDataSets.AddRange(waterbody.DataSets);
+                        foreach (DataSet dataset in waterbody.DataSets)
+                        {
+                            if (!collectedDataSets.Contains(dataset))
+                                collectedDataSets.Add(dataset);
+                        }
                     }
-                    datasets = collectedDataSets.ToArray();
+                    datasets = collectedDataSets;
                 }
 
                 return datasets;
@@ -307,7 +311,10 @@ namespace SJRAtlas.Models
             {
                 if (interactiveMaps == null)
                 {
-                    interactiveMaps = InteractiveMap.FindAllByQuery(String.Format("%{0}%", Name));
+                    string query = String.Format("%{0}%", Name);
+                    interactiveMaps = IsWithinBasin() ? 
+                        InteractiveMap.FindAllWithFullBasinCoverageByQuery(query) :
+                        InteractiveMap.FindAllByQuery(query);
                 }
 
                 return interactiveMaps;

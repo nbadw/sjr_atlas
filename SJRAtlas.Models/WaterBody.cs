@@ -119,37 +119,21 @@ namespace SJRAtlas.Models
             set { flowsIntoWaterBodyName = value; }
         }
 
-        #endregion
-
-        private DataSet[] datasets;
-
-        public virtual DataSet[] DataSets
-        {
-            get 
-            {
-                if (datasets == null)
-                {
-                    datasets = new DataSet[DataSetList.Count];
-                    DataSetList.CopyTo(datasets, 0);
-                }
-
-                return datasets;
-            }
-        }
-
-        private IList<DataSet> datasetList = new List<DataSet>();
+        private IList<DataSet> datasets = new List<DataSet>();
 
         [HasAndBelongsToMany(typeof(DataSet), Table = "data_sets_waterbodies",
             ColumnKey = "waterbody_id", ColumnRef = "data_set_id")]
-        public IList<DataSet> DataSetList
+        public IList<DataSet> DataSets
         {
-            get { return datasetList; }
-            set { datasetList = value; }
-        }             
+            get { return datasets; }
+            set { datasets = value; }
+        }     
+
+        #endregion        
 
         public bool IsWithinBasin()
         {
-            return Watershed.IsWithinBasin();
+            return Watershed != null ? Watershed.IsWithinBasin() : false;
         }
 
         private IList<InteractiveMap> interactiveMaps;
@@ -160,7 +144,10 @@ namespace SJRAtlas.Models
             {
                 if (interactiveMaps == null)
                 {
-                    interactiveMaps = InteractiveMap.FindAllByQuery(String.Format("%{0}%", Name));
+                    string query = String.Format("%{0}%", Name);
+                    interactiveMaps = IsWithinBasin() ?
+                        InteractiveMap.FindAllWithFullBasinCoverageByQuery(query) :
+                        InteractiveMap.FindAllByQuery(query);
                 }
 
                 return interactiveMaps;

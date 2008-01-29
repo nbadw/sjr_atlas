@@ -6,12 +6,16 @@ namespace SJRAtlas.Site.Controllers
 {
     public class WatershedController : BaseController
     {
-        public void View(string cgndbKey)
+        public void View(string cgndbKey, string drainageCode)
         {
-            Watershed watershed = AtlasMediator.FindWatershedByCgndbKey(cgndbKey);
-            IList<InteractiveMap> interactiveMaps = watershed.IsWithinBasin() ?
-                AddFullBasinInteractiveMaps(watershed.RelatedInteractiveMaps) :
-                watershed.RelatedInteractiveMaps;
+            if (String.IsNullOrEmpty(cgndbKey) && String.IsNullOrEmpty(drainageCode))
+                throw new ArgumentException(@"Action: View on Controller: Watershed must be passed
+                    either a CGNDB Key or a Drainage Unit Code");
+
+            Watershed watershed = String.IsNullOrEmpty(drainageCode) ?
+                AtlasMediator.FindWatershedByCgndbKey(cgndbKey) :
+                AtlasMediator.Find<Watershed>(drainageCode);
+            IList<InteractiveMap> interactiveMaps = watershed.RelatedInteractiveMaps;
             IList<Publication> publications = watershed.RelatedPublications;
             
             PropertyBag["watershed"] = watershed;

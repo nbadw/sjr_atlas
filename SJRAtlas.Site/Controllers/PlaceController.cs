@@ -27,7 +27,8 @@ namespace SJRAtlas.Site.Controllers
                 return;
             }
             
-            if (AtlasMediator.WatershedExistsForCgndbKey(place.CgndbKey))
+            if (place.IsWithinBasin() &&
+                AtlasMediator.WatershedExistsForCgndbKey(place.CgndbKey))
             {
                 Dictionary<string, string> parameters = new Dictionary<string, string>();
                 parameters.Add("cgndbKey", place.CgndbKey);
@@ -35,9 +36,7 @@ namespace SJRAtlas.Site.Controllers
                 return;
             }
 
-            IList<InteractiveMap> interactiveMaps = place.IsWithinBasin() ?
-                AddFullBasinInteractiveMaps(place.RelatedInteractiveMaps) :
-                place.RelatedInteractiveMaps;
+            IList<InteractiveMap> interactiveMaps = place.RelatedInteractiveMaps;
             IList<Publication> publications = place.RelatedPublications;
 
             PropertyBag["place"] = place;

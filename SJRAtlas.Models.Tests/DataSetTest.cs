@@ -41,7 +41,6 @@ namespace SJRAtlas.Models.Tests
         public void TestPresentationsNeverReturnsNull()
         {
             DataSet dataset = new DataSet();
-            dataset.Presentations = null;
             Assert.IsNotNull(dataset.Presentations);
             Assert.AreEqual(0, dataset.Presentations.Count);
         }

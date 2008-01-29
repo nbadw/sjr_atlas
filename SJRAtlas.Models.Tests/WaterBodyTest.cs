@@ -138,21 +138,57 @@ namespace SJRAtlas.Models.Tests
         }
 
         [Test]
-        public void TestRelatedInteractiveMaps()
+        public void TestRelatedInteractiveMapsWhenIsNotWithinBasin()
         {
             string query = "place name is the default query";
             WaterBody waterbody = new WaterBody();
             waterbody.Name = query;
+
+            Watershed watershed = mocks.CreateMock<Watershed>();
+            waterbody.Watershed = watershed;
+
+            Expect.Call(watershed.IsWithinBasin()).Return(false ).Repeat.AtLeastOnce();
+            mocks.ReplayAll();
 
             InteractiveMap[] interactiveMaps = new InteractiveMap[3];
             for (int i = 0; i < interactiveMaps.Length; i++)
             {
                 interactiveMaps[i] = new InteractiveMap();
                 interactiveMaps[i].Title = "Interactive Map where " + query + ": #" + i.ToString();
+                interactiveMaps[i].IsBasinMap = (i % 2) == 0 ? true : false; // even to true, odd to false
                 interactiveMaps[i].CreateAndFlush();
             }
 
+            Assert.IsFalse(waterbody.IsWithinBasin());
             Assert.AreEqual(interactiveMaps.Length, waterbody.RelatedInteractiveMaps.Count);
+            mocks.VerifyAll();
+        }
+
+        [Test]
+        public void TestRelatedInteractiveMapsWhenIsWithinBasin()
+        {
+            string query = "place name is the default query";
+            WaterBody waterbody = new WaterBody();
+            waterbody.Name = query;
+
+            Watershed watershed = mocks.CreateMock<Watershed>();
+            waterbody.Watershed = watershed;
+
+            Expect.Call(watershed.IsWithinBasin()).Return(true).Repeat.AtLeastOnce();
+            mocks.ReplayAll();
+
+            InteractiveMap[] interactiveMaps = new InteractiveMap[3];
+            for (int i = 0; i < interactiveMaps.Length; i++)
+            {
+                interactiveMaps[i] = new InteractiveMap();
+                interactiveMaps[i].Title = "Interactive Map where " + query + ": #" + i.ToString();
+                interactiveMaps[i].IsBasinMap = (i % 2) == 0 ? true : false; // even to true, odd to false
+                interactiveMaps[i].CreateAndFlush();
+            }
+
+            Assert.IsTrue(waterbody.IsWithinBasin());
+            Assert.AreEqual(2, waterbody.RelatedInteractiveMaps.Count);
+            mocks.VerifyAll();
         }
 
         [Test]
@@ -212,13 +248,13 @@ namespace SJRAtlas.Models.Tests
             DataSet dataset2 = new DataSet();
             dataset2.CreateAndFlush();
 
-            waterbody.DataSetList.Add(dataset1);
-            waterbody.DataSetList.Add(dataset2);
+            waterbody.DataSets.Add(dataset1);
+            waterbody.DataSets.Add(dataset2);
             waterbody.SaveAndFlush();
 
             waterbody = WaterBody.Find(id);
             Assert.IsNotNull(waterbody);
-            Assert.AreEqual(2, waterbody.DataSets.Length);
+            Assert.AreEqual(2, waterbody.DataSets.Count);
         }
 
         [Test]

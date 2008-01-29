@@ -6,5 +6,5 @@
     County: $!{county}<br />
     Latitude: $!{latitude}<br />
     Longitude: $!{longitude}<br />
-    $MapHelper.ApplicationLink("View Location In Map", "%{coordinate=$coordinate, cgns='true'}", "%{onclick='view_location(\'$cgndb_key\'); return false;', class='option'}")
+    $Atlas.MapLink("View Location In Map", "%{coordinate=$coordinate, cgns='true'}", "%{onclick='view_location(\'$cgndb_key\'); return false;', class='option'}")
 </div>

@@ -15,14 +15,6 @@ namespace SJRAtlas.Models
             isBasinMap = false;
         }
 
-        public static IList<InteractiveMap> FindAllByQuery(string query)
-        {
-            DetachedCriteria criteria = DetachedCriteria.For<InteractiveMap>();
-            criteria.Add(Expression.Like("Title", query));
-            return ActiveRecordMediator<InteractiveMap>.FindAll(criteria, 
-                new Order[] { Order.Asc("Title") });
-        }
-
         protected override bool BeforeSave(IDictionary state)
         {
             if ((DateTime)state["CreatedAt"] == DateTime.MinValue)
@@ -130,6 +122,26 @@ namespace SJRAtlas.Models
 
         #endregion
 
+        #region Finders
+
+        public static IList<InteractiveMap> FindAllByQuery(string query)
+        {
+            DetachedCriteria criteria = DetachedCriteria.For<InteractiveMap>();
+            criteria.Add(Expression.Like("Title", query));
+            return ActiveRecordMediator<InteractiveMap>.FindAll(criteria,
+                new Order[] { Order.Asc("Title") });
+        }
+
+        public static IList<InteractiveMap> FindAllWithFullBasinCoverageByQuery(string query)
+        {
+            DetachedCriteria criteria = DetachedCriteria.For<InteractiveMap>();
+            criteria.Add(Expression.And(
+                Expression.Like("Title", query),
+                Expression.Eq("IsBasinMap", true)));
+            return ActiveRecordMediator<InteractiveMap>.FindAll(criteria,
+                new Order[] { Order.Asc("Title") });
+        }
+
         public static IList<InteractiveMap> FindAllBasinMaps()
         {
             DetachedCriteria criteria = DetachedCriteria.For<InteractiveMap>();
@@ -150,5 +162,7 @@ namespace SJRAtlas.Models
             criteria.Add(Expression.InG<string>("Title", titles));
             return InteractiveMap.FindAll(criteria, new Order[] { Order.Asc("Title") });
         }
+
+        #endregion
     }
 }

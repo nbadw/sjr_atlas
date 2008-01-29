@@ -146,7 +146,8 @@
     <Compile Include="Controllers\WatershedController.cs" />
     <Compile Include="DefaultPresentationViewResolver.cs" />
     <Compile Include="GlobalApplication.cs" />
-    <Compile Include="Helpers\MapHelper.cs" />
+    <Compile Include="Helpers\AtlasHelper.cs" />
+    <Compile Include="Helpers\AtlasHelperConfiguration.cs" />
     <Compile Include="IPresentationViewResolver.cs" />
     <Compile Include="Models\SearchOptions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

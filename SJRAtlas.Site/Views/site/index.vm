@@ -16,7 +16,7 @@
                     <ul>
                     #foreach( $map in $interactive_maps )
                         <li class="interactive-map">
-                            <h4 class="title">$MapHelper.ApplicationLink($map.Title, $map.ServiceName)</h4>
+                            <h4 class="title">$Atlas.MapLink($map.Title, $map.ServiceName)</h4>
                         </li>
                     #end
                     </ul>

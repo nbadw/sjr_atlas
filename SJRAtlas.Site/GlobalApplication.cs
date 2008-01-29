@@ -15,7 +15,7 @@ namespace SJRAtlas.Site
         {
             instance = this;
             container = new WebApplicationContainer();
-            logger = (container[typeof(ILoggerFactory)] as ILoggerFactory).Create(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+            logger = CreateLogger(GetType().FullName);
         }
 
 		public void Application_OnStart()
@@ -38,14 +38,22 @@ namespace SJRAtlas.Site
 
         #endregion
 
-        public static ILoggerFactory LogFactory
-        {
-            get { return ContainerAccessor.Container[typeof(ILoggerFactory)] as ILoggerFactory; }
-        }
-
         public static ILogger CreateLogger(string name)
         {
-            return LogFactory.Create(name);
+            return LoggerFactory.Create(name);
+        }
+
+        private static ILoggerFactory LoggerFactory
+        {
+            get 
+            { 
+                ILoggerFactory nullLoggerFactory = new NullLogFactory();
+                if (ContainerAccessor == null || ContainerAccessor.Container == null)
+                    return nullLoggerFactory;
+
+                ILoggerFactory loggerFactory = ContainerAccessor.Container[typeof(ILoggerFactory)] as ILoggerFactory;
+                return loggerFactory != null ? loggerFactory : nullLoggerFactory;
+            }
         }
 
         public static IContainerAccessor ContainerAccessor
