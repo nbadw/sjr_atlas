@@ -5,6 +5,7 @@ using SJRAtlas.Site.Controllers;
 using Rhino.Mocks;
 using SJRAtlas.Models;
 using System.Collections.Generic;
+using SJRAtlas.Models.Atlas;
 
 namespace SJRAtlas.Site.Tests.Controllers
 {    

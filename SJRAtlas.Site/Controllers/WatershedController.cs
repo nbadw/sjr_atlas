@@ -1,6 +1,8 @@
 using System;
 using SJRAtlas.Models;
 using System.Collections.Generic;
+using SJRAtlas.Models.DataWarehouse;
+using SJRAtlas.Models.Atlas;
 
 namespace SJRAtlas.Site.Controllers
 {

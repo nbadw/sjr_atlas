@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Castle.ActiveRecord;
+using SJRAtlas.Models.Atlas;
+using SJRAtlas.Models.DataWarehouse;
 
 namespace SJRAtlas.Models
 {

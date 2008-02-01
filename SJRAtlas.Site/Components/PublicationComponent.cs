@@ -1,6 +1,6 @@
 using System;
 using Castle.MonoRail.Framework;
-using SJRAtlas.Models;
+using SJRAtlas.Models.Atlas;
 
 namespace SJRAtlas.Site.Components
 {

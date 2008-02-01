@@ -134,8 +134,8 @@ namespace Metadata.Indexer.Console
         }
 
         private static void RemoveCurrentDatabaseEntries(Type[] metadataAwareTypes)
-        {            
-            SJRAtlas.Models.Metadata.DeleteAll();
+        {
+            SJRAtlas.Models.Atlas.Metadata.DeleteAll();
             Type activeRecordType = typeof(ActiveRecordBase);
             MethodInfo deleteAll = activeRecordType.GetMethod("DeleteAll", BindingFlags.Static | BindingFlags.NonPublic, 
                 null, new Type[] { typeof(Type) }, null);

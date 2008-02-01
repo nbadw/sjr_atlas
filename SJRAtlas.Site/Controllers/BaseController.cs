@@ -7,6 +7,7 @@ using System.Reflection;
 using SJRAtlas.Site.Models;
 using SJRAtlas.Models;
 using SJRAtlas.Site.Helpers;
+using SJRAtlas.Models.Atlas;
 
 namespace SJRAtlas.Site.Controllers
 {

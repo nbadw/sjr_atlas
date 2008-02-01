@@ -57,27 +57,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Agency.cs" />
-    <Compile Include="ClosestWatershedToPlace.cs" />
+    <Compile Include="DataWarehouse\Agency.cs" />
+    <Compile Include="Atlas\ClosestWatershedToPlace.cs" />
     <Compile Include="AtlasMediator.cs" />
-    <Compile Include="Feedback.cs" />
-    <Compile Include="Publication.cs" />
-    <Compile Include="LatLngCoord.cs" />
-    <Compile Include="DataSet.cs" />
-    <Compile Include="GraphPresentation.cs" />
-    <Compile Include="IMetadataAware.cs" />
-    <Compile Include="InteractiveMap.cs" />
-    <Compile Include="MapPresentation.cs" />
-    <Compile Include="Metadata.cs" />
-    <Compile Include="Place.cs" />
-    <Compile Include="Presentation.cs" />
+    <Compile Include="Atlas\Feedback.cs" />
+    <Compile Include="Atlas\Publication.cs" />
+    <Compile Include="Atlas\LatLngCoord.cs" />
+    <Compile Include="Atlas\DataSet.cs" />
+    <Compile Include="Atlas\GraphPresentation.cs" />
+    <Compile Include="Atlas\IMetadataAware.cs" />
+    <Compile Include="Atlas\InteractiveMap.cs" />
+    <Compile Include="Atlas\MapPresentation.cs" />
+    <Compile Include="Atlas\Metadata.cs" />
+    <Compile Include="Atlas\Place.cs" />
+    <Compile Include="Atlas\Presentation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PublishedMap.cs" />
-    <Compile Include="PublishedReport.cs" />
-    <Compile Include="SummaryReportPresentation.cs" />
-    <Compile Include="TabularPresentation.cs" />
-    <Compile Include="WaterBody.cs" />
-    <Compile Include="Watershed.cs" />
+    <Compile Include="Atlas\PublishedMap.cs" />
+    <Compile Include="Atlas\PublishedReport.cs" />
+    <Compile Include="Atlas\SummaryReportPresentation.cs" />
+    <Compile Include="Atlas\TabularPresentation.cs" />
+    <Compile Include="Atlas\TableFilter.cs" />
+    <Compile Include="Atlas\Table.cs" />
+    <Compile Include="DataWarehouse\WaterBody.cs" />
+    <Compile Include="DataWarehouse\Watershed.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

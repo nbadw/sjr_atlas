@@ -7,6 +7,7 @@ using Castle.MonoRail.TestSupport;
 using Castle.MonoRail.Framework;
 using SJRAtlas.Site.Components;
 using SJRAtlas.Models;
+using SJRAtlas.Models.Atlas;
 
 namespace SJRAtlas.Site.Tests.Components
 {

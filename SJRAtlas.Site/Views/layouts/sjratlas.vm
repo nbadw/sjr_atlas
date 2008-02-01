@@ -19,6 +19,10 @@
 <link rel="stylesheet" type="text/css" href="$siteroot/Content/stylesheets/bug-fixes-ie6.css" />
 <![endif]-->
 
+$Ajax.InstallScripts()
+$Scriptaculous.InstallScripts()
+$FormHelper.InstallScripts()
+
 $!{header}
 
 </head>
@@ -109,9 +113,6 @@ $childContent
 	</div>
 </div>
 
-$Ajax.InstallScripts()
-$Scriptaculous.InstallScripts()
-$FormHelper.InstallScripts()
 <script type="text/javascript" language="javascript">
 function start_submit(request)
 {
@@ -137,8 +138,9 @@ function done_submit(request)
 <script type="text/javascript" language="javascript" src="$siteroot/Content/javascripts/ibox/ibox.js"></script>
 $!{javascripts}
 
-<!-- crazy egg tracking script -->
+<!-- crazy egg tracking script 
 <script type="text/javascript" src="http://cetrk.com/pages/scripts/0007/1476.js"> </script>
+-->
 
 </body>
 </html>

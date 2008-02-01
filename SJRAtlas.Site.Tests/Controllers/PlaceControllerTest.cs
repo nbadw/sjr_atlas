@@ -7,6 +7,7 @@ using SJRAtlas.Site.Controllers;
 using SJRAtlas.Models;
 using Castle.ActiveRecord;
 using System.Collections;
+using SJRAtlas.Models.Atlas;
 
 namespace SJRAtlas.Site.Tests.Controllers
 {

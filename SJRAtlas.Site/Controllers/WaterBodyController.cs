@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using Castle.MonoRail.Framework;
 using System.Collections;
 using Castle.ActiveRecord.Queries;
-using SJRAtlas.Models;
+using SJRAtlas.Models.DataWarehouse;
+using SJRAtlas.Models.Atlas;
 
 namespace SJRAtlas.Site.Controllers
 {

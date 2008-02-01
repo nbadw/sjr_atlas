@@ -14,6 +14,7 @@ using log4net;
 using Castle.ActiveRecord.Framework;
 using Castle.ActiveRecord.Framework.Config;
 using Castle.ActiveRecord;
+using SJRAtlas.Models.Atlas;
 
 [TestFixture]
 public class IndexerTest

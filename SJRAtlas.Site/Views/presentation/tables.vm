@@ -1,0 +1,90 @@
+#capturefor(header)
+<!--CSS file (default YUI Sam Skin) -->
+<link type="text/css" rel="stylesheet" href="http://yui.yahooapis.com/2.4.1/build/datatable/assets/skins/sam/datatable.css">
+<!-- Dependencies -->
+<script type="text/javascript" src="http://yui.yahooapis.com/2.4.1/build/yahoo-dom-event/yahoo-dom-event.js"></script>
+<script type="text/javascript" src="http://yui.yahooapis.com/2.4.1/build/element/element-beta-min.js"></script>
+<script type="text/javascript" src="http://yui.yahooapis.com/2.4.1/build/datasource/datasource-beta-min.js"></script>
+
+<!-- OPTIONAL: External JSON parser from http://www.json.org/ (enables JSON validation) -->
+<script type="text/javascript" src="http://www.json.org/json.js"></script>
+
+<!-- OPTIONAL: Connection (enables XHR) -->
+<script type="text/javascript" src="http://yui.yahooapis.com/2.4.1/build/connection/connection-min.js"></script>
+
+<!-- OPTIONAL: Drag Drop (enables resizeable columns) -->
+<script type="text/javascript" src="http://yui.yahooapis.com/2.4.1/build/dragdrop/dragdrop-min.js"></script>
+
+<!-- OPTIONAL: Calendar (enables calendar editors) -->
+<script type="text/javascript" src="http://yui.yahooapis.com/2.4.1/build/calendar/calendar-min.js"></script>
+
+<!-- Source files -->
+<script type="text/javascript" src="http://yui.yahooapis.com/2.4.1/build/datatable/datatable-beta-min.js"></script>
+#end
+
+#capturefor(headline)
+<h1>Tabular Data</h1>
+#end
+
+
+
+<div id="content" class="clearfix">	
+	<div class="innerwrap">
+		<div class="textbox">	
+		    <div id="tabular">
+		    
+		        #foreach($table in $tables)
+		            <div id="marked-up-table-$table.Id" class="table">	
+		                <table id="table-$table.Id">
+		                    <thead>
+		                        <tr>
+		                            #foreach($column_name in $table.Columns)
+		                                <th>$column_name</th>
+		                            #end
+		                        </tr>		            
+		                    </thead>
+        		        
+		                    <tbody>
+		                        #set($count = 0)
+	                            #foreach($row in $table.Rows)
+	                                #if($count % 2 == 0)
+	                                    <tr class="even">
+	                                #else
+	                                    <tr class="odd">
+	                                #end	                
+	                                #foreach($value in $row)
+	                                    <td>$value</td>
+	                                #end
+	                                </tr>
+	                                #set($count = $count + 1)		                
+	                            #end
+		                    </tbody>
+		                </table>  
+		            </div> 
+		            
+		            <script type="text/javascript">
+                    var myDataSource = new YAHOO.util.DataSource(YAHOO.util.Dom.get("table-$table.Id"));
+                    myDataSource.responseType = YAHOO.util.DataSource.TYPE_HTMLTABLE;
+                    var columns = 
+                    [
+                        #foreach($column in $table.Columns)
+                            {key: "$column"},
+                        #end
+                            {key:"remove-me"}
+                    ];
+                    var blank_column = columns.pop();
+                    
+                    myDataSource.responseSchema = 
+                    {
+                        fields: columns
+                    };
+
+                    // Pass in an empty config object for progressively enhanced table, due to known issue
+                    var myDataTable = new YAHOO.widget.DataTable("marked-up-table-$table.Id", columns, myDataSource, {});
+                    </script>
+		        #end
+		        
+		    </div>                    
+        </div>
+	</div>
+</div>

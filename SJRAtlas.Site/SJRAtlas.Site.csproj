@@ -144,11 +144,12 @@
     <Compile Include="Controllers\SiteController.cs" />
     <Compile Include="Controllers\WaterBodyController.cs" />
     <Compile Include="Controllers\WatershedController.cs" />
-    <Compile Include="DefaultPresentationViewResolver.cs" />
+    <Compile Include="Presentations\PresentationViewResolver.cs" />
     <Compile Include="GlobalApplication.cs" />
+    <Compile Include="Presentations\TabularPresentationViewHandler.cs" />
     <Compile Include="Helpers\AtlasHelper.cs" />
     <Compile Include="Helpers\AtlasHelperConfiguration.cs" />
-    <Compile Include="IPresentationViewResolver.cs" />
+    <Compile Include="Presentations\IPresentationViewHandler.cs" />
     <Compile Include="Models\SearchOptions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WebApplicationContainer.cs" />
@@ -242,6 +243,7 @@
     <None Include="Views\interactive_map\interactive_map.vm" />
     <None Include="Views\metadata\metadata.vm" />
     <None Include="Views\place\info.vm" />
+    <None Include="Views\presentation\tables.vm" />
     <None Include="Views\publication\_list_reports.vm" />
     <None Include="Views\publication\_list_maps.vm" />
     <None Include="Views\publication\_list.vm" />

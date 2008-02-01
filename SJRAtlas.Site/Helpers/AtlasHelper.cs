@@ -1,11 +1,11 @@
 using System;
 using Castle.MonoRail.Framework.Helpers;
-using SJRAtlas.Models;
 using System.Collections;
 using System.Configuration;
 using System.Text;
 using System.Collections.Generic;
 using Castle.Core.Logging;
+using SJRAtlas.Models.Atlas;
 
 namespace SJRAtlas.Site.Helpers
 {
@@ -93,49 +93,34 @@ namespace SJRAtlas.Site.Helpers
         public string PresentationLinks(IList<Presentation> presentations)
         {
             StringBuilder presentationLinks = new StringBuilder();
-            IList<Type> presentationTypes = GetOrderedPresentationTypes(presentations);  
-            foreach (Type type in presentationTypes)
-            {
-                AppendPresentationLink(presentationLinks, type);
-            }
-            return presentationLinks.ToString();
-        }
-
-        private IList<Type> GetOrderedPresentationTypes(IList<Presentation> presentations)
-        {
-            List<Type> allTypes = new List<Type>();
+            
+            // XXX: haven't thought about what to do if there are multiple presentations
+            //      of the same type.  We can only show 4 links at the moment so we're going
+            //      to take only the first occurance of each presentation type
+            Dictionary<Type, Presentation> presentationsByType = new Dictionary<Type, Presentation>();
             foreach (Presentation presentation in presentations)
             {
-                if (!allTypes.Contains(presentation.GetType()))
-                    allTypes.Add(presentation.GetType());
+                if(!presentationsByType.ContainsKey(presentation.GetType()))
+                    presentationsByType.Add(presentation.GetType(), presentation);
             }
 
-            if (Config.LinkOrder.Count == 0)
-                return allTypes;
-
-            List<Type> orderedTypes = new List<Type>();
-            foreach (Type orderedType in Config.LinkOrder)
+            foreach (Type type in Config.LinkOrder)
             {
-                if (allTypes.Contains(orderedType))
-                {
-                    orderedTypes.Add(orderedType);
-                    allTypes.Remove(orderedType);
-                }
+                if (!presentationsByType.ContainsKey(type))
+                    continue;
+
+                Presentation presentation = presentationsByType[type];
+                if (Config.LinkTitles.ContainsKey(type))
+                    presentationLinks.
+                        AppendFormat("<span class=\"presentation-link\">{0}</span>",
+                        Link(Config.LinkTitles[type], DictHelper.Create(
+                            "controller=presentation",
+                            "action=view",
+                            String.Format("querystring=id={0}", presentation.Id)
+                        )));
             }
-            orderedTypes.AddRange(allTypes);
 
-            return orderedTypes;
-        }
-
-        private void AppendPresentationLink(StringBuilder presentationLinks, Type type)
-        {
-            if (Config.LinkTitles[type] != null)
-                presentationLinks.
-                    AppendFormat("<span class=\"presentation-link\">{0}</span>",
-                    Link(Config.LinkTitles[type], DictHelper.Create(
-                        "controller=presentation",
-                        "action=view"
-                    )));
+            return presentationLinks.ToString();
         }
 
         #endregion

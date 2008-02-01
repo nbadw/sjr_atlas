@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using SJRAtlas.Models;
 using System.Text.RegularExpressions;
 using System.Collections.Specialized;
+using SJRAtlas.Models.Atlas;
+using SJRAtlas.Models.DataWarehouse;
 
 namespace SJRAtlas.Site.Controllers
 {

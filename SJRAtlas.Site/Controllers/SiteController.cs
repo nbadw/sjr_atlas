@@ -4,6 +4,7 @@ using Castle.Core.Logging;
 using Castle.MonoRail.Framework;
 using SJRAtlas.Models;
 using NHibernate.Expression;
+using SJRAtlas.Models.Atlas;
 
 namespace SJRAtlas.Site.Controllers
 {    

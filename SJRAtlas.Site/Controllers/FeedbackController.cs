@@ -4,7 +4,7 @@ using System.Text;
 using Castle.MonoRail.Framework;
 using Castle.Components.Common.EmailSender;
 using Castle.Components.Validator;
-using SJRAtlas.Models;
+using SJRAtlas.Models.Atlas;
 
 namespace SJRAtlas.Site.Controllers
 {

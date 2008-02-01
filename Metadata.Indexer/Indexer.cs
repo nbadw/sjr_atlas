@@ -10,6 +10,7 @@ using SJRAtlas.Models;
 using System.Reflection;
 using System.Xml;
 using System.Text.RegularExpressions;
+using SJRAtlas.Models.Atlas;
 
 namespace Metadata.Indexer
 {
@@ -75,7 +76,7 @@ namespace Metadata.Indexer
             IMetadataAware metadataOwner = CreateMetadataOwner(metadataAwareType, xmlContent);
             Logger.Info("IMetadataAware instance created");
 
-            SJRAtlas.Models.Metadata metadata = CreateMetadata(metadataOwner, metadataFile, xmlContent);
+            SJRAtlas.Models.Atlas.Metadata metadata = CreateMetadata(metadataOwner, metadataFile, xmlContent);
             Logger.Info("Metadata instance created");
 
             metadata.Save();
@@ -175,10 +176,10 @@ namespace Metadata.Indexer
             return metadataOwner;
         }
 
-        private SJRAtlas.Models.Metadata CreateMetadata(IMetadataAware metadataOwner, string metadataFile, XmlDocument xmlContent)
+        private SJRAtlas.Models.Atlas.Metadata CreateMetadata(IMetadataAware metadataOwner, string metadataFile, XmlDocument xmlContent)
         {
             Logger.Debug("Creating metadata");
-            SJRAtlas.Models.Metadata metadata = new SJRAtlas.Models.Metadata();
+            SJRAtlas.Models.Atlas.Metadata metadata = new SJRAtlas.Models.Atlas.Metadata();
             metadata.Filename = metadataFile;
             metadata.Content = xmlContent.OuterXml;
             metadata.Owner = metadataOwner;

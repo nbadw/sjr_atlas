@@ -74,22 +74,23 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AbstractModelTestCase.cs" />
-    <Compile Include="ClosestWatershedToPlaceTest.cs" />
-    <Compile Include="AgencyTest.cs" />
-    <Compile Include="DataSetTest.cs" />
-    <Compile Include="FeedbackTest.cs" />
-    <Compile Include="InteractiveMapTest.cs" />
-    <Compile Include="LatLngCoordinateTest.cs" />
-    <Compile Include="MetadataTest.cs" />
-    <Compile Include="PlaceTest.cs" />
-    <Compile Include="PresentationTest.cs" />
+    <Compile Include="Atlas\ClosestWatershedToPlaceTest.cs" />
+    <Compile Include="DataWarehouse\AgencyTest.cs" />
+    <Compile Include="Atlas\DataSetTest.cs" />
+    <Compile Include="Atlas\FeedbackTest.cs" />
+    <Compile Include="Atlas\InteractiveMapTest.cs" />
+    <Compile Include="Atlas\LatLngCoordinateTest.cs" />
+    <Compile Include="Atlas\MetadataTest.cs" />
+    <Compile Include="Atlas\PlaceTest.cs" />
+    <Compile Include="Atlas\PresentationTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PublicationTest.cs" />
-    <Compile Include="PublishedMapTest.cs" />
-    <Compile Include="PublishedReportTest.cs" />
+    <Compile Include="Atlas\PublicationTest.cs" />
+    <Compile Include="Atlas\PublishedMapTest.cs" />
+    <Compile Include="Atlas\PublishedReportTest.cs" />
+    <Compile Include="Atlas\Tabular\TabularPresentationFilterTest.cs" />
     <Compile Include="TestHelper.cs" />
-    <Compile Include="WaterBodyTest.cs" />
-    <Compile Include="WatershedTest.cs" />
+    <Compile Include="DataWarehouse\WaterBodyTest.cs" />
+    <Compile Include="DataWarehouse\WatershedTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -7,6 +7,8 @@ namespace SJRAtlas.Site.Tests.Controllers
     using System.Collections.Generic;
     using SJRAtlas.Site.Controllers;
     using SJRAtlas.Models;
+    using SJRAtlas.Models.Atlas;
+    using SJRAtlas.Models.DataWarehouse;
 
     [TestFixture]
     public class SearchControllerTest : BaseControllerTest
