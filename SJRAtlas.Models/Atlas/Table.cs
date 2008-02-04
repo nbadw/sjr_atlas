@@ -139,15 +139,17 @@ namespace SJRAtlas.Models.Atlas
                 using (IDataReader reader = command.ExecuteReader())
                 {                    
                     string[] columns = new string[reader.FieldCount];
-                    List<object[]> rows = new List<object[]>();
+                    for (int i = 0; i < columns.Length; i++)
+                    {
+                        columns[i] = reader.GetName(i);
+                    }
 
+                    List<object[]> rows = new List<object[]>();
                     while (reader.Read())
                     {
                         object[] row = new object[reader.FieldCount];
                         for (int i = 0; i < row.Length; i++)
                         {
-                            if (String.IsNullOrEmpty(columns[i]))
-                                columns[i] = reader.GetName(i);
                             row[i] = reader.GetValue(i);
                         }
                         rows.Add(row);
@@ -185,7 +187,7 @@ namespace SJRAtlas.Models.Atlas
             foreach (Filter filter in filters)
             {
                 string parameterName = String.Format("@{0}", filter.Column);
-                filteredSql.AppendFormat("{0} {1} @{2}", filter.Column, filter.Comparison, parameterName);
+                filteredSql.AppendFormat("{0} {1} {2}", filter.Column, filter.Comparison, parameterName);
 
                 IDbDataParameter parameter = command.CreateParameter();
                 parameter.ParameterName = parameterName;

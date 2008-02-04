@@ -23,7 +23,7 @@ namespace SJRAtlas.Site.Controllers
             get { return presentationViewResolver; }
         }
 
-        public void View(int id, string drainageCode, int waterbodyId)
+        public void View(int id)
         {
             Presentation presentation = AtlasMediator.Find<Presentation>(id);            
             // what if presentation == null ???

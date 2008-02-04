@@ -76,7 +76,6 @@
     <Compile Include="Atlas\PublishedReport.cs" />
     <Compile Include="Atlas\SummaryReportPresentation.cs" />
     <Compile Include="Atlas\TabularPresentation.cs" />
-    <Compile Include="Atlas\TableFilter.cs" />
     <Compile Include="Atlas\Table.cs" />
     <Compile Include="DataWarehouse\WaterBody.cs" />
     <Compile Include="DataWarehouse\Watershed.cs" />

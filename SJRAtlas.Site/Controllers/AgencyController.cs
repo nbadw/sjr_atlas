@@ -1,16 +1,17 @@
 using System;
 using Castle.MonoRail.Framework;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace SJRAtlas.Site.Controllers
 {
     public class AgencyController : BaseController
     {
         //[AjaxAction]
-        //public IDictionary List(string drainageCode, string waterbodyId, string aquaticSiteId)
+        //public void List(string drainageCode, string waterbodyId, string aquaticSiteId)
         //{
         //    Hashtable results = new Hashtable();
-        //    Agency[] agencies;
+        //    IList<Agency> agencies;
 
         //    if (!String.IsNullOrEmpty(drainageCode))
         //    {

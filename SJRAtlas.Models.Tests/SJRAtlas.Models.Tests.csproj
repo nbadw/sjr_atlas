@@ -75,6 +75,7 @@
   <ItemGroup>
     <Compile Include="AbstractModelTestCase.cs" />
     <Compile Include="Atlas\ClosestWatershedToPlaceTest.cs" />
+    <Compile Include="Atlas\TableTest.cs" />
     <Compile Include="DataWarehouse\AgencyTest.cs" />
     <Compile Include="Atlas\DataSetTest.cs" />
     <Compile Include="Atlas\FeedbackTest.cs" />
@@ -87,7 +88,7 @@
     <Compile Include="Atlas\PublicationTest.cs" />
     <Compile Include="Atlas\PublishedMapTest.cs" />
     <Compile Include="Atlas\PublishedReportTest.cs" />
-    <Compile Include="Atlas\Tabular\TabularPresentationFilterTest.cs" />
+    <Compile Include="Atlas\TabularPresentationTest.cs" />
     <Compile Include="TestHelper.cs" />
     <Compile Include="DataWarehouse\WaterBodyTest.cs" />
     <Compile Include="DataWarehouse\WatershedTest.cs" />
