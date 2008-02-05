@@ -19,10 +19,8 @@
 <link rel="stylesheet" type="text/css" href="$siteroot/Content/stylesheets/bug-fixes-ie6.css" />
 <![endif]-->
 
-$Ajax.InstallScripts()
+<script type="text/javascript" language="javascript" src="$siteroot/Content/javascripts/prototype-1.6.0.2.js"></script>
 $Scriptaculous.InstallScripts()
-$FormHelper.InstallScripts()
-
 $!{header}
 
 </head>
@@ -35,18 +33,7 @@ $!{header}
 		    <h1><a href="$siteroot/">Saint John River Atlas</a></h1>	
 		    <p><a id="leave-feedback" rel="ibox&type=3&height=438" href="$siteroot/feedback/feedbackform.rails">Leave Feedback</a></p>
         </div>
-        <div class="yui-u"> 
-            <!--
-	        <div id="user_controls">
-		        <div class="box">
-		            <p>$Url.Link('Register', "%{controller='user', action='register'}")</p>
-		            <p>$Url.Link('Login', "%{controller='user', action='login'}")</p>
-			        <p style="display:none">Logged in as: <span id="username"><a href="#">username</a></span></p>
-			        <p style="display:none"><a href="#">account settings</a></p>
-		        </div>
-	        </div>	
-	        -->
-	        
+        <div class="yui-u"> 	        
             <div id="cri">			
 		        <span class="fir"></span>
 		        <h2>Canadian Rivers Institute</h2>
@@ -112,35 +99,6 @@ $childContent
 	    </table>
 	</div>
 </div>
-
-<script type="text/javascript" language="javascript">
-function start_submit(request)
-{
-    document.getElementById('feedback-form-content').style.display = 'none';
-    document.getElementById('submitting').style.display = 'block';
-}
-
-function done_submit(request)
-{
-    document.getElementById('submitting').style.display = 'none';
-    if(request.responseText.startsWith('<div id="feedback">'))
-    {
-        document.getElementById('ibox_content').innerHTML = request.responseText;
-        document.getElementById('feedback').style.display = 'block';
-    }
-    else
-    {    
-        document.getElementById('submit-done-msg').innerHTML = request.responseText;
-        document.getElementById('submit-done-msg').style.display = 'block';
-    }
-}
-</script>
-<script type="text/javascript" language="javascript" src="$siteroot/Content/javascripts/ibox/ibox.js"></script>
-$!{javascripts}
-
-<!-- crazy egg tracking script 
-<script type="text/javascript" src="http://cetrk.com/pages/scripts/0007/1476.js"> </script>
--->
 
 </body>
 </html>

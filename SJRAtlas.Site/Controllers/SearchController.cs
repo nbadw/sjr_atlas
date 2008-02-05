@@ -5,6 +5,7 @@ using System.Text.RegularExpressions;
 using System.Collections.Specialized;
 using SJRAtlas.Models.Atlas;
 using SJRAtlas.Models.DataWarehouse;
+using Newtonsoft.Json;
 
 namespace SJRAtlas.Site.Controllers
 {
@@ -45,7 +46,13 @@ namespace SJRAtlas.Site.Controllers
                 return;
             }
 
-            PropertyBag["results"] = results;
+            List<PlaceAttributes> resultAttributes = new List<PlaceAttributes>(results.Count);
+            foreach (Place result in results)
+            {
+                resultAttributes.Add(new PlaceAttributes(result));
+            }
+
+            PropertyBag["results"] = JavaScriptConvert.SerializeObject(resultAttributes);
             PropertyBag["query"] = q;
             RenderView("places");
         }
@@ -119,6 +126,21 @@ namespace SJRAtlas.Site.Controllers
         private Regex CreateWatershedTriggerRegex()
         {
             return new Regex(@"\swatershed$|\sbasin$|\scatchment$", RegexOptions.IgnoreCase);
+        }
+
+        public class PlaceAttributes : Dictionary<string, object>
+        {
+            public PlaceAttributes(Place place) : base()
+            {                
+                this["name"] = place.Name;
+                this["cgndb_key"] = place.CgndbKey;
+                this["region"] = place.Region;
+                this["status_term"] = place.NameStatus;
+                this["type"] = place.GenericTerm;
+                this["county"] = place.County;
+                this["latitude"] = place.Latitude;
+                this["longitude"] = place.Longitude;
+            }
         }
 	}
 }

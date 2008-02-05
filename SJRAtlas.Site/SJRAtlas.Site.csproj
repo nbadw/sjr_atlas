@@ -1626,6 +1626,7 @@
     <Content Include="Content\javascripts\ibox\images\small\image_3.jpg" />
     <Content Include="Content\javascripts\ibox\readme.txt" />
     <Content Include="Content\javascripts\maps-index.js" />
+    <Content Include="Content\javascripts\prototype-1.6.0.2.js" />
     <Content Include="Content\javascripts\search.js" />
     <Content Include="Content\javascripts\tools-min.js" />
     <Content Include="Content\javascripts\treeview\assets\skins\sam\treeview-loading.gif" />
