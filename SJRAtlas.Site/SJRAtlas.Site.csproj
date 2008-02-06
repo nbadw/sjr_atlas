@@ -73,6 +73,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\External Libs\Castle Framework .NET-2.0\Castle.MonoRail.Framework.Views.NVelocity.dll</HintPath>
     </Reference>
+    <Reference Include="Castle.MonoRail.JSONSupport, Version=1.0.3.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\External Libs\Castle Framework .NET-2.0\Castle.MonoRail.JSONSupport.dll</HintPath>
+    </Reference>
     <Reference Include="Castle.MonoRail.WindsorExtension, Version=1.0.3.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\External Libs\Castle Framework .NET-2.0\Castle.MonoRail.WindsorExtension.dll</HintPath>
@@ -186,6 +190,7 @@
     <Content Include="Content\javascripts\autocomplete\autocomplete.js" />
     <Content Include="Content\javascripts\connection-min.js" />
     <Content Include="Content\javascripts\connection.js" />
+    <Content Include="Content\javascripts\adv-search.js" />
     <Content Include="Content\javascripts\effects-min.js" />
     <Content Include="Content\javascripts\ext-2.0.1\adapter\ext\ext-base.js" />
     <Content Include="Content\javascripts\ext-2.0.1\adapter\jquery\ext-jquery-adapter.js" />
@@ -1711,7 +1716,9 @@
     <None Include="Views\site\reports.vm" />
     <None Include="Views\site\maps.vm" />
     <None Include="Views\site\index.vm" />
+    <None Include="Views\waterbody\autocomplete.vm" />
     <None Include="Views\waterbody\info.vm" />
+    <None Include="Views\watershed\autocomplete.vm" />
     <None Include="Views\watershed\info.vm" />
     <None Include="Views\feedback\emailsent.vm" />
     <None Include="Views\feedback\feedbackform.vm" />

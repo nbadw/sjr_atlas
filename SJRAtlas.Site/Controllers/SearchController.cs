@@ -89,19 +89,19 @@ namespace SJRAtlas.Site.Controllers
 
         public void Advanced()
         {
-            IList<Agency> agencies = AtlasMediator.FindAll<Agency>();
-            IList<DataSet> datasets = AtlasMediator.FindAll<DataSet>();
+            //IList<Agency> agencies = AtlasMediator.FindAll<Agency>();
+            //IList<DataSet> datasets = AtlasMediator.FindAll<DataSet>();
 
-            List<string> agencyNames = new List<string>(agencies.Count);
-            foreach (Agency agency in agencies)
-            {
-                if (!String.IsNullOrEmpty(agency.Name))
-                    agencyNames.Add(agency.Name);
-            }
-            agencyNames.Sort();
+            //List<string> agencyNames = new List<string>(agencies.Count);
+            //foreach (Agency agency in agencies)
+            //{
+            //    if (!String.IsNullOrEmpty(agency.Name))
+            //        agencyNames.Add(agency.Name);
+            //}
+            //agencyNames.Sort();
 
-            PropertyBag["datasets"] = datasets;
-            PropertyBag["agencies"] = agencyNames;
+            //PropertyBag["datasets"] = datasets;
+            //PropertyBag["agencies"] = agencyNames;
             //PropertyBag["optionstype"] = typeof(SearchOptions);
         }
 

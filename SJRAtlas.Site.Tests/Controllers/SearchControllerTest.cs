@@ -100,10 +100,11 @@ namespace SJRAtlas.Site.Tests.Controllers
         {
             string query = "test";
             AtlasMediator mediator = mocks.CreateMock<AtlasMediator>();
-            IList<Place> results = mocks.CreateMock<IList<Place>>();
+            List<Place> results = new List<Place>();
+            results.Add(new Place());
+            results.Add(new Place());
 
             Expect.Call(mediator.FindAllPlacesByQuery(query)).Return(results);
-            Expect.Call(results.Count).Repeat.Twice().Return(2);
             mocks.ReplayAll();
 
             SearchController controller = new SearchController();
@@ -112,7 +113,7 @@ namespace SJRAtlas.Site.Tests.Controllers
             controller.Places(query);
 
             Assert.AreEqual(query, controller.PropertyBag["query"]);
-            Assert.AreEqual(results, controller.PropertyBag["results"]);
+            Assert.IsNotNull(controller.PropertyBag["results"]);
             Assert.AreEqual(@"search\places", controller.SelectedViewName);
             mocks.VerifyAll();
         }

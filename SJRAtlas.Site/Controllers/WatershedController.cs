@@ -3,6 +3,9 @@ using SJRAtlas.Models;
 using System.Collections.Generic;
 using SJRAtlas.Models.DataWarehouse;
 using SJRAtlas.Models.Atlas;
+using Castle.ActiveRecord.Queries;
+using Castle.MonoRail.Framework;
+using Newtonsoft.Json;
 
 namespace SJRAtlas.Site.Controllers
 {
@@ -57,41 +60,36 @@ namespace SJRAtlas.Site.Controllers
         //    return watersheds;
         //}
 
-        //[AjaxAction]
-        //public IDictionary AutoComplete(string query)
-        //{
-        //    Logger.Debug(String.Format("XHR call to Watershed Autocomplete for {0} received", query));
-        //    string idQuery = String.Format("{0}%", query);
-        //    string textQuery = String.Format("%{0}%", query);
+        [AjaxAction]
+        public void AutoComplete(string query)
+        {
+            Logger.Debug(String.Format("XHR call to Watershed Autocomplete for {0} received", query));
+            string idQuery = String.Format("{0}%", query);
+            string textQuery = String.Format("%{0}%", query);
 
-        //    Hashtable results = new Hashtable();
-        //    ArrayList resultList = new ArrayList();
+            SimpleQuery<Watershed> q = new SimpleQuery<Watershed>("from Watershed ws where ws.Name like ? or ws.DrainageCode like ?", textQuery, idQuery);
+            Watershed[] results = q.Execute();
 
-        //    SimpleQuery<DrainageUnit> q = new SimpleQuery<DrainageUnit>("from DrainageUnit du where du.UnitName like ? or du.DrainageCode like ?", textQuery, idQuery);
-        //    foreach (DrainageUnit watershed in q.Execute())
-        //    {
-        //        resultList.Add(watershed);
-        //        if (resultList.Count == 10)
-        //            break;
-        //    }
+            List<WatershedAttributes> watersheds = new List<WatershedAttributes>(results.Length);
+            foreach (Watershed waterbody in results)
+            {
+                watersheds.Add(new WatershedAttributes(waterbody));
+            }
 
-        //    results["Watersheds"] = resultList;
-        //    Logger.Info(String.Format("Autocomplete XHR found {0} matches", resultList.Count));
-        //    return results;
-        //}
+            PropertyBag["watersheds"] = JavaScriptConvert.SerializeObject(watersheds);
+            PropertyBag["resultsCount"] = watersheds.Count;
+            CancelLayout();
+            Context.Response.ContentType = "text/javascript";
+        }
 
-        //public void AutoCompleteData()
-        //{
-        //    ArrayList resultList = new ArrayList();
-        
-        //    foreach (DrainageUnit watershed in DrainageUnit.FindAll())
-        //    {
-        //        resultList.Add(String.Format("{0} ({1})", watershed.Name, watershed.DrainageCode));
-        //    }
-
-        //    CancelLayout();
-        //    Context.Response.ContentType = "text/plain";
-        //    RenderText(Newtonsoft.Json.JavaScriptConvert.SerializeObject(resultList));
-        //}
+        public class WatershedAttributes : Dictionary<string, object>
+        {
+            public WatershedAttributes(Watershed watershed)
+                : base()
+            {
+                this["drainage_code"] = watershed.DrainageCode;
+                this["name"] = watershed.Name;
+            }
+        }
     }
 }

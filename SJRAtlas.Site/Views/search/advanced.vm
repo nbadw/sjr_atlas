@@ -5,32 +5,94 @@
 #end
 
 #capturefor(header)
-<link type="text/css" rel="stylesheet" href="$siteroot/Content/javascripts/treeview/assets/skins/sam/treeview.css"> 
-<link type="text/css" rel="stylesheet" href="$siteroot/Content/javascripts/autocomplete/assets/skins/sam/autocomplete.css"> 
-<style>
-.yui-skin-sam .yui-ac-input { width: 400px; }
-.yui-skin-sam .yui-ac-content { width: 400px; }
-</style>
-#end
+<!-- JAVASCRIPT FORM HELPER -->
+$FormHelper.InstallScripts()
 
-#capturefor(javascripts)
-<script type="text/javascript" language="javascript" src="$siteroot/Content/javascripts/yahoo-dom-event.js"></script>
-<script type="text/javascript" language="javascript" src="$siteroot/Content/javascripts/connection-min.js"></script> 
-<script type="text/javascript" language="javascript" src="$siteroot/Content/javascripts/treeview/treeview-min.js" ></script> 
-<script type="text/javascript" language="javascript" src="$siteroot/Content/javascripts/autocomplete/autocomplete-debug.js"></script> 
-<script type="text/javascript" language="javascript" src="$siteroot/Content/javascripts/advanced-search.js"></script>
+<!-- EXT JS 2.0.1 -->
+<link rel="stylesheet" type="text/css" href="$siteroot/Content/javascripts/ext-2.0.1/resources/css/ext-all.css" />
+<script src="$siteroot/Content/javascripts/ext-2.0.1/adapter/prototype/ext-prototype-adapter.js" type="text/javascript" language="javascript"></script>
+<script src="$siteroot/Content/javascripts/ext-2.0.1/ext-all-debug.js" type="text/javascript" language="javascript"></script>
+
+<!-- CONFIGURES AUTOCOMPLETE FIELDS -->
+<script type="text/javascript" language="javascript">
+Ext.onReady(function() {
+    Ext.get('waterbody-box').boxWrap();
+    Ext.get('watershed-autocomplete').boxWrap();
+
+    var waterbody_datastore = new Ext.data.JsonStore({
+        url: '$siteroot/waterbody/autocomplete.castle',
+        root: 'waterbodies',
+        totalProperty: 'results',
+        id: 'id',
+        fields: ['id', 'name', 'alt_name']
+    });
+    
+    var watershed_datastore = new Ext.data.JsonStore({
+        url: '$siteroot/watershed/autocomplete.castle',
+        root: 'watersheds',
+        totalProperty: 'results',
+        id: 'drainage_code',
+        fields: ['drainage_code', 'name']
+    });
+    
+    var waterbody_result_template = new Ext.XTemplate(
+        '<tpl for="."><div class="waterbody-search-item">',
+            '<tpl if="name">',
+                '<h3>{name}</h3>',
+            '</tpl>',
+            '<tpl if="!name">',
+                '<h3>Unnamed Water Body</h3>',
+            '</tpl>',            
+            '<p>Id: {id}</p>',
+            '<tpl if="alt_name">',
+                '<p>Also known as: {alt_name}</p>',
+            '</tpl>',
+        '</div></tpl>'
+    );
+    
+    var watershed_result_template = new Ext.XTemplate(
+        '<tpl for="."><div class="watershed-search-item">',
+            '<h3>{name}</h3>',
+            '<p>{drainage_code}</p>',
+        '</div></tpl>'
+    );
+    
+    var waterbody_search = new Ext.form.ComboBox({
+        store: waterbody_datastore,
+        displayField: 'title',
+        typeAhead: false,
+        loadingText: 'Searching...',
+        width: 500,
+        hideTrigger: true,
+        minChars: 2,
+        tpl: waterbody_result_template,
+        applyTo: 'options_waterbody',
+        itemSelector: 'div.waterbody-search-item'
+    });
+    
+    var watershed_search = new Ext.form.ComboBox({
+        store: watershed_datastore,
+        displayField: 'title',
+        typeAhead: true,
+        loadingText: 'Searching...',
+        width: 500,
+        hideTrigger: true,
+        minChars: 2,
+        tpl: watershed_result_template,
+        applyTo: 'options_watershed',
+        itemSelector: 'div.watershed-search-item'
+    });
+});
+</script>
 #end
 
 <div id="content" class="clearfix">	
 	<div class="innerwrap">
 		<div class="textbox">
-		    
-            $Ajax.InstallScripts()
-            $Scriptaculous.InstallScripts()
-            $FormHelper.InstallScripts()
-		
+		    		
 		    $Form.FormTag("%{action='submitadvanced', immediate='true', useLabels='true'}")
 		    
+		    <!--
 		    #if($flash.summary)
 		    <br />
 		        #foreach($errormessage in $summary.ErrorMessages)
@@ -58,33 +120,29 @@
 		        <p>All Areas Will Be Searched</p>
 		    </div>
 		    
+		    -->
+		    
 		    <div id="aquatic-site" class="area-of-interest" style="display: none;">
 		        $Form.LabelFor("options.aquaticsiteid", "Aquatic Site ID:")
 		        $Form.TextField("options.aquaticsiteid")
 		    </div>
 		    		
-		    <div id="waterbody" class="area-of-interest" style="display: none;">    
-		        <div id="waterbody-autocomplete" class="yui-skin-sam">
+		    <div id="waterbody" class="area-of-interest" style="xdisplay: none;">    
+		        <div id="waterbody-box">
 		            $Form.LabelFor("options.waterbody", 'Water Body:')
 		            $Form.TextField("options.waterbody")
 		        </div>
 		    </div>
-		    		 
-		    <div id="watershed" class="area-of-interest" style="display: none;">   
-		        <!--
-		        <div id="watershed-unit-tree">
-		            $Form.LabelFor("options.watershedcode", "Watershed Code:")
-		            $Form.TextField("options.watershedcode")		    
-		        </div>		        		        
-		        -->
-        		    
-        		<div id="watershed-autocomplete" class="yui-skin-sam" >
+		     
+		    <div id="watershed" class="area-of-interest" style="xdisplay: none;"> 
+        		<div id="watershed-autocomplete">
 	                $Form.LabelFor("options.watershed", 'Watershed:')
 	                $Form.TextField("options.watershed")
 	            </div>
 		    </div>
 		    <div style="margin-bottom: 2em;"></div>
 		    
+		    <!--
 		    <div id="agency" style="xdisplay: none;" class="step">
 		        <span class="step-num">Step #3 of 4.</span>     		    
 		        $Form.LabelFor("options.agency", "Select an Agency (optional):")
@@ -100,6 +158,7 @@
 		    <div id="do-search" style="xdisplay: none;">
 		        $Form.Submit("Search")	    
 		    </div>
+		    -->
 		    
 		    $Form.EndFormTag()
 		               
