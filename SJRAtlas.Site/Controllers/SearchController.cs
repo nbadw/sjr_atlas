@@ -136,7 +136,7 @@ namespace SJRAtlas.Site.Controllers
                 this["cgndb_key"] = place.CgndbKey;
                 this["region"] = place.Region;
                 this["status_term"] = place.NameStatus;
-                this["type"] = place.GenericTerm;
+                this["type"] = place.ConciseTerm;
                 this["county"] = place.County;
                 this["latitude"] = place.Latitude;
                 this["longitude"] = place.Longitude;

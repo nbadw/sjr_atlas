@@ -190,7 +190,6 @@
     <Content Include="Content\javascripts\autocomplete\autocomplete.js" />
     <Content Include="Content\javascripts\connection-min.js" />
     <Content Include="Content\javascripts\connection.js" />
-    <Content Include="Content\javascripts\adv-search.js" />
     <Content Include="Content\javascripts\effects-min.js" />
     <Content Include="Content\javascripts\ext-2.0.1\adapter\ext\ext-base.js" />
     <Content Include="Content\javascripts\ext-2.0.1\adapter\jquery\ext-jquery-adapter.js" />

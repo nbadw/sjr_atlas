@@ -5,6 +5,8 @@
 #end
 
 #capturefor(header)
+$Ajax.GenerateJSProxy('Agency', 'Agency')
+
 <!-- JAVASCRIPT FORM HELPER -->
 $FormHelper.InstallScripts()
 
@@ -16,72 +18,152 @@ $FormHelper.InstallScripts()
 <!-- CONFIGURES AUTOCOMPLETE FIELDS -->
 <script type="text/javascript" language="javascript">
 Ext.onReady(function() {
-    Ext.get('waterbody-box').boxWrap();
-    Ext.get('watershed-autocomplete').boxWrap();
+    var form = new Ext.FormPanel({
+        frame: true,
+        title: 'Search Data Sets',
+        defaultType: 'textfield',
+        items: [{
+            fieldLabel: 'Select a Data Set',
+            name: 'dataset',
+            allowBlank: false
+        }, {
+            xtype: 'fieldset',
+            checkboxToggle: true,
+            collapsed :false,
+            title: 'Specify an Agency?',
+            items: [{
+                xtype: 'combo',
+                fieldLabel: 'Agency',
+                name: 'agency',
+                width: 500,
+                displayField: 'Name',
+                editable: false,
+                forceSelection: true,
+                emptyText: 'Select an agency...',
+                store: new Ext.data.JsonStore({
+                    autoload: Agency.list,
+                    root: 'agencies',
+                    totalProperty: 'results',
+                    id: 'AgencyCode',
+                    fields: ['AgencyCode', 'Name', 'Type']
+                }),
+                tpl: new Ext.XTemplate(
+                    '<tpl for="."><div class="agency-list-item">',
+                        '<h3>{Name}</h3>',
+                    '</div></tpl>'
+                ),
+                itemSelector: 'div.agency-list-item'                
+            }]                
+        }, { 
+            xtype: 'fieldset',
+            checkboxToggle: true,
+            collapsed: true,
+            title: 'Specify an Area of Interest?',
+            items: [new WaterBodyAutoComplete() 
+            , new WatershedAutoComplete() 
+            , { 
+                xtype: 'textfield',
+                fieldLabel: 'Aquatic Site',
+                name: 'aquatic_site' 
+            }]
+        }, {
+            xtype: 'fieldset',
+            checkboxToggle: true,
+            collapsed: true,
+            title: 'Specify a Date Range?',
+            items: [{                                  
+                xtype: 'datefield',
+                fieldLabel: 'Start Date',
+                name: 'start_date'               
+            }, {                               
+                xtype: 'datefield',
+                fieldLabel: 'End Date',
+                name: 'end_date'                                                           
+            }]         
+        }],
+        buttons: [{text: 'Search'}]
+    }); 
+    
+    form.render('advanced-search-form');
+});
 
-    var waterbody_datastore = new Ext.data.JsonStore({
-        url: '$siteroot/waterbody/autocomplete.castle',
-        root: 'waterbodies',
-        totalProperty: 'results',
-        id: 'id',
-        fields: ['id', 'name', 'alt_name']
-    });
-    
-    var watershed_datastore = new Ext.data.JsonStore({
-        url: '$siteroot/watershed/autocomplete.castle',
-        root: 'watersheds',
-        totalProperty: 'results',
-        id: 'drainage_code',
-        fields: ['drainage_code', 'name']
-    });
-    
-    var waterbody_result_template = new Ext.XTemplate(
-        '<tpl for="."><div class="waterbody-search-item">',
-            '<tpl if="name">',
-                '<h3>{name}</h3>',
-            '</tpl>',
-            '<tpl if="!name">',
-                '<h3>Unnamed Water Body</h3>',
-            '</tpl>',            
-            '<p>Id: {id}</p>',
-            '<tpl if="alt_name">',
-                '<p>Also known as: {alt_name}</p>',
-            '</tpl>',
-        '</div></tpl>'
-    );
-    
-    var watershed_result_template = new Ext.XTemplate(
-        '<tpl for="."><div class="watershed-search-item">',
-            '<h3>{name}</h3>',
-            '<p>{drainage_code}</p>',
-        '</div></tpl>'
-    );
-    
-    var waterbody_search = new Ext.form.ComboBox({
-        store: waterbody_datastore,
+WaterBodyAutoComplete = function() {
+    WaterBodyAutoComplete.superclass.constructor.call(this, {
+        store: new Ext.data.JsonStore({
+            url: '$siteroot/waterbody/autocomplete.castle',
+            root: 'waterbodies',
+            totalProperty: 'results',
+            id: 'id',
+            fields: ['id', 'name', 'alt_name']
+        }),
+        fieldLabel: 'Water Body',
         displayField: 'title',
         typeAhead: false,
         loadingText: 'Searching...',
         width: 500,
         hideTrigger: true,
         minChars: 2,
-        tpl: waterbody_result_template,
-        applyTo: 'options_waterbody',
+        tpl: new Ext.XTemplate(
+            '<tpl for="."><div class="waterbody-search-item">',
+                '<h3>{title}</h3>',       
+                '<p>Id: {id}</p>',
+                '<tpl if="alt_name">',
+                    '<p>Also known as: {alt_name}</p>',
+                '</tpl>',
+            '</div></tpl>'
+        ),
         itemSelector: 'div.waterbody-search-item'
     });
-    
-    var watershed_search = new Ext.form.ComboBox({
-        store: watershed_datastore,
-        displayField: 'title',
-        typeAhead: true,
+};
+
+Ext.extend(WaterBodyAutoComplete, Ext.form.ComboBox, {
+    initList : function() {
+        WaterBodyAutoComplete.superclass.initList.call(this);  
+        this.view.prepareData = function(data) {
+            Ext.apply(data, { 
+                title: data['name'] || 'Unnamed Water Body',
+            });
+            return data;
+        };   
+    }  
+});
+
+WatershedAutoComplete = function() {
+    WatershedAutoComplete.superclass.constructor.call(this, {
+        store: new Ext.data.JsonStore({
+            url: '$siteroot/watershed/autocomplete.castle',
+            root: 'watersheds',
+            totalProperty: 'results',
+            id: 'drainage_code',
+            fields: ['drainage_code', 'name']
+        }),
+        fieldLabel: 'Watershed',
+        displayField: 'name',
+        typeAhead: false,
         loadingText: 'Searching...',
         width: 500,
         hideTrigger: true,
         minChars: 2,
-        tpl: watershed_result_template,
-        applyTo: 'options_watershed',
+        tpl: new Ext.XTemplate(
+            '<tpl for="."><div class="watershed-search-item">',
+                '<h3>{name}</h3>',
+                '<p>{drainage_code}</p>',
+            '</div></tpl>'
+        ),
         itemSelector: 'div.watershed-search-item'
     });
+}
+
+Ext.extend(WatershedAutoComplete, Ext.form.ComboBox, {
+    initList : function() {
+        WatershedAutoComplete.superclass.initList.call(this);  
+        this.view.prepareData = function(data) {
+            Ext.apply(data, { 
+                title: data['name']
+            });
+            return data;
+        };   
+    }  
 });
 </script>
 #end
@@ -89,10 +171,14 @@ Ext.onReady(function() {
 <div id="content" class="clearfix">	
 	<div class="innerwrap">
 		<div class="textbox">
-		    		
+		    <div id="advanced-search-form">
+		    
+		    </div>
+		
+		    	<!--	
 		    $Form.FormTag("%{action='submitadvanced', immediate='true', useLabels='true'}")
 		    
-		    <!--
+		    
 		    #if($flash.summary)
 		    <br />
 		        #foreach($errormessage in $summary.ErrorMessages)
@@ -120,15 +206,13 @@ Ext.onReady(function() {
 		        <p>All Areas Will Be Searched</p>
 		    </div>
 		    
-		    -->
-		    
 		    <div id="aquatic-site" class="area-of-interest" style="display: none;">
 		        $Form.LabelFor("options.aquaticsiteid", "Aquatic Site ID:")
 		        $Form.TextField("options.aquaticsiteid")
 		    </div>
 		    		
 		    <div id="waterbody" class="area-of-interest" style="xdisplay: none;">    
-		        <div id="waterbody-box">
+		        <div id="waterbody-autocomplete">
 		            $Form.LabelFor("options.waterbody", 'Water Body:')
 		            $Form.TextField("options.waterbody")
 		        </div>
@@ -142,7 +226,6 @@ Ext.onReady(function() {
 		    </div>
 		    <div style="margin-bottom: 2em;"></div>
 		    
-		    <!--
 		    <div id="agency" style="xdisplay: none;" class="step">
 		        <span class="step-num">Step #3 of 4.</span>     		    
 		        $Form.LabelFor("options.agency", "Select an Agency (optional):")
@@ -158,9 +241,9 @@ Ext.onReady(function() {
 		    <div id="do-search" style="xdisplay: none;">
 		        $Form.Submit("Search")	    
 		    </div>
-		    -->
 		    
 		    $Form.EndFormTag()
+		    -->
 		               
         </div>
 	</div>

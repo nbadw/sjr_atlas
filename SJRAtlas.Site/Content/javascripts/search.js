@@ -5,7 +5,7 @@ Ext.onReady(function() {
     var map = new MapPanel();
     
     results.on('resultSelect', function(result) {
-        map.zoomTo(result);
+        map.selectPlace(result);
     });
     
     var panel = new Ext.Panel({
@@ -94,6 +94,19 @@ MapPanel = function() {
     this.map.addControl(new GLargeMapControl());
     
     this.markers = {};
+    
+    this.infoTemplate = new Ext.XTemplate(
+        '<div class="place-info-window">',
+            '<h3>{name}, {region} ({status_term})</h3>',       
+            '<p>Type: {type}</p>',
+            '<tpl if="county">',
+               '<p>County: {county}</p>', 
+            '</tpl>',            
+            '<p>Lat: {latitude}</p>',
+            '<p>Lon: {longitude}</p>',
+            '<p><a href="{url}">More Details...</a></p>',
+        '</div>'
+    ).compile();
      
     MapPanel.superclass.constructor.call(this, {
         id: 'map-panel',
@@ -114,13 +127,18 @@ MapPanel = function() {
 };
 
 Ext.extend(MapPanel, Ext.Panel, {
-    zoomTo: function(result) {
+    selectPlace: function(result) {
         for(var key in this.markers) {
-            this.markers[key].hide();
+            var marker = this.markers[key];
+            marker.hide();
+            marker.bindInfoWindowHtml(null);
         }
         var activeMarker = this.markers[result['cgndb_key']];
+        var html = this.infoTemplate.apply(result);
         activeMarker.show();
         this.map.panTo(activeMarker.getLatLng());
+        activeMarker.bindInfoWindowHtml(html);
+        activeMarker.openInfoWindowHtml(html);
     },
     
     makeAllMarkersVisible: function() {

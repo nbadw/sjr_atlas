@@ -20,4 +20,10 @@
 
 <script type="text/javascript" language="javascript">
 Search.Results = $results;
+for(var i=0; i < Search.Results.length; i++)
+{
+    Ext.apply(Search.Results[i], {
+        url: '$siteroot/place/view.castle?cgndbKey=' + Search.Results[i]['cgndb_key']
+    });
+}
 </script>
