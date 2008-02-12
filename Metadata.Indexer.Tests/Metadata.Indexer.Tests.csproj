@@ -67,10 +67,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Metadata.Indexer\Metadata.Indexer.csproj">
-      <Project>{39BE68F4-3D4D-4257-9159-47DC68D6FEF7}</Project>
-      <Name>Metadata.Indexer</Name>
-    </ProjectReference>
     <ProjectReference Include="..\SJRAtlas.Models\SJRAtlas.Models.csproj">
       <Project>{43819902-84F0-47AB-B474-C1EF5E89ED8A}</Project>
       <Name>SJRAtlas.Models</Name>

@@ -15,6 +15,8 @@ namespace SJRAtlas.Site.Presentations
             TabularPresentation tabularPresentation = presentation as TabularPresentation;
             Controller controller = context.CurrentController;
 
+            
+
             IList<Table> tables = tabularPresentation.GetTables();
             IList<ExtGrid> extGrids = new List<ExtGrid>(tables.Count);
             foreach (Table table in tables)
@@ -44,6 +46,18 @@ namespace SJRAtlas.Site.Presentations
         }
 
         #endregion
+
+        public class TableQuery
+        {
+             // [4;36;1mSQL (0.000000)[0m   [0;1mSELECT count(*) AS count_all FROM tblAquaticSite [0m
+             // [4;35;1mSQL (0.016000)[0m   [0mSELECT TOP 45 * INTO #limit_offset_temp -- limit => 15 offset => 30 
+             //FROM tblAquaticSite ORDER BY tblAquaticSite.[aquaticsitename] ASC[0m
+             // [4;36;1mSQL (0.000000)[0m   [0;1mSET ROWCOUNT 30[0m
+             // [4;35;1mSQL (0.000000)[0m   [0mDELETE from #limit_offset_temp[0m
+             // [4;36;1mSQL (0.000000)[0m   [0;1mSET ROWCOUNT 0[0m
+             // [4;35;1mSQL (0.000000)[0m   [0mSELECT * FROM #limit_offset_temp[0m
+             // [4;36;1mSQL (0.015000)[0m   [0;1mDROP TABLE #limit_offset_temp[0m
+        }
 
         public class ExtGrid
         {

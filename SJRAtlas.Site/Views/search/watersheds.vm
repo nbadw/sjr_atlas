@@ -38,7 +38,7 @@
                 <p>You've searched the Atlas for: <span class="search_query">&ldquo;$!{query}&rdquo;</span>.</p>
                 <p>If you haven't found what you are looking for you may also want to try the following:</p>
                 <ul>
-                    <li>$Url.Link('Advanced Search', "%{controller='search', action='advanced'}")</li>
+                    <li>$Url.Link('Advanced Search', "%{controller='search', action='index'}")</li>
                     <li>$Url.Link('Search Tips', "%{controller='search', action='tips'}")</li>
                 </ul>
             </div>              

@@ -53,7 +53,7 @@ $!{header}
 			<ul>			
 			    <li id="home-tab">$Url.Link('Home', "%{controller='site', action='index'}")</li>
 				<li id="maps-tab">$Url.Link('Maps', "%{controller='site', action='maps'}")</li>
-                <li id="search-tab">$Url.Link('Search', "%{controller='search', action='advanced'}")</li>
+                <li id="search-tab">$Url.Link('Search', "%{controller='search', action='index'}")</li>
                 <li id="forms-tab">$Url.Link('Forms', "%{controller='site', action='forms'}")</li>                
                 <li id="reports-tab">$Url.Link('Reports', "%{controller='site', action='reports'}")</li> 
                 <li id="about-tab">$Url.Link('About', "%{controller='site', action='about'}")</li>                
@@ -61,7 +61,7 @@ $!{header}
 		</div>
 		<div id="quick-search" class="yui-u">
 			<div class="adv-link">
-			    $Url.Link('Advanced Search', "%{controller='search', action='advanced'}")
+			    $Url.Link('Advanced Search', "%{controller='search', action='index'}")
 			</div>
 			$Form.FormTag("%{controller='search', action='quick', id='quick-search-form'}")			
 				<div id="search-box">

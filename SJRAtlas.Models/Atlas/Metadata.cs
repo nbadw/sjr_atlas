@@ -7,7 +7,7 @@ using System.Xml;
 
 namespace SJRAtlas.Models.Atlas
 {
-    [ActiveRecord("metadata")]
+    [ActiveRecord("web_metadata")]
     public class Metadata : ActiveRecordBase<Metadata>
     {
         private int id;

@@ -5,7 +5,7 @@ using Castle.ActiveRecord;
 
 namespace SJRAtlas.Models.Atlas
 {
-    [ActiveRecord("presentations", DiscriminatorColumn = "type", DiscriminatorType = "String", DiscriminatorValue = "Presentation")]
+    [ActiveRecord("web_presentations", DiscriminatorColumn = "type", DiscriminatorType = "String", DiscriminatorValue = "Presentation")]
     public abstract class Presentation : ActiveRecordBase<Presentation>
     {
         #region Active Record Properties

@@ -3,6 +3,6 @@
   <p class="abstract">$!{abstract}</p>
   <p class="origin">Origin: $!{origin}</p>  
   <div class="presentations">
-    $Atlas.PresentationLinks($presentations)
+    $Atlas.PresentationLinks($presentations, $filtered_by)
   </div>
 </div>

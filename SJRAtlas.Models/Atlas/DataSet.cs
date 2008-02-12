@@ -2,10 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Castle.ActiveRecord;
+using Newtonsoft.Json;
 
 namespace SJRAtlas.Models.Atlas
 {
-    [ActiveRecord("data_sets")]
+    [ActiveRecord("web_data_sets")]
     public class DataSet : ActiveRecordBase<DataSet>, IMetadataAware
     {
         private int id;
@@ -53,16 +54,54 @@ namespace SJRAtlas.Models.Atlas
             set { origin = value; }
         }
 
-        //private TimePeriod timePeriod;
+        private bool isWaterBodyFilterAware;
 
-        //public TimePeriod MyProperty
-        //{
-        //    get { return timePeriod; }
-        //    set { timePeriod = value; }
-        //}
-        
-        private IList<Presentation> presentations = new List<Presentation>();
+        [Property("waterbody_filter_aware")]
+        public bool IsWaterBodyFilterAware
+        {
+            get { return isWaterBodyFilterAware; }
+            set { isWaterBodyFilterAware = value; }
+        }
+
+        private bool isWatershedFilterAware;
+
+        [Property("watershed_filter_aware")]
+        public bool IsWatershedFilterAware
+        {
+            get { return isWatershedFilterAware; }
+            set { isWatershedFilterAware = value; }
+        }
+
+        private bool isAgencyFilterAware;
+
+        [Property("agency_filter_aware")]
+        public bool IsAgencyFilterAware
+        {
+            get { return isAgencyFilterAware; }
+            set { isAgencyFilterAware = value; }
+        }
+
+        private bool isAquaticSiteFilterAware;
+
+        [Property("aquatic_site_filter_aware")]
+        public bool IsAquaticSiteFilterAware
+        {
+            get { return isAquaticSiteFilterAware; }
+            set { isAquaticSiteFilterAware = value; }
+        }
+
+        private bool isDateFilterAware;
+
+        [Property("date_filter_aware")]
+        public bool IsDateFilterAware
+        {
+            get { return isDateFilterAware; }
+            set { isDateFilterAware = value; }
+        }
                 
+        private IList<Presentation> presentations = new List<Presentation>();
+            
+        [JsonIgnore]
         [HasMany(typeof(Presentation), Table="presentations", ColumnKey="data_set_id")]
         public IList<Presentation> Presentations
         {

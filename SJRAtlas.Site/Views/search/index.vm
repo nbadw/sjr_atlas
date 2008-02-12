@@ -5,8 +5,6 @@
 #end
 
 #capturefor(header)
-$Ajax.GenerateJSProxy('Agency', 'Agency')
-
 <!-- JAVASCRIPT FORM HELPER -->
 $FormHelper.InstallScripts()
 
@@ -22,11 +20,9 @@ Ext.onReady(function() {
         frame: true,
         title: 'Search Data Sets',
         defaultType: 'textfield',
-        items: [{
-            fieldLabel: 'Select a Data Set',
-            name: 'dataset',
-            allowBlank: false
-        }, {
+        items: [
+            new DataSetComboBox()
+        , {
             xtype: 'fieldset',
             checkboxToggle: true,
             collapsed :false,
@@ -37,14 +33,16 @@ Ext.onReady(function() {
                 name: 'agency',
                 width: 500,
                 displayField: 'Name',
-                editable: false,
+                editable: true,
                 forceSelection: true,
+                mode: 'local',
                 emptyText: 'Select an agency...',
                 store: new Ext.data.JsonStore({
-                    autoload: Agency.list,
+                    url: '$siteroot/agency/list.castle',
                     root: 'agencies',
                     totalProperty: 'results',
                     id: 'AgencyCode',
+                    autoLoad: true,
                     fields: ['AgencyCode', 'Name', 'Type']
                 }),
                 tpl: new Ext.XTemplate(
@@ -121,7 +119,7 @@ Ext.extend(WaterBodyAutoComplete, Ext.form.ComboBox, {
         WaterBodyAutoComplete.superclass.initList.call(this);  
         this.view.prepareData = function(data) {
             Ext.apply(data, { 
-                title: data['name'] || 'Unnamed Water Body',
+                title: (data['name'] || 'Unnamed Water Body') + '(' + data['id'] + ')',
             });
             return data;
         };   
@@ -160,6 +158,52 @@ Ext.extend(WatershedAutoComplete, Ext.form.ComboBox, {
         this.view.prepareData = function(data) {
             Ext.apply(data, { 
                 title: data['name']
+            });
+            return data;
+        };   
+    }  
+});
+
+DataSetComboBox = function(datasets) {
+    DataSetComboBox.superclass.constructor.call(this, {
+        store: new Ext.data.JsonStore({
+            url: '$siteroot/dataset/list.castle',
+            root: 'datasets',
+            totalProperty: 'results',
+            id: 'Id',
+            autoLoad: true,
+            fields: [
+                'Id', 'Title', 'Abstract', 'Author', 'Origin', 
+                'IsWaterBodyFilterAware', 'IsWatershedFilterAware', 'IsAgencyFilterAware', 
+                'IsAquaticSiteFilterAware', 'IsDateFilterAware'
+            ]
+        }),
+        fieldLabel: 'Data Set',
+        emptyText: 'Select a Data Set...', 
+        mode: 'local',
+        forceSelection: true,
+        displayField: 'Title',
+        width: 500,
+        tpl: new Ext.XTemplate(
+            '<tpl for="."><div class="dataset-list-item">',
+                '<h3>{Title}</h3>',
+                '<p>{short_abstract}</p>',
+            '</div></tpl>'
+        ),
+        itemSelector: 'div.dataset-list-item'
+    });
+}
+
+Ext.extend(DataSetComboBox, Ext.form.ComboBox, {
+    initList : function() {
+        DataSetComboBox.superclass.initList.call(this);  
+        this.view.prepareData = function(data) {
+            var the_abstract = data['Abstract'] || '';
+            var short_abstract = the_abstract.length > 100 ?
+                the_abstract.substring(0, 97) + '...' :
+                the_abstract;
+            Ext.apply(data, { 
+                short_abstract: short_abstract
             });
             return data;
         };   

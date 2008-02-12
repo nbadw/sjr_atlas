@@ -36,7 +36,7 @@
 	                <li><a href="#">Coordinate Search</a></li>
 	                <li><a href="http://www.canadapost.ca/tools/pcl/bin/advanced-e.asp">Postal Code Search</a></li>
 	                <li><a href="#">Water Body Search</a></li>
-	                <li>$Url.Link('Advanced Search', "%{controller='search', action='advanced'}")</li>
+	                <li>$Url.Link('Advanced Search', "%{controller='search', action='index'}")</li>
 	                <li><a href="http://geodiscover.cgdi.ca/gdp/index.jsp?language=en">GeoConnections GeoPortal</a></li>
 	            </ul>               
             </div>

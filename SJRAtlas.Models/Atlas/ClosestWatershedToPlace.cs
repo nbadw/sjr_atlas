@@ -7,7 +7,7 @@ using SJRAtlas.Models.DataWarehouse;
 
 namespace SJRAtlas.Models.Atlas
 {
-    [ActiveRecord("closest_watershed_to_place", Mutable = false)]
+    [ActiveRecord("web_closest_watershed_to_place", Mutable = false)]
     public class ClosestWatershedToPlace : ActiveRecordBase<ClosestWatershedToPlace>
     {
         private int id;

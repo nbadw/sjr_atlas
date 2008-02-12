@@ -7,7 +7,7 @@ using System.Collections;
 
 namespace SJRAtlas.Models.Atlas
 {
-    [ActiveRecord("interactive_maps")]
+    [ActiveRecord("web_interactive_maps")]
     public class InteractiveMap : ActiveRecordBase<InteractiveMap>, IMetadataAware
     {
         public InteractiveMap()

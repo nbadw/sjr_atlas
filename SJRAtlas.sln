@@ -13,24 +13,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SJRAtlas.Models.Tests", "SJ
 		Release.AspNetCompiler.Debug = "False"
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Metadata.Indexer", "Metadata.Indexer\Metadata.Indexer.csproj", "{39BE68F4-3D4D-4257-9159-47DC68D6FEF7}"
-	ProjectSection(WebsiteProperties) = preProject
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.Debug = "False"
-	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Metadata.Indexer.Tests", "Metadata.Indexer.Tests\Metadata.Indexer.Tests.csproj", "{6E8C82A2-2E2A-414B-91FC-B12680403DBD}"
-	ProjectSection(WebsiteProperties) = preProject
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.Debug = "False"
-	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Metadata.Indexer.Console", "Metadata.Indexer.Console\Metadata.Indexer.Console.csproj", "{AC9D6FB0-08C4-4EF7-9AEF-48734A219E42}"
-	ProjectSection(WebsiteProperties) = preProject
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.Debug = "False"
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SJRAtlas.Site", "SJRAtlas.Site\SJRAtlas.Site.csproj", "{136FD2E6-F684-4A3E-85D2-9A1B2B6896C5}"
 	ProjectSection(WebsiteProperties) = preProject
 		Debug.AspNetCompiler.Debug = "True"
@@ -57,18 +39,6 @@ Global
 		{529FB8AB-2830-42BD-96A9-2EFBFFC451DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{529FB8AB-2830-42BD-96A9-2EFBFFC451DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{529FB8AB-2830-42BD-96A9-2EFBFFC451DA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{39BE68F4-3D4D-4257-9159-47DC68D6FEF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{39BE68F4-3D4D-4257-9159-47DC68D6FEF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{39BE68F4-3D4D-4257-9159-47DC68D6FEF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{39BE68F4-3D4D-4257-9159-47DC68D6FEF7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6E8C82A2-2E2A-414B-91FC-B12680403DBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6E8C82A2-2E2A-414B-91FC-B12680403DBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6E8C82A2-2E2A-414B-91FC-B12680403DBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6E8C82A2-2E2A-414B-91FC-B12680403DBD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AC9D6FB0-08C4-4EF7-9AEF-48734A219E42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AC9D6FB0-08C4-4EF7-9AEF-48734A219E42}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AC9D6FB0-08C4-4EF7-9AEF-48734A219E42}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AC9D6FB0-08C4-4EF7-9AEF-48734A219E42}.Release|Any CPU.Build.0 = Release|Any CPU
 		{136FD2E6-F684-4A3E-85D2-9A1B2B6896C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{136FD2E6-F684-4A3E-85D2-9A1B2B6896C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{136FD2E6-F684-4A3E-85D2-9A1B2B6896C5}.Release|Any CPU.ActiveCfg = Release|Any CPU

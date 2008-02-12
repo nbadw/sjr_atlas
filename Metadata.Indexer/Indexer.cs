@@ -59,30 +59,58 @@ namespace Metadata.Indexer
 
             if (!File.Exists(metadataFile))
                 throw new ArgumentException(String.Format("{0} does not exist", metadataFile));
+            
+            ItemToIndex itemToIndex = BuildItemToIndex(metadataFile);
+
+            IMetadataAware metadataOwner = itemToIndex.CreateTargetInstance();            
+            Logger.Info("IMetadataAware instance created");
+
+            SJRAtlas.Models.Atlas.Metadata metadata = itemToIndex.CreateMetadata();
+            Logger.Info("Metadata instance created");
+
+            //metadata.Save();
+        }
+
+        public ItemToIndex BuildItemToIndex(string metadataFile)
+        {
+            string targetFile = FindMatchingFileForMetadata(metadataFile);
+            logger.Debug(
+                String.Format(
+                    "Linking file {0} to metadata file {1}", 
+                    targetFile, 
+                    metadataFile
+            ));
 
             string possibleTypeName = GuessTypeNameFromDirectory(metadataFile);
-            Type metadataAwareType = CheckForMatchingType(possibleTypeName);            
-            logger.Debug(String.Format("IMetadataAware match found: {0} -> {1}", possibleTypeName, metadataAwareType.Name));
+            Type metadataAwareType = CheckForMatchingType(possibleTypeName);
+            logger.Debug(
+                String.Format(
+                    "IMetadataAware match found: {0} -> {1}", 
+                    possibleTypeName, 
+                    metadataAwareType.Name
+            ));
 
             XmlDocument xmlContent = new XmlDocument();
             xmlContent.Load(metadataFile);
-            
             if (xmlContent.DocumentElement.Name != "metadata")
-                throw new Exception(String.Format("The root element of {0} should be <metadata> but was <{1}>", 
-                    metadataFile, xmlContent.DocumentElement.Name));
+                throw new Exception(
+                    String.Format(
+                        "The root element of {0} should be <metadata> but was <{1}>",
+                        metadataFile, 
+                        xmlContent.DocumentElement.Name
+                ));
 
-            EnsureUTF16Encoding(xmlContent);
-
-            IMetadataAware metadataOwner = CreateMetadataOwner(metadataAwareType, xmlContent);
-            Logger.Info("IMetadataAware instance created");
-
-            SJRAtlas.Models.Atlas.Metadata metadata = CreateMetadata(metadataOwner, metadataFile, xmlContent);
-            Logger.Info("Metadata instance created");
-
-            metadata.Save();
+            return new ItemToIndex(targetFile, metadataAwareType, xmlContent);
         }
 
-        private string GuessTypeNameFromDirectory(string metadataFile)
+        private string FindMatchingFileForMetadata(string metadataFile)
+        {
+            string matchingFile = metadataFile;
+            Directory.GetFiles(metadataDirectory, "*.xml", System.IO.SearchOption.AllDirectories);
+            throw new Exception("Not Implemented");
+        }
+
+        public string GuessTypeNameFromDirectory(string metadataFile)
         {
             // based on the directory the file is in we can take a guess at it's type.  
             // for example, the following types and directory paths may be matches:
@@ -107,7 +135,7 @@ namespace Metadata.Indexer
             return remainingPath.Split('\\')[0];
         }
 
-        private Type CheckForMatchingType(string possibleTypeName)
+        public Type CheckForMatchingType(string possibleTypeName)
         {
             // possibleTypeName may be pluralized so check for that too
             foreach (Type type in MetadataAwareTypes)
@@ -119,7 +147,7 @@ namespace Metadata.Indexer
             throw new Exception(String.Format("No IMetadataAware classes could be found to match the type named {0}", possibleTypeName));
         }
 
-        private void EnsureUTF16Encoding(XmlDocument xmlDocument)
+        public void EnsureUTF16Encoding(XmlDocument xmlDocument)
         {
             // get the declaration
             XmlDeclaration declaration = null;
@@ -141,7 +169,7 @@ namespace Metadata.Indexer
             }
         }
 
-        private IMetadataAware CreateMetadataOwner(Type metadataAwareType, XmlDocument xmlDocument)
+        public IMetadataAware CreateMetadataOwner(Type metadataAwareType, XmlDocument xmlDocument)
         {
             Logger.Debug("Creating metadata owner");
             IMetadataAware metadataOwner = (IMetadataAware)Activator.CreateInstance(metadataAwareType);
@@ -176,7 +204,7 @@ namespace Metadata.Indexer
             return metadataOwner;
         }
 
-        private SJRAtlas.Models.Atlas.Metadata CreateMetadata(IMetadataAware metadataOwner, string metadataFile, XmlDocument xmlContent)
+        public SJRAtlas.Models.Atlas.Metadata CreateMetadata(IMetadataAware metadataOwner, string metadataFile, XmlDocument xmlContent)
         {
             Logger.Debug("Creating metadata");
             SJRAtlas.Models.Atlas.Metadata metadata = new SJRAtlas.Models.Atlas.Metadata();

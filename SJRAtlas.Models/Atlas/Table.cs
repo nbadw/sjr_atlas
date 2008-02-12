@@ -7,7 +7,7 @@ using NHibernate;
 
 namespace SJRAtlas.Models.Atlas
 {
-    [ActiveRecord("tabular_queries")]
+    [ActiveRecord("web_tabular_queries")]
     public class Table : ActiveRecordBase<Table>
     {
         public static IList<Table> FindTablesForTabularPresentation(int presentationId)

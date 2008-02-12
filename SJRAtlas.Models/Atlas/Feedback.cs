@@ -4,7 +4,7 @@ using Castle.Components.Validator;
 
 namespace SJRAtlas.Models.Atlas
 {
-    [ActiveRecord("feedback")]
+    [ActiveRecord("web_feedback")]
     public class Feedback : ActiveRecordValidationBase<Feedback>
     {
         private int id;

@@ -1,0 +1,44 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlas.Indexer", "Atlas.Indexer\Atlas.Indexer.csproj", "{81BD0A35-EBB8-4B22-85AF-BF4178C5D5DC}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlas.Indexer.Console", "Atlas.Indexer.Console\Atlas.Indexer.Console.csproj", "{B4B14CD3-827C-45AA-9EBB-497650FB18E0}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlas.Indexer.Tests", "Atlas.Indexer.Tests\Atlas.Indexer.Tests.csproj", "{F7310349-968D-4247-BB90-B29F71F003CF}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{81BD0A35-EBB8-4B22-85AF-BF4178C5D5DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81BD0A35-EBB8-4B22-85AF-BF4178C5D5DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81BD0A35-EBB8-4B22-85AF-BF4178C5D5DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81BD0A35-EBB8-4B22-85AF-BF4178C5D5DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4B14CD3-827C-45AA-9EBB-497650FB18E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4B14CD3-827C-45AA-9EBB-497650FB18E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4B14CD3-827C-45AA-9EBB-497650FB18E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4B14CD3-827C-45AA-9EBB-497650FB18E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7310349-968D-4247-BB90-B29F71F003CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7310349-968D-4247-BB90-B29F71F003CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7310349-968D-4247-BB90-B29F71F003CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7310349-968D-4247-BB90-B29F71F003CF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

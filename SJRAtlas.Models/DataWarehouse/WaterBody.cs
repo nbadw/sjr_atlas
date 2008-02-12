@@ -122,7 +122,7 @@ namespace SJRAtlas.Models.DataWarehouse
 
         private IList<DataSet> datasets = new List<DataSet>();
 
-        [HasAndBelongsToMany(typeof(DataSet), Table = "data_sets_waterbodies",
+        [HasAndBelongsToMany(typeof(DataSet), Table = "web_data_sets_waterbodies",
             ColumnKey = "waterbody_id", ColumnRef = "data_set_id")]
         public IList<DataSet> DataSets
         {

@@ -90,7 +90,7 @@ namespace SJRAtlas.Site.Helpers
 
         #region Presentation Link Helpers
 
-        public string PresentationLinks(IList<Presentation> presentations)
+        public string PresentationLinks(IList<Presentation> presentations, string filteredBy)
         {
             StringBuilder presentationLinks = new StringBuilder();
             
@@ -116,7 +116,7 @@ namespace SJRAtlas.Site.Helpers
                         Link(Config.LinkTitles[type], DictHelper.Create(
                             "controller=presentation",
                             "action=view",
-                            String.Format("querystring=id={0}", presentation.Id)
+                            String.Format("querystring=id={0}&{1}", presentation.Id, filteredBy)
                         )));
             }
 

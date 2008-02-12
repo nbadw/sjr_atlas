@@ -145,6 +145,7 @@
     <Compile Include="Components\WaterBodyInfoComponent.cs" />
     <Compile Include="Components\WatershedInfoComponent.cs" />
     <Compile Include="Controllers\AgencyController.cs" />
+    <Compile Include="Controllers\DataSetController.cs" />
     <Compile Include="Controllers\PresentationController.cs" />
     <Compile Include="Controllers\FeedbackController.cs" />
     <Compile Include="Controllers\PlaceController.cs" />
@@ -152,6 +153,7 @@
     <Compile Include="Controllers\SiteController.cs" />
     <Compile Include="Controllers\WaterBodyController.cs" />
     <Compile Include="Controllers\WatershedController.cs" />
+    <Compile Include="Filters\EscapeToUnicodeFilter.cs" />
     <Compile Include="Presentations\PresentationViewResolver.cs" />
     <Compile Include="GlobalApplication.cs" />
     <Compile Include="Presentations\TabularPresentationViewHandler.cs" />
@@ -1729,7 +1731,7 @@
     <None Include="Views\rescues\problemsendingemail.vm" />
     <None Include="Views\rescues\generalerror.vm" />
     <None Include="Views\resource\tabular.vm" />
-    <None Include="Views\search\advanced.vm" />
+    <None Include="Views\search\index.vm" />
     <None Include="Views\search\tips.vm" />
     <None Include="Views\search\places.vm" />
     <None Include="Views\search\no-results.vm" />

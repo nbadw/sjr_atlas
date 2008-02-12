@@ -8,12 +8,14 @@ using SJRAtlas.Site.Models;
 using SJRAtlas.Models;
 using SJRAtlas.Site.Helpers;
 using SJRAtlas.Models.Atlas;
+using SJRAtlas.Site.Filters;
 
 namespace SJRAtlas.Site.Controllers
 {
     [Layout("sjratlas")]
     [Rescue("generalerror")]
     [Helper(typeof(AtlasHelper), "Atlas")]
+    [FilterAttribute(ExecuteEnum.AfterAction, typeof(EscapeToUnicodeFilter))]
     public class BaseController : SmartDispatcherController
     {
         public BaseController() : this(new AtlasMediator())

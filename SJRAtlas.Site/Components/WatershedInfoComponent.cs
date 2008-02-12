@@ -31,6 +31,7 @@ namespace SJRAtlas.Site.Components
         {
             Place place = Watershed.Place;
 
+            PropertyBag["watershed"] = Watershed;
             PropertyBag["name"] = Watershed.Name;
             PropertyBag["coordinate"] = Watershed.GetCoordinate();
             PropertyBag["flows_into"] = Watershed.FlowsInto;

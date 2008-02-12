@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace SJRAtlas.Models.Atlas
 {
-    [ActiveRecord("publications", DiscriminatorColumn="type", DiscriminatorType="String", DiscriminatorValue="Publication")]
+    [ActiveRecord("web_publications", DiscriminatorColumn = "type", DiscriminatorType = "String", DiscriminatorValue = "Publication")]
     public class Publication : ActiveRecordBase<Publication>, IMetadataAware
     {
         public static IList<Publication> FindAllByQuery(string query)

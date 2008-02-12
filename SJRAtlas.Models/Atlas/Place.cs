@@ -6,7 +6,7 @@ using NHibernate.Expression;
 
 namespace SJRAtlas.Models.Atlas
 {
-    [ActiveRecord("places")]
+    [ActiveRecord("web_places")]
     public class Place : ActiveRecordBase<Place>
     {
         #region ActiveRecord Properties

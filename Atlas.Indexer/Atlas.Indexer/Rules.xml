@@ -1,0 +1,6 @@
+<rules>	
+  <rule field="title" xpath="/metadata/idinfo/citation/citeinfo/title" />
+  <rule field="origin" xpath="/metadata/idinfo/citation/citeinfo/origin" />
+  <rule field="published" xpath="/metadata/idinfo/citation/citeinfo/pubdate" />
+  <rule field="abstract" xpath="/metadata/idinfo/descript/abstract" />
+</rules>

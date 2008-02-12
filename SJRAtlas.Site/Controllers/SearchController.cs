@@ -11,6 +11,11 @@ namespace SJRAtlas.Site.Controllers
 {
 	public class SearchController : BaseController
 	{
+        public void Index()
+        {
+
+        }
+
         public void Quick(string q)
         {
             Regex triggerRegex = CreateWatershedTriggerRegex();
@@ -49,7 +54,12 @@ namespace SJRAtlas.Site.Controllers
             List<PlaceAttributes> resultAttributes = new List<PlaceAttributes>(results.Count);
             foreach (Place result in results)
             {
-                resultAttributes.Add(new PlaceAttributes(result));
+                NameValueCollection queryParams = new NameValueCollection(1);
+                queryParams["cgndbKey"] = result.CgndbKey;
+                PlaceAttributes attributes = new PlaceAttributes(result);
+                attributes["url"] = UrlBuilder.BuildUrl(
+                    Context.UrlInfo, "place", "view", queryParams);
+                resultAttributes.Add(attributes);
             }
 
             PropertyBag["results"] = JavaScriptConvert.SerializeObject(resultAttributes);
@@ -87,41 +97,33 @@ namespace SJRAtlas.Site.Controllers
             RenderView("no-results");
         }
 
-        public void Advanced()
+        public void Advanced(int dataSetId, string agencyCode, string drainageCode,
+            int waterbodyId, DateTime startDate, DateTime endDate)
         {
-            //IList<Agency> agencies = AtlasMediator.FindAll<Agency>();
-            //IList<DataSet> datasets = AtlasMediator.FindAll<DataSet>();
+            DataSet dataset = AtlasMediator.Find<DataSet>(dataSetId);
+            foreach (Presentation presentation in dataset.Presentations)
+            {
+                if (presentation is TabularPresentation)
+                {
+                    Redirect("presentation", "view",
+                        Castle.MonoRail.Framework.Helpers.DictHelper.Create(
+                            "id=" + presentation.Id,
+                            "agencyCode=" + agencyCode,
+                            "drainageCode=" + drainageCode,
+                            "waterbodyId=" + waterbodyId,
+                            "startDate=" + startDate,
+                            "endDate=" + endDate
+                    ));
+                }
+            }
 
-            //List<string> agencyNames = new List<string>(agencies.Count);
-            //foreach (Agency agency in agencies)
-            //{
-            //    if (!String.IsNullOrEmpty(agency.Name))
-            //        agencyNames.Add(agency.Name);
-            //}
-            //agencyNames.Sort();
-
-            //PropertyBag["datasets"] = datasets;
-            //PropertyBag["agencies"] = agencyNames;
-            //PropertyBag["optionstype"] = typeof(SearchOptions);
+            throw new Exception("Dataset has no tabular information");
         }
 
         public void Tips()
         {
             RenderView("tips");
         }
-
-        //public void SubmitAdvanced([DataBind("options", Validate=true)] SearchOptions options)
-        //{
-        //    if (HasValidationError(options))
-        //    {
-        //        Flash["options"] = options;
-        //        Flash["summary"] = GetErrorSummary(options);
-        //        RedirectToAction("advanced");
-        //        return;
-        //    }
-
-        //    RenderSharedView("shared/todo");
-        //}
 
         private Regex CreateWatershedTriggerRegex()
         {

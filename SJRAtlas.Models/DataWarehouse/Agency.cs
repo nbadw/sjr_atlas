@@ -1,6 +1,7 @@
 using System;
 using Castle.ActiveRecord.Queries;
 using Castle.ActiveRecord;
+using Newtonsoft.Json;
 
 namespace SJRAtlas.Models.DataWarehouse
 {
@@ -38,6 +39,7 @@ namespace SJRAtlas.Models.DataWarehouse
 
         private string dataRulesInd;
 
+        [JsonIgnore]
         [Property("DataRulesInd")]
         public virtual string DataRulesInd
         {

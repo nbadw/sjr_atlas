@@ -135,6 +135,7 @@
     <Compile Include="Controllers\PlaceControllerTest.cs" />
     <Compile Include="Controllers\SearchControllerTest.cs" />
     <Compile Include="Controllers\WatershedControllerTest.cs" />
+    <Compile Include="Filters\EscapeToUnicodeFilterTest.cs" />
     <Compile Include="Models\SearchOptionsTest.cs" />
     <Compile Include="SJRAtlasControllerTest.cs" />
   </ItemGroup>
