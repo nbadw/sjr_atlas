@@ -71,7 +71,7 @@ $!{header}
 				<div class="btn">
 				    <input id="btn_search" name="submit" type="submit"/>
 				</div>
-			$Form.EndFormTag()
+			</form>
 		</div>
 	</div>
 </div>

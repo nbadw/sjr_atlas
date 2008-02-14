@@ -8,47 +8,64 @@
 <h1>Tabular Data</h1>
 #end
 
-
-
 <div id="content" class="clearfix">	
 	<div class="innerwrap">
 		<div class="textbox">	
 		    <div id="tabular">
-		    
-		        #set($count = 0)
-		        #foreach($ext_grid in $ext_grids)
-		            <div id="table-$count" class="table">
-		            </div> 
-		            
-		            <script language="javascript" type="text/javascript">
-		            var store = new Ext.data.JsonStore({
-		                url: 
-		                fields: $ext_grid.Fields()	                
-		            });
-		            store.loadData($ext_grid.Data());
-		            
-		            var grid = new Ext.grid.GridPanel({
-		                store: store,
-		                columns: $ext_grid.Columns(),
-		                stripeRows: true,
-		                frame: true,
-		                height: 300,
-		                width: 800,
-		                bbar: new Ext.PagingToolbar({
-		                    pageSize: 50,
-		                    store: store,
-		                    displayInfo: true,
-		                    displayMsg: 'Displaying rows {0} - {1} of {2}',
-		                    emptyMsg: 'No rows to display'
-		                })               
-		            });
-		            
-		            grid.render('table-$count');		            
-		            </script>
-		            
-		            #set($count = $count + 1)
-		        #end
-		        
+		    		            
+	        <script language="javascript" type="text/javascript">	            
+	            var config = $configuration;
+	            var filters = config['filters'];
+	            var tables = config['tables'];
+	            
+	            for(var i=0; i < tables.length; i++)
+	            {
+	                var table_config = tables[i];
+	                var url = table_config['url'];
+	                var columns = table_config['columns'];
+	                
+	                var fields = columns;
+	                var headers = [];
+	                for(var j=0; j < columns.length; j++)
+	                {
+	                    headers[j] = { header: columns[j] };
+	                }
+	                
+	                var table_div = Ext.DomHelper.append('tabular', '<div class="table">', true);            
+	                
+	                var table_store = new Ext.data.JsonStore({
+                        url: url,
+                        root: 'rows',
+                        totalProperty: 'results',
+                        fields: fields,
+                        baseParams: filters
+                    });
+                    
+                    var grid = new Ext.grid.GridPanel({
+	                    store: table_store,
+	                    stripeRows: true,
+	                    frame: true,
+	                    height: 300,
+	                    width: 800,
+	                    loadMask: true,
+	                    columns: headers,
+	                    bbar: new Ext.PagingToolbar({
+	                        pageSize: 50,
+	                        store: table_store,
+	                        displayInfo: true,
+	                        displayMsg: 'Displaying rows {0} - {1} of {2}',
+	                        emptyMsg: 'No rows to display'
+	                    })               
+	                });
+	                
+	                grid.render(table_div);	
+	            
+	                table_store.load({
+	                    params: { start: 0, limit: 50 }
+	                });	
+	            }	                 
+	        </script>
+	            
 		    </div>                    
         </div>
 	</div>

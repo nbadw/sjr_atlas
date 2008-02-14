@@ -7,5 +7,6 @@ namespace SJRAtlas.Site.Presentations
     public interface IPresentationViewHandler
     {
         void RenderViewFor(Presentation presentation, IRailsEngineContext context);
+        void RegisterDynamicActions(Controller controller);
     }
 }

@@ -13,7 +13,8 @@ namespace SJRAtlas.Site.Controllers
     {        
         public PresentationController(PresentationViewResolver presentationViewResolver)
         {
-            this.presentationViewResolver = presentationViewResolver; 
+            this.presentationViewResolver = presentationViewResolver;
+            PresentationViewResolver.RegisterDynamicActions(this);
         }
 
         private PresentationViewResolver presentationViewResolver;

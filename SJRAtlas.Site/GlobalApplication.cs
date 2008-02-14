@@ -15,7 +15,7 @@ namespace SJRAtlas.Site
         {
             instance = this;
             container = new WebApplicationContainer();
-            logger = CreateLogger(GetType().FullName);
+            logger = CreateLogger(GetType());
         }
 
 		public void Application_OnStart()
@@ -41,6 +41,11 @@ namespace SJRAtlas.Site
         public static ILogger CreateLogger(string name)
         {
             return LoggerFactory.Create(name);
+        }
+
+        public static ILogger CreateLogger(Type type)
+        {
+            return LoggerFactory.Create(type);
         }
 
         private static ILoggerFactory LoggerFactory
