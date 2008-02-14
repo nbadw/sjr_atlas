@@ -8,17 +8,17 @@ namespace SJRAtlas.Models.Atlas
     [ActiveRecord(DiscriminatorValue = "TabularPresentation")]
     public class TabularPresentation : Presentation
     {
-        private IList<Table> tables;
+        private IList<TabularQuery> tables;
 
-        protected IList<Table> Tables
+        protected IList<TabularQuery> Tables
         {
             get { return tables; }
             set { tables = value; }
         }
 
-        public virtual IList<Table> GetTables()
+        public virtual IList<TabularQuery> GetQueries()
         {
-            return Table.FindTablesForTabularPresentation(this.Id);
+            return TabularQuery.FindQueriesForTabularPresentation(this.Id);
         }       
     }
 }

@@ -85,9 +85,12 @@
     <Compile Include="Atlas\PublishedReport.cs" />
     <Compile Include="Atlas\SummaryReportPresentation.cs" />
     <Compile Include="Atlas\TabularPresentation.cs" />
-    <Compile Include="Atlas\Table.cs" />
+    <Compile Include="Atlas\TabularQuery.cs" />
     <Compile Include="DataWarehouse\WaterBody.cs" />
     <Compile Include="DataWarehouse\Watershed.cs" />
+    <Compile Include="Query\CustomQuery.cs" />
+    <Compile Include="Query\QueryFilter.cs" />
+    <Compile Include="Query\QueryResults.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DataWarehouse\DataWarehouse.actiw">

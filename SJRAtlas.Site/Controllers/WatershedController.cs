@@ -6,6 +6,7 @@ using SJRAtlas.Models.Atlas;
 using Castle.ActiveRecord.Queries;
 using Castle.MonoRail.Framework;
 using Newtonsoft.Json;
+using NHibernate.Expression;
 
 namespace SJRAtlas.Site.Controllers
 {
@@ -30,54 +31,40 @@ namespace SJRAtlas.Site.Controllers
             PropertyBag["datasets"] = watershed.DataSets;
         }
 
-        //[AjaxAction]
-        //public IWatershed[] List(string code)
-        //{      
-        //    if (code == null)
-        //        code = "";
-
-        //    string tempMatch = String.Format("{0}-%-00-00-00-00-00-", code);
-        //    if (tempMatch.StartsWith("-"))
-        //        tempMatch = tempMatch.Remove(0, 1);
-
-        //    string match = String.Empty;
-        //    int dashCount = 0;
-        //    while (dashCount < 6)
-        //    {
-        //        int dashIndex = tempMatch.IndexOf("-") + 1;
-        //        match += tempMatch.Substring(0, dashIndex);
-        //        tempMatch = tempMatch.Remove(0, dashIndex);
-        //        dashCount++;
-        //    }
-        //    match = match.Substring(0, match.Length - 1);
-        //    string exclude = match.Replace("%", "00");
-
-        //    if (match == exclude)
-        //        return new IWatershed[0];
-
-        //    SimpleQuery<DrainageUnit> q = new SimpleQuery<DrainageUnit>("from DrainageUnit du where du.DrainageCode like ? and du.DrainageCode not like ?", match, exclude);
-        //    IWatershed[] watersheds = q.Execute();
-        //    return watersheds;
-        //}
-
         [AjaxAction]
-        public void AutoComplete(string query)
+        public void AutoComplete(string query, int start, int limit)
         {
             Logger.Debug(String.Format("XHR call to Watershed Autocomplete for {0} received", query));
             string idQuery = String.Format("{0}%", query);
             string textQuery = String.Format("%{0}%", query);
 
-            SimpleQuery<Watershed> q = new SimpleQuery<Watershed>("from Watershed ws where ws.Name like ? or ws.DrainageCode like ?", textQuery, idQuery);
-            Watershed[] results = q.Execute();
+            DetachedCriteria criteria = DetachedCriteria.For<Watershed>();
+            criteria.Add(Expression.Or(
+                Expression.Like("Name", textQuery),
+                Expression.Like("DrainageCode", idQuery)
+            ));
 
+            Watershed[] results = Watershed.SlicedFindAll(start, limit, criteria,
+                Order.Asc("Name"));
             List<WatershedAttributes> watersheds = new List<WatershedAttributes>(results.Length);
             foreach (Watershed waterbody in results)
             {
                 watersheds.Add(new WatershedAttributes(waterbody));
             }
 
+            criteria = DetachedCriteria.For<Watershed>();
+            criteria.Add(Expression.Or(
+                Expression.Like("Name", textQuery),
+                Expression.Like("DrainageCode", idQuery)
+            ));
+            ScalarProjectionQuery<Watershed, int> count = new ScalarProjectionQuery<Watershed, int>(
+                NHibernate.Expression.Projections.RowCount(),
+                criteria
+            );
+            int total = count.Execute();
+
             PropertyBag["watersheds"] = JavaScriptConvert.SerializeObject(watersheds);
-            PropertyBag["resultsCount"] = watersheds.Count;
+            PropertyBag["resultsCount"] = total;
             CancelLayout();
             Context.Response.ContentType = "text/javascript";
         }

@@ -21,7 +21,8 @@
 		            </div> 
 		            
 		            <script language="javascript" type="text/javascript">
-		            var store = new Ext.data.SimpleStore({
+		            var store = new Ext.data.JsonStore({
+		                url: 
 		                fields: $ext_grid.Fields()	                
 		            });
 		            store.loadData($ext_grid.Data());
@@ -32,7 +33,14 @@
 		                stripeRows: true,
 		                frame: true,
 		                height: 300,
-		                width: 800                
+		                width: 800,
+		                bbar: new Ext.PagingToolbar({
+		                    pageSize: 50,
+		                    store: store,
+		                    displayInfo: true,
+		                    displayMsg: 'Displaying rows {0} - {1} of {2}',
+		                    emptyMsg: 'No rows to display'
+		                })               
 		            });
 		            
 		            grid.render('table-$count');		            

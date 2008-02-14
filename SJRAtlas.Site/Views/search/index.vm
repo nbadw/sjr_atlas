@@ -142,6 +142,7 @@ WatershedAutoComplete = function() {
         width: 500,
         hideTrigger: true,
         minChars: 2,
+        pageSize: 10,
         tpl: new Ext.XTemplate(
             '<tpl for="."><div class="watershed-search-item">',
                 '<h3>{name}</h3>',
