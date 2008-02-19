@@ -52,19 +52,35 @@ namespace SJRAtlas.Models.Query
                 FilterByDrainageCode(parameters["drainageCode"]);
 
             if (!String.IsNullOrEmpty(parameters["waterbodyId"]))
-                FilterByWaterBodyId(int.Parse(parameters["waterbodyId"]));
+            {
+                int id = int.Parse(parameters["waterbodyId"]);
+                if(id > 0)
+                    FilterByWaterBodyId(id);
+            }
 
             if (!String.IsNullOrEmpty(parameters["agencyCode"]))
                 FilterByAgencyCode(parameters["agencyCode"]);
 
-            //if (!String.IsNullOrEmpty(parameters["aquaticSite"]))
-            //    filters["aquaticSite"] = parameters["aquaticSite"];
+            if (!String.IsNullOrEmpty(parameters["aquaticSiteId"]))
+            {
+                int id = int.Parse(parameters["aquaticSite"]);
+                if (id > 0)
+                    FilterByAquaticSiteId(id);
+            }
 
             if (!String.IsNullOrEmpty(parameters["startDate"]))
-                FilterByStartDate(DateTime.Parse(parameters["startDate"]));
+            {
+                DateTime startDate = DateTime.Parse(parameters["startDate"]);
+                if (startDate > DateTime.MinValue && startDate < DateTime.MaxValue)
+                    FilterByStartDate(startDate);
+            }
 
             if (!String.IsNullOrEmpty(parameters["endDate"]))
-                FilterByEndDate(DateTime.Parse(parameters["endDate"]));
+            {
+                DateTime endDate = DateTime.Parse(parameters["endDate"]);
+                if (endDate > DateTime.MinValue && endDate < DateTime.MaxValue)
+                    FilterByStartDate(endDate);
+            }
 
             return this;
         }
@@ -90,6 +106,11 @@ namespace SJRAtlas.Models.Query
             return FilterBy("WaterBodyID", "=", waterbodyId);
         }
 
+        public CustomQuery FilterByAquaticSiteId(int aquaticSiteId)
+        {
+            return FilterBy("AquaticSiteID", "=", aquaticSiteId);
+        }
+
         public CustomQuery FilterByAgencyCode(string agencyCode)
         {
             return FilterBy("AgencyCd", "=", agencyCode);
@@ -97,12 +118,12 @@ namespace SJRAtlas.Models.Query
 
         public CustomQuery FilterByStartDate(DateTime startDate)
         {
-            return FilterBy("StartDate", ">=", startDate);
+            return FilterBy("Date", ">=", startDate);
         }
 
         public CustomQuery FilterByEndDate(DateTime endDate)
         {
-            return FilterBy("EndDate", "<=", endDate);
+            return FilterBy("Date", "<=", endDate);
         }
 
         protected void AddFilters(IDbCommand command)

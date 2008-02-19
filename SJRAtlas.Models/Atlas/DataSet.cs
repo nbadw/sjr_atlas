@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 using Castle.ActiveRecord;
 using Newtonsoft.Json;
+using Castle.ActiveRecord.Queries;
+using NHibernate;
 
 namespace SJRAtlas.Models.Atlas
 {
@@ -122,5 +124,17 @@ namespace SJRAtlas.Models.Atlas
         }
 
         #endregion
+
+        public static IList<DataSet> FindAllWithPresentation(string presentationType)
+        {
+            SimpleQuery<DataSet> query = new SimpleQuery<DataSet>(QueryLanguage.Sql, @"
+                SELECT  {dataset.*}
+                FROM    web_data_sets as dataset, web_presentations as presentation
+                WHERE   (dataset.id = presentation.data_set_id AND presentation.type = ?)",
+                presentationType
+            );
+            query.AddSqlReturnDefinition(typeof(DataSet), "dataset");
+            return query.Execute();
+        }
     }
 }

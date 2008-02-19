@@ -98,8 +98,8 @@ namespace SJRAtlas.Site.Controllers
         }
 
         public void Advanced(int dataSetId, string agencyCode, string drainageCode,
-            int waterbodyId, DateTime startDate, DateTime endDate)
-        {
+            int waterbodyId, int aquaticSiteId, DateTime startDate, DateTime endDate)
+        {            
             DataSet dataset = AtlasMediator.Find<DataSet>(dataSetId);
             foreach (Presentation presentation in dataset.Presentations)
             {
@@ -111,6 +111,7 @@ namespace SJRAtlas.Site.Controllers
                             "agencyCode=" + agencyCode,
                             "drainageCode=" + drainageCode,
                             "waterbodyId=" + waterbodyId,
+                            "aquaticSiteId" + aquaticSiteId,
                             "startDate=" + startDate,
                             "endDate=" + endDate
                     ));

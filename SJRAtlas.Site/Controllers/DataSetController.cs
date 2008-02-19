@@ -10,12 +10,13 @@ namespace SJRAtlas.Site.Controllers
     public class DataSetController : BaseController
     {
         [AjaxAction]
-        public void List()
+        public void List(string presentationType)
         {
-            IList<DataSet> datasets = DataSet.FindAll();
-
-            CancelLayout();
-            CancelView();
+            IList<DataSet> datasets;
+            if (!String.IsNullOrEmpty(presentationType))
+                datasets = DataSet.FindAllWithPresentation(presentationType);
+            else
+                datasets = DataSet.FindAll();
 
             Context.Response.ContentType = "text/javascript";
             RenderText(

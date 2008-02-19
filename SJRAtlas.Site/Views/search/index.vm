@@ -16,11 +16,20 @@ $FormHelper.InstallScripts()
 <!-- CONFIGURES AUTOCOMPLETE FIELDS -->
 <script type="text/javascript" language="javascript">
 Ext.onReady(function() {
+    /* COMPONENTS */
     var datasets = new DataSetComboBox();
     var waterbodies = new WaterBodyAutoComplete();
     var watersheds = new WatershedAutoComplete();
     var aquaticSites = new AquaticSiteAutoComplete();
     var agencies = new AgencyComboBox();
+    var startDate = new DateRangeField({
+        fieldLabel: 'Start Date',
+        name: 'startDate'
+    });
+    var endDate = new DateRangeField({
+        fieldLabel: 'End Date',
+        name: 'endDate'
+    });
     
     var area_of_interest_panel = new Ext.form.FieldSet({
         collapsible: true,
@@ -46,17 +55,10 @@ Ext.onReady(function() {
         collapsed: true,
         disabled: true,
         title: 'Specify a Date Range? (optional)',
-        items: [{                                  
-            xtype: 'datefield',
-            fieldLabel: 'Start Date',
-            name: 'start_date'               
-        }, {                               
-            xtype: 'datefield',
-            fieldLabel: 'End Date',
-            name: 'end_date'                                                           
-        }]         
+        items: [startDate, endDate]         
     });
     
+    /* EVENTS */
     datasets.on('select', function(combo, record, index) {
         var dataset = record.data;    
         var turn_on  = function(component) {
@@ -73,17 +75,17 @@ Ext.onReady(function() {
         dataset['IsAgencyFilterAware'] ? turn_on(agency_panel) : turn_off(agency_panel);
         dataset['IsWaterBodyFilterAware'] ? turn_on(waterbodies) : turn_off(waterbodies);
         dataset['IsWatershedFilterAware'] ? turn_on(watersheds) : turn_off(watersheds);
-        //dataset['IsAquaticSiteFilterAware'] ? waterbodies.enable() : waterbodies.disable();
+        dataset['IsAquaticSiteFilterAware'] ? turn_on(aquaticSites) : turn_off(aquaticSites);
         dataset['IsDateFilterAware'] ? turn_on(date_range_panel) : turn_off(date_range_panel);
         (dataset['IsWaterbodyFilterAware'] || dataset['IsWatershedFilterAware'] ||
             dataset['IsAquaticSiteFilterAware']) ? turn_on(area_of_interest_panel) : 
             turn_off(area_of_interest_panel);
+            
+        Ext.getCmp('btn-search').enable();
     });
         
-    var setWatershedFilter = function() {
-        var drainageCode = (!watersheds.disabled && watersheds.getWatershed()) ?
-            watersheds.getWatershed()['id'] : '';      
-        agencies.setFilter('drainageCode', drainageCode);
+    var setWatershedFilter = function() {   
+        agencies.setFilter('drainageCode', !watersheds.disabled ? watersheds.getValue() : '');
     };
     watersheds.on({
         'change': function() { setWatershedFilter(); },
@@ -91,9 +93,7 @@ Ext.onReady(function() {
     });
     
     var setWaterbodyFilter = function() {
-        var waterbodyId = (!waterbodies.disabled && waterbodies.getWaterBody()) ?
-            waterbodies.getWaterBody()['id'] : '';
-        agencies.setFilter('waterbodyId', waterbodyId);
+        agencies.setFilter('waterbodyId', !waterbodies.disabled ? waterbodies.getValue() : '');
     };
     waterbodies.on({
         'change': function() { setWaterbodyFilter(); },
@@ -101,9 +101,7 @@ Ext.onReady(function() {
     });
     
     var setAquaticSiteFilter = function() {
-        var aquaticSiteId = (!aquaticSites.disabled && aquaticSites.getAquaticSite()) ?
-            aquaticSites.getAquaticSite()['id'] : '';
-        agencies.setFilter('aquaticSiteId', aquaticSiteId);
+        agencies.setFilter('aquaticSiteId', !aquaticSites.disabled ? aquaticSites.getValue() : '');
     };
     aquaticSites.on({
         'change': function() { setAquaticSiteFilter(); },
@@ -115,25 +113,46 @@ Ext.onReady(function() {
             params: filters
         });
     });
-
+    
+//    startDate.on('change', function(dateField, newValue, oldValue) {
+//        if(dateField.isValid())
+//            endDate.setMinValue(newValue);
+//    });
+         
+    /* FORM */    
+    Ext.override(Ext.form.BasicForm, {    
+        getValues: function(asString) {
+            var values = {};
+            this.items.each(function(f) {
+                var value = f.getValue();
+                if(value instanceof Date)
+                    value = value.dateFormat("m/d/y");
+                values[f.getName()] = value;                     
+            });
+            if(asString === true) {
+                return Ext.urlEncode(values);
+            }
+            return values;
+        }
+    });
+    
     var form = new Ext.FormPanel({
         frame: true,
         title: 'Search Data Sets',
         defaultType: 'textfield',
         items: [datasets, area_of_interest_panel, agency_panel, date_range_panel],
-        onSubmit: Ext.emptyFn,
-        submit: function() {
-            this.getEl().dom.submit();
-        }       
-    }); 
-    
-    form.addButton('Search', function() {
-        form.getForm().submit();
-    });
+        buttons: [{
+            id: 'btn-search',
+            text: 'Search',
+            disabled: true,
+            handler: function() {
+                var params = form.getForm().getValues(true);
+                window.location.href = '$siteroot/search/advanced.castle?' + params;
+            }
+        }] 
+    });  
     
     form.render('advanced-search-form');
-    
-    form.getForm().getEl().dom.action = '$siteroot/search/advanced.castle';
 });
 
 DataSetComboBox = function() {
@@ -144,6 +163,7 @@ DataSetComboBox = function() {
             totalProperty: 'results',
             id: 'Id',
             autoLoad: true,
+            baseParams: { presentationType: 'TabularPresentation' },
             fields: [
                 'Id', 'Title', 'Abstract', 'Author', 'Origin', 
                 'IsWaterBodyFilterAware', 'IsWatershedFilterAware', 'IsAgencyFilterAware', 
@@ -181,7 +201,12 @@ Ext.extend(DataSetComboBox, Ext.form.ComboBox, {
             });
             return data;
         };   
-    }  
+    },
+    
+    getValue: function() {        
+        var dataset = this.findRecord(this.valueField || this.displayField, this.getRawValue());
+        return dataset ? dataset['id'] : '';    
+    }
 });
 
 WaterBodyAutoComplete = function() {
@@ -226,8 +251,9 @@ Ext.extend(WaterBodyAutoComplete, Ext.form.ComboBox, {
         };   
     },
     
-    getWaterBody: function() {
-        return this.findRecord(this.valueField || this.displayField, this.getValue());
+    getValue: function() {
+        var waterbody = this.findRecord(this.valueField || this.displayField, this.getRawValue());
+        return waterbody ? waterbody['id'] : '';
     }
 });
 
@@ -243,7 +269,6 @@ WatershedAutoComplete = function() {
         name: 'drainageCode',
         fieldLabel: 'Watershed',
         displayField: 'name',
-        valueField: 'drainage_code',
         typeAhead: false,
         loadingText: 'Searching...',
         width: 500,
@@ -272,8 +297,9 @@ Ext.extend(WatershedAutoComplete, Ext.form.ComboBox, {
         };   
     },
     
-    getWatershed: function() {
-        return this.findRecord(this.valueField || this.displayField, this.getValue());
+    getValue: function() {
+        var watershed = this.findRecord(this.valueField || this.displayField, this.getRawValue());
+        return watershed ? watershed['id'] : '';
     } 
 });
 
@@ -321,9 +347,10 @@ Ext.extend(AquaticSiteAutoComplete, Ext.form.ComboBox, {
         };   
     },
     
-    getAquaticSite: function() {
-        return this.findRecord(this.valueField || this.displayField, this.getValue());
-    }
+    getValue: function() {
+        var aquaticSite = this.findRecord(this.valueField || this.displayField, this.getRawValue());
+        return aquaticSite ? aquaticSite['id'] : '';
+    } 
 });
 
 AgencyComboBox = function() {
@@ -368,7 +395,36 @@ Ext.extend(AgencyComboBox, Ext.form.ComboBox, {
             
         this.filters[name] = val;
         return this.fireEvent('filterchange', this, this.filters);
-    }
+    },
+    
+    getValue: function() {
+        var agency = this.findRecord(this.valueField || this.displayField, this.getRawValue());
+        return agency ? agency['id'] : '';
+    } 
+});
+
+DateRangeField = function(options) {
+    DateRangeField.superclass.constructor.call( 
+        this, Ext.apply({ maxValue: Date() }, options) 
+    ); 
+};
+
+Ext.extend(DateRangeField, Ext.form.DateField, {
+//    setMinValue: function(date) {
+//        this.minValue = date;
+//        Ext.apply(this.menu.picker, { minDate: this.minValue });
+//    },
+//    
+//    setMaxValue: function(date) {
+//        this.maxValue = date;
+//        Ext.apply(this.menu.picker, { maxValue: this.minValue });    
+//    },
+//    
+//    getValue: function() {
+//        return this.formatDate(
+//            Ext.form.DateField.superclass.getValue.call(this)
+//        );
+//    }
 });
 </script>
 #end

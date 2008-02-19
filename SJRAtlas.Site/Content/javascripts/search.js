@@ -130,7 +130,7 @@ Ext.extend(MapPanel, Ext.Panel, {
     selectPlace: function(result) {
         for(var key in this.markers) {
             var marker = this.markers[key];
-            marker.hide();
+            //marker.hide();
             marker.bindInfoWindowHtml(null);
         }
         var activeMarker = this.markers[result['cgndb_key']];
@@ -162,6 +162,10 @@ Ext.extend(MapPanel, Ext.Panel, {
                 result['longitude']
             )
         );
+        var mapPanel = this;
+        GEvent.addListener(marker, "click", function() { 
+            mapPanel.selectPlace(result);
+        });
         this.map.addOverlay(marker);
         this.markers[result['cgndb_key']] = marker;
     },

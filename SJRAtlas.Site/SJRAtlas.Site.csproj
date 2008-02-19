@@ -184,15 +184,8 @@
     <Content Include="Content\images\saint-john-river-basin.jpg" />
     <Content Include="Content\images\Topographic Map.jpg" />
     <Content Include="Content\javascripts\abstract.js" />
-    <Content Include="Content\javascripts\advanced-search.js" />
     <Content Include="Content\javascripts\animation-min.js" />
     <Content Include="Content\javascripts\animation.js" />
-    <Content Include="Content\javascripts\autocomplete\assets\autocomplete-core.css" />
-    <Content Include="Content\javascripts\autocomplete\assets\skins\sam\autocomplete-skin.css" />
-    <Content Include="Content\javascripts\autocomplete\assets\skins\sam\autocomplete.css" />
-    <Content Include="Content\javascripts\autocomplete\autocomplete-debug.js" />
-    <Content Include="Content\javascripts\autocomplete\autocomplete-min.js" />
-    <Content Include="Content\javascripts\autocomplete\autocomplete.js" />
     <Content Include="Content\javascripts\connection-min.js" />
     <Content Include="Content\javascripts\connection.js" />
     <Content Include="Content\javascripts\effects-min.js" />
@@ -1638,19 +1631,6 @@
     <Content Include="Content\javascripts\prototype-1.6.0.2.js" />
     <Content Include="Content\javascripts\search.js" />
     <Content Include="Content\javascripts\tools-min.js" />
-    <Content Include="Content\javascripts\treeview\assets\skins\sam\treeview-loading.gif" />
-    <Content Include="Content\javascripts\treeview\assets\skins\sam\treeview-skin.css" />
-    <Content Include="Content\javascripts\treeview\assets\skins\sam\treeview-sprite.gif" />
-    <Content Include="Content\javascripts\treeview\assets\skins\sam\treeview.css" />
-    <Content Include="Content\javascripts\treeview\assets\sprite-menu.gif" />
-    <Content Include="Content\javascripts\treeview\assets\sprite-orig.gif" />
-    <Content Include="Content\javascripts\treeview\assets\treeview-core.css" />
-    <Content Include="Content\javascripts\treeview\assets\treeview-loading.gif" />
-    <Content Include="Content\javascripts\treeview\assets\treeview-menu.css" />
-    <Content Include="Content\javascripts\treeview\assets\treeview.css" />
-    <Content Include="Content\javascripts\treeview\treeview-debug.js" />
-    <Content Include="Content\javascripts\treeview\treeview-min.js" />
-    <Content Include="Content\javascripts\treeview\treeview.js" />
     <Content Include="Content\javascripts\utilities.js" />
     <Content Include="Content\javascripts\yahoo-dom-event.js" />
     <Content Include="Content\stylesheets\bug-fixes-ie6.css" />
@@ -1666,7 +1646,6 @@
     <Content Include="Config\facilities.config" />
     <Content Include="Config\properties.config" />
     <None Include="Content\AtlanticSalmonAnglingCatchAndEffort-1 report.rtf" />
-    <None Include="Content\javascripts\autocomplete\README" />
     <None Include="Content\javascripts\ext-2.0.1\docs\tree.json" />
     <None Include="Content\javascripts\ext-2.0.1\examples\dependency\dep-tree.json" />
     <None Include="Content\javascripts\ext-2.0.1\examples\dependency\dependency.php" />
@@ -1698,8 +1677,6 @@
     <None Include="Content\javascripts\ext-2.0.1\source\ext.jsb" />
     <None Include="Content\javascripts\ibox\demo\process.php" />
     <None Include="Content\javascripts\ibox\images\small\Thumbs.db" />
-    <None Include="Content\javascripts\treeview\assets\skins\sam\Thumbs.db" />
-    <None Include="Content\javascripts\treeview\README" />
     <None Include="Views\data_set\data_set.vm" />
     <None Include="Views\data_set\_list.vm" />
     <None Include="Views\interactive_map\_list.vm" />
@@ -1750,10 +1727,6 @@
       <Project>{43819902-84F0-47AB-B474-C1EF5E89ED8A}</Project>
       <Name>SJRAtlas.Models</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Content\javascripts\treeview\css\" />
-    <Folder Include="Content\javascripts\treeview\img\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v8.0\WebApplications\Microsoft.WebApplication.targets" />

@@ -59,8 +59,8 @@ namespace SJRAtlas.Site.Presentations
             if (!String.IsNullOrEmpty(parameters["agencyCode"]))
                 filters["agencyCode"] = parameters["agencyCode"];
 
-            if (!String.IsNullOrEmpty(parameters["aquaticSite"]))
-                filters["aquaticSite"] = parameters["aquaticSite"];
+            if (!String.IsNullOrEmpty(parameters["aquaticSiteId"]))
+                filters["aquaticSiteId"] = parameters["aquaticSiteId"];
 
             if (!String.IsNullOrEmpty(parameters["startDate"]))
                 filters["startDate"] = parameters["startDate"];
