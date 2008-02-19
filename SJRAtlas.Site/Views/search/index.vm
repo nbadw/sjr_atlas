@@ -16,156 +16,127 @@ $FormHelper.InstallScripts()
 <!-- CONFIGURES AUTOCOMPLETE FIELDS -->
 <script type="text/javascript" language="javascript">
 Ext.onReady(function() {
+    var datasets = new DataSetComboBox();
+    var waterbodies = new WaterBodyAutoComplete();
+    var watersheds = new WatershedAutoComplete();
+    var aquaticSites = new AquaticSiteAutoComplete();
+    var agencies = new AgencyComboBox();
+    
+    var area_of_interest_panel = new Ext.form.FieldSet({
+        collapsible: true,
+        titleCollapse: true,
+        collapsed: true,
+        disabled: true,
+        title: 'Specify an Area of Interest? (optional)',
+        items: [waterbodies, watersheds, aquaticSites]
+    });
+    
+    var agency_panel = new Ext.form.FieldSet({        
+        collapsible: true,
+        titleCollapse: true,
+        collapsed: true,
+        disabled: true,
+        title: 'Specify an Agency? (optional)',
+        items: [agencies]
+    });  
+    
+    var date_range_panel = new Ext.form.FieldSet({
+        collapsible: true,
+        titleCollapse: true,
+        collapsed: true,
+        disabled: true,
+        title: 'Specify a Date Range? (optional)',
+        items: [{                                  
+            xtype: 'datefield',
+            fieldLabel: 'Start Date',
+            name: 'start_date'               
+        }, {                               
+            xtype: 'datefield',
+            fieldLabel: 'End Date',
+            name: 'end_date'                                                           
+        }]         
+    });
+    
+    datasets.on('select', function(combo, record, index) {
+        var dataset = record.data;    
+        var turn_on  = function(component) {
+            component.enable();
+            if(component.expand)
+                component.expand();
+        };        
+        var turn_off = function(component) {
+            component.disable();
+            if(component.collapse)
+                component.collapse();
+        };
+        
+        dataset['IsAgencyFilterAware'] ? turn_on(agency_panel) : turn_off(agency_panel);
+        dataset['IsWaterBodyFilterAware'] ? turn_on(waterbodies) : turn_off(waterbodies);
+        dataset['IsWatershedFilterAware'] ? turn_on(watersheds) : turn_off(watersheds);
+        //dataset['IsAquaticSiteFilterAware'] ? waterbodies.enable() : waterbodies.disable();
+        dataset['IsDateFilterAware'] ? turn_on(date_range_panel) : turn_off(date_range_panel);
+        (dataset['IsWaterbodyFilterAware'] || dataset['IsWatershedFilterAware'] ||
+            dataset['IsAquaticSiteFilterAware']) ? turn_on(area_of_interest_panel) : 
+            turn_off(area_of_interest_panel);
+    });
+        
+    var setWatershedFilter = function() {
+        var drainageCode = (!watersheds.disabled && watersheds.getWatershed()) ?
+            watersheds.getWatershed()['id'] : '';      
+        agencies.setFilter('drainageCode', drainageCode);
+    };
+    watersheds.on({
+        'change': function() { setWatershedFilter(); },
+        'disable': function() { setWatershedFilter(); }       
+    });
+    
+    var setWaterbodyFilter = function() {
+        var waterbodyId = (!waterbodies.disabled && waterbodies.getWaterBody()) ?
+            waterbodies.getWaterBody()['id'] : '';
+        agencies.setFilter('waterbodyId', waterbodyId);
+    };
+    waterbodies.on({
+        'change': function() { setWaterbodyFilter(); },
+        'disable': function() { setWaterbodyFilter(); }       
+    });
+    
+    var setAquaticSiteFilter = function() {
+        var aquaticSiteId = (!aquaticSites.disabled && aquaticSites.getAquaticSite()) ?
+            aquaticSites.getAquaticSite()['id'] : '';
+        agencies.setFilter('aquaticSiteId', aquaticSiteId);
+    };
+    aquaticSites.on({
+        'change': function() { setAquaticSiteFilter(); },
+        'disable': function() { setAquaticSiteFilter(); }       
+    });
+    
+    agencies.on('filterchange', function(combo, filters) {
+        combo.store.load({
+            params: filters
+        });
+    });
+
     var form = new Ext.FormPanel({
         frame: true,
         title: 'Search Data Sets',
         defaultType: 'textfield',
-        items: [
-            new DataSetComboBox()
-        , {
-            xtype: 'fieldset',
-            checkboxToggle: true,
-            collapsed :false,
-            title: 'Specify an Agency?',
-            items: [{
-                xtype: 'combo',
-                fieldLabel: 'Agency',
-                name: 'agency',
-                width: 500,
-                displayField: 'Name',
-                editable: true,
-                forceSelection: true,
-                mode: 'local',
-                emptyText: 'Select an agency...',
-                store: new Ext.data.JsonStore({
-                    url: '$siteroot/agency/list.castle',
-                    root: 'agencies',
-                    totalProperty: 'results',
-                    id: 'AgencyCode',
-                    autoLoad: true,
-                    fields: ['AgencyCode', 'Name', 'Type']
-                }),
-                tpl: new Ext.XTemplate(
-                    '<tpl for="."><div class="agency-list-item">',
-                        '<h3>{Name}</h3>',
-                    '</div></tpl>'
-                ),
-                itemSelector: 'div.agency-list-item'                
-            }]                
-        }, { 
-            xtype: 'fieldset',
-            checkboxToggle: true,
-            collapsed: true,
-            title: 'Specify an Area of Interest?',
-            items: [new WaterBodyAutoComplete() 
-            , new WatershedAutoComplete() 
-            , { 
-                xtype: 'textfield',
-                fieldLabel: 'Aquatic Site',
-                name: 'aquatic_site' 
-            }]
-        }, {
-            xtype: 'fieldset',
-            checkboxToggle: true,
-            collapsed: true,
-            title: 'Specify a Date Range?',
-            items: [{                                  
-                xtype: 'datefield',
-                fieldLabel: 'Start Date',
-                name: 'start_date'               
-            }, {                               
-                xtype: 'datefield',
-                fieldLabel: 'End Date',
-                name: 'end_date'                                                           
-            }]         
-        }],
-        buttons: [{text: 'Search'}]
+        items: [datasets, area_of_interest_panel, agency_panel, date_range_panel],
+        onSubmit: Ext.emptyFn,
+        submit: function() {
+            this.getEl().dom.submit();
+        }       
     }); 
     
+    form.addButton('Search', function() {
+        form.getForm().submit();
+    });
+    
     form.render('advanced-search-form');
+    
+    form.getForm().getEl().dom.action = '$siteroot/search/advanced.castle';
 });
 
-WaterBodyAutoComplete = function() {
-    WaterBodyAutoComplete.superclass.constructor.call(this, {
-        store: new Ext.data.JsonStore({
-            url: '$siteroot/waterbody/autocomplete.castle',
-            root: 'waterbodies',
-            totalProperty: 'results',
-            id: 'id',
-            fields: ['id', 'name', 'alt_name']
-        }),
-        fieldLabel: 'Water Body',
-        displayField: 'title',
-        typeAhead: false,
-        loadingText: 'Searching...',
-        width: 500,
-        hideTrigger: true,
-        minChars: 2,
-        tpl: new Ext.XTemplate(
-            '<tpl for="."><div class="waterbody-search-item">',
-                '<h3>{title}</h3>',       
-                '<p>Id: {id}</p>',
-                '<tpl if="alt_name">',
-                    '<p>Also known as: {alt_name}</p>',
-                '</tpl>',
-            '</div></tpl>'
-        ),
-        itemSelector: 'div.waterbody-search-item'
-    });
-};
-
-Ext.extend(WaterBodyAutoComplete, Ext.form.ComboBox, {
-    initList : function() {
-        WaterBodyAutoComplete.superclass.initList.call(this);  
-        this.view.prepareData = function(data) {
-            Ext.apply(data, { 
-                title: (data['name'] || 'Unnamed Water Body') + '(' + data['id'] + ')',
-            });
-            return data;
-        };   
-    }  
-});
-
-WatershedAutoComplete = function() {
-    WatershedAutoComplete.superclass.constructor.call(this, {
-        store: new Ext.data.JsonStore({
-            url: '$siteroot/watershed/autocomplete.castle',
-            root: 'watersheds',
-            totalProperty: 'results',
-            id: 'drainage_code',
-            fields: ['drainage_code', 'name']
-        }),
-        fieldLabel: 'Watershed',
-        displayField: 'name',
-        typeAhead: false,
-        loadingText: 'Searching...',
-        width: 500,
-        hideTrigger: true,
-        minChars: 2,
-        pageSize: 10,
-        tpl: new Ext.XTemplate(
-            '<tpl for="."><div class="watershed-search-item">',
-                '<h3>{name}</h3>',
-                '<p>{drainage_code}</p>',
-            '</div></tpl>'
-        ),
-        itemSelector: 'div.watershed-search-item'
-    });
-}
-
-Ext.extend(WatershedAutoComplete, Ext.form.ComboBox, {
-    initList : function() {
-        WatershedAutoComplete.superclass.initList.call(this);  
-        this.view.prepareData = function(data) {
-            Ext.apply(data, { 
-                title: data['name']
-            });
-            return data;
-        };   
-    }  
-});
-
-DataSetComboBox = function(datasets) {
+DataSetComboBox = function() {
     DataSetComboBox.superclass.constructor.call(this, {
         store: new Ext.data.JsonStore({
             url: '$siteroot/dataset/list.castle',
@@ -179,9 +150,11 @@ DataSetComboBox = function(datasets) {
                 'IsAquaticSiteFilterAware', 'IsDateFilterAware'
             ]
         }),
-        fieldLabel: 'Data Set',
-        emptyText: 'Select a Data Set...', 
+        name: 'dataSetId',
+        fieldLabel: 'Select a Data Set',
+        emptyText: 'Required', 
         mode: 'local',
+        triggerAction: 'all',
         forceSelection: true,
         displayField: 'Title',
         width: 500,
@@ -210,86 +183,202 @@ Ext.extend(DataSetComboBox, Ext.form.ComboBox, {
         };   
     }  
 });
+
+WaterBodyAutoComplete = function() {
+    WaterBodyAutoComplete.superclass.constructor.call(this, {
+        store: new Ext.data.JsonStore({
+            url: '$siteroot/waterbody/autocomplete.castle',
+            root: 'waterbodies',
+            totalProperty: 'results',
+            id: 'id',
+            fields: ['id', 'name', 'alt_name']
+        }),
+        name: 'waterbodyId',
+        fieldLabel: 'Water Body',
+        displayField: 'title',
+        typeAhead: false,
+        loadingText: 'Searching...',
+        width: 500,
+        hideTrigger: true,
+        minChars: 2,
+        forceSelection: true,
+        tpl: new Ext.XTemplate(
+            '<tpl for="."><div class="waterbody-search-item">',
+                '<h3>{title}</h3>',       
+                '<p>Id: {id}</p>',
+                '<tpl if="alt_name">',
+                    '<p>Also known as: {alt_name}</p>',
+                '</tpl>',
+            '</div></tpl>'
+        ),
+        itemSelector: 'div.waterbody-search-item'
+    });
+};
+
+Ext.extend(WaterBodyAutoComplete, Ext.form.ComboBox, {
+    initList : function() {
+        WaterBodyAutoComplete.superclass.initList.call(this);  
+        this.view.prepareData = function(data) {
+            Ext.apply(data, { 
+                title: (data['name'] || 'Unnamed Water Body') + '(' + data['id'] + ')',
+            });
+            return data;
+        };   
+    },
+    
+    getWaterBody: function() {
+        return this.findRecord(this.valueField || this.displayField, this.getValue());
+    }
+});
+
+WatershedAutoComplete = function() {
+    WatershedAutoComplete.superclass.constructor.call(this, {
+        store: new Ext.data.JsonStore({
+            url: '$siteroot/watershed/autocomplete.castle',
+            root: 'watersheds',
+            totalProperty: 'results',
+            id: 'drainage_code',
+            fields: ['drainage_code', 'name']
+        }),
+        name: 'drainageCode',
+        fieldLabel: 'Watershed',
+        displayField: 'name',
+        valueField: 'drainage_code',
+        typeAhead: false,
+        loadingText: 'Searching...',
+        width: 500,
+        hideTrigger: true,
+        minChars: 2,
+        pageSize: 10,
+        forceSelection: true,
+        tpl: new Ext.XTemplate(
+            '<tpl for="."><div class="watershed-search-item">',
+                '<h3>{name}</h3>',
+                '<p>{drainage_code}</p>',
+            '</div></tpl>'
+        ),
+        itemSelector: 'div.watershed-search-item'
+    });
+}
+
+Ext.extend(WatershedAutoComplete, Ext.form.ComboBox, {
+    initList: function() {
+        WatershedAutoComplete.superclass.initList.call(this);  
+        this.view.prepareData = function(data) {
+            Ext.apply(data, { 
+                title: data['name']
+            });
+            return data;
+        };   
+    },
+    
+    getWatershed: function() {
+        return this.findRecord(this.valueField || this.displayField, this.getValue());
+    } 
+});
+
+AquaticSiteAutoComplete = function() {
+    AquaticSiteAutoComplete.superclass.constructor.call(this, {
+        store: new Ext.data.JsonStore({
+            url: '$siteroot/aquaticsite/autocomplete.castle',
+            root: 'aquaticSites',
+            totalProperty: 'results',
+            id: 'Id',
+            fields: ["Id", "OldAquaticSiteID", "RiverSystemID", "WaterBodyID", "WaterBodyName",
+                "AquaticSiteName", "AquaticSiteDesc", "HabitatDesc", "ReachNo", "StartDesc", 
+                "EndDesc", "StartRouteMeas", "EndRouteMeas", "SiteType", "SpecificSiteInd", 
+                "GeoReferencedInd", "IncorporatedInd", "CoordinateSource", "CoordinateSystem",
+                "XCoordinate", "YCoordinate", "CoordinateUnits", "Comments"
+            ]
+        }),
+        name: 'aquaticSiteId',
+        fieldLabel: 'Aquatic Site',
+        displayField: 'AquaticSiteName',
+        typeAhead: false,
+        loadingText: 'Searching...',
+        width: 500,
+        hideTrigger: true,
+        minChars: 2,
+        pageSize: 10,
+        forceSelection: true,
+        tpl: new Ext.XTemplate(
+            '<tpl for="."><div class="aquaticsite-search-item">',
+                '<h3>{title}</h3>',
+            '</div></tpl>'
+        ),
+        itemSelector: 'div.aquaticsite-search-item'
+    });
+}
+
+Ext.extend(AquaticSiteAutoComplete, Ext.form.ComboBox, {
+    initList : function() {
+        AquaticSiteAutoComplete.superclass.initList.call(this);  
+        this.view.prepareData = function(data) {
+            Ext.apply(data, { 
+                title: '#' + data['Id'] + ': ' + data['AquaticSiteName']
+            });
+            return data;
+        };   
+    },
+    
+    getAquaticSite: function() {
+        return this.findRecord(this.valueField || this.displayField, this.getValue());
+    }
+});
+
+AgencyComboBox = function() {
+    AgencyComboBox.superclass.constructor.call(this, {     
+        fieldLabel: 'Agency',
+        name: 'agency',
+        width: 500,
+        displayField: 'Name',
+        editable: true,
+        forceSelection: true,
+        triggerAction: 'all',
+        mode: 'local',
+        emptyText: 'Select an agency...',
+        store: new Ext.data.JsonStore({
+            url: '$siteroot/agency/list.castle',
+            root: 'agencies',
+            totalProperty: 'results',
+            id: 'AgencyCode',
+            autoLoad: true,
+            fields: ['AgencyCode', 'Name', 'Type']
+        }),
+        tpl: new Ext.XTemplate(
+            '<tpl for="."><div class="agency-list-item">',
+                '<h3>{Name}</h3>',
+            '</div></tpl>'
+        ),
+        itemSelector: 'div.agency-list-item'   
+    });
+    
+    this.filters = {
+        drainageCode: '',
+        waterbodyId: '',
+        aquaticSiteId: ''
+    };
+};
+
+Ext.extend(AgencyComboBox, Ext.form.ComboBox, {    
+    setFilter: function(name, val) {
+        var oldVal = this.filters[name];
+        if(val == oldVal)
+            return;
+            
+        this.filters[name] = val;
+        return this.fireEvent('filterchange', this, this.filters);
+    }
+});
 </script>
 #end
 
 <div id="content" class="clearfix">	
 	<div class="innerwrap">
 		<div class="textbox">
-		    <div id="advanced-search-form">
-		    
-		    </div>
 		
-		    	<!--	
-		    $Form.FormTag("%{action='submitadvanced', immediate='true', useLabels='true'}")
-		    
-		    
-		    #if($flash.summary)
-		    <br />
-		        #foreach($errormessage in $summary.ErrorMessages)
-		            $errormessage<br />
-		        #end
-		    <br />
-		    #end
-		    
-		    <div id="dataset" class="step">
-		        <span class="step-num">Step #1 of 4.</span>
-		        $Form.LabelFor("options.dataset", 'Select a Data Set:')
-		        $Form.Select("options.dataset", $datasets, "%{value='id', text='name', firstoption='(Required)' firstoptionvalue=''}")
-		    </div>
-		    
-		    <div id="aoi-toggles" style="xdisplay: none;" class="step">
-		        <span class="step-num">Step #2 of 4.</span>
-		        Is your area of interest:
-		        <a href="javascript:void(0)" id="aoi-watershed" class="aoi-toggle" onclick="toggle_area_of_interest('watershed');">Watershed Area</a>, 
-		        <a href="javascript:void(0)" id="aoi-waterbody" class="aoi-toggle" onclick="toggle_area_of_interest('waterbody');">Lake or Stream</a>, 
-		        a <a href="javascript:void(0)" id="aoi-aquatic-site" class="aoi-toggle" onclick="toggle_area_of_interest('aquatic-site');">Specific Site</a>,
-		        or <a href="javascript:void(0)" id="aoi-all" class="aoi-toggle" onclick="toggle_area_of_interest('all');">All</a>?
-		    </div>
-		    
-		    <div id="all" class="area-of-interest" style="display: none;">
-		        <p>All Areas Will Be Searched</p>
-		    </div>
-		    
-		    <div id="aquatic-site" class="area-of-interest" style="display: none;">
-		        $Form.LabelFor("options.aquaticsiteid", "Aquatic Site ID:")
-		        $Form.TextField("options.aquaticsiteid")
-		    </div>
-		    		
-		    <div id="waterbody" class="area-of-interest" style="xdisplay: none;">    
-		        <div id="waterbody-autocomplete">
-		            $Form.LabelFor("options.waterbody", 'Water Body:')
-		            $Form.TextField("options.waterbody")
-		        </div>
-		    </div>
-		     
-		    <div id="watershed" class="area-of-interest" style="xdisplay: none;"> 
-        		<div id="watershed-autocomplete">
-	                $Form.LabelFor("options.watershed", 'Watershed:')
-	                $Form.TextField("options.watershed")
-	            </div>
-		    </div>
-		    <div style="margin-bottom: 2em;"></div>
-		    
-		    <div id="agency" style="xdisplay: none;" class="step">
-		        <span class="step-num">Step #3 of 4.</span>     		    
-		        $Form.LabelFor("options.agency", "Select an Agency (optional):")
-		        $Form.Select("options.agency", $agencies, "%{firstoption='All'}")
-		    </div>
-		    
-		    <div id="date-range" style="xdisplay: none;" class="step">
-		        <span class="step-num">Step #4 of 4.</span>		    
-		        $Form.LabelFor("options.daterange", "Specify a Date Range (optional):")
-		        $Form.TextField("options.daterange")
-		    </div>
-		    
-		    <div id="do-search" style="xdisplay: none;">
-		        $Form.Submit("Search")	    
-		    </div>
-		    
-		    $Form.EndFormTag()
-		    -->
-		               
+		    <div id="advanced-search-form"></div>	
+		    	               
         </div>
 	</div>
 </div>

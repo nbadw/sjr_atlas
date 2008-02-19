@@ -119,6 +119,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
@@ -145,7 +146,9 @@
     <Compile Include="Components\WaterBodyInfoComponent.cs" />
     <Compile Include="Components\WatershedInfoComponent.cs" />
     <Compile Include="Controllers\AgencyController.cs" />
+    <Compile Include="Controllers\AquaticSiteController.cs" />
     <Compile Include="Controllers\DataSetController.cs" />
+    <Compile Include="Controllers\MetadataController.cs" />
     <Compile Include="Controllers\PresentationController.cs" />
     <Compile Include="Controllers\FeedbackController.cs" />
     <Compile Include="Controllers\PlaceController.cs" />
@@ -1712,6 +1715,7 @@
     <None Include="Views\search\search-result.vm" />
     <None Include="Views\shared\basic_map.vm" />
     <None Include="Views\shared\basic_info.vm" />
+    <None Include="Views\shared\404.vm" />
     <None Include="Views\site\about.vm" />
     <None Include="Views\site\forms.vm" />
     <None Include="Views\site\reports.vm" />

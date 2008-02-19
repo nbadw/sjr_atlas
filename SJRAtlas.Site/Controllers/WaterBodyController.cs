@@ -34,7 +34,7 @@ namespace SJRAtlas.Site.Controllers
             string idQuery = String.Format("{0}%", query);
             string textQuery = String.Format("%{0}%", query);                        
 
-            SimpleQuery<WaterBody> q = new SimpleQuery<WaterBody>("from WaterBody wb where wb.Name like ? or wb.Id like ? or wb.Abbreviation like ?", textQuery, idQuery, textQuery);            
+            SimpleQuery<WaterBody> q = new SimpleQuery<WaterBody>("from WaterBody wb where wb.Name like ? or wb.Id like ? or wb.Abbreviation like ?", textQuery, idQuery, textQuery);                        
             WaterBody[] results = q.Execute();
 
             List<WaterBodyAttributes> waterbodies = new List<WaterBodyAttributes>(results.Length);

@@ -33,5 +33,11 @@ namespace SJRAtlas.Models.Query
         {
             get { return value; }
         }
+
+        public override string ToString()
+        {
+            return String.Format("QueryFilter - [Column: {0}, Comparison: {1}, Value: {2}]",
+                column, comparison, value);
+        }
     }
 }

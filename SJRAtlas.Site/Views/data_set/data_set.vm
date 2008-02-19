@@ -4,5 +4,6 @@
   <p class="origin">Origin: $!{origin}</p>  
   <div class="presentations">
     $Atlas.PresentationLinks($presentations, $filtered_by)
+    $Atlas.MetadataLink($dataset)
   </div>
 </div>

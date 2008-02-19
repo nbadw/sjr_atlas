@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<model dslVersion="1.0.0.0" Id="055ea857-3ca8-4142-babf-4a0e98aa1a51" xmlns="http://schemas.microsoft.com/dsltools/ActiveWriter">
+  <additionalImports>AAEAAAD/////AQAAAAAAAAAMAgAAAF1BbHRpbm9yZW4uQWN0aXZlV3JpdGVyLkRzbCwgVmVyc2lvbj0xLjAuMC4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPTkwNTE0MTM5NmRkYjA3OTkEAQAAAKEBU3lzdGVtLkNvbGxlY3Rpb25zLkdlbmVyaWMuTGlzdGAxW1tBbHRpbm9yZW4uQWN0aXZlV3JpdGVyLkltcG9ydCwgQWx0aW5vcmVuLkFjdGl2ZVdyaXRlci5Ec2wsIFZlcnNpb249MS4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj05MDUxNDEzOTZkZGIwNzk5XV0DAAAABl9pdGVtcwVfc2l6ZQhfdmVyc2lvbgQAAB9BbHRpbm9yZW4uQWN0aXZlV3JpdGVyLkltcG9ydFtdAgAAAAgICQMAAAAAAAAAAAAAAAcDAAAAAAEAAAAAAAAABB1BbHRpbm9yZW4uQWN0aXZlV3JpdGVyLkltcG9ydAIAAAAL</additionalImports>
+  <classes>
+    <modelClass name="AquaticSite" schema="dbo" table="tblAquaticSite">
+      <properties>
+        <modelProperty Id="80c2c879-74e2-4e01-9728-8de06f01b03d" name="Id" column="AquaticSiteID" columnType="Int32" length="0" notNull="true" keyType="PrimaryKey" />
+        <modelProperty Id="6d124267-8e3a-4d7c-b069-4916604aeca6" name="OldAquaticSiteID" column="oldAquaticSiteID" columnType="Int32" length="0" />
+        <modelProperty Id="4f75e628-3ae8-4b0f-8d0d-b4757fabb38e" name="RiverSystemID" column="RiverSystemID" columnType="Int16" length="0" />
+        <modelProperty Id="402abc26-14cc-40ff-95fa-2003c7e84770" name="WaterBodyID" column="WaterBodyID" columnType="Int32" length="0" />
+        <modelProperty Id="47ef567b-5113-4252-8b8b-91a152fe244c" name="WaterBodyName" column="WaterBodyName" length="0" />
+        <modelProperty Id="ce59c509-0600-48b5-813c-03ea48067267" name="AquaticSiteName" column="AquaticSiteName" length="0" />
+        <modelProperty Id="f6701bd9-c461-4742-a4ce-b686f8fb4ce6" name="AquaticSiteDesc" column="AquaticSiteDesc" length="0" />
+        <modelProperty Id="e483c908-1733-4e12-b43c-70c5e870c039" name="HabitatDesc" column="HabitatDesc" length="0" />
+        <modelProperty Id="aefd6a1a-46b7-4590-b649-751c5a528b89" name="ReachNo" column="ReachNo" columnType="Int32" length="0" />
+        <modelProperty Id="8edef103-9c08-484c-9280-b118a280d144" name="StartDesc" column="StartDesc" length="0" />
+        <modelProperty Id="351980e7-6a35-415d-8f4d-5757e3b502af" name="EndDesc" column="EndDesc" length="0" />
+        <modelProperty Id="d0fcb0e1-0f49-4356-b66a-8f54907943be" name="StartRouteMeas" column="StartRouteMeas" columnType="Double" length="0" />
+        <modelProperty Id="9628e53f-af71-44f6-abf2-02c1985fcc09" name="EndRouteMeas" column="EndRouteMeas" columnType="Double" length="0" />
+        <modelProperty Id="8cb039e8-589e-412e-a794-240ebce8ebbe" name="SiteType" column="SiteType" length="0" />
+        <modelProperty Id="240b2b17-3873-48aa-a6d6-ad508d22657a" name="SpecificSiteInd" column="SpecificSiteInd" length="0" />
+        <modelProperty Id="6eb5750a-055b-4d15-84d1-2bf86fe6a2c4" name="GeoReferencedInd" column="GeoReferencedInd" length="0" />
+        <modelProperty Id="c58f1206-c53a-41fc-af0b-ae3c23748378" name="IncorporatedInd" column="IncorporatedInd" columnType="Boolean" length="0" />
+        <modelProperty Id="2961ad3c-d863-4322-8872-7f4a8a861d69" name="CoordinateSource" column="CoordinateSource" length="0" />
+        <modelProperty Id="e57c86f7-09da-46c5-b557-32423f7505d1" name="CoordinateSystem" column="CoordinateSystem" length="0" />
+        <modelProperty Id="160bc96b-8226-4922-9319-65ad84c73b79" name="XCoordinate" column="XCoordinate" length="0" />
+        <modelProperty Id="f1045514-7678-45bb-bc96-e30bda9c0f3d" name="YCoordinate" column="YCoordinate" length="0" />
+        <modelProperty Id="30d411b1-ad6b-4764-90e9-25767f8ecc10" name="CoordinateUnits" column="CoordinateUnits" length="0" />
+        <modelProperty Id="a33cf49b-34a0-4fbb-bd6e-a347cfd6e33b" name="Comments" column="Comments" length="0" />
+      </properties>
+    </modelClass>
+  </classes>
+</model>

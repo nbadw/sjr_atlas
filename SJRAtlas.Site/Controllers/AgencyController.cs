@@ -10,28 +10,13 @@ namespace SJRAtlas.Site.Controllers
     public class AgencyController : BaseController
     {
         [AjaxAction]
-        public void List(string drainageCode, string waterbodyId, string aquaticSiteId)
+        public void List(string drainageCode, int waterbodyId, int aquaticSiteId)
         {
-            IList<Agency> agencies;
-            if (!String.IsNullOrEmpty(drainageCode))
-            {
-                agencies = Agency.FindAllByDrainageCode(drainageCode);
-            }
-            else if (!String.IsNullOrEmpty(waterbodyId))
-            {
-                agencies = Agency.FindAllByWaterBodyId(waterbodyId);
-            }
-            else if (!String.IsNullOrEmpty(aquaticSiteId))
-            {
-                agencies = Agency.FindAllByAquaticSiteId(aquaticSiteId);
-            }
-            else
-            {
-                agencies = Agency.FindAll();
-            }
+            IList<Agency> agencies = Agency.FindAllOrByShortListQuery(
+                drainageCode,
+                waterbodyId,
+                aquaticSiteId);
 
-            CancelLayout();
-            CancelView();
             Context.Response.ContentType = "text/javascript";
             RenderText(String.Format("{{ results: {0}, agencies: {1} }}", agencies.Count,
                 JavaScriptConvert.SerializeObject(agencies)));

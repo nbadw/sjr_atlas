@@ -130,55 +130,62 @@ namespace SJRAtlas.Models.Query
             command.CommandText = filteredSql.ToString();
         }
 
+        private string InspectFilters()
+        {
+            StringBuilder builder = new StringBuilder("[");
+            for(int i=0; i < filters.Count; i++)
+            {
+                builder.Append(filters[i].ToString());
+                if (i < filters.Count - 1)
+                    builder.Append(", ");
+            }
+            builder.Append("]");
+            return builder.ToString();
+        }
+
         #endregion
 
         public QueryResults Execute()
         {
             Logger.Info("Executing Custom Query");
             Logger.Debug(String.Format("Start Row: {0}, Limit: {1}", offset, limit));
+            Logger.Debug(String.Format("Filters: {0}", InspectFilters()));
             QueryResults results = new QueryResults();
             ISession session = ActiveRecordMediator.GetSessionFactoryHolder().CreateSession(typeof(ActiveRecordBase));
             Logger.Info("Session Acquired");
 
             try
             {
-                using (ITransaction transaction = session.BeginTransaction())
+                results.TotalRowCount = CountRows(session);
+                IDbCommand select = (offset > 0) ? SelectWithOffset(session) : Select(session);
+
+                using (IDataReader reader = select.ExecuteReader())
                 {
-                    results.TotalRowCount = CountRows(session, transaction);
-
-                    IDbCommand select = (offset > 0) ? SelectWithOffset(session, transaction) : Select(session, transaction);
-
-                    using (IDataReader reader = select.ExecuteReader())
+                    string[] columns = new string[reader.FieldCount];
+                    for (int i = 0; i < columns.Length; i++)
                     {
-                        string[] columns = new string[reader.FieldCount];
-                        for (int i = 0; i < columns.Length; i++)
-                        {
-                            columns[i] = reader.GetName(i);
-                        }
-
-                        List<object[]> rows = new List<object[]>();
-                        while (reader.Read())
-                        {
-                            object[] row = new object[reader.FieldCount];
-                            for (int i = 0; i < row.Length; i++)
-                            {
-                                object val = reader.GetValue(i);
-                                row[i] = !(val is DBNull) ? val : null;
-                            }
-                            rows.Add(row);
-                        }
-
-                        results.Columns = columns;
-                        results.Rows = rows;
+                        columns[i] = reader.GetName(i);
                     }
-                    Logger.Debug(results.ToString());
 
-                    if(offset > 0)
-                        RemoveTemporaryTable(session, transaction);
+                    List<object[]> rows = new List<object[]>();
+                    while (reader.Read())
+                    {
+                        object[] row = new object[reader.FieldCount];
+                        for (int i = 0; i < row.Length; i++)
+                        {
+                            object val = reader.GetValue(i);
+                            row[i] = !(val is DBNull) ? val : null;
+                        }
+                        rows.Add(row);
+                    }
+
+                    results.Columns = columns;
+                    results.Rows = rows;
                 }
+                Logger.Debug(results.ToString());
             }
             catch (Exception e)
-            {
+            {                
                 Logger.Error("Could not complete custom query", e);
             }
             finally
@@ -190,17 +197,16 @@ namespace SJRAtlas.Models.Query
             return results;
         }
 
-        private int CountRows(ISession session, ITransaction transaction)
+        private int CountRows(ISession session)
         {
             IDbCommand count = session.Connection.CreateCommand();
             count.CommandText = String.Format("SELECT count(*) AS count_all FROM ({0}) as derived_table", query);
             AddFilters(count);
             Logger.Debug(count.CommandText);
-            transaction.Enlist(count);
             return ((int)count.ExecuteScalar());
         }
 
-        private IDbCommand Select(ISession session, ITransaction transaction)
+        private IDbCommand Select(ISession session)
         {
             IDbCommand select = session.Connection.CreateCommand();
             select.CommandText = String.Format(
@@ -210,55 +216,40 @@ namespace SJRAtlas.Models.Query
             );
             AddFilters(select);
             Logger.Debug(select.CommandText);
-            transaction.Enlist(select);
             return select;
         }
 
-        private IDbCommand SelectWithOffset(ISession session, ITransaction transaction)
+        private IDbCommand SelectWithOffset(ISession session)
         {
-            IDbCommand tempTable = session.Connection.CreateCommand();
-            tempTable.CommandText = String.Format(
+            IDbCommand select = session.Connection.CreateCommand();
+            select.CommandText = String.Format(
                 "SELECT TOP {0} * INTO #limit_offset_temp FROM ({1}) as derived_table",
                 limit + offset,
                 query
             );
-            AddFilters(tempTable);
-            Logger.Debug(tempTable.CommandText);
-            transaction.Enlist(tempTable);
-            tempTable.ExecuteNonQuery();
-
-            IDbCommand setOffset = session.Connection.CreateCommand();
-            setOffset.CommandText = "SET ROWCOUNT " + offset.ToString();
-            Logger.Debug(setOffset.CommandText);
-            transaction.Enlist(setOffset);
-            setOffset.ExecuteNonQuery();
-
-            IDbCommand deleteFrom = session.Connection.CreateCommand();
-            deleteFrom.CommandText = "DELETE FROM #limit_offset_temp";
-            Logger.Debug(deleteFrom.CommandText);
-            transaction.Enlist(deleteFrom);
-            deleteFrom.ExecuteNonQuery();
-
-            IDbCommand select = session.Connection.CreateCommand();
-            select.CommandText = "SELECT * FROM #limit_offset_temp";
+            AddFilters(select);
             Logger.Debug(select.CommandText);
-            transaction.Enlist(select);
+
+            StringBuilder selectBuilder = new StringBuilder(select.CommandText);
+            selectBuilder.Append(";\n");
+
+            selectBuilder.AppendFormat("SET ROWCOUNT {0};\n", offset);
+            if (Logger.IsDebugEnabled) Logger.Debug("SET ROWCOUNT {0}", offset);
+
+            selectBuilder.Append("DELETE FROM #limit_offset_temp;\n");
+            if (Logger.IsDebugEnabled) Logger.Debug("DELETE FROM #limit_offset_temp");
+
+            selectBuilder.Append("SELECT * FROM #limit_offset_temp;\n");
+            if (Logger.IsDebugEnabled) Logger.Debug("SELECT * FROM #limit_offset_temp");
+
+            selectBuilder.Append("SET ROWCOUNT 0;\n");
+            if (Logger.IsDebugEnabled) Logger.Debug("SET ROWCOUNT 0");
+
+            selectBuilder.Append("DROP TABLE #limit_offset_temp;");
+            if (Logger.IsDebugEnabled) Logger.Debug("DROP TABLE #limit_offset_temp");
+
+            select.CommandText = selectBuilder.ToString();
             return select;
-        }
-
-        private void RemoveTemporaryTable(ISession session, ITransaction transaction)
-        {
-            IDbCommand setRowCount = session.Connection.CreateCommand();
-            setRowCount.CommandText = "SET ROWCOUNT 0";
-            Logger.Debug(setRowCount.CommandText);
-            transaction.Enlist(setRowCount);
-            setRowCount.ExecuteNonQuery();
-
-            IDbCommand dropTemp = session.Connection.CreateCommand();
-            dropTemp.CommandText = "DROP TABLE #limit_offset_temp";
-            Logger.Debug(dropTemp.CommandText);
-            transaction.Enlist(dropTemp);
-            dropTemp.ExecuteNonQuery();
         }
     }
 }

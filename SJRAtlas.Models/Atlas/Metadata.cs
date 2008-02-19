@@ -39,7 +39,8 @@ namespace SJRAtlas.Models.Atlas
         
         private IMetadataAware owner;
 
-        [Any(typeof(int), MetaType = typeof(string), TypeColumn = "metadata_aware_type", IdColumn = "metadata_aware_id", Cascade = CascadeEnum.SaveUpdate)]
+        [Any(typeof(int), MetaType = typeof(string), TypeColumn = "metadata_aware_type", 
+            IdColumn = "metadata_aware_id", Cascade = CascadeEnum.SaveUpdate)]
         [Any.MetaValue("Publication", typeof(Publication))]
         [Any.MetaValue("PublishedMap", typeof(PublishedMap))]
         [Any.MetaValue("PublishedReport", typeof(PublishedReport))]
@@ -56,6 +57,28 @@ namespace SJRAtlas.Models.Atlas
             DetachedCriteria criteria = DetachedCriteria.For<Metadata>();
             criteria.Add(Expression.Eq("Owner", owner));
             return ActiveRecordMediator<Metadata>.FindOne(criteria);
+        }
+
+        public static Metadata FindByOwner(int ownerId, string type)
+        {
+            NHibernate.ISession session = ActiveRecordMediator
+                .GetSessionFactoryHolder()
+                .CreateSession(typeof(Metadata));
+
+            try
+            {
+                return session.CreateSQLQuery(
+                        "SELECT * FROM web_metadata WHERE " + 
+                        "metadata_aware_id = " + ownerId.ToString() +
+                        " AND metadata_aware_type = '" + type + "'"
+                    )
+                    .AddEntity(typeof(Metadata))
+                    .UniqueResult<Metadata>();
+            }
+            finally
+            {
+                ActiveRecordMediator.GetSessionFactoryHolder().ReleaseSession(session);
+            }
         }
     }
 }

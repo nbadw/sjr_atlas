@@ -1,1 +1,12 @@
- 
+﻿<?xml version="1.0" encoding="utf-8"?>
+<activeRecordMapping dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" isCompleteView="false" name="DataWarehouse">
+  <modelMoniker Id="055ea857-3ca8-4142-babf-4a0e98aa1a51" />
+  <nestedChildShapes>
+    <classShape Id="f1ecd205-81d6-49c8-a986-7db9e84b0978" absoluteBounds="0.5, 0.5, 2.875, 4.4974471028645828">
+      <modelClassMoniker name="/055ea857-3ca8-4142-babf-4a0e98aa1a51/AquaticSite" />
+      <nestedChildShapes>
+        <elementListCompartment Id="8f1b9825-cf25-4c0f-8ee4-46f718752721" absoluteBounds="0.515, 0.91000000000000014, 2.8449999999999998, 3.987447102864583" name="Properties" title="Properties" titleFillColor="LightGray" compartmentFillColor="White" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
+</activeRecordMapping>

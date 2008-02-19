@@ -75,6 +75,7 @@
     <Compile Include="Atlas\Metadata.cs" />
     <Compile Include="Atlas\Place.cs" />
     <Compile Include="Atlas\Presentation.cs" />
+    <Compile Include="DataWarehouse\AquaticSite.cs" />
     <Compile Include="DataWarehouse\DataWarehouse.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

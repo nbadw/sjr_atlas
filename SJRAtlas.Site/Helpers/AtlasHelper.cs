@@ -124,5 +124,17 @@ namespace SJRAtlas.Site.Helpers
         }
 
         #endregion
+
+        public string MetadataLink(DataSet dataset)
+        {
+            return String.Format("<span class=\"metadata-link\">{0}</span>", Link(
+                "View Metadata", 
+                DictHelper.Create(
+                    "controller=metadata",
+                    "action=view",
+                    "querystring=owner=" + dataset.Id.ToString() + 
+                    "&type=" + dataset.GetType().Name
+            )));
+        }
     }
 }
