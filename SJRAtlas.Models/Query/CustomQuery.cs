@@ -72,14 +72,14 @@ namespace SJRAtlas.Models.Query
             {
                 DateTime startDate = DateTime.Parse(parameters["startDate"]);
                 if (startDate > DateTime.MinValue && startDate < DateTime.MaxValue)
-                    FilterByStartDate(startDate);
+                    FilterByStartDate(startDate);                
             }
 
             if (!String.IsNullOrEmpty(parameters["endDate"]))
             {
                 DateTime endDate = DateTime.Parse(parameters["endDate"]);
                 if (endDate > DateTime.MinValue && endDate < DateTime.MaxValue)
-                    FilterByStartDate(endDate);
+                    FilterByEndDate(endDate);
             }
 
             return this;
@@ -118,12 +118,12 @@ namespace SJRAtlas.Models.Query
 
         public CustomQuery FilterByStartDate(DateTime startDate)
         {
-            return FilterBy("Date", ">=", startDate);
+            return FilterBy("StartDate", ">=", startDate.ToString("yyyy/MM/dd"));
         }
 
         public CustomQuery FilterByEndDate(DateTime endDate)
         {
-            return FilterBy("Date", "<=", endDate);
+            return FilterBy("EndDate", "<=", endDate.ToString("yyyy/MM/dd"));
         }
 
         protected void AddFilters(IDbCommand command)

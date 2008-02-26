@@ -1,7 +1,8 @@
 #capturefor(headline)
-<h1>Advanced Search</h1>
-<p>This is an advanced search option for querying tabular data. You will be able to download the tabular data and its associated spatial data if available. </p>
-<p>Enter search criteria in the form below:</p>
+<h1 class="title">Advanced Search</h1>
+<p>This is an advanced search option for querying tabular data. You will be able to download the tabular data and its associated spatial data if available.</p>
+<a class="help" href="#">Help</a>
+<p>Enter search criteria in the form below.</p>
 #end
 
 #capturefor(header)
@@ -12,6 +13,10 @@ $FormHelper.InstallScripts()
 <link rel="stylesheet" type="text/css" href="$siteroot/Content/javascripts/ext-2.0.1/resources/css/ext-all.css" />
 <script src="$siteroot/Content/javascripts/ext-2.0.1/adapter/prototype/ext-prototype-adapter.js" type="text/javascript" language="javascript"></script>
 <script src="$siteroot/Content/javascripts/ext-2.0.1/ext-all-debug.js" type="text/javascript" language="javascript"></script>
+#end
+
+<div id="advanced-search-form"></div>	
+
 
 <!-- CONFIGURES AUTOCOMPLETE FIELDS -->
 <script type="text/javascript" language="javascript">
@@ -427,14 +432,3 @@ Ext.extend(DateRangeField, Ext.form.DateField, {
 //    }
 });
 </script>
-#end
-
-<div id="content" class="clearfix">	
-	<div class="innerwrap">
-		<div class="textbox">
-		
-		    <div id="advanced-search-form"></div>	
-		    	               
-        </div>
-	</div>
-</div>

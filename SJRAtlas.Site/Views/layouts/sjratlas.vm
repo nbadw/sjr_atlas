@@ -8,6 +8,7 @@
 
 <link rel="stylesheet" href="$siteroot/Content/stylesheets/reset-fonts-grids.css" type="text/css" media="screen" />
 <link rel="stylesheet" href="$siteroot/Content/stylesheets/typography.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="$siteroot/Content/javascripts/ibox/ibox.css" type="text/css" media="screen" />
 <link rel="stylesheet" href="$siteroot/Content/stylesheets/style.css" type="text/css" media="screen" />
 
 <!-- CONDITIONAL COMMENTS (FOR MICROSOFT BROWSERS) -->
@@ -29,81 +30,68 @@ $Scriptaculous.InstallScripts()
 $!{header}
 
 </head>
-<body id="$!{controller.Name}">
-
-<div id="header">
-	<div class="innerwrap yui-gc">
-        <div id="title" class="yui-u first">
+<body id="$!{controller.Name}" class="$!{controller.Action}">
+    <div id="container">
+    
+        <div id="header">
             <a href="$siteroot/"><span class="fir"></span></a>
-		    <h1><a href="$siteroot/">Saint John River Atlas</a></h1>	
-		    <p><a id="leave-feedback" rel="ibox&type=3&height=438" href="$siteroot/feedback/feedbackform.rails">Leave Feedback</a></p>
+            <h1 class="title"><a href="$siteroot/" title="Home">Saint John River Atlas</a></h1>	
+            <h2 class="sponsor"><a href="http://www.unb.ca/cri/" title="Canadian Rivers Institute">A Project by the Canadian Rivers Institute</a></h2>	   
         </div>
-        <div class="yui-u"> 	        
-            <div id="cri">			
-		        <span class="fir"></span>
-		        <h2>Canadian Rivers Institute</h2>
-	        </div>
+             
+        <div id="feedback">          
+            <a id="leave-feedback" rel="ibox&type=3&height=438" href="$siteroot/feedback/feedbackform.rails">Leave Feedback</a>
         </div>
-	</div>
-</div>
-
-<div id="navigation">	
-	<div class="innerwrap yui-gc">
-		<div id="tabs" class="yui-u first">
-			<ul>			
-			    <li id="home-tab">$Url.Link('Home', "%{controller='site', action='index'}")</li>
-				<li id="maps-tab">$Url.Link('Maps', "%{controller='site', action='maps'}")</li>
-                <li id="search-tab">$Url.Link('Search', "%{controller='search', action='index'}")</li>
-                <li id="forms-tab">$Url.Link('Forms', "%{controller='site', action='forms'}")</li>                
-                <li id="reports-tab">$Url.Link('Reports', "%{controller='site', action='reports'}")</li> 
-                <li id="about-tab">$Url.Link('About', "%{controller='site', action='about'}")</li>                
-			</ul>
-		</div>
-		<div id="quick-search" class="yui-u">
-			<div class="adv-link">
-			    $Url.Link('Advanced Search', "%{controller='search', action='index'}")
-			</div>
-			$Form.FormTag("%{controller='search', action='quick', id='quick-search-form'}")			
-				<div id="search-box">
-				    <label id="lbl_search" for="txt_search">Quick Search:</label>
-				    <input id="txt_search" name="q" type="text"/>
-				</div>
-				<div class="btn">
-				    <input id="btn_search" name="submit" type="submit"/>
-				</div>
-			</form>
-		</div>
-	</div>
-</div>
-
-<div id="headline">
-	<div class="innerwrap">
-		<div class="textbox">			    
-	        <div id="breadcrumbs">
-	            Location:                      
+        
+        <div id="navigation">
+	        <div id="tabs">
+		        <ul>			
+		            <li id="home-tab">$Url.Link('Home', "%{controller='site', action='index'}")</li>
+			        <li id="maps-tab">$Url.Link('Maps', "%{controller='site', action='maps'}")</li>
+                    <li id="search-tab">$Url.Link('Search', "%{controller='search', action='index'}")</li>
+                    <li id="forms-tab">$Url.Link('Forms', "%{controller='site', action='forms'}")</li>                
+                    <li id="reports-tab">$Url.Link('Reports', "%{controller='site', action='reports'}")</li> 
+                    <li id="about-tab">$Url.Link('About', "%{controller='site', action='about'}")</li>                
+		        </ul>
 	        </div>
-	        <div style="clear: both;"></div>
-	    	    
-		    $!{headline}
-		</div>
-	</div>
-</div>
-
-$childContent
-
-<div id="footer">
-	<div class="xinnerwrap">	
-		<p id="copyright">Saint John River Atlas: Release 1</p>
-        <p id="timestamp">Updated: 11/16/07</p>
-	    <table>
-	        <tr>
-	            <td><img src="$siteroot/Content/images/geoconnections.png" /></td>
-	            <td><img src="$siteroot/Content/images/NBWTF(LR).gif" /></td>
-	            <td><img src="$siteroot/Content/images/bwmcc.gif" /></td>
-	        </tr>
-	    </table>
-	</div>
-</div>
-
+	        <div id="quick-search">
+		        <div class="adv-link">
+		            $Url.Link('Advanced Search', "%{controller='search', action='index'}")
+		        </div>
+		        $Form.FormTag("%{controller='search', action='quick', id='quick-search-form'}")			
+			        <div id="search-box">
+			            <label id="lbl_search" for="txt_search">Quick Search:</label>
+			            <input id="txt_search" name="q" type="text"/>
+			        </div>
+			        <div class="btn">
+			            <input id="btn_search" name="submit" type="submit"/>
+			        </div>
+		        </form>
+	        </div>			    
+            <div id="breadcrumbs">
+                <span class="location">Location:</span><a href="#">URL</a>                     
+            </div>
+        </div>
+        
+        <div id="main">
+            <div id="headline">   	    	    
+	            $!{headline}	            
+	            <div style="clear: both"></div>
+	        </div>
+            
+            <div id="content">
+                $!{childContent}                
+                <div style="clear: both"></div>
+            </div>
+        </div>
+        
+        <div id="footer">
+            <div class="textbox">
+	            <p class="release">Saint John River Atlas: Release 2</p>
+	            <p class="copyright">Copyright &copy; 2008</p>
+	        </div>
+        </div>   
+          
+    </div>
 </body>
 </html>

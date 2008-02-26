@@ -7,7 +7,7 @@
 #end
 
 #capturefor(headline)
-<h1>Search</h1>
+<h1 class="title">Search</h1>
 <p>You've searched for: <span class="search_query">&ldquo;$!{query}&rdquo;</span>. Please select one of the below locations to continue.</p>
 #end
 

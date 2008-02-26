@@ -131,7 +131,6 @@
     <Content Include="Content\images\logo.gif" />
     <Content Include="Content\images\search-button.gif" />
     <Content Include="Readme.txt" />
-    <Content Include="Content\stylesheets\reset-min.css" />
     <Content Include="Content\stylesheets\style.css" />
     <Content Include="Content\stylesheets\typography.css" />
     <Content Include="Web.config" />
@@ -184,11 +183,6 @@
     <Content Include="Content\images\saint-john-river-basin.jpg" />
     <Content Include="Content\images\Topographic Map.jpg" />
     <Content Include="Content\javascripts\abstract.js" />
-    <Content Include="Content\javascripts\animation-min.js" />
-    <Content Include="Content\javascripts\animation.js" />
-    <Content Include="Content\javascripts\connection-min.js" />
-    <Content Include="Content\javascripts\connection.js" />
-    <Content Include="Content\javascripts\effects-min.js" />
     <Content Include="Content\javascripts\ext-2.0.1\adapter\ext\ext-base.js" />
     <Content Include="Content\javascripts\ext-2.0.1\adapter\jquery\ext-jquery-adapter.js" />
     <Content Include="Content\javascripts\ext-2.0.1\adapter\jquery\jquery-plugins.js" />
@@ -1630,15 +1624,9 @@
     <Content Include="Content\javascripts\maps-index.js" />
     <Content Include="Content\javascripts\prototype-1.6.0.2.js" />
     <Content Include="Content\javascripts\search.js" />
-    <Content Include="Content\javascripts\tools-min.js" />
-    <Content Include="Content\javascripts\utilities.js" />
-    <Content Include="Content\javascripts\yahoo-dom-event.js" />
     <Content Include="Content\stylesheets\bug-fixes-ie6.css" />
     <Content Include="Content\stylesheets\bug-fixes-ie7.css" />
-    <Content Include="Content\stylesheets\fonts.css" />
-    <Content Include="Content\stylesheets\grids.css" />
     <Content Include="Content\stylesheets\reset-fonts-grids.css" />
-    <Content Include="Content\stylesheets\reset.css" />
     <Content Include="log.txt" />
     <Content Include="logging.config" />
     <Content Include="Config\components.config" />

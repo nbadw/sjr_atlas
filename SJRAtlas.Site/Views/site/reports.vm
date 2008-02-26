@@ -1,45 +1,46 @@
 #capturefor(headline)
-<h1>Reports</h1>
-<p>Below are the links to chapters and appendices of the NB Aquatic Data Warehouse Manual. The manual describes how data is collected and how it is stored within the repository. Please note that not all repository data is presented within this web mapping application. To receive copies of any data set, please forward your request to the NB Aquatic Data Warehouse.</p>
+<h1 class="title">Reports</h1>
+<p>Listed below are links to various publications related to the Saint John River and this Atlas.</p>
 #end
 
-<div id="content" class="clearfix">	
-	<div class="innerwrap">
-		<div class="textbox yui-gc">		
-            <div id="report-tree" class="yui-u first">
-                <h2>Data Warehouse Manual</h2>
-                <ul>
-                    <li><a href="/data-manuals/DW Manual/DWM-05-Drainage System.pdf">New Brunswick Hierarchal Drainage System</a></li>
-                    <li><a href="/data-manuals/DW Manual/DWM-Appendix A - Drainage Unit Listing.pdf">Drainage Unit Listing</a></li>
-                    <li><a href="/data-manuals/DW Manual/DWM-06-Water Resource Inventory.pdf">Water Resource Inventory</a></li>
-                </ul>                
-                
-                <h2>Other Documents</h2>
-                <ul>
-                    <li><a href="/data-manuals/Other Agencies/ETB/DTDB 1998 User's Guide.pdf">DTDB 1998 Users's Guide</a></li>
-                    <li><a href="/data-manuals/Other Agencies/ESAs/ESA1.PDF">Environmentally Significant Areas In New Brunswick (15.5 MB)</a></li>
-                    <li><a href="/data-manuals/Other Agencies/ESAs/ESA2.PDF">Environmentally Significant Areas In New Brunswick - Database Structure, Database Dictionary (6.6 MB)</a></li>
-                </ul>
-                
-                <h2>Published Reports</h2>
-                <ul>
-                    <li><a href="#">Adult Atlantic Salmon Counts</a></li>
-                    <li><a href="#">Drainage Units List (Refer to Manual section - Drainage System for methodology)</a></li>
-                    <li><a href="#">Stream Habitat Summaries </a></li>
-                    <li><a href="#">Lake Survey Summaries </a></li>
-                    <li><a href="#">Atlantic Salmon Angling Catch and Effort</a></li>
-                    <li><a href="#">Regular Crown Reserve Angling Catch and Effort </a></li>
-                </ul>                 
-            </div>
-            <div class="yui-u">
-                <h2>Please note:</h2>
-                <p>Adobe Acrobat is required to view the reports. </p>
-                <div style="text-align: center;">
-                    <a href="http://www.adobe.com/products/acrobat/readstep2_allversions.html">
-                        <img src="http://www.adobe.com/products/acrobat/images/button209x32reader_int.jpg" />
-                    </a>
-                </div>
-            </div>               
+<div class="yui-gc">		
+    <div class="yui-u first">
+        <h3 class="title">NB Watershed Units and Water Body Inventory:</h3>
+        <ul>
+            <li><a href="/data-manuals/DW Manual/DWM-05-Drainage System.pdf">New Brunswick Hierarchal Drainage System</a></li>
+            <li><a href="/data-manuals/DW Manual/DWM-Appendix A - Drainage Unit Listing.pdf">Drainage Unit Listing</a></li>
+            <li><a href="/data-manuals/DW Manual/DWM-06-Water Resource Inventory.pdf">Water Resource Inventory</a></li>
+        </ul>  
+        
+        <h3 class="title">Scientific Reports:</h3>
+        <ul>
+        </ul>
+        
+        <h3 class="title">Published Reports:</h3>
+        <ul>
+            <li><a href="#">Adult Atlantic Salmon Counts</a></li>
+            <li><a href="#">Drainage Units List (Refer to Manual section - Drainage System for methodology)</a></li>
+            <li><a href="#">Stream Habitat Summaries </a></li>
+            <li><a href="#">Lake Survey Summaries </a></li>
+            <li><a href="#">Atlantic Salmon Angling Catch and Effort</a></li>
+            <li><a href="#">Regular Crown Reserve Angling Catch and Effort </a></li>
+        </ul>                        
+        
+        <h3 class="title">Other Documents:</h3>
+        <ul>
+            <li><a href="/data-manuals/Other Agencies/ETB/DTDB 1998 User's Guide.pdf">DTDB 1998 Users's Guide</a></li>
+            <li><a href="/data-manuals/Other Agencies/ESAs/ESA1.PDF">Environmentally Significant Areas In New Brunswick (15.5 MB)</a></li>
+            <li><a href="/data-manuals/Other Agencies/ESAs/ESA2.PDF">Environmentally Significant Areas In New Brunswick - Database Structure, Database Dictionary (6.6 MB)</a></li>
+        </ul>               
+    </div>
+    <div class="yui-u">
+        <h2>Please note:</h2>
+        <p>Adobe Acrobat is required to view the reports. </p>
+        <div style="text-align: center;">
+            <a href="http://www.adobe.com/products/acrobat/readstep2_allversions.html">
+                <img src="http://www.adobe.com/products/acrobat/images/button209x32reader_int.jpg" />
+            </a>
         </div>
-	</div>
+    </div>               
 </div>
+        

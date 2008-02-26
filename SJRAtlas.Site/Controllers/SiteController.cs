@@ -15,8 +15,8 @@ namespace SJRAtlas.Site.Controllers
         {
             Logger.Debug("Site/Index action called");
             string[] mapTitles = {
-                    "Saint John River Basin", "Major Landowners Map", "Land Use",
-                    "Topographic Map", "Lake Depths Map", "Watershed Maps" };
+                    "Saint John River Basin", "Major Landowners", "Land Use",
+                    "Topographic Map", "Lake Map", "Data Collection Sites" };
             IList<InteractiveMap> maps = AtlasMediator.FindAllInteractiveMapsByTitles(mapTitles);
             PropertyBag["interactive_maps"] = maps;
             RenderView("index");

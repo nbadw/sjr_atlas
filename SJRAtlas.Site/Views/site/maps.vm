@@ -1,62 +1,29 @@
 #capturefor(headline)		    
-<h1>About the Maps</h1><p>There are 2 types of maps presented: interactive and published. Interactive maps present current data which are updated on a regular basis and through web mapping technology, clients can interact with the map, zooming into areas of interest and requesting information.  The published maps, on the other hand, are static and presented as PDF files.</p>
-<p>There is also an advanced interactive map for clients wishing access to more data and functionality. <span style="display: none;">Login is required. <a href="#">Click here to register</a>.</span></p>
+<h1 class="title">About the Maps</h1><p>There are 2 types of maps presented: interactive and published. Interactive maps present current data which are updated on a regular basis and through web mapping technology, clients can interact with the map, zooming into areas of interest and requesting information.  The published maps, on the other hand, are static and presented as PDF files.</p>
+<p style="display: none">There is also an advanced interactive map for clients wishing access to more data and functionality. <span style="display: none;">Login is required. <a href="#">Click here to register</a>.</span></p>
+<ul id="toc">
+    <li><a href="#interactive-maps">Interactive Maps</a></li>
+    <li><a href="#published-maps">Published Maps</a></li>
+    <li><a href="$siteroot/Content/SJR Atlas User Manual - Release 1.pdf">Help</a></li>
+</ul> 
 #end
 
-#capturefor(javascripts)
-<script type="text/javascript" language="javascript" src="$siteroot/Content/javascripts/yahoo-dom-event.js"></script>
-<script type="text/javascript" language="javascript" src="$siteroot/Content/javascripts/animation-min.js"></script>
-<script type="text/javascript" language="javascript" src="$siteroot/Content/javascripts/tools-min.js"></script>
-<script type="text/javascript" language="javascript" src="$siteroot/Content/javascripts/effects-min.js"></script>
-<script type="text/javascript" language="javascript" src="$siteroot/Content/javascripts/maps-index.js"></script>
-#end
-
-<div id="content" class="clearfix">	
-	<div class="innerwrap">
-		<div class="textbox yui-gc">		
-                <div class="yui-u first">                 
-                    <div id="map-controls">
-                        <a href="#interactive-maps" class="active toggle">Interactive Maps</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-                        <a href="#published-maps" class="toggle">Published Maps</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-                        <a href="#advancedmap" class="toggle">Advanced Map</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-                        <a href="#help" class="toggle">Help</a>
-                    </div> 
-                    
-                    <div id="interactive-maps">
-                        #if($interactive_maps.Count == 0)
-                            <p>No Interactive Maps</p>
-                        #else
-                            #parse("interactive_map/_list.vm")                        
-                        #end
-                    </div>
-                    
-                    <div id="published-maps" style="display: none;">  
-                        #if($published_maps.Count == 0)
-                            <p>No Published Maps</p>
-                        #else
-                            #parse("publication/_list_maps.vm")
-                        #end
-                    </div>
-                    
-                    <div id="advancedmap" style="display:none;">
-                        about advanced map...
-                    </div>
-                    
-                    <div id="help" style="display:none;">
-                        Please see: <a href="$siteroot/Content/SJR Atlas User Manual - Release 1.pdf">SJR Atlas User Manual - Release 1</a>
-                    </div>                    
-                </div>
-                
-                <div class="yui-u">
-                    <h2>Preview Screenshot</h2>
-                    <div id="map-preview">
-                        <p id="preview-message">Place the mouse over a map to view a larger preview image</p>
-                        <img style="display: none;" id="large-preview-img" src="" />
-                    </div>                   
-                </div>
-                
-            </div>                  
-        </div>
-	</div>
+<a name="interactive-maps"></a>
+<div id="interactive-maps">
+    <h2 class="title">Interactive Maps:</h2>
+    #if($interactive_maps.Count == 0)
+        <p>No Interactive Maps</p>
+    #else
+        #parse("interactive_map/_list.vm")                        
+    #end
 </div>
 
+<a name="published-maps"></a>
+<div id="published-maps">  
+    <h2 class="title">Published Maps:</h2>
+    #if($published_maps.Count == 0)
+        <p>No Published Maps</p>
+    #else
+        #parse("publication/_list_maps.vm")
+    #end
+</div>
