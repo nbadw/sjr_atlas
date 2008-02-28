@@ -197,7 +197,6 @@ ul li { list-style-image: url('../images/bullet.jpg'); }
 	font-size: 1.1666666666666667em; 
 	line-height: 1.2857142857142858em; 
 	margin-bottom: 1.2857142857142858em; 
-	font-weight: bold;	
 }
 
 #content {
@@ -227,6 +226,33 @@ ul li { list-style-image: url('../images/bullet.jpg'); }
 }
 
 /* PAGE CONTENT STYLES */
+#content #expanded-info #interactive-maps,
+#content #expanded-info #published-maps,
+#content #expanded-info #published-reports,
+#content #expanded-info #datasets
+{
+	margin-bottom: 2em;	
+}
+#content .publication,
+#content .interactive-map,
+#content .dataset {
+	margin-left: 1em;
+	margin-bottom: 1.5em;
+}
+#content .publication .title,
+#content .interactive-map .title,
+#content .dataset .title {
+	margin-bottom: 5px;
+}
+#content .publication p,
+#content .interactive-map p,
+#content .dataset p {
+	margin-bottom: 0;
+}
+#content .dataset .presentations span.presentation-link {
+	padding-right: 15px;
+}
+
 #site.index #content .box {
 	float: left;
 	width: 282px;
@@ -304,14 +330,30 @@ ul li { list-style-image: url('../images/bullet.jpg'); }
 	font-style: italic; 
 }
 
-#search.places #headline .search_query {
+#search .search-query {
 	font-weight: bold; 
 	color: #425cbd; 
 }
 
+#content #rescue .exception {
+	overflow: scroll;
+	background-color: #efefef;
+	font-family: Consolas, "Lucida Console", monospace;
+	padding: 10px 10px 0;
+}
+
+#site.help ul.toc li {
+	list-style-type: decimal;	
+	list-style-image: none;	
+}
+#site.help ul.toc ul {
+	margin-bottom: 7px;
+}
+#site.help ul.toc ul li {
+	list-style-type: lower-alpha;
+}
+
 /*
-
-
 .thumbnail { height: 50px; width: 50px; background-color: #fff; border: 1px solid black; text-align: center; float: left; margin: 0 1em 1em 0; }
 #map-controls { margin-bottom: 1.125em; }
 #map-controls a { margin: 0; font-size: 1.3333333333333333em; line-height: 1.125em; }

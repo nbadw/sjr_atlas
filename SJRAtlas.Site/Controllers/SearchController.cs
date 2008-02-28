@@ -81,6 +81,20 @@ namespace SJRAtlas.Site.Controllers
 
             if(results.Count == 0)
             {
+                RedirectToAction("datasets", "q=" + q);
+                return;               
+            }
+
+            PropertyBag["query"] = q;
+            PropertyBag["results"] = results;
+        }
+
+        public void DataSets(string q)
+        {
+            IList<DataSet> results = AtlasMediator.FindAllDataSetsByQuery(q);
+
+            if (results.Count == 0)
+            {
                 NameValueCollection parameters = new NameValueCollection();
                 parameters.Add("q", q);
                 RedirectToAction("noresults", parameters);

@@ -1,39 +1,31 @@
+#capturefor(breadcrumb_trail)
+$Url.Link('Home', "%{controller='site', action='index'}")
+<span class="breadcrumb-separator">&#8722;</span>
+<a href="#" title="Error Page">Error</a>
+#end
+
 #capturefor(headline)
-<h2>An unexpected error happened.</h2>
-<p> This is the rescue page. See the exception details below:</p>
+<h1 class="title">Oops! Something unexpected happened.</h1>
+<p style="color: red">Take me back to the $Url.Link('homepage', "%{controller='site', action='index'}")!</p>
+<p>This is an error page. Exception details are below:</p>
 #end
 
 #macro(showexception $exc)
-<h3>$exc.GetType().Name</h3>
+    <h3 class="title">$exc.GetType().Name</h3>
+    <pre class="exception">Message: 
+$exc.Message 
 
-<p>
-Message:<br />
-$exc.Message
-</p>
-
-#if($exc.StackTrace)
-<div class="stacktrace">
-StackTrace:<br />
-<pre>
+Stacktrace:
 $exc.StackTrace
-</pre>
-</div>
+    </pre>
+
+    #if($exc.InnerException)     
+        #set($inner = $exc.InnerException)
+        #showexception($inner)
+    #end
 #end
 
-#if($exc.InnerException)
-<div class="inner-exception">
-<b>Inner exception:</b>
-#set($inner = $exc.InnerException)
-#showexception($inner)
-#end
-</div>
-#end
-
-<div id="content" class="clearfix">	
-	<div class="innerwrap">
-		<div class="textbox">		
-            #set($exception = $context.LastException)
-            #showexception($exception)               
-        </div>
-	</div>
+<div id="rescue">
+#set($exception = $context.LastException)
+#showexception($exception)               
 </div>

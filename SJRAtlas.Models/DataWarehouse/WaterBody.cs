@@ -4,6 +4,7 @@ using System.Text;
 using Castle.ActiveRecord;
 using NHibernate.Expression;
 using SJRAtlas.Models.Atlas;
+using Newtonsoft.Json;
 
 namespace SJRAtlas.Models.DataWarehouse
 {
@@ -23,6 +24,7 @@ namespace SJRAtlas.Models.DataWarehouse
 
         private Place place;
 
+        [JsonIgnore]
         [BelongsTo("CGNDB_Key")]
         public Place Place
         {
@@ -32,6 +34,7 @@ namespace SJRAtlas.Models.DataWarehouse
 
         private Place altPlace;
 
+        [JsonIgnore]
         [BelongsTo("CGNDB_Key_Alt")]
         public Place AltPlace
         {
@@ -41,6 +44,7 @@ namespace SJRAtlas.Models.DataWarehouse
 
         private Watershed watershed;
 
+        [JsonIgnore]
         [BelongsTo("DrainageCd")]
         public Watershed Watershed
         {
@@ -122,6 +126,7 @@ namespace SJRAtlas.Models.DataWarehouse
 
         private IList<DataSet> datasets = new List<DataSet>();
 
+        [JsonIgnore]
         [HasAndBelongsToMany(typeof(DataSet), Table = "web_data_sets_waterbodies",
             ColumnKey = "waterbody_id", ColumnRef = "data_set_id")]
         public IList<DataSet> DataSets
@@ -139,6 +144,7 @@ namespace SJRAtlas.Models.DataWarehouse
 
         private IList<InteractiveMap> interactiveMaps;
 
+        [JsonIgnore]
         public IList<InteractiveMap> RelatedInteractiveMaps
         {
             get
@@ -157,6 +163,7 @@ namespace SJRAtlas.Models.DataWarehouse
 
         private IList<Publication> publications;
 
+        [JsonIgnore]
         public IList<Publication> RelatedPublications
         {
             get

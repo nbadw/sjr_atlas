@@ -1,6 +1,15 @@
+#capturefor(breadcrumb_trail)
+$Url.Link('Home', "%{controller='site', action='index'}")
+<span class="breadcrumb-separator">&#8722;</span>
+<a href="#" title="Watershed Information">Watershed Information</a>
+#end
+
 #capturefor(headline)
-    <h1>Watershed Information</h1>
-    #component(watershed_info with "Watershed=$watershed")
+    <h1 class="title">Watershed Information: $!{watershed.Name}</h1>
+    <p>
+    Drainage Code: <span style="font-weight: normal">$!{watershed.DrainageCode}</span><br />
+    Flows Into: <span style="font-weight: normal">$!{watershed.FlowsInto}</span><br />
+    </p>
 #end
 
 #capturefor(javascripts)
@@ -13,7 +22,7 @@
 		<div class="textbox">               
             <div id="expanded-info">
                 <div id="interactive-maps">
-                    <h2>Interactive Maps</h2>
+                    <h2 class="title">Interactive Maps:</h2>
                     #if($interactive_maps.Count == 0)
                         <p>No Interactive Maps</p>
                     #else
@@ -22,7 +31,7 @@
                 </div>
 
                 <div id="published-maps">  
-                    <h2>Published Maps</h2>  
+                    <h2 class="title">Published Maps:</h2>  
                     #if($published_maps.Count == 0)
                         <p>No Published Maps</p>
                     #else
@@ -31,7 +40,7 @@
                 </div>
                 
                 <div id="published-reports">  
-                    <h2>Published Reports</h2>  
+                    <h2 class="title">Published Reports:</h2>  
                     #if($published_reports.Count == 0)
                         <p>No Published Reports</p>
                     #else
@@ -40,7 +49,7 @@
                 </div>
                 
                 <div id="datasets">  
-                    <h2>Data</h2>  
+                    <h2 class="title">Data:</h2>  
                     #if($datasets.Count == 0)
                         <p>No Data</p>
                     #else

@@ -1,3 +1,7 @@
+#capturefor(breadcrumb_trail)
+<a href="#" title="Home">Home</a>
+#end
+
 #capturefor(headline)
 <h1 class="title">Saint John River Atlas</h1>
 <p>The Saint John River Atlas is an online tool for presenting and interacting with the extensive body of data and information associated with the Saint John River, a multi-jurisdictional waterway originating in Maine and Québec and flowing into the Bay of Fundy at Saint John, New Brunswick. It is New Brunswick’s largest river system, draining approximately 40% of the province. See <a rel="ibox" href="$siteroot/Content/images/saint-john-river-basin.jpg">Map</a>.</p>

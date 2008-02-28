@@ -2,7 +2,6 @@ using System;
 using NUnit.Framework;
 using Castle.MonoRail.TestSupport;
 using SJRAtlas.Site.Controllers;
-using SJRAtlas.Site.Models;
 using Castle.MonoRail.Framework;
 using Castle.Components.Validator;
 using Castle.Components.Common.EmailSender;

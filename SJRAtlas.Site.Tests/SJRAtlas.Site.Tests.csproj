@@ -125,8 +125,6 @@
     <Compile Include="AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Components\BasicInfoComponentTest.cs" />
-    <Compile Include="Components\PlaceInfoComponentTest.cs" />
     <Compile Include="Controllers\AgencyControllerTest.cs" />
     <Compile Include="Controllers\PresentationControllerTest.cs" />
     <Compile Include="Controllers\WaterBodyControllerTest.cs" />
@@ -136,7 +134,6 @@
     <Compile Include="Controllers\SearchControllerTest.cs" />
     <Compile Include="Controllers\WatershedControllerTest.cs" />
     <Compile Include="Filters\EscapeToUnicodeFilterTest.cs" />
-    <Compile Include="Models\SearchOptionsTest.cs" />
     <Compile Include="SJRAtlasControllerTest.cs" />
   </ItemGroup>
   <ItemGroup>

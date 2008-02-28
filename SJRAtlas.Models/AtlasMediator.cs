@@ -70,5 +70,10 @@ namespace SJRAtlas.Models
         {
             return Watershed.FindByCgndbKey(cgndbKey);
         }
+
+        public static IList<DataSet> FindAllDataSetsByQuery(string q)
+        {
+            return DataSet.FindAllByQuery(q);
+        }
     }
 }

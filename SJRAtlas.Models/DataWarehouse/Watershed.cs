@@ -5,6 +5,7 @@ using System.Text.RegularExpressions;
 using Castle.ActiveRecord;
 using NHibernate.Expression;
 using SJRAtlas.Models.Atlas;
+using Newtonsoft.Json;
 
 namespace SJRAtlas.Models.DataWarehouse
 {
@@ -27,12 +28,10 @@ namespace SJRAtlas.Models.DataWarehouse
 
         public string FlowsInto
         {
-            get
-            {
-                return DrainsInto != null ? DrainsInto : TributaryOf;
-            }
+            get { return DrainsInto != null ? DrainsInto : TributaryOf; }
         }
-        
+
+        [JsonIgnore]
         public string TributaryOf
         {
             get
@@ -72,6 +71,7 @@ namespace SJRAtlas.Models.DataWarehouse
 
         private IList<DataSet> datasets;
 
+        [JsonIgnore]
         public IList<DataSet> DataSets
         {
             get
@@ -116,6 +116,7 @@ namespace SJRAtlas.Models.DataWarehouse
                 
         private Place place;
 
+        [JsonIgnore]
         [BelongsTo("CGNDB_Key", Cascade=CascadeEnum.SaveUpdate)]
         public Place Place
         {
@@ -125,6 +126,7 @@ namespace SJRAtlas.Models.DataWarehouse
 
         private IList<WaterBody> waterbodies;
 
+        [JsonIgnore]
         [HasMany(typeof(WaterBody), Cascade = ManyRelationCascadeEnum.SaveUpdate)]
         public IList<WaterBody> WaterBodies
         {
@@ -134,6 +136,7 @@ namespace SJRAtlas.Models.DataWarehouse
 
         private string drainsInto;
 
+        [JsonIgnore]
         [Property]
         public string DrainsInto
         {
@@ -306,6 +309,7 @@ namespace SJRAtlas.Models.DataWarehouse
                 
         private IList<InteractiveMap> interactiveMaps;
 
+        [JsonIgnore]
         public IList<InteractiveMap> RelatedInteractiveMaps
         {
             get
@@ -324,6 +328,7 @@ namespace SJRAtlas.Models.DataWarehouse
 
         private IList<Publication> publications;
 
+        [JsonIgnore]
         public IList<Publication> RelatedPublications
         {
             get

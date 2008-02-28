@@ -42,6 +42,7 @@ namespace SJRAtlas.Site.Presentations
                 ((ArrayList)configuration["tables"]).Add(tableConfig);
             }
 
+            controller.PropertyBag["presentation"] = tabularPresentation;
             controller.PropertyBag["configuration"] = JavaScriptConvert.SerializeObject(configuration);
             controller.RenderSharedView("presentation/tables");
         }

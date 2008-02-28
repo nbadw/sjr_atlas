@@ -1,3 +1,9 @@
+#capturefor(breadcrumb_trail)
+$Url.Link('Home', "%{controller='site', action='index'}")
+<span class="breadcrumb-separator">&#8722;</span>
+<a href="#" title="Search">Search</a>
+#end
+
 #capturefor(headline)
 <h1 class="title">Advanced Search</h1>
 <p>This is an advanced search option for querying tabular data. You will be able to download the tabular data and its associated spatial data if available.</p>
@@ -220,8 +226,11 @@ WaterBodyAutoComplete = function() {
             url: '$siteroot/waterbody/autocomplete.castle',
             root: 'waterbodies',
             totalProperty: 'results',
-            id: 'id',
-            fields: ['id', 'name', 'alt_name']
+            id: 'Id',
+            fields: [
+                "Id", "Type", "Name", "Abbreviation", "AltName", "ComplexId", 
+                "SurveyedInd", "FlowsIntoWaterBodyId", "FlowsIntoWaterBodyName"
+            ]
         }),
         name: 'waterbodyId',
         fieldLabel: 'Water Body',
@@ -231,13 +240,14 @@ WaterBodyAutoComplete = function() {
         width: 500,
         hideTrigger: true,
         minChars: 2,
+        pageSize: 10,
         forceSelection: true,
         tpl: new Ext.XTemplate(
             '<tpl for="."><div class="waterbody-search-item">',
                 '<h3>{title}</h3>',       
-                '<p>Id: {id}</p>',
-                '<tpl if="alt_name">',
-                    '<p>Also known as: {alt_name}</p>',
+                '<p>Id: {Id}</p>',
+                '<tpl if="AltName">',
+                    '<p>Also known as: {AltName}</p>',
                 '</tpl>',
             '</div></tpl>'
         ),
@@ -250,7 +260,7 @@ Ext.extend(WaterBodyAutoComplete, Ext.form.ComboBox, {
         WaterBodyAutoComplete.superclass.initList.call(this);  
         this.view.prepareData = function(data) {
             Ext.apply(data, { 
-                title: (data['name'] || 'Unnamed Water Body') + '(' + data['id'] + ')',
+                title: (data['Name'] || 'Unnamed Water Body') + '(' + data['Id'] + ')',
             });
             return data;
         };   
@@ -268,12 +278,17 @@ WatershedAutoComplete = function() {
             url: '$siteroot/watershed/autocomplete.castle',
             root: 'watersheds',
             totalProperty: 'results',
-            id: 'drainage_code',
-            fields: ['drainage_code', 'name']
+            id: 'DrainageCode',
+            fields: [
+                "DrainageCode", "Name", "FlowsInto", "UnitType", "BorderInd",
+                "StreamOrder", "AreaHA", "AreaPercent", "Level1No", "Level1Name",
+                "Level2No", "Level2Name", "Level3No", "Level3Name", "Level4No", 
+                "Level4Name", "Level5No", "Level5Name", "Level6No", "Level6Name"
+            ]
         }),
         name: 'drainageCode',
         fieldLabel: 'Watershed',
-        displayField: 'name',
+        displayField: 'Name',
         typeAhead: false,
         loadingText: 'Searching...',
         width: 500,
@@ -283,8 +298,8 @@ WatershedAutoComplete = function() {
         forceSelection: true,
         tpl: new Ext.XTemplate(
             '<tpl for="."><div class="watershed-search-item">',
-                '<h3>{name}</h3>',
-                '<p>{drainage_code}</p>',
+                '<h3>{Name}</h3>',
+                '<p>{DrainageCode}</p>',
             '</div></tpl>'
         ),
         itemSelector: 'div.watershed-search-item'
@@ -296,7 +311,7 @@ Ext.extend(WatershedAutoComplete, Ext.form.ComboBox, {
         WatershedAutoComplete.superclass.initList.call(this);  
         this.view.prepareData = function(data) {
             Ext.apply(data, { 
-                title: data['name']
+                title: data['Name']
             });
             return data;
         };   
@@ -315,7 +330,8 @@ AquaticSiteAutoComplete = function() {
             root: 'aquaticSites',
             totalProperty: 'results',
             id: 'Id',
-            fields: ["Id", "OldAquaticSiteID", "RiverSystemID", "WaterBodyID", "WaterBodyName",
+            fields: [
+                "Id", "OldAquaticSiteID", "RiverSystemID", "WaterBodyID", "WaterBodyName",
                 "AquaticSiteName", "AquaticSiteDesc", "HabitatDesc", "ReachNo", "StartDesc", 
                 "EndDesc", "StartRouteMeas", "EndRouteMeas", "SiteType", "SpecificSiteInd", 
                 "GeoReferencedInd", "IncorporatedInd", "CoordinateSource", "CoordinateSystem",
@@ -375,7 +391,7 @@ AgencyComboBox = function() {
             totalProperty: 'results',
             id: 'AgencyCode',
             autoLoad: true,
-            fields: ['AgencyCode', 'Name', 'Type']
+            fields: ['AgencyCode', 'Name', 'Type']            
         }),
         tpl: new Ext.XTemplate(
             '<tpl for="."><div class="agency-list-item">',

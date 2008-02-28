@@ -6,6 +6,7 @@ using Castle.ActiveRecord.Queries;
 using SJRAtlas.Models.DataWarehouse;
 using SJRAtlas.Models.Atlas;
 using Newtonsoft.Json;
+using NHibernate.Expression;
 
 namespace SJRAtlas.Site.Controllers
 {
@@ -29,35 +30,36 @@ namespace SJRAtlas.Site.Controllers
         }
 
         [AjaxAction]
-        public void AutoComplete(string query)
+        public void AutoComplete(string query, int start, int limit)
         {
             string idQuery = String.Format("{0}%", query);
-            string textQuery = String.Format("%{0}%", query);                        
+            string textQuery = String.Format("%{0}%", query);  
 
-            SimpleQuery<WaterBody> q = new SimpleQuery<WaterBody>("from WaterBody wb where wb.Name like ? or wb.Id like ? or wb.Abbreviation like ?", textQuery, idQuery, textQuery);                        
-            WaterBody[] results = q.Execute();
+            DetachedCriteria criteria = DetachedCriteria.For<WaterBody>();
+            criteria.Add(Expression.Or(
+                Expression.Or(
+                    Expression.Like("Name", textQuery),
+                    Expression.Like("Abbreviation", textQuery)),                
+                Expression.Sql("WaterBodyID LIKE '" + idQuery + "'")
+            ));
+            WaterBody[] results = WaterBody.SlicedFindAll(start, limit, criteria,
+                Order.Asc("Name"));
 
-            List<WaterBodyAttributes> waterbodies = new List<WaterBodyAttributes>(results.Length);
-            foreach(WaterBody waterbody in results)
-            {
-                waterbodies.Add(new WaterBodyAttributes(waterbody));
-            }
+            criteria = DetachedCriteria.For<WaterBody>();
+            criteria.Add(Expression.Or(
+                Expression.Or(
+                    Expression.Like("Name", textQuery),
+                    Expression.Like("Abbreviation", textQuery)),
+                Expression.Sql("WaterBodyID LIKE '" + idQuery + "'")
+            ));
+            int count = new ScalarProjectionQuery<WaterBody, int>(
+                NHibernate.Expression.Projections.RowCount(),
+                criteria
+            ).Execute();
 
-            PropertyBag["waterbodies"] = JavaScriptConvert.SerializeObject(waterbodies);
-            PropertyBag["resultsCount"] = waterbodies.Count;
-            CancelLayout();
             Context.Response.ContentType = "text/javascript";
-        }
-
-        public class WaterBodyAttributes : Dictionary<string, object>
-        {
-            public WaterBodyAttributes(WaterBody waterbody)
-                : base()
-            {
-                this["id"] = waterbody.Id;
-                this["name"] = waterbody.Name;
-                this["alt_name"] = waterbody.AltName;
-            }
+            RenderText(String.Format("{{ results: {0}, waterbodies: {1} }}", count,
+                JavaScriptConvert.SerializeObject(results)));
         }
     }
 }

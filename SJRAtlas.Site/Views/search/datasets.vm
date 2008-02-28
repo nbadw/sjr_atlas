@@ -1,0 +1,23 @@
+#capturefor(breadcrumb_trail)
+$Url.Link('Home', "%{controller='site', action='index'}")
+<span class="breadcrumb-separator">&#8722;</span>
+$Url.Link('Search', "%{controller='search', action='index'}")
+<span class="breadcrumb-separator">&#8722;</span>
+<a href="#" title="Metadata">Metadata</a>
+#end
+
+#capturefor(headline)
+<h1 class="title">Search</h1>
+<p>You've searched for: <span class="search-query">&ldquo;$!{query}&rdquo;</span>. Below is a list of datasets that matched your query.</p>
+#end
+
+<div class="yui-gc">			
+    <div class="yui-u first">
+        <h2 class="title">Search Results</h2>  
+        #set($datasets = $results)
+        #parse("data_set/_list.vm")
+    </div>
+    <div class="yui-u">
+        #parse("search/_need-help.vm")
+    </div>              
+</div>

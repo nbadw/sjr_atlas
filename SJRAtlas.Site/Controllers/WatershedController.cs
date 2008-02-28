@@ -43,40 +43,22 @@ namespace SJRAtlas.Site.Controllers
                 Expression.Like("Name", textQuery),
                 Expression.Like("DrainageCode", idQuery)
             ));
-
             Watershed[] results = Watershed.SlicedFindAll(start, limit, criteria,
                 Order.Asc("Name"));
-            List<WatershedAttributes> watersheds = new List<WatershedAttributes>(results.Length);
-            foreach (Watershed waterbody in results)
-            {
-                watersheds.Add(new WatershedAttributes(waterbody));
-            }
 
             criteria = DetachedCriteria.For<Watershed>();
             criteria.Add(Expression.Or(
                 Expression.Like("Name", textQuery),
                 Expression.Like("DrainageCode", idQuery)
             ));
-            ScalarProjectionQuery<Watershed, int> count = new ScalarProjectionQuery<Watershed, int>(
+            int count = new ScalarProjectionQuery<Watershed, int>(
                 NHibernate.Expression.Projections.RowCount(),
                 criteria
-            );
-            int total = count.Execute();
+            ).Execute();
 
-            PropertyBag["watersheds"] = JavaScriptConvert.SerializeObject(watersheds);
-            PropertyBag["resultsCount"] = total;
-            CancelLayout();
             Context.Response.ContentType = "text/javascript";
-        }
-
-        public class WatershedAttributes : Dictionary<string, object>
-        {
-            public WatershedAttributes(Watershed watershed)
-                : base()
-            {
-                this["drainage_code"] = watershed.DrainageCode;
-                this["name"] = watershed.Name;
-            }
+            RenderText(String.Format("{{ results: {0}, watersheds: {1} }}", count,
+                JavaScriptConvert.SerializeObject(results)));
         }
     }
 }

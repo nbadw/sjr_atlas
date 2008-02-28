@@ -1,6 +1,20 @@
-#capturefor(headline)
-    <h1>Place Information</h1>
-    #component(place_info with "Place=$place")
+#capturefor(breadcrumb_trail)
+$Url.Link('Home', "%{controller='site', action='index'}")
+<span class="breadcrumb-separator">&#8722;</span>
+<a href="#" title="Place Information">Place Information</a>
+#end
+
+#capturefor(headline)    
+    #set($coordinate = $place.GetCoordinate())
+    <h1 class="title">Place Information: $place.Name, $place.Region</h1>
+    <p>
+    Name Status: <span style="font-weight: normal">$!{place.NameStatus}</span><br />
+    Place Type: <span style="font-weight: normal">$!{place.GenericTerm}</span><br />
+    County: <span style="font-weight: normal">$!{place.County}</span><br />
+    Latitude: <span style="font-weight: normal">$!{coordinate.Latitude}</span><br />
+    Longitude: <span style="font-weight: normal">$!{coordinate.Longitude}</span><br />   
+    $Atlas.MapLink("View Location In Map", "%{coordinate=$coordinate}", "%{onclick='view_location(\'$cgndb_key\'); return false;', class='option'}")
+    </p>
 #end
 
 #capturefor(javascripts)
@@ -8,37 +22,32 @@
 <script type="text/javascript" language="javascript" src="$siteroot/Content/javascripts/abstract.js" />
 #end
 
-<div id="content" class="clearfix">	
-	<div class="innerwrap">
-		<div class="textbox">   
-            <div id="expanded-info">
-                <div id="interactive-maps">
-                    <h2>Interactive Maps</h2>
-                    #if($interactive_maps.Count == 0)
-                        <p>No Interactive Maps</p>
-                    #else
-                        #parse("interactive_map/_list.vm")                        
-                    #end
-                </div>
+  
+<div id="expanded-info">
+    <div id="interactive-maps">
+        <h2 class="title">Interactive Maps:</h2>
+        #if($interactive_maps.Count == 0)
+            <p>No Interactive Maps</p>
+        #else
+            #parse("interactive_map/_list.vm")                        
+        #end
+    </div>
 
-                <div id="published-maps">  
-                    <h2>Published Maps</h2>  
-                    #if($published_maps.Count == 0)
-                        <p>No Published Maps</p>
-                    #else
-                        #parse("publication/_list_maps.vm")
-                    #end
-                </div>
-                
-                <div id="published-reports">  
-                    <h2>Published Reports</h2>  
-                    #if($published_reports.Count == 0)
-                        <p>No Published Reports</p>
-                    #else
-                        #parse("publication/_list_reports.vm")
-                    #end
-                </div>
-            </div>
-        </div>
-	</div>
+    <div id="published-maps">  
+        <h2 class="title">Published Maps:</h2>  
+        #if($published_maps.Count == 0)
+            <p>No Published Maps</p>
+        #else
+            #parse("publication/_list_maps.vm")
+        #end
+    </div>
+    
+    <div id="published-reports">  
+        <h2 class="title">Published Reports:</h2>  
+        #if($published_reports.Count == 0)
+            <p>No Published Reports</p>
+        #else
+            #parse("publication/_list_reports.vm")
+        #end
+    </div>
 </div>

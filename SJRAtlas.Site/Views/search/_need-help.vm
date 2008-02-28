@@ -1,0 +1,8 @@
+<h2>Need Help?</h2>
+<p>You've searched the Atlas for: <span class="search-query">&ldquo;$!{query}&rdquo;</span>.</p>
+<p>If you haven't found what you are looking for you may also want to try the following:</p>
+<ul>
+    <li>$Url.Link('Advanced Search', "%{controller='search', action='index'}")</li>
+    <li>$Url.Link('Search Tips', "%{controller='search', action='tips'}")</li>
+    <li>$Url.Link('Help', "%{controller='site', action='help'}")</li>
+</ul>

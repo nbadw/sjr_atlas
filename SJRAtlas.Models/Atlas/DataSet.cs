@@ -129,12 +129,56 @@ namespace SJRAtlas.Models.Atlas
         {
             SimpleQuery<DataSet> query = new SimpleQuery<DataSet>(QueryLanguage.Sql, @"
                 SELECT  {dataset.*}
-                FROM    web_data_sets as dataset, web_presentations as presentation
+                FROM     web_data_sets as dataset, web_presentations as presentation
                 WHERE   (dataset.id = presentation.data_set_id AND presentation.type = ?)",
                 presentationType
             );
             query.AddSqlReturnDefinition(typeof(DataSet), "dataset");
             return query.Execute();
+        }
+
+        public static IList<DataSet> FindAllByQuery(string q)
+        {
+            string terms = BuildContainsTerms(q);
+            SimpleQuery<DataSet> query = new SimpleQuery<DataSet>(QueryLanguage.Sql, 
+                String.Format(@"
+                    SELECT      {{dataset.*}}
+                    FROM          web_data_sets as dataset, web_metadata as metadata
+                    WHERE         metadata.metadata_aware_type = 'DataSet' 
+                    AND           dataset.id = metadata.metadata_aware_id
+                    AND (
+                        CONTAINS (metadata.content, '{0}')
+                        OR CONTAINS (dataset.title, '{0}')
+                        OR CONTAINS (dataset.abstract, '{0}')
+                    )",
+                    terms
+                )
+            );
+            query.AddSqlReturnDefinition(typeof(DataSet), "dataset");
+            return query.Execute();
+        }
+
+        private static string BuildContainsTerms(string query)
+        {
+            StringBuilder contains = new StringBuilder();
+            string[] terms = query.Split(' ');
+            bool quoted_term = false;
+            for (int i = 0; i < terms.Length; i++)
+            {
+                string term = terms[i];
+                contains.Append(term);
+
+                if (term.StartsWith("\""))
+                    quoted_term = true;
+                else if (term.EndsWith("\""))
+                    quoted_term = false;
+
+                if (!quoted_term && i != terms.Length - 1)
+                    contains.Append(" AND ");
+                else
+                    contains.Append(" ");
+            }
+            return contains.ToString();
         }
     }
 }

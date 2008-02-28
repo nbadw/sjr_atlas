@@ -1,3 +1,0 @@
-<div id="search-results">
-  <%= render :partial => 'search/result', :collection => @results %>
-</div>

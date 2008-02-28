@@ -1,7 +1,6 @@
 using System;
 using Castle.MonoRail.Framework;
 using System.Collections.Generic;
-using SJRAtlas.Site.Models;
 using Castle.Core.Logging;
 using System.Collections.Specialized;
 using SJRAtlas.Models;

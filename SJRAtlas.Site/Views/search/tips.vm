@@ -1,13 +1,15 @@
+#capturefor(breadcrumb_trail)
+$Url.Link('Home', "%{controller='site', action='index'}")
+<span class="breadcrumb-separator">&#8722;</span>
+$Url.Link('Search', "%{controller='search', action='index'}")
+<span class="breadcrumb-separator">&#8722;</span>
+<a href="#" title="Tips">Tips</a>
+#end
+
 #capturefor(headline)
 <h1>Search Tips</h1>
 #end
-
-<div id="content" class="clearfix">	
-	<div class="innerwrap">
-		<div class="textbox">		
-            <p>Enter the words &ldquo;watershed&rdquo;, &ldquo;basin&rdquo; or &ldquo;catchment&rdquo; after a water body name if you want the search to include all lakes and streams within a drainage area. Note the water body name must be one of the province's official drainage units.  <a href="#">View the Drainage Unit Listing</a>.</p>                  
-            <p>The search checks NR Canada's Canadian Geographic Names database and will return official and rescinded place names. Rescinded names are no longer official place names but may still be commonly used. The search results indicate whether the place name has official status.</p>           
-        </div>
-	</div>
-</div>
-
+				
+<p>Enter the words &ldquo;watershed&rdquo;, &ldquo;basin&rdquo; or &ldquo;catchment&rdquo; after a water body name if you want the search to include all lakes and streams within a drainage area. Note the water body name must be one of the province's official drainage units.  <a href="#">View the Drainage Unit Listing</a>.</p>                  
+<p>The search checks NR Canada's Canadian Geographic Names database and will return official and rescinded place names. Rescinded names are no longer official place names but may still be commonly used. The search results indicate whether the place name has official status.</p>           
+     

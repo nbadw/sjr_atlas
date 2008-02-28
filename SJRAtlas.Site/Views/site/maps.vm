@@ -1,3 +1,9 @@
+#capturefor(breadcrumb_trail)
+$Url.Link('Home', "%{controller='site', action='index'}")
+<span class="breadcrumb-separator">&#8722;</span>
+<a href="#" title="Maps">Maps</a>
+#end
+
 #capturefor(headline)		    
 <h1 class="title">About the Maps</h1><p>There are 2 types of maps presented: interactive and published. Interactive maps present current data which are updated on a regular basis and through web mapping technology, clients can interact with the map, zooming into areas of interest and requesting information.  The published maps, on the other hand, are static and presented as PDF files.</p>
 <p style="display: none">There is also an advanced interactive map for clients wishing access to more data and functionality. <span style="display: none;">Login is required. <a href="#">Click here to register</a>.</span></p>

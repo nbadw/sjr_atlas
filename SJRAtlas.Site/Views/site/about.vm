@@ -1,3 +1,9 @@
+#capturefor(breadcrumb_trail)
+$Url.Link('Home', "%{controller='site', action='index'}")
+<span class="breadcrumb-separator">&#8722;</span>
+<a href="#" title="About">About</a>
+#end
+
 #capturefor(headline)
 <h1 class="title">Our Goal</h1>
 <p>To develop and maintain a comprehensive, up-to-date GIS-based repository of multi-agency fisheries, aquatic and environmental information which is easily accessible to those involved in resource management decisions - resource managers, policy makers, researchers, and the public.</p>

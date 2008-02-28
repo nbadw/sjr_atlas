@@ -1,8 +1,13 @@
+#capturefor(breadcrumb_trail)
+$Url.Link('Home', "%{controller='site', action='index'}")
+<span class="breadcrumb-separator">&#8722;</span>
+<a href="#" title="Forms">Forms</a>
+#end
+
 #capturefor(headline)
 <h1 class="title">Forms</h1>
 <p>The NB Aquatic Data Warehouse, NB Department of Natural Resources, NB Department of Environment and NB Wildlife Council collaborated to create standardized data collection forms for various fisheries and environmental activities. The purpose of the forms is to ensure data is collected at the same level of detail and in the same manner.</p>
 #end
-
 
 <div class="yui-gc">		
     <div class="yui-u first">

@@ -1,0 +1,21 @@
+#capturefor(breadcrumb_trail)
+$Url.Link('Home', "%{controller='site', action='index'}")
+<span class="breadcrumb-separator">&#8722;</span>
+<a href="#" title="Help">Help</a>
+#end
+
+#capturefor(headline)
+<h1 class="title">Help Contents</h1>
+<ul class="toc">
+    <li>Website Overview</li>
+    <ul>
+        <li>Overview of Maps</li>
+    </ul>
+    <li>Quick Search</li>    
+</ul>
+#end
+
+<a name="#"></a>
+<div class="section">
+    <h2 class="title">Website Overview</h2>
+</div>

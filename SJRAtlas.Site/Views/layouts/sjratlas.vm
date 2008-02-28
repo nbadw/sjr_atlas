@@ -69,7 +69,7 @@ $!{header}
 		        </form>
 	        </div>			    
             <div id="breadcrumbs">
-                <span class="location">Location:</span><a href="#">URL</a>                     
+                <span class="location">Location:</span>$!{breadcrumb_trail}                    
             </div>
         </div>
         
@@ -86,10 +86,8 @@ $!{header}
         </div>
         
         <div id="footer">
-            <div class="textbox">
-	            <p class="release">Saint John River Atlas: Release 2</p>
-	            <p class="copyright">Copyright &copy; 2008</p>
-	        </div>
+            <p class="release">Saint John River Atlas: Release 2</p>
+            <p class="copyright">Copyright &copy; 2008</p>
         </div>   
           
     </div>
