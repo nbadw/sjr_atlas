@@ -7,6 +7,7 @@ using SJRAtlas.Models.Query;
 using Castle.MonoRail.Framework.Helpers;
 using System.Collections;
 using System.Collections.Specialized;
+using Microsoft.Office.Interop.Excel;
 
 namespace SJRAtlas.Site.Presentations
 {
@@ -17,6 +18,7 @@ namespace SJRAtlas.Site.Presentations
         public void RegisterDynamicActions(Controller controller)
         {
             controller.DynamicActions["table"] = new TableDynamicAction();
+            controller.DynamicActions["download"] = new DownloadDynamicAction();
         }
 
         public void RenderViewFor(Presentation presentation, IRailsEngineContext context)
@@ -74,6 +76,8 @@ namespace SJRAtlas.Site.Presentations
 
         #endregion
 
+        #region TableDynamicAction
+
         public class TableDynamicAction : IDynamicAction
         {
             #region IDynamicAction Members
@@ -117,5 +121,26 @@ namespace SJRAtlas.Site.Presentations
             #endregion
         }
 
+        #endregion
+
+        #region DownloadDynamicAction
+
+        public class DownloadDynamicAction : IDynamicAction
+        {
+            #region IDynamicAction Members
+
+            public void Execute(Controller controller)
+            {
+                //Application excel = new Application();
+                //Workbook workbook;
+                //Worksheet worksheet;
+
+                //excel.Workbooks
+            }
+
+            #endregion
+        }
+
+        #endregion
     }
 }

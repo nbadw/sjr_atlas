@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="$siteroot/Content/stylesheets/reset-fonts-grids.css" type="text/css" media="screen" />
 <link rel="stylesheet" href="$siteroot/Content/stylesheets/typography.css" type="text/css" media="screen" />
 <link rel="stylesheet" href="$siteroot/Content/javascripts/ibox/ibox.css" type="text/css" media="screen" />
-<link rel="stylesheet" href="$siteroot/Content/stylesheets/style.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="/content/stylesheets/style.css" type="text/css" media="screen" />
 
 <!-- CONDITIONAL COMMENTS (FOR MICROSOFT BROWSERS) -->
 <!--[if IE 7]>
