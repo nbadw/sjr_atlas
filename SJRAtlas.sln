@@ -25,12 +25,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SJRAtlas.Site.Tests", "SJRA
 		Release.AspNetCompiler.Debug = "False"
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApplication1", "ConsoleApplication1\ConsoleApplication1.csproj", "{D56869EA-EF4C-4F50-9870-892773D67DA1}"
-	ProjectSection(WebsiteProperties) = preProject
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.Debug = "False"
-	EndProjectSection
-EndProject
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "C:\...\SJRAtlas.Content\", "SJRAtlas.Content\", "{037F74AD-F577-4EEB-918F-21FDC8F2C51F}"
 	ProjectSection(WebsiteProperties) = preProject
 		Debug.AspNetCompiler.VirtualPath = "/SJRAtlas.Content"
@@ -101,16 +95,6 @@ Global
 		{9BA4FA25-68C9-4A65-B911-4570AA9B78A9}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9BA4FA25-68C9-4A65-B911-4570AA9B78A9}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{9BA4FA25-68C9-4A65-B911-4570AA9B78A9}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{D56869EA-EF4C-4F50-9870-892773D67DA1}.Debug|.NET.ActiveCfg = Debug|Any CPU
-		{D56869EA-EF4C-4F50-9870-892773D67DA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D56869EA-EF4C-4F50-9870-892773D67DA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D56869EA-EF4C-4F50-9870-892773D67DA1}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{D56869EA-EF4C-4F50-9870-892773D67DA1}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{D56869EA-EF4C-4F50-9870-892773D67DA1}.Release|.NET.ActiveCfg = Release|Any CPU
-		{D56869EA-EF4C-4F50-9870-892773D67DA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D56869EA-EF4C-4F50-9870-892773D67DA1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D56869EA-EF4C-4F50-9870-892773D67DA1}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{D56869EA-EF4C-4F50-9870-892773D67DA1}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{037F74AD-F577-4EEB-918F-21FDC8F2C51F}.Debug|.NET.ActiveCfg = Debug|.NET
 		{037F74AD-F577-4EEB-918F-21FDC8F2C51F}.Debug|.NET.Build.0 = Debug|.NET
 		{037F74AD-F577-4EEB-918F-21FDC8F2C51F}.Debug|Any CPU.ActiveCfg = Debug|.NET
