@@ -13,9 +13,10 @@ namespace SJRAtlas.Site.Helpers
 {
     public class AtlasHelperConfiguration
     {
-        public AtlasHelperConfiguration(string mapApplicationUrl, string defaultServiceName,
-            string defaultCoordinateSystem, string defaultUnits)
+        public AtlasHelperConfiguration(string contentPath, string mapApplicationUrl, 
+            string defaultServiceName, string defaultCoordinateSystem, string defaultUnits)
         {
+            this.contentPath = contentPath;
             this.mapApplicationUrl = mapApplicationUrl;
             this.defaultServiceName = defaultServiceName;
             this.defaultCoordinateSystem = defaultCoordinateSystem;
@@ -39,6 +40,14 @@ namespace SJRAtlas.Site.Helpers
             get { return linkTitles; }
             set { linkTitles = value; }
         }
+
+        private string contentPath;
+
+        public string ContentPath
+        {
+            get { return contentPath; }
+            set { contentPath = value; }
+        }	
 
         private string mapApplicationUrl;
 

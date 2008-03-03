@@ -16,9 +16,9 @@ $Url.Link('Home', "%{controller='site', action='index'}")
 $FormHelper.InstallScripts()
 
 <!-- EXT JS 2.0.1 -->
-<link rel="stylesheet" type="text/css" href="$siteroot/Content/javascripts/ext-2.0.1/resources/css/ext-all.css" />
-<script src="$siteroot/Content/javascripts/ext-2.0.1/adapter/prototype/ext-prototype-adapter.js" type="text/javascript" language="javascript"></script>
-<script src="$siteroot/Content/javascripts/ext-2.0.1/ext-all-debug.js" type="text/javascript" language="javascript"></script>
+<link rel="stylesheet" type="text/css" href="$Atlas.ContentPath()/javascripts/ext-2.0.1/resources/css/ext-all.css" />
+<script src="$Atlas.ContentPath()/javascripts/ext-2.0.1/adapter/prototype/ext-prototype-adapter.js" type="text/javascript" language="javascript"></script>
+<script src="$Atlas.ContentPath()/javascripts/ext-2.0.1/ext-all-debug.js" type="text/javascript" language="javascript"></script>
 #end
 
 <div id="advanced-search-form"></div>	

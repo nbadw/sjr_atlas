@@ -8,7 +8,7 @@ using SJRAtlas.Models.Atlas;
 using SJRAtlas.Site.Presentations;
 
 namespace SJRAtlas.Site.Controllers
-{
+{    
     public class PresentationController : BaseController
     {        
         public PresentationController(PresentationViewResolver presentationViewResolver)

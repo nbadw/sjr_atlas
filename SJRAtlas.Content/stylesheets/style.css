@@ -352,36 +352,3 @@ ul li { list-style-image: url('../images/bullet.jpg'); }
 #site.help ul.toc ul li {
 	list-style-type: lower-alpha;
 }
-
-/*
-.thumbnail { height: 50px; width: 50px; background-color: #fff; border: 1px solid black; text-align: center; float: left; margin: 0 1em 1em 0; }
-#map-controls { margin-bottom: 1.125em; }
-#map-controls a { margin: 0; font-size: 1.3333333333333333em; line-height: 1.125em; }
-.title { margin-bottom: 0; }
-#easymaps ul { margin-left: 0; }
-#easymaps li { list-style: none; clear: both; }
-#map-preview { height: 250px; width: 250px; background-color: #fff; border: 1px solid black; text-align: center; }
-#large-preview-img { height: 250px; width: 250px; }
-
-/** FEEDBACK FORM **
-#feedback-form-content { background: #eee; padding: 2em; }
-#feedback-form-content label { display: block; margin: 0; }
-#feedback-form-content input[type="text"] { width: 90%; }
-#feedback-form-content textarea { width: 300px; height: 200px; }
-#feedback-form-content div { }
-#feedback-control { font-size: 1.6em; font-weight: bold; text-align: center; height: 24px; background-color: #ccc; padding: 5px; }
-
-#interactive-maps,
-#published-maps,
-#published-reports { margin-bottom: 1em; }
-#interactive-maps h2,
-#published-maps h2,
-#published-reports h2,
-#datasets h2 { text-decoration: underline; margin: 1.5em 0 0.8em; }
-.interactive-map,
-.publication { clear: both; margin-bottom: 1em; }
-.publication > * { margin-bottom: 0; }
-
-.presentations span.presentation-link { padding-right: 20px; }
-*/
-

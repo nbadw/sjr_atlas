@@ -10,7 +10,7 @@ $Url.Link('Home', "%{controller='site', action='index'}")
 <ul id="toc">
     <li><a href="#interactive-maps">Interactive Maps</a></li>
     <li><a href="#published-maps">Published Maps</a></li>
-    <li><a href="$siteroot/Content/SJR Atlas User Manual - Release 1.pdf">Help</a></li>
+    <li><a href="$Atlas.ContentPath()/SJR Atlas User Manual - Release 1.pdf">Help</a></li>
 </ul> 
 #end
 

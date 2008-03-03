@@ -41,7 +41,7 @@
     </div>
     
     <div id="submitting" style="display: none; text-align: center; padding-top: 5em;">
-        <img src="$siteroot/Content/images/ajax-loader.gif" />
+        <img src="$Atlas.ContentPath()/images/ajax-loader.gif" />
         <p style="margin-top: 7px;">Sending Feedback...</p>
     </div>
     

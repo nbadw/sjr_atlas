@@ -5,6 +5,8 @@ using Castle.Core.Resource;
 using SJRAtlas.Site.Controllers;
 using Castle.Core.Logging;
 using Castle.MonoRail.WindsorExtension;
+using System.Collections.Generic;
+using SJRAtlas.Site.Helpers;
 
 namespace SJRAtlas.Site
 {
@@ -18,7 +20,6 @@ namespace SJRAtlas.Site
             logger = (this[typeof(ILoggerFactory)] as ILoggerFactory).Create(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
             RegisterFacilities();
             RegisterComponents();
-            //RegisterRoutes();
         }
 
         protected virtual void RegisterFacilities()
@@ -41,23 +42,5 @@ namespace SJRAtlas.Site
                 }
             }
         }
-
-        //protected virtual void RegisterRoutes()
-        //{
-        //    RoutingModuleEx.Engine.Add(
-        //        new PatternRoute("/search/<action>/[q]").
-        //        DefaultForController().Is("search").
-        //        DefaultForArea().IsEmpty.
-        //        DefaultForAction().Is("advanced")
-        //    );
-        //    RoutingModuleEx.Engine.Add(
-        //        new PatternRoute("/<controller>/<action>/<id>"));
-        //    RoutingModuleEx.Engine.Add(
-        //        new PatternRoute("/<action>").
-        //        DefaultForController().Is("site").
-        //        DefaultForArea().IsEmpty.
-        //        DefaultForAction().Is("index")
-        //    );
-        //}
     }
 }

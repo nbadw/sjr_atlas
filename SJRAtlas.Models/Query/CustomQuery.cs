@@ -20,7 +20,7 @@ namespace SJRAtlas.Models.Query
         public CustomQuery(string query)
         {
             this.query = query;
-            this.limit = 50;
+            this.limit = 0;
             this.offset = 0;
             filters = new List<QueryFilter>();
             logger = NullLogger.Instance;
@@ -169,7 +169,11 @@ namespace SJRAtlas.Models.Query
         public QueryResults Execute()
         {
             Logger.Info("Executing Custom Query");
-            Logger.Debug(String.Format("Start Row: {0}, Limit: {1}", offset, limit));
+            Logger.Debug(String.Format(
+                "Start Row: {0}, Limit: {1}", 
+                offset, 
+                limit > 0 ? limit.ToString() : "No limit set (all rows will be selected)"
+            ));
             Logger.Debug(String.Format("Filters: {0}", InspectFilters()));
             QueryResults results = new QueryResults();
             ISession session = ActiveRecordMediator.GetSessionFactoryHolder().CreateSession(typeof(ActiveRecordBase));
@@ -232,7 +236,7 @@ namespace SJRAtlas.Models.Query
             IDbCommand select = session.Connection.CreateCommand();
             select.CommandText = String.Format(
                 "SELECT TOP {0} * FROM ({1}) as derived_table",
-                limit,
+                limit > 0 ? limit.ToString() : "100 PERCENT",
                 query
             );
             AddFilters(select);
@@ -245,7 +249,7 @@ namespace SJRAtlas.Models.Query
             IDbCommand select = session.Connection.CreateCommand();
             select.CommandText = String.Format(
                 "SELECT TOP {0} * INTO #limit_offset_temp FROM ({1}) as derived_table",
-                limit + offset,
+                limit > 0 ? (limit + offset).ToString() : "100 PERCENT",
                 query
             );
             AddFilters(select);

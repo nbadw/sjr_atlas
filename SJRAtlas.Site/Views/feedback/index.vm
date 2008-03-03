@@ -24,7 +24,7 @@ feedback form
             <br />
             
             <div id="feedback-form-loading" style="text-align: center; display: none;">
-                <img src="$siteroot/Content/images/ajax-loading.gif" />
+                <img src="$Atlas.ContentPath()/images/ajax-loading.gif" />
             </div>
             <div id="feedback-form">
             </div>    

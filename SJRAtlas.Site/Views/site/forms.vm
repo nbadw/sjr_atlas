@@ -68,7 +68,7 @@ $Url.Link('Home', "%{controller='site', action='index'}")
 
     <div class="yui-u">
         <h2>Download</h2>
-        <p><a href="$siteroot/Content/Standard-Forms.zip">Forms Package</a></p>
+        <p><a href="$Atlas.ContentPath()/Standard-Forms.zip">Forms Package</a></p>
         <p>This package includes all standard forms and manual.</p>                                
     </div>   
 </div>  

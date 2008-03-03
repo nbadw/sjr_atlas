@@ -6,22 +6,22 @@
 
 <title>Saint John River Atlas</title>
 
-<link rel="stylesheet" href="$siteroot/Content/stylesheets/reset-fonts-grids.css" type="text/css" media="screen" />
-<link rel="stylesheet" href="$siteroot/Content/stylesheets/typography.css" type="text/css" media="screen" />
-<link rel="stylesheet" href="$siteroot/Content/javascripts/ibox/ibox.css" type="text/css" media="screen" />
-<link rel="stylesheet" href="/content/stylesheets/style.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="$Atlas.ContentPath()/stylesheets/reset-fonts-grids.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="$Atlas.ContentPath()/stylesheets/typography.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="$Atlas.ContentPath()/javascripts/ibox/ibox.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="$Atlas.ContentPath()/stylesheets/style.css" type="text/css" media="screen" />
 
 <!-- CONDITIONAL COMMENTS (FOR MICROSOFT BROWSERS) -->
 <!--[if IE 7]>
-<link rel="stylesheet" type="text/css" href="$siteroot/Content/stylesheets/bug-fixes-ie7.css" />
+<link rel="stylesheet" type="text/css" href="$Atlas.ContentPath()/stylesheets/bug-fixes-ie7.css" />
 <![endif]-->
 <!--[if lt IE 7]>
-<link rel="stylesheet" type="text/css" href="$siteroot/Content/stylesheets/bug-fixes-ie6.css" />
+<link rel="stylesheet" type="text/css" href="$Atlas.ContentPath()/stylesheets/bug-fixes-ie6.css" />
 <![endif]-->
 <!-- END CONDITIONAL COMMENTS -->
 
 <!-- PROTOTYPE 1.6 -->
-<script type="text/javascript" language="javascript" src="$siteroot/Content/javascripts/prototype-1.6.0.2.js"></script>
+<script type="text/javascript" language="javascript" src="$Atlas.ContentPath()/javascripts/prototype-1.6.0.2.js"></script>
 
 <!-- SCRIPTACULOUS -->
 $Scriptaculous.InstallScripts()

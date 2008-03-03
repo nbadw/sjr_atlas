@@ -19,7 +19,8 @@ namespace SJRAtlas.Site.Helpers
             }
             catch (Exception e)
             {
-                config = new AtlasHelperConfiguration(String.Empty, String.Empty, String.Empty, String.Empty);
+                config = new AtlasHelperConfiguration(String.Empty, String.Empty, 
+                    String.Empty, String.Empty, String.Empty);
                 ILogger logger = GlobalApplication.CreateLogger(GetType().FullName);
                 if (logger != null)
                 {
@@ -135,6 +136,11 @@ namespace SJRAtlas.Site.Helpers
                     "querystring=owner=" + dataset.Id.ToString() + 
                     "&type=" + dataset.GetType().Name
             )));
+        }
+
+        public string ContentPath()
+        {
+            return Config.ContentPath;
         }
     }
 }

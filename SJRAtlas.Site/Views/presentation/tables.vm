@@ -7,9 +7,9 @@ $Url.Link('Search', "%{controller='search', action='index'}")
 #end
 
 #capturefor(header)
-<link rel="stylesheet" type="text/css" href="/Content/javascripts/ext-2.0.1/resources/css/ext-all.css" />
-<script src="/Content/javascripts/ext-2.0.1/adapter/prototype/ext-prototype-adapter.js" type="text/javascript" language="javascript"></script>
-<script src="/Content/javascripts/ext-2.0.1/ext-all-debug.js" type="text/javascript" language="javascript"></script>
+<link rel="stylesheet" type="text/css" href="$Atlas.ContentPath()/javascripts/ext-2.0.1/resources/css/ext-all.css" />
+<script src="$Atlas.ContentPath()/javascripts/ext-2.0.1/adapter/prototype/ext-prototype-adapter.js" type="text/javascript" language="javascript"></script>
+<script src="$Atlas.ContentPath()/javascripts/ext-2.0.1/ext-all-debug.js" type="text/javascript" language="javascript"></script>
 #end
 
 #capturefor(headline)
@@ -25,6 +25,7 @@ $Url.Link('Search', "%{controller='search', action='index'}")
     {
         var table_config = tables[i];
         var url = table_config['url'];
+        var download_url = table_config['download'];
         var columns = table_config['columns'];
         
         var fields = columns;
@@ -44,7 +45,32 @@ $Url.Link('Search', "%{controller='search', action='index'}")
             baseParams: filters
         });
         
+        var downloadAction = function() {
+            var grid = Ext.getCmp(this.gridId);
+            // 1250 was the average number of milleseconds taken 
+            // for a page of 50 records to be prepared
+            var estimation = new Date();
+            estimation.setTime(1250 * grid.store.totalLength / 50);
+            var estimateMsg = estimation.getMinutes() + 'min ' + estimation.getSeconds() + 's';
+                      
+            var loadMask = new Ext.LoadMask(this.gridId, {
+                msg: 'Please wait, your download is being prepared...<br/>(Estimated preparation time - ' + estimateMsg + ')',
+                removeMask: true
+            });
+                        
+            var iframe = document.createElement('iframe');
+            iframe.src = download_url + Ext.urlEncode(filters);
+            iframe.style.display = 'none'; 
+                        
+            loadMask.show();             
+            iframe.onload = function() {
+                loadMask.hide();                
+            };
+            Ext.getDom('content').appendChild(iframe); 
+        };
+        
         var grid = new Ext.grid.GridPanel({
+            id: table_div.id,
             store: table_store,
             stripeRows: true,
             frame: true,
@@ -57,7 +83,16 @@ $Url.Link('Search', "%{controller='search', action='index'}")
                 store: table_store,
                 displayInfo: true,
                 displayMsg: 'Displaying rows {0} - {1} of {2}',
-                emptyMsg: 'No rows to display'
+                emptyMsg: 'No rows to display',
+                items: [
+                    '-', {
+                        text: 'Download',
+                        handler: downloadAction,
+                        cls: 'x-btn-text-icon',
+                        icon: '$Atlas.ContentPath()/images/save-blue-16.png',
+                        gridId: table_div.id
+                    }   
+                ]
             })               
         });
         
