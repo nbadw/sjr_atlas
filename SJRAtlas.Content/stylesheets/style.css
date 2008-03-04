@@ -252,6 +252,12 @@ ul li { list-style-image: url('../images/bullet.jpg'); }
 #content .dataset .presentations span.presentation-link {
 	padding-right: 15px;
 }
+#content #rescue .exception {
+	overflow: scroll;
+	background-color: #efefef;
+	font-family: Consolas, "Lucida Console", monospace;
+	padding: 10px 10px 0;
+}
 
 #site.index #content .box {
 	float: left;
@@ -330,18 +336,6 @@ ul li { list-style-image: url('../images/bullet.jpg'); }
 	font-style: italic; 
 }
 
-#search .search-query {
-	font-weight: bold; 
-	color: #425cbd; 
-}
-
-#content #rescue .exception {
-	overflow: scroll;
-	background-color: #efefef;
-	font-family: Consolas, "Lucida Console", monospace;
-	padding: 10px 10px 0;
-}
-
 #site.help ul.toc li {
 	list-style-type: decimal;	
 	list-style-image: none;	
@@ -351,4 +345,13 @@ ul li { list-style-image: url('../images/bullet.jpg'); }
 }
 #site.help ul.toc ul li {
 	list-style-type: lower-alpha;
+}
+
+#presentation.view #content .table {
+	margin-bottom: 30px;
+}
+
+#search .search-query {
+	font-weight: bold; 
+	color: #425cbd; 
 }

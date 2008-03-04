@@ -45,16 +45,9 @@ $Url.Link('Search', "%{controller='search', action='index'}")
             baseParams: filters
         });
         
-        var downloadAction = function() {
-            var grid = Ext.getCmp(this.gridId);
-            // 1250 was the average number of milleseconds taken 
-            // for a page of 50 records to be prepared
-            var estimation = new Date();
-            estimation.setTime(1250 * grid.store.totalLength / 50);
-            var estimateMsg = estimation.getMinutes() + 'min ' + estimation.getSeconds() + 's';
-                      
+        var downloadAction = function() {  
             var loadMask = new Ext.LoadMask(this.gridId, {
-                msg: 'Please wait, your download is being prepared...<br/>(Estimated preparation time - ' + estimateMsg + ')',
+                msg: 'Please wait, your download is being prepared...<br/>(Estimated preparation time is 2-5min depending on the size of the dataset)',
                 removeMask: true
             });
                         
