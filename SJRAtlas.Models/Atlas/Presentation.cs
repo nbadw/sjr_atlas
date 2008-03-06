@@ -19,25 +19,6 @@ namespace SJRAtlas.Models.Atlas
             set { id = value; }
         }
         
-        private string title;
-
-        [Property]
-        public string Title
-        {
-            get { return title; }
-            set { title = value; }
-        }
-
-        private string description;
-
-        public string Description
-        {
-            get { return description; }
-            set { description = value; }
-        }
-        
         #endregion
-
-
-    }
+    }   
 }

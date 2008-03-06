@@ -43,7 +43,16 @@ namespace SJRAtlas.Models.Atlas
             get { return presentationId; }
             set { presentationId = value; }
         }
-        
+
+        private string title;
+
+        [Property("title")]
+        public string Title
+        {
+            get { return title; }
+            set { title = value; }
+        }
+                
         #endregion
 
         public string[] ColumnNames()

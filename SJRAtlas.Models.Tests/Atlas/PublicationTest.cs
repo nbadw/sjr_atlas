@@ -24,14 +24,15 @@ namespace SJRAtlas.Models.Tests.Atlas
         }
 
         [Test]
-        public void TestBasicProperties()
+        public void TestProperties()
         {
             Dictionary<string, object> properties = new Dictionary<string, object>();
             properties["Id"] = 1000;
             properties["Title"] = "test title";
-            properties["Summary"] = "just a simple summary";
-            properties["Author"] = "Colin";
-            properties["File"] = "c:/path/to/file";
+            properties["Abstract"] = "just a simple abstract";
+            properties["Origin"] = "Colin";
+            properties["Uri"] = "c:/path/to/file";
+            properties["MimeType"] = "application/pdf";
             properties["CreatedAt"] = new DateTime(2007, 1, 1);
             properties["UpdatedAt"] = new DateTime(2007, 1, 2);
             TestHelper.ErrorSummary summary = TestHelper.TestProperties(publication, properties);

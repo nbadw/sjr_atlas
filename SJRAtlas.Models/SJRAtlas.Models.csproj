@@ -61,6 +61,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Atlas\PublicationPresentation.cs" />
     <Compile Include="DataWarehouse\Agency.cs" />
     <Compile Include="Atlas\ClosestWatershedToPlace.cs" />
     <Compile Include="AtlasMediator.cs" />

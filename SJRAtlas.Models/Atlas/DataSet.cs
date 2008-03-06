@@ -29,22 +29,13 @@ namespace SJRAtlas.Models.Atlas
             set { title = value; }
         }
 
-        private string abstractText;
+        private string _abstract;
 
         [Property("abstract", ColumnType = "StringClob")]
         public string Abstract
         {
-            get { return abstractText; }
-            set { abstractText = value; }
-        }
-
-        private string author;
-
-        [Property("author")]
-        public string Author
-        {
-            get { return author; }
-            set { author = value; }
+            get { return _abstract; }
+            set { _abstract = value; }
         }
 
         private string origin;

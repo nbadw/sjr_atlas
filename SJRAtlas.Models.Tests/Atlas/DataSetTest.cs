@@ -53,9 +53,8 @@ namespace SJRAtlas.Models.Tests.Atlas
             Dictionary<string, object> properties = new Dictionary<string, object>();
             properties.Add("Id", 7);
             properties.Add("Abstract", "Test Abstract");
-            properties.Add("Author", "Colin Casey");
             properties.Add("Title", "DataSet Title");
-            properties.Add("Origin", "New Origin");
+            properties.Add("Origin", "Colin Casey");
             properties.Add("Presentations", mocks.CreateMock<IList<Presentation>>());
             TestHelper.ErrorSummary summary = TestHelper.TestProperties(dataset, properties);
             Assert.IsEmpty(summary, "The following errors occured while testing DataSet properties:\n" + summary.GetSummary());

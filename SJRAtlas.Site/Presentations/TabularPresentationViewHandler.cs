@@ -53,6 +53,7 @@ namespace SJRAtlas.Site.Presentations
                     "download",
                     DictHelper.Create("table=" + table.Id.ToString())
                 );
+                tableConfig["title"] = table.Title;
                 tableConfig["columns"] = table.ColumnNames();
                 ((ArrayList)configuration["tables"]).Add(tableConfig);
             }
@@ -159,8 +160,6 @@ namespace SJRAtlas.Site.Presentations
                 CustomQuery customQuery = new CustomQuery(query.SelectStatement);
                 customQuery.Logger = GlobalApplication.CreateLogger(typeof(CustomQuery));
 
-                Presentation presentation = Presentation.Find(query.PresentationId);
-
                 QueryResults results = customQuery
                     .ConfigureFilters(controller.Params)
                     .Execute();
@@ -191,7 +190,7 @@ namespace SJRAtlas.Site.Presentations
                 }
 
                 sheet = book.ActiveSheet as Worksheet;
-                sheet.Name = presentation.Title;
+                sheet.Name = query.Title;
 
                 // first row is column names
                 for (int i = 0; i < results.Columns.Length; i++)
@@ -244,7 +243,7 @@ namespace SJRAtlas.Site.Presentations
                 controller.CancelLayout();
 
                 IResponse response = controller.Context.Response;
-                string attachment = String.Format("attachment; filename=\"{0}.xls\"", presentation.Title);
+                string attachment = String.Format("attachment; filename=\"{0}.xls\"", query.Title);
                 string contentLength = new FileInfo(filename).Length.ToString();
 
                 response.Clear();

@@ -12,7 +12,7 @@ namespace SJRAtlas.Models.Atlas
     {
         private int id;
 
-        [PrimaryKey("OBJECTID")]
+        [PrimaryKey("id")]
         public int Id
         {
             get { return id; }

@@ -13,7 +13,7 @@ $Url.Link('Search', "%{controller='search', action='index'}")
 #end
 
 #capturefor(headline)
-<h1 class="title">$presentation.Title Data</h1>
+<h1 class="title">Tabular Data</h1>
 #end
 			            
 <script language="javascript" type="text/javascript">	            
@@ -71,6 +71,7 @@ $Url.Link('Search', "%{controller='search', action='index'}")
             width: 'auto',
             loadMask: true,
             columns: headers,
+            title: table_config.title,
             bbar: new Ext.PagingToolbar({
                 pageSize: 50,
                 store: table_store,

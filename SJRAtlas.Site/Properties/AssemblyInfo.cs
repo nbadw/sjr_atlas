@@ -3,17 +3,17 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // Change me!
-[assembly: AssemblyTitle("MonoRail Web Project")]
+[assembly: AssemblyTitle("Saint John River Atlas Web Site")]
 
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 
 // Change me!
-[assembly: AssemblyProduct("MonoRail Web Project")]
+[assembly: AssemblyProduct("Saint John River Atlas Project")]
 
 // Change me!
-[assembly: AssemblyCopyright("Copyright ©  2006")]
+[assembly: AssemblyCopyright("Copyright ©  2008")]
 
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -27,7 +27,7 @@ using System.Runtime.InteropServices;
 //
 // You can specify all the values or you can default the Revision and Build Numbers 
 // by using the '*' as shown below:
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyVersion("1.2.32.0")]
+[assembly: AssemblyFileVersion("1.2.32.0")]
 
 //[assembly: log4net.Config.XmlConfigurator(ConfigFile = "Log4Net.config", Watch = true)]

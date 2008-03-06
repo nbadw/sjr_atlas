@@ -28,13 +28,13 @@ namespace SJRAtlas.Models.Atlas
             set { content = value; }
         }
 
-        private string filename;
+        private string uri;
 
-        [Property("filename", Unique = true)]
-        public string Filename
+        [Property("uri", Unique = true)]
+        public string Uri
         {
-            get { return filename; }
-            set { filename = value; }
+            get { return uri; }
+            set { uri = value; }
         }
         
         private IMetadataAware owner;

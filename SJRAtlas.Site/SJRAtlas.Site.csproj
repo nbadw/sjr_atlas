@@ -149,6 +149,7 @@
     <Compile Include="Controllers\WaterBodyController.cs" />
     <Compile Include="Controllers\WatershedController.cs" />
     <Compile Include="Filters\EscapeToUnicodeFilter.cs" />
+    <Compile Include="Presentations\PublicationPresentationViewHandler.cs" />
     <Compile Include="Presentations\PresentationViewResolver.cs" />
     <Compile Include="GlobalApplication.cs" />
     <Compile Include="Presentations\TabularPresentationViewHandler.cs" />
@@ -160,6 +161,7 @@
     <Compile Include="Controllers\BaseController.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="FGDC.xsl" />
     <Content Include="log.txt" />
     <Content Include="logging.config" />
     <Content Include="Config\components.config" />

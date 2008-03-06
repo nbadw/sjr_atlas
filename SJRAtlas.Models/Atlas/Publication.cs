@@ -36,32 +36,42 @@ namespace SJRAtlas.Models.Atlas
             set { title = value; }
         }
 
-        private string summary;
+        private string _abstract;
 
-        [Property("summary")]
-        public string Summary
+        [Property("abstract")]
+        public string Abstract
         {
-            get { return summary; }
-            set { summary = value; }
+            get { return _abstract; }
+            set { _abstract = value; }
         }
 
-        private string author;
+        private string origin;
 
-        [Property("author")]
-        public string Author
+        [Property("origin")]
+        public string Origin
         {
-            get { return author; }
-            set { author = value; }
+            get { return origin; }
+            set { origin = value; }
         }
 
-        private string file;
+        private string uri;
 
-        [Property("filename")]
-        public string File
+        [Property("uri")]
+        public string Uri
         {
-            get { return file; }
-            set { file = value; }
+            get { return uri; }
+            set { uri = value; }
         }
+
+        private string mimeType;
+
+        [Property("mime_type")]
+        public string MimeType
+        {
+            get { return mimeType; }
+            set { mimeType = value; }
+        }
+	
 
         private DateTime createdAt = DateTime.Now;
 

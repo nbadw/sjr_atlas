@@ -6,7 +6,7 @@ using Castle.ActiveRecord;
 namespace SJRAtlas.Models.Atlas
 {
     [ActiveRecord(DiscriminatorValue = "SummaryReportPresentation")]
-    public class SummaryReportPresentation : Presentation
-    {
+    public class SummaryReportPresentation : PublicationPresentation
+    {	
     }
 }

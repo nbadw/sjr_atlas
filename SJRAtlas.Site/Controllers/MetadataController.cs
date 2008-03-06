@@ -1,13 +1,8 @@
 using System;
-using System.Data;
-using System.Configuration;
-using System.Web;
-using System.Web.Security;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Web.UI.WebControls.WebParts;
-using System.Web.UI.HtmlControls;
 using SJRAtlas.Models.Atlas;
+using System.Xml;
+using System.Xml.Xsl;
+using System.Reflection;
 
 namespace SJRAtlas.Site.Controllers
 {
@@ -19,12 +14,29 @@ namespace SJRAtlas.Site.Controllers
             if (metadata == null)
             {
                 RenderSharedView("shared/404");
+                return;
             }
-            else
+
+            Uri location = new Uri(metadata.Uri);
+            if (location.IsFile)
             {
+                //XmlDocument xml = new XmlDocument();
+                //xml.LoadXml(metadata.Content);
+                //using(XmlReader reader = XmlReader.Create(
+                //    Assembly.GetExecutingAssembly().GetManifestResourceStream(
+                //        "SJRAtlas.Site.FGDC.xsl"))) 
+                //{
+                //    XslCompiledTransform xsl = new XslCompiledTransform();
+                //    xsl.Load(reader);                    
+                //    xsl.Transform(xml, null, Context.Response.OutputStream);
+                //}  
                 Context.Response.ContentType = "text/xml";
                 RenderText(metadata.Content);
             }
+            else
+            {
+                Redirect(metadata.Uri);
+            }          
         }
     }
 }

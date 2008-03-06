@@ -76,7 +76,7 @@ namespace SJRAtlas.Models.Tests.Atlas
             Dictionary<string, object> properties = new Dictionary<string, object>();
             properties.Add("Id", 12345);
             properties.Add("Content", "<metadata>some xml content</metadata>");
-            properties.Add("Filename", "c:/path/to/metadata/file.xml");
+            properties.Add("Uri", "c:/path/to/metadata/file.xml");
             properties.Add("Owner", mocks.CreateMock<IMetadataAware>());
             TestHelper.ErrorSummary summary = TestHelper.TestProperties(metadata, properties);
             Assert.IsEmpty(summary, "The following errors occured while testing Metadata properties:\n" + summary.GetSummary());

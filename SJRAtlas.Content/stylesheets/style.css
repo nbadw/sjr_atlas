@@ -238,6 +238,7 @@ ul li { list-style-image: url('../images/bullet.jpg'); }
 #content .dataset {
 	margin-left: 1em;
 	margin-bottom: 1.5em;
+	clear: both;
 }
 #content .publication .title,
 #content .interactive-map .title,
@@ -351,7 +352,14 @@ ul li { list-style-image: url('../images/bullet.jpg'); }
 	margin-bottom: 30px;
 }
 
-#search .search-query {
+.search-query {
 	font-weight: bold; 
 	color: #425cbd; 
+}
+
+.interactive-map img.thumbnail {
+	height: 100px;
+	width: 100px;
+	float: left;
+	margin: 0 1em 1.5em 0;
 }
