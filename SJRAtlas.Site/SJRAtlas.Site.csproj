@@ -161,7 +161,6 @@
     <Compile Include="Controllers\BaseController.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="FGDC.xsl" />
     <Content Include="log.txt" />
     <Content Include="logging.config" />
     <Content Include="Config\components.config" />
