@@ -214,7 +214,7 @@ namespace SJRAtlas.Site.Tests.Controllers
         }
 
         [Test]
-        public void TestWatershedsSearchRedirectsToDataSetSearchWhenNoResultsFound()
+        public void TestWatershedsSearchRedirectsToAllSearchWhenNoResultsFound()
         {
             string query = "test";
             AtlasMediator mediator = mocks.CreateMock<AtlasMediator>();
@@ -229,7 +229,7 @@ namespace SJRAtlas.Site.Tests.Controllers
             PrepareController(controller, "search", "watersheds");
             controller.Watersheds(query);
 
-            Assert.AreEqual("/search/datasets.rails?q=" + query + "&", Response.RedirectedTo);
+            Assert.AreEqual("/search/all.rails?q=" + query + "&", Response.RedirectedTo);
             mocks.VerifyAll();
         }
 
@@ -254,44 +254,104 @@ namespace SJRAtlas.Site.Tests.Controllers
 
         # endregion
 
-        #region DataSet Search Test
+        #region All Search Test
 
         [Test]
-        public void TestDataSetSearchWhenResultsFound()
+        public void TestAllSearchWhenDataSetResultsFound()
         {
             string query = "test";
             AtlasMediator mediator = mocks.CreateMock<AtlasMediator>();
-            IList<DataSet> results = new List<DataSet>();
+            List<DataSet> results = new List<DataSet>();
             results.Add(new DataSet());
 
             Expect.Call(mediator.FindAllDataSetsByQuery(query)).Return(results);
+            Expect.Call(mediator.FindAllInteractiveMapsByQuery(query)).Return(new List<InteractiveMap>());
+            Expect.Call(mediator.FindAllPublicationsByQuery(query)).Return(new List<Publication>());
             mocks.ReplayAll();
 
             SearchController controller = new SearchController();
             controller.AtlasMediator = mediator;
-            PrepareController(controller, "search", "datasets");
-            controller.DataSets(query);
+            PrepareController(controller, "search", "all");
+            controller.All(query);
 
             Assert.AreEqual(query, controller.PropertyBag["query"]);
-            Assert.AreEqual(results, controller.PropertyBag["results"]);
-            Assert.AreEqual(@"search\datasets", controller.SelectedViewName);
+            Assert.IsNotNull(controller.PropertyBag["datasets"]);
+            Assert.IsNotNull(controller.PropertyBag["interactive_maps"]);
+            Assert.IsNotNull(controller.PropertyBag["published_maps"]);
+            Assert.IsNotNull(controller.PropertyBag["published_reports"]);
+            Assert.AreEqual(@"search\all", controller.SelectedViewName);
             mocks.VerifyAll();
         }
 
         [Test]
-        public void TestDataSetSearchRendersNoResultsPageWhenNoResultsFound()
+        public void TestAllSearchWhenInteractiveMapResultsFound()
         {
             string query = "test";
             AtlasMediator mediator = mocks.CreateMock<AtlasMediator>();
-            IList<DataSet> results = new List<DataSet>();
+            List<InteractiveMap> results = new List<InteractiveMap>();
+            results.Add(new InteractiveMap());
 
-            Expect.Call(mediator.FindAllDataSetsByQuery(query)).Return(results);
+            Expect.Call(mediator.FindAllDataSetsByQuery(query)).Return(new List<DataSet>());
+            Expect.Call(mediator.FindAllInteractiveMapsByQuery(query)).Return(results);
+            Expect.Call(mediator.FindAllPublicationsByQuery(query)).Return(new List<Publication>());
             mocks.ReplayAll();
 
             SearchController controller = new SearchController();
             controller.AtlasMediator = mediator;
-            PrepareController(controller, "search", "datasets");
-            controller.DataSets(query);
+            PrepareController(controller, "search", "all");
+            controller.All(query);
+
+            Assert.AreEqual(query, controller.PropertyBag["query"]);
+            Assert.IsNotNull(controller.PropertyBag["datasets"]);
+            Assert.IsNotNull(controller.PropertyBag["interactive_maps"]);
+            Assert.IsNotNull(controller.PropertyBag["published_maps"]);
+            Assert.IsNotNull(controller.PropertyBag["published_reports"]);
+            Assert.AreEqual(@"search\all", controller.SelectedViewName);
+            mocks.VerifyAll();
+        }
+
+        [Test]
+        public void TestAllSearchWhenPublicationResultsFound()
+        {
+            string query = "test";
+            AtlasMediator mediator = mocks.CreateMock<AtlasMediator>();
+            List<Publication> results = new List<Publication>();
+            results.Add(new Publication());
+
+            Expect.Call(mediator.FindAllDataSetsByQuery(query)).Return(new List<DataSet>());
+            Expect.Call(mediator.FindAllInteractiveMapsByQuery(query)).Return(new List<InteractiveMap>());
+            Expect.Call(mediator.FindAllPublicationsByQuery(query)).Return(results);
+            mocks.ReplayAll();
+
+            SearchController controller = new SearchController();
+            controller.AtlasMediator = mediator;
+            PrepareController(controller, "search", "all");
+            controller.All(query);
+
+            Assert.AreEqual(query, controller.PropertyBag["query"]);
+            Assert.IsNotNull(controller.PropertyBag["datasets"]);
+            Assert.IsNotNull(controller.PropertyBag["interactive_maps"]);
+            Assert.IsNotNull(controller.PropertyBag["published_maps"]);
+            Assert.IsNotNull(controller.PropertyBag["published_reports"]);
+            Assert.AreEqual(@"search\all", controller.SelectedViewName);
+            mocks.VerifyAll();
+        }
+
+        [Test]
+        public void TestAllSearchRendersNoResultsPageWhenNoResultsFound()
+        {
+            string query = "test";
+            AtlasMediator mediator = mocks.CreateMock<AtlasMediator>();
+
+            Expect.Call(mediator.FindAllDataSetsByQuery(query)).Return(new List<DataSet>());
+            Expect.Call(mediator.FindAllInteractiveMapsByQuery(query)).Return(new List<InteractiveMap>());
+            Expect.Call(mediator.FindAllPublicationsByQuery(query)).Return(new List<Publication>());
+            mocks.ReplayAll();
+
+            SearchController controller = new SearchController();
+            controller.AtlasMediator = mediator;
+            PrepareController(controller, "search", "all");
+            controller.All(query);
 
             Assert.AreEqual("/search/noresults.rails?q=" + query + "&", Response.RedirectedTo);
             mocks.VerifyAll();
@@ -299,18 +359,20 @@ namespace SJRAtlas.Site.Tests.Controllers
 
         [Test]
         [ExpectedException(typeof(Exception))]
-        public void TestDataSetSearchDisplaysRescueWhenAnExceptionOccurs()
+        public void TestAllSearchDisplaysRescueWhenAnExceptionOccurs()
         {
             string query = "test";
             AtlasMediator mediator = mocks.CreateMock<AtlasMediator>();
 
             Expect.Call(mediator.FindAllDataSetsByQuery(query)).Throw(new Exception());
+            Expect.Call(mediator.FindAllInteractiveMapsByQuery(query)).Throw(new Exception());
+            Expect.Call(mediator.FindAllPublicationsByQuery(query)).Throw(new Exception());
             mocks.ReplayAll();
 
             SearchController controller = new SearchController();
             controller.AtlasMediator = mediator;
-            PrepareController(controller, "search", "datasets");
-            controller.DataSets(query);
+            PrepareController(controller, "search", "all");
+            controller.All(query);
 
             Assert.AreEqual(@"rescue\generalerror", controller.SelectedViewName);
             mocks.VerifyAll();

@@ -27,10 +27,12 @@
 
 <div id="search" class="box">
     <h2 class="header">Quick Search</h2>    <div class="body">        <p>Enter a place name, lake or stream name, data set name, or other text string to search for maps, reports, data and other information.<br /> $Url.Link('More tips...', "%{controller='search', action='tips'}")</p>
-               <form id="alt_search_form" action="$siteroot/search/quick.rails" method="get">
-            <label id="lbl_alt_search" for="txt_alt_search">Search:</label>
-            <input id="txt_alt_search" name="q" type="text"/>
-            <input id="btn_alt_search" name="submit" type="submit" value="Go"/>
+               <form id="alt-search-form" action="$siteroot/search/quick.rails" method="get">
+            <label id="lbl-alt-search" for="txt-alt-search">Search:</label>
+            <input id="txt-alt-search" class="search" name="q" type="text"/>            
+	        <div id="btn-alt-search" class="btn">
+	            <input name="alt-search" type="submit" value="Go"/>
+	        </div>
         </form>                <p>This "Quick Search" can also be found in the navigation menu on every page in this site.</p>
         <p>For other searches, try:</p>
         <ul>

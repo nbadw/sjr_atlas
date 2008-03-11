@@ -81,7 +81,7 @@ namespace SJRAtlas.Site.Controllers
 
             if(results.Count == 0)
             {
-                RedirectToAction("datasets", "q=" + q);
+                RedirectToAction("all", "q=" + q);
                 return;               
             }
 
@@ -89,11 +89,13 @@ namespace SJRAtlas.Site.Controllers
             PropertyBag["results"] = results;
         }
 
-        public void DataSets(string q)
+        public void All(string q)
         {
-            IList<DataSet> results = AtlasMediator.FindAllDataSetsByQuery(q);
-
-            if (results.Count == 0)
+            IList<DataSet> datasets = AtlasMediator.FindAllDataSetsByQuery(q);
+            IList<InteractiveMap> interactiveMaps = AtlasMediator.FindAllInteractiveMapsByQuery(q);
+            IList<Publication> publications = AtlasMediator.FindAllPublicationsByQuery(q);
+            
+            if (datasets.Count == 0 && interactiveMaps.Count == 0 && publications.Count == 0)
             {
                 NameValueCollection parameters = new NameValueCollection();
                 parameters.Add("q", q);
@@ -102,7 +104,11 @@ namespace SJRAtlas.Site.Controllers
             }
 
             PropertyBag["query"] = q;
-            PropertyBag["results"] = results;
+            PropertyBag["datasets"] = datasets;
+            PropertyBag["interactive_maps"] = interactiveMaps;
+            PropertyBag["published_maps"] = GetPublicationsByType<PublishedMap>(publications);
+            PropertyBag["published_reports"] = GetPublicationsByType<PublishedReport>(publications);
+
         }
 
         public void NoResults(string q)

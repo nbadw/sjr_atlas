@@ -1,0 +1,49 @@
+#capturefor(breadcrumb_trail)
+$Url.Link('Home', "%{controller='site', action='index'}")
+<span class="breadcrumb-separator">&#8722;</span>
+$Url.Link('Search', "%{controller='search', action='index'}")
+<span class="breadcrumb-separator">&#8722;</span>
+<a href="#" title="Metadata">Metadata</a>
+#end
+
+#capturefor(headline)
+<h1 class="title">Search</h1>
+<p>You've searched for: <span class="search-query">&ldquo;$!{query}&rdquo;</span>. Below is a list of matches for your query.</p>
+#end
+
+<div class="yui-gc">			
+    <div class="yui-u first">
+        
+        #if($interactive_maps.Count != 0)
+        <div id="interactive-maps">
+            <h2 class="title">Interactive Maps:</h2>
+            #parse("interactive_map/_list.vm")    
+        </div>
+        #end
+
+        #if($published_maps.Count != 0)
+        <div id="published-maps">  
+            <h2 class="title">Published Maps:</h2>  
+            #parse("publication/_list_maps.vm")            
+        </div>
+        #end
+        
+        #if($published_reports.Count != 0)
+        <div id="published-reports">  
+            <h2 class="title">Published Reports:</h2>  
+            #parse("publication/_list_reports.vm")            
+        </div>
+        #end
+        
+        #if($datasets.Count != 0)
+        <div id="datasets">  
+            <h2 class="title">Data Sets:</h2> 
+            #parse("data_set/_list.vm")
+        </div>
+        #end
+        
+    </div>
+    <div class="yui-u">
+        #parse("search/_need-help.vm")
+    </div>              
+</div>

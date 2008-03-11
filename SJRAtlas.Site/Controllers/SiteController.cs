@@ -47,11 +47,5 @@ namespace SJRAtlas.Site.Controllers
             PropertyBag["published_maps"] = AtlasMediator.FindAllPublishedMaps();
             RenderView("maps");
         }
-
-        public void Help()
-        {
-            Logger.Debug("Site/Help action called");
-            RenderView("help");
-        }
     }
 }

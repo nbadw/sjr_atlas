@@ -22,7 +22,7 @@
 
 <!-- PROTOTYPE 1.6 -->
 <script type="text/javascript" language="javascript" src="$Atlas.ContentPath()/javascripts/prototype-1.6.0.2.js"></script>
-
+<script type="text/javascript" language="javascript" src="$Atlas.ContentPath()/javascripts/application.js"></script>
 <!-- SCRIPTACULOUS -->
 $Scriptaculous.InstallScripts()
 
@@ -60,11 +60,11 @@ $!{header}
 		        </div>
 		        $Form.FormTag("%{controller='search', action='quick', id='quick-search-form'}")			
 			        <div id="search-box">
-			            <label id="lbl_search" for="txt_search">Quick Search:</label>
-			            <input id="txt_search" name="q" type="text"/>
+			            <label id="lbl-search" for="txt-search">Quick Search:</label>
+			            <input id="txt-search" class="search" name="q" type="text"/>
 			        </div>
-			        <div class="btn">
-			            <input id="btn_search" name="submit" type="submit"/>
+			        <div id="btn-search" class="btn">
+			            <input name="search" type="submit" value="Go"/>
 			        </div>
 		        </form>
 	        </div>			    

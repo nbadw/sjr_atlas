@@ -75,5 +75,15 @@ namespace SJRAtlas.Models
         {
             return DataSet.FindAllByQuery(q);
         }
+
+        public virtual IList<InteractiveMap> FindAllInteractiveMapsByQuery(string q)
+        {
+            return InteractiveMap.FindAllByQuery(q);
+        }
+
+        public virtual IList<Publication> FindAllPublicationsByQuery(string q)
+        {
+            return Publication.FindAllByQuery(q);
+        }
     }
 }

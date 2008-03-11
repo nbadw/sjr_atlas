@@ -1,0 +1,51 @@
+#capturefor(breadcrumb_trail)
+$Url.Link('Home', "%{controller='site', action='index'}")
+<span class="breadcrumb-separator">&#8722;</span>
+<a href="#" title="Help">Help</a>
+#end
+
+#macro(build_toc $help)    
+    <li><a title="Go to &quot;$help.Name&quot;" href="#$help.Anchor">$help.Name</a>
+        #if($help.Contents.Count > 0)
+            <ul>
+                #foreach( $section in $help.Contents )                
+                    #build_toc($section)
+                #end
+            </ul>
+        #end            
+    </li>
+#end
+
+#macro(print_contents $help)    
+    <div class="section">
+        <a name="$help.Anchor"></a>
+        <h2 class="title">$help.Name</h2>
+        <div class="contents">
+            #if($help.View)
+                #parse("$help.View")   
+            #end
+            
+            #if($help.Contents.Count > 0)
+                #foreach( $section in $help.Contents )                
+                    #print_contents($section)
+                #end
+            #end  
+        </div>
+    </div>
+#end
+
+#capturefor(headline)
+<a name="table-of-contents"></a>
+<h1 class="title">$!{help_contents.Title}</h1>
+<ul class="toc">
+    #foreach( $section in $help_contents.Contents )
+        #build_toc($section)
+    #end   
+</ul>
+#end
+
+<div id="help-contents">
+    #foreach( $section in $help_contents.Contents )
+        #print_contents($section)
+    #end 
+</div>

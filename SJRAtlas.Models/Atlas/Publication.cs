@@ -2,18 +2,28 @@ using System;
 using Castle.ActiveRecord;
 using NHibernate.Expression;
 using System.Collections.Generic;
+using SJRAtlas.Models.Query;
+using Castle.ActiveRecord.Queries;
 
 namespace SJRAtlas.Models.Atlas
 {
     [ActiveRecord("web_publications", DiscriminatorColumn = "type", DiscriminatorType = "String", DiscriminatorValue = "Publication")]
     public class Publication : ActiveRecordBase<Publication>, IMetadataAware
     {
-        public static IList<Publication> FindAllByQuery(string query)
+        public static IList<Publication> FindAllByQuery(string q)
         {
-            DetachedCriteria criteria = DetachedCriteria.For<Publication>();
-            criteria.Add(Expression.Like("Title", query));
-            return ActiveRecordMediator<Publication>.FindAll(criteria,
-                new Order[] { Order.Asc("Title") });
+            string terms = QueryParser.BuildContainsTerms(q);
+            SimpleQuery<Publication> query = new SimpleQuery<Publication>(QueryLanguage.Sql,
+                String.Format(@"
+                    SELECT        *
+                    FROM          web_publications as publication
+                    WHERE         CONTAINS (publication.title, '{0}')
+                    OR            CONTAINS (publication.abstract, '{0}')",
+                    terms
+                )
+            );
+            query.AddSqlReturnDefinition(typeof(Publication), "publication");
+            return query.Execute();
         }
 
         #region ActiveRecord Properties

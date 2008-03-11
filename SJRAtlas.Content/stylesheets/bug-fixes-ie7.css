@@ -3,7 +3,7 @@ Author: Colin Casey
 Date: 7/20/2007
 */
 
-/** NAVIGATION FIXES **/
+/** NAVIGATION FIXES 
 #navigation ul { margin-left: 10px; padding-top: 23px; }
 #navigation li { float: left; margin-right: 4px; padding: 0; border: 1px solid #070660; border-bottom: none; color: #8291ec; background-color: #e8ebfc; }
 #navigation li a { display: block; padding: 3px 15px; }
@@ -23,3 +23,4 @@ Date: 7/20/2007
 #navigation #quick-search #txt_search { width: 100%; margin-bottom: 1.125em; padding: 0 2px; }
 #navigation #quick-search div.btn { margin-top: -34px; margin-right: -3px; }
 #navigation #quick-search #btn_search { position: relative; z-index: 100; width: 20px; height: 20px; border: none; overflow: hidden; font-size: 0em; color: #fff; background: #fff center no-repeat url('../images/search-button.gif'); }
+**/

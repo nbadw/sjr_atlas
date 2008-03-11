@@ -5,6 +5,7 @@ using Castle.ActiveRecord;
 using Newtonsoft.Json;
 using Castle.ActiveRecord.Queries;
 using NHibernate;
+using SJRAtlas.Models.Query;
 
 namespace SJRAtlas.Models.Atlas
 {
@@ -130,7 +131,7 @@ namespace SJRAtlas.Models.Atlas
 
         public static IList<DataSet> FindAllByQuery(string q)
         {
-            string terms = BuildContainsTerms(q);
+            string terms = QueryParser.BuildContainsTerms(q);
             SimpleQuery<DataSet> query = new SimpleQuery<DataSet>(QueryLanguage.Sql, 
                 String.Format(@"
                     SELECT      {{dataset.*}}
@@ -147,29 +148,6 @@ namespace SJRAtlas.Models.Atlas
             );
             query.AddSqlReturnDefinition(typeof(DataSet), "dataset");
             return query.Execute();
-        }
-
-        private static string BuildContainsTerms(string query)
-        {
-            StringBuilder contains = new StringBuilder();
-            string[] terms = query.Split(' ');
-            bool quoted_term = false;
-            for (int i = 0; i < terms.Length; i++)
-            {
-                string term = terms[i];
-                contains.Append(term);
-
-                if (term.StartsWith("\""))
-                    quoted_term = true;
-                else if (term.EndsWith("\""))
-                    quoted_term = false;
-
-                if (!quoted_term && i != terms.Length - 1)
-                    contains.Append(" AND ");
-                else
-                    contains.Append(" ");
-            }
-            return contains.ToString();
         }
     }
 }

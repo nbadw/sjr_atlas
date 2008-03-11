@@ -24,30 +24,24 @@ $Url.Link('Home', "%{controller='site', action='index'}")
 
   
 <div id="expanded-info">
+    #if($interactive_maps.Count != 0)
     <div id="interactive-maps">
         <h2 class="title">Interactive Maps:</h2>
-        #if($interactive_maps.Count == 0)
-            <p>No Interactive Maps</p>
-        #else
-            #parse("interactive_map/_list.vm")                        
-        #end
+        #parse("interactive_map/_list.vm")    
     </div>
+    #end
 
+    #if($published_maps.Count != 0)
     <div id="published-maps">  
         <h2 class="title">Published Maps:</h2>  
-        #if($published_maps.Count == 0)
-            <p>No Published Maps</p>
-        #else
-            #parse("publication/_list_maps.vm")
-        #end
+        #parse("publication/_list_maps.vm")            
     </div>
+    #end
     
+    #if($published_reports.Count != 0)
     <div id="published-reports">  
         <h2 class="title">Published Reports:</h2>  
-        #if($published_reports.Count == 0)
-            <p>No Published Reports</p>
-        #else
-            #parse("publication/_list_reports.vm")
-        #end
+        #parse("publication/_list_reports.vm")            
     </div>
+    #end
 </div>

@@ -18,7 +18,7 @@ namespace SJRAtlas.Site.Controllers
             }
 
             Uri location = new Uri(metadata.Uri);
-            if (location.IsFile)
+            if (location.IsFile)// && location.AbsolutePath.EndsWith(".xml"))
             {
                 //XmlDocument xml = new XmlDocument();
                 //xml.LoadXml(metadata.Content);
@@ -30,6 +30,8 @@ namespace SJRAtlas.Site.Controllers
                 //    xsl.Load(reader);                    
                 //    xsl.Transform(xml, null, Context.Response.OutputStream);
                 //}  
+
+                //htmlUri = location.AbsolutePath.Replace(".xml", ".html");                
                 Context.Response.ContentType = "text/xml";
                 RenderText(metadata.Content);
             }

@@ -4,6 +4,8 @@ using System.Text;
 using Castle.ActiveRecord;
 using NHibernate.Expression;
 using System.Collections;
+using Castle.ActiveRecord.Queries;
+using SJRAtlas.Models.Query;
 
 namespace SJRAtlas.Models.Atlas
 {
@@ -124,12 +126,20 @@ namespace SJRAtlas.Models.Atlas
 
         #region Finders
 
-        public static IList<InteractiveMap> FindAllByQuery(string query)
+        public static IList<InteractiveMap> FindAllByQuery(string q)
         {
-            DetachedCriteria criteria = DetachedCriteria.For<InteractiveMap>();
-            criteria.Add(Expression.Like("Title", query));
-            return ActiveRecordMediator<InteractiveMap>.FindAll(criteria,
-                new Order[] { Order.Asc("Title") });
+            string terms = QueryParser.BuildContainsTerms(q);
+            SimpleQuery<InteractiveMap> query = new SimpleQuery<InteractiveMap>(QueryLanguage.Sql,
+                String.Format(@"
+                    SELECT        *
+                    FROM          web_interactive_maps as interactive_map
+                    WHERE         CONTAINS (interactive_map.title, '{0}')
+                    OR            CONTAINS (interactive_map.description, '{0}')",
+                    terms
+                )
+            );
+            query.AddSqlReturnDefinition(typeof(InteractiveMap), "interactive_map");
+            return query.Execute();
         }
 
         public static IList<InteractiveMap> FindAllWithFullBasinCoverageByQuery(string query)

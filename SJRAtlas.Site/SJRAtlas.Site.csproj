@@ -139,6 +139,7 @@
     <Compile Include="Components\ResourceComponent.cs" />
     <Compile Include="Controllers\AgencyController.cs" />
     <Compile Include="Controllers\AquaticSiteController.cs" />
+    <Compile Include="Controllers\HelpController.cs" />
     <Compile Include="Controllers\DataSetController.cs" />
     <Compile Include="Controllers\MetadataController.cs" />
     <Compile Include="Controllers\PresentationController.cs" />
@@ -169,6 +170,15 @@
     <Content Include="Config\properties.config" />
     <None Include="Views\data_set\data_set.vm" />
     <None Include="Views\data_set\_list.vm" />
+    <None Include="Views\help\_advanced_search.vm" />
+    <None Include="Views\help\_search_tips.vm" />
+    <None Include="Views\help\_quick_search.vm" />
+    <None Include="Views\help\_navigation.vm" />
+    <None Include="Views\help\_map_contents.vm" />
+    <None Include="Views\help\_tasks.vm" />
+    <None Include="Views\help\_toolbar.vm" />
+    <None Include="Views\help\_interactive_maps.vm" />
+    <None Include="Views\help\_overview_of_maps.vm" />
     <None Include="Views\interactive_map\_list.vm" />
     <None Include="Views\interactive_map\interactive_map.vm" />
     <None Include="Views\metadata\metadata.vm" />
@@ -178,10 +188,10 @@
     <None Include="Views\publication\_list.vm" />
     <None Include="Views\publication\publication.vm" />
     <None Include="Views\search\_need-help.vm" />
-    <None Include="Views\search\datasets.vm" />
+    <None Include="Views\search\all.vm" />
     <None Include="Views\shared\404.vm" />
     <None Include="Views\site\about.vm" />
-    <None Include="Views\site\help.vm" />
+    <None Include="Views\help\index.vm" />
     <None Include="Views\site\forms.vm" />
     <None Include="Views\site\reports.vm" />
     <None Include="Views\site\maps.vm" />

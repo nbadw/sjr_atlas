@@ -14,7 +14,7 @@ $Url.Link('Search', "%{controller='search', action='index'}")
 <div class="yui-gc">			
     <div class="yui-u first">
         <h2 class="title">No Results Found!</h2>
-        <p>Sorry, we tried to run your query against the <a title="CGNS" href="http://gnss.nrcan.gc.ca/index_e.html">CGNS</a> <a href="http://gnss.nrcan.gc.ca/gnss-srt/searchName.jsp" title="GNSS Search">Geographical Names Search Service</a> database as well as the list of watersheds and available Data Sets in the <a title="NB Aquatic Data Warehouse" href="http://nbwaters.unb.ca/">NB Aquatic Data Warehouse</a> but nothing could be found to match <span class="search-query">&ldquo;$!{query}&rdquo;</span>.</p>
+        <p>Sorry, we tried to run your query against the <a title="CGNS" href="http://gnss.nrcan.gc.ca/index_e.html">CGNS</a> <a href="http://gnss.nrcan.gc.ca/gnss-srt/searchName.jsp" title="GNSS Search">Geographical Names Search Service</a> database as well as the list of watersheds and available Data Sets, Interactive Maps, and Publications in the <a title="NB Aquatic Data Warehouse" href="http://nbwaters.unb.ca/">NB Aquatic Data Warehouse</a> but nothing could be found to match <span class="search-query">&ldquo;$!{query}&rdquo;</span>.</p>
     </div>
     <div class="yui-u">
         #parse("search/_need-help.vm")
