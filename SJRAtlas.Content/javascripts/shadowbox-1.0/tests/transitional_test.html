@@ -1,0 +1,44 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+
+<!--
+Created to test the transitional doctype.
+-->
+
+<head>
+<title>Shadowbox Transitional Test</title>
+<link rel="stylesheet" type="text/css" href="../src/css/shadowbox.css" />
+<style type="text/css">
+
+body {
+  text-align: center;
+}
+
+</style>
+<script type="text/javascript" src="../src/js/lib/yui-utilities.js"></script>
+<script type="text/javascript" src="../src/js/adapter/shadowbox-yui.js"></script>
+<script type="text/javascript" src="../src/js/shadowbox.js"></script>
+<script type="text/javascript">
+
+window.onload = function(){
+
+    var o = {
+        loadingImage: '../images/loading.gif'
+    };
+
+    Shadowbox.init(o);
+
+};
+
+</script>
+</head>
+
+<body>
+
+<a rel="shadowbox" href="../gallery/mustang/blue.jpg"><img src="../gallery/mustang/blue-thumb.jpg" /></a>
+
+</body>
+
+</html>

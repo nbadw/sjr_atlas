@@ -1,0 +1,103 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+    "http://www.w3.org/TR/html4/strict.dtd">
+
+<html>
+
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Shadowbox.js Media Viewer</title>
+
+<link rel="stylesheet" type="text/css" href="../style.css">
+
+</head>
+
+<body>
+
+<div id="wrapper">
+
+    <h1>Shadowbox.js<span> by <a href="http://www.mjijackson.com/">Michael J. I. Jackson</a></span></h1>
+
+    <p>Version: 1.0</p>
+
+    <ul id="nav">
+        <li><a href="../index.html">Overview</a></li>
+        <li><a class="selected">Support</a></li>
+        <li><a href="usage.html">Usage</a></li>
+    </ul>
+
+    <h2><a name="support">Support</a></h2>
+
+    <h3><a name="forum">Forum</a></h3>
+
+    <p>A support forum for Shadowbox is hosted on <a href="http://www.nabble.com/Shadowbox-f31623.html">Nabble</a>. If you have questions about using Shadowbox or feature requests, please post them in that venue.</p>
+
+    <h3><a name="browsers">Browsers</a></h3>
+
+    <p>Shadowbox supports the following browsers:</p>
+
+    <ul>
+        <li><a href="http://www.mozilla.com/firefox/">Firefox</a> 1.5+</li>
+        <li><a href="http://caminobrowser.org/">Camino</a></li>
+        <li><a href="http://www.apple.com/safari/">Safari</a> 2+</li>
+        <li><a href="http://www.opera.com/">Opera</a> 9+</li>
+        <li><a href="http://www.microsoft.com/windows/products/winfamily/ie/default.mspx">Internet Explorer</a> 6+</li>
+    </ul>
+
+    <p><a href="http://en.wikipedia.org/wiki/Quirks_mode">Quirks mode</a> is not supported in any browser, but that doesn't necessarily mean that it won't work. If you don't know what I'm talking about, <a href="http://www.alistapart.com/articles/doctype/">this article</a> should help you.</p>
+
+    <h3><a name="adapters">Adapters</a></h3>
+
+    <p>It's easy to use Shadowbox with your JavaScript library of choice for a given project. This is accomplished using adapters. An adapter is a small file that tells Shadowbox which methods to call on the underlying framework to achieve some common purpose such as querying the DOM or handling events. Shadowbox comes bundled with adapters for the following JavaScript frameworks:</p>
+
+    <ul>
+        <li><a href="http://developer.yahoo.com/yui/">Yahoo! User Interface Library</a> (yahoo, dom, event, anim)</li>
+        <li><a href="http://extjs.com">Ext</a> (standalone, ext-core.js)</li>
+        <li><a href="http://prototypejs.org/">Prototype</a> + <a href="http://script.aculo.us/">Scriptaculous</a></li>
+        <li><a href="http://jquery.com/">jQuery</a></li>
+        <li><a href="http://mootools.net/">MooTools</a> (requires Fx.Styles and its dependancies)</li>
+        <li><a href="http://dojotoolkit.org/">Dojo Toolkit</a> (thanks Peter Higgins)</li>
+    </ul>
+
+    <p>In order to use Shadowbox, you must include <a href="../src/css/shadowbox.css">shadowbox.css</a>, your choice of underlying framework, the appropriate adapter, and of course <a href="../src/js/shadowbox.js">shadowbox.js</a>. For example, to use Shadowbox in combination with the <a href="http://developer.yahoo.com/yui/">Yahoo! User Interface</a> (YUI) library, you would do the following:</p>
+
+<pre>&lt;head>
+&lt;link rel="stylesheet" type="text/css" href="shadowbox.css" />
+&lt;script type="text/javascript" src="yui-utilities.js">&lt;/script>
+&lt;script type="text/javascript" src="shadowbox-yui.js">&lt;/script>
+&lt;script type="text/javascript" src="shadowbox.js">&lt;/script>
+&lt;/head>
+</pre>
+
+    <p>To use Shadowbox with the <a href="http://prototypejs.org/">Prototype</a> library, you must also include the <a href="http://script.aculo.us/">Scriptaculous</a> effects engine.</p>
+
+<pre>&lt;head>
+&lt;link rel="stylesheet" type="text/css" href="shadowbox.css" />
+&lt;script type="text/javascript" src="prototype.js">&lt;/script>
+&lt;script type="text/javascript" src="scriptaculous.js?load=effects">&lt;/script>
+&lt;script type="text/javascript" src="shadowbox-prototype.js">&lt;/script>
+&lt;script type="text/javascript" src="shadowbox.js">&lt;/script>
+&lt;/head>
+</pre>
+
+    <p>Adapters may be found in the <code>js/adapter/</code> directory, and additional adapters may be created easily by implementing the same interface. If there is currently no adapter for your favorite library, and you'd like to contribute to the project, please feel free to create your own and send it to me for inclusion in a future release.</p>
+
+    <h3><a name="media">Media</a></h3>
+
+    <p>Shadowbox supports many different media formats via the <a href="http://www.adobe.com/products/flashplayer/">Flash</a>, <a href="http://www.apple.com/quicktime/">QuickTime</a>, and <a href="http://www.microsoft.com/windows/windowsmedia/">Windows Media Player</a> browser plugins. Windows media files are supported on the Mac via the <a href="http://www.flip4mac.com/wmv_download.htm">Flip4Mac</a> QuickTime plugin.</p>
+
+    <p><a href="http://en.wikipedia.org/wiki/Flash_Video">Flash video</a> is supported via <a href="http://www.jeroenwijering.com/">Jeroen Wijering's</a> <a href="http://www.jeroenwijering.com/?item=JW_FLV_Player">JW FLV Player</a>. Although Shadowbox supports many types of video, it is recommended that all video be displayed in this (FLV) format because it will have the most uniform result across different platforms. QuickTime and Windows Media Player each have their bugs and quirks that are difficult to iron out.</p>
+
+    <p>Shadowbox uses a smart plugin detection mechanism that automatically detects whether or not the client is capable of displaying linked content. For movies that can be played using either QuickTime or Windows Media Player, Shadowbox will automatically detect which one is installed and use it. In the case of a missing plugin, Shadowbox can either display a useful error message with a link to the appropriate plugin download page (the default behavior), or it can ignore the gallery piece altogether. See the <a href="usage.html#handleunsupported">handleUnsupported</a> option in the options section below for more details on how to configure this behavior.</p>
+
+    <h3><a name="bugs">Bugs</a></h3>
+
+    <p>If you think you've found a bug in the script, please let me know about it via the <a href="http://code.google.com/p/michaeljackson/issues/list">issue tracking</a> system on Google Code (where this project is hosted). You'll have a much better chance of actually getting the bug fixed if it's well documented and an example is provided.</p>
+
+    <p class="footer">Copyright &copy; 2007-2008 Michael J. I. Jackson, All rights reserved.</p>
+
+</div>
+
+</body>
+
+</html>
