@@ -41,8 +41,7 @@ $Url.Link('Home', "%{controller='site', action='index'}")
                 Fredericton, NB E3B 6E1<br />
                 Phone:	(506) 452-6208<br />
                 Fax:	(506) 453-3583<br />
-                Web: <a href="http://www.unb.ca/cri">www.unb.ca/cri</a><br />
-                <a href="http://www.unb.ca/fredericton/science/biology/Faculty/Curry.html">www.unb.ca/fredericton/science/biology/Faculty/Curry.html</a>            </p>        </div>
+                Web: <a href="http://www.unb.ca/cri">Canadian Rivers Institute</a><br />                            </p>        </div>
     </div>                
 </div>
 

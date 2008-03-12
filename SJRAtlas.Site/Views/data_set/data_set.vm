@@ -1,7 +1,7 @@
 <div class="dataset">
   <h3 class="title">$!{title}</h3>
   <p class="abstract">$!{abstract}</p>
-  <p class="origin">Origin: $!{origin}</p>  
+  <p class="origin"><b>Origin:</b> $!{origin}</p>  
   <div class="presentations">
     $Atlas.PresentationLinks($presentations, $filtered_by)
     $Atlas.MetadataLink($dataset)

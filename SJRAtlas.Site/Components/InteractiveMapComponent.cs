@@ -40,6 +40,7 @@ namespace SJRAtlas.Site.Components
             PropertyBag["interactive_map"] = InteractiveMap;
             PropertyBag["title"] = InteractiveMap.Title;
             PropertyBag["thumbnail_url"] = InteractiveMap.ThumbnailUrl;
+            PropertyBag["large_thumbnail_url"] = InteractiveMap.LargeThumbnailUrl;
             PropertyBag["description"] = InteractiveMap.Description;
             PropertyBag["service_name"] = InteractiveMap.ServiceName;
             PropertyBag["coordinate"] = Coordinate;

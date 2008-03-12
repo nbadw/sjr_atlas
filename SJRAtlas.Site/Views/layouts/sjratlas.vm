@@ -7,11 +7,11 @@
 <title>Saint John River Atlas</title>
 
 <link rel="stylesheet" href="$Atlas.ContentPath()/stylesheets/reset-fonts-grids.css" type="text/css" media="screen" />
-<link rel="stylesheet" href="$Atlas.ContentPath()/stylesheets/typography.css" type="text/css" media="screen" />
-<link rel="stylesheet" href="$Atlas.ContentPath()/javascripts/ibox/ibox.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="$Atlas.ContentPath()/stylesheets/shadowbox-light.css" type="text/css" media="screen" />
+$!{stylesheets}
 <link rel="stylesheet" href="$Atlas.ContentPath()/stylesheets/style.css" type="text/css" media="screen" />
 
-<!-- CONDITIONAL COMMENTS (FOR MICROSOFT BROWSERS) -->
+<!-- CONDITIONAL COMMENTS (STYLESHEET FIXES FOR MICROSOFT BROWSERS) -->
 <!--[if IE 7]>
 <link rel="stylesheet" type="text/css" href="$Atlas.ContentPath()/stylesheets/bug-fixes-ie7.css" />
 <![endif]-->
@@ -20,14 +20,17 @@
 <![endif]-->
 <!-- END CONDITIONAL COMMENTS -->
 
-<!-- PROTOTYPE 1.6 -->
-<script type="text/javascript" language="javascript" src="$Atlas.ContentPath()/javascripts/prototype-1.6.0.2.js"></script>
-<script type="text/javascript" language="javascript" src="$Atlas.ContentPath()/javascripts/application.js"></script>
-<!-- SCRIPTACULOUS -->
-$Scriptaculous.InstallScripts()
-
-<!-- *** EXTRA HEADER INCLUDES *** -->
-$!{header}
+<script type="text/javascript" language="javascript">
+var Atlas = {
+    contentPath: '$Atlas.ContentPath()'    
+}
+</script>
+<script type="text/javascript" language="javascript" src="$Atlas.ContentPath()/javascripts/prototype.js"></script>
+<script type="text/javascript" language="javascript" src="$Atlas.ContentPath()/javascripts/effects.js"></script>
+<script type="text/javascript" language="javascript" src="$Atlas.ContentPath()/javascripts/shadowbox-prototype.js"></script>
+<script type="text/javascript" language="javascript" src="$Atlas.ContentPath()/javascripts/shadowbox.js"></script>
+$!{javascripts}
+<script type="text/javascript" language="javascript" src="$Atlas.ContentPath()/javascripts/site.js"></script>
 
 </head>
 <body id="$!{controller.Name}" class="$!{controller.Action}">

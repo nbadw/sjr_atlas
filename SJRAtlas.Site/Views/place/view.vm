@@ -13,7 +13,6 @@ $Url.Link('Home', "%{controller='site', action='index'}")
     County: <span style="font-weight: normal">$!{place.County}</span><br />
     Latitude: <span style="font-weight: normal">$!{coordinate.Latitude}</span><br />
     Longitude: <span style="font-weight: normal">$!{coordinate.Longitude}</span><br />   
-    $Atlas.MapLink("View Location In Map", "%{coordinate=$coordinate}", "%{onclick='view_location(\'$cgndb_key\'); return false;', class='option'}")
     </p>
 #end
 

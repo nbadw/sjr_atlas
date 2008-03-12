@@ -1,7 +1,6 @@
 <div class="publication">
     <h3 class="title"><a href="$url_for_publication">$title</a></h3>
-    <p class="author"><b>Author:</b> $!{author}</p>
-    <p class="summary">$!{summary}</p>
+    <p class="abstract">$!{abstract}</p>
     <p class="origin"><b>Origin:</b> $!{origin}</p>
     <p class="published"><b>Published Date:</b> $!{published_date}</p>
     <p class="time-period"><b>Time Period:</b> $!{time_period}</p>
