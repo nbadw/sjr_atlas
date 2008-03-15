@@ -37,6 +37,7 @@ namespace SJRAtlas.Site.Controllers
         public void Reports()
         {
             Logger.Debug("Site/Maps action called");
+            PropertyBag["reports"] = PublishedReport.FindAll();
             RenderView("reports");
         }
 

@@ -163,7 +163,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="log.txt" />
-    <Content Include="logging.config" />
+    <Content Include="Config\logging.config" />
     <Content Include="Config\components.config" />
     <Content Include="Config\controllers.config" />
     <Content Include="Config\facilities.config" />

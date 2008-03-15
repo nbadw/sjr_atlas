@@ -13,17 +13,22 @@ $Url.Link('Home', "%{controller='site', action='index'}")
     <div class="yui-u first">
         <h3 class="title">The following standardized data collection forms and manual are available:</h3>
         <ul>
-            <li><a href="#" title="Download Water Temperature Data Logger Form">Water Temperature Data Logger Form</a></li>
-            <li><a href="#" title="Download Fish Stocking Form">Fish Stocking Form</a></li>
-            <li><a href="#" title="Download Electrofishing Forms">Electrofishing Forms</a></li>
-            <li><a href="#" title="Download Individual Fish Measurements Form">Individual Fish Measurements Form</a></li>
-            <li><a href="#" title="Download Aquatic Habitat Enhancement / Restoration Form">Aquatic Habitat Enhancement / Restoration Form</a></li>
-            <li><a href="#" title="Download Environmental Stream Assessment">Environmental Stream Assessment</a></li>
-            <li><a href="#" title="Download Stream Habitat Survey">Stream Habitat Survey</a></li>
-            <li><a href="#" title="Download Water Flow Calculation Form">Water Flow Calculation Form</a></li>
+            <li><a href="$Atlas.ContentPath()/Data Collection Forms/Water Temperature Recorder Site Form - May 2006.pdf" title="Download Water Temperature Data Logger Form">Water Temperature Data Logger Form</a></li>
+            <li><a href="$Atlas.ContentPath()/Data Collection Forms/Fish Stocking Form - May 2006.pdf" title="Download Fish Stocking Form">Fish Stocking Form</a></li>
+            <li><a href="#" title="Download Electrofishing Forms">Electrofishing Forms Package</a>
+                <ul>
+                    <li>Form 1</li>
+                    <li>Form 2</li>
+                </ul>
+            </li>
+            <li><a href="$Atlas.ContentPath()/Data Collection Forms/Individual Fish Measurements Form - May 2006.pdf" title="Download Individual Fish Measurements Form">Individual Fish Measurements Form</a></li>
+            <li><a href="$Atlas.ContentPath()/Data Collection Forms/Habitat Enhancement Form - May 2006.pdf" title="Download Aquatic Habitat Enhancement / Restoration Form">Aquatic Habitat Enhancement / Restoration Form</a></li>
+            <li style="display:none"><a href="#" title="Download Environmental Stream Assessment">Environmental Stream Assessment</a></li>
+            <li style="display:none"><a href="#" title="Download Stream Habitat Survey">Stream Habitat Survey</a></li>
+            <li><a href="$Atlas.ContentPath()/Data Collection Forms/Water Flow Calculation Form - July 2002.pdf" title="Download Water Flow Calculation Form">Water Flow Calculation Form</a></li>
         </ul>   
         <ul>
-            <li><a href="#" title="Download Data Collection Form Manual">Data Collection Form Manual</a></li>            
+            <li><a href="$Atlas.ContentPath()/Data Collection Forms/Fisheries Data Collection Forms Manual - May 2006.pdf" title="Download Data Collection Form Manual">Data Collection Form Manual</a></li>            
         </ul>
         
         <p>These forms provide space to record many important details related to the specific activity, including particulars on the sampling site and methods used. Users should complete all applicable spaces on the forms. Accurately identifying the location of the activity is particularly important. Please record GPS coordinates if available, water body identification numbers (from NB Aquatic Data Warehouse), and textual descriptions. Also, note the locations on a 1:50,000 topographic map. The download package includes a manual for completing the forms.</p>
@@ -68,7 +73,14 @@ $Url.Link('Home', "%{controller='site', action='index'}")
 
     <div class="yui-u">
         <h2>Download</h2>
-        <p><a href="$Atlas.ContentPath()/Standard-Forms.zip">Forms Package</a></p>
-        <p>This package includes all standard forms and manual.</p>                                
+        <p><a href="$Atlas.ContentPath()/Data Collection Forms/Standard-Forms.zip">Forms Package</a></p>
+        <p>This package includes all standard forms and manual.</p>                              
+        <h2>Please note:</h2>
+        <p>Adobe Acrobat is required to view the reports. </p>
+        <div style="text-align: center;">
+            <a href="http://www.adobe.com/products/acrobat/readstep2_allversions.html">
+                <img src="http://www.adobe.com/products/acrobat/images/button209x32reader_int.jpg" />
+            </a>
+        </div>  
     </div>   
 </div>  

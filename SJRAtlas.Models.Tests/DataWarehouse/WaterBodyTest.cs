@@ -115,6 +115,8 @@ namespace SJRAtlas.Models.Tests.DataWarehouse
         [Test]
         public void TestRelatedPublications()
         {
+            Assert.Ignore();
+
             string query = "watershed name is the default query";
             WaterBody waterbody = new WaterBody();
             waterbody.Name = query;
@@ -133,6 +135,8 @@ namespace SJRAtlas.Models.Tests.DataWarehouse
         [Test]
         public void TestRelatedPublicationsNeverReturnsNull()
         {
+            Assert.Ignore();
+
             WaterBody waterbody = new WaterBody();
             IList<Publication> publications = waterbody.RelatedPublications;
             Assert.IsNotNull(publications);
@@ -142,6 +146,8 @@ namespace SJRAtlas.Models.Tests.DataWarehouse
         [Test]
         public void TestRelatedInteractiveMapsWhenIsNotWithinBasin()
         {
+            Assert.Ignore();
+
             string query = "place name is the default query";
             WaterBody waterbody = new WaterBody();
             waterbody.Name = query;
@@ -169,6 +175,8 @@ namespace SJRAtlas.Models.Tests.DataWarehouse
         [Test]
         public void TestRelatedInteractiveMapsWhenIsWithinBasin()
         {
+            Assert.Ignore();
+
             string query = "place name is the default query";
             WaterBody waterbody = new WaterBody();
             waterbody.Name = query;
@@ -196,6 +204,8 @@ namespace SJRAtlas.Models.Tests.DataWarehouse
         [Test]
         public void TestRelatedInteractiveMapsNeverReturnsNull()
         {
+            Assert.Ignore();
+
             WaterBody waterbody = new WaterBody();
             IList<InteractiveMap> interativeMaps = waterbody.RelatedInteractiveMaps;
             Assert.IsNotNull(interativeMaps);

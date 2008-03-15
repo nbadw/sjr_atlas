@@ -49,3 +49,9 @@ $Url.Link('Home', "%{controller='site', action='index'}")
         #print_contents($section)
     #end 
 </div>
+
+#if($anchor)
+    <script type="text/javascript" language="javascript">
+    window.location = window.location + "#$anchor";
+    </script>
+#end

@@ -11,25 +11,72 @@ namespace SJRAtlas.Site.Controllers
     [DefaultAction("Index")]
     public class HelpController : BaseController
     {
+        private static HelpContents helpContents;
+
+        public HelpController()
+        {            
+            foreach(HelpNode node in GetHelpContents().Contents)
+            {
+                CreateDynamicActions(node);
+            }
+        }
+
         public void Index()
         {
-            if(Logger.IsDebugEnabled)
+            if (Logger.IsDebugEnabled)
                 Logger.Debug("Help/Index action called");
 
-            PropertyBag["help_contents"] = new HelpContents()
-                .AddSection("Website Overview")
-                    .Add("Overview of Maps")
-                    .Add("Interactive Maps")
-                    .Add("ToolBar")
-                    .Add("Tasks")
-                    .Add("Map Contents")
-                    .Add("Navigation")
-                .AddSection("Searching")
-                    .Add("Quick Search")
-                    .Add("Search Tips")
-                    .Add("Advanced Search");
-            
+            PropertyBag["help_contents"] = helpContents;
             RenderView("index");
+        }
+
+        public static HelpContents GetHelpContents()
+        {
+            if (helpContents == null)
+            {
+                helpContents = new HelpContents()
+                    .AddSection("Website Overview")
+                        .Add("Overview of Maps")
+                        .Add("Interactive Maps")
+                        .Add("ToolBar")
+                        .Add("Tasks")
+                        .Add("Map Contents")
+                        .Add("Navigation")
+                    .AddSection("Searching")
+                        .Add("Quick Search")
+                        .Add("Search Tips")
+                        .Add("Advanced Search");
+            }
+
+            return helpContents;
+        }
+
+        private void CreateDynamicActions(HelpNode node)
+        {
+            string action = node.Anchor;
+            if (!DynamicActions.ContainsKey(action))
+            {
+                DynamicActions[action] = new HelpDynamicAction();
+            }
+
+            foreach (HelpNode helpNode in node.Contents)
+            {
+                CreateDynamicActions(helpNode);
+            }
+        }
+
+        public class HelpDynamicAction : IDynamicAction
+        {
+            #region IDynamicAction Members
+
+            public void Execute(Controller controller)
+            {
+                controller.PropertyBag["help_contents"] = HelpController.GetHelpContents();
+                controller.PropertyBag["anchor"] = controller.Action;
+                controller.RenderView("index");
+            }
+
+            #endregion
         }
 
         public class HelpContents

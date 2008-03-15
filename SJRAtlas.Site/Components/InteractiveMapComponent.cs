@@ -41,8 +41,7 @@ namespace SJRAtlas.Site.Components
             PropertyBag["title"] = InteractiveMap.Title;
             PropertyBag["thumbnail_url"] = InteractiveMap.ThumbnailUrl;
             PropertyBag["large_thumbnail_url"] = InteractiveMap.LargeThumbnailUrl;
-            PropertyBag["description"] = InteractiveMap.Description;
-            PropertyBag["service_name"] = InteractiveMap.ServiceName;
+            PropertyBag["description"] = InteractiveMap.Abstract;
             PropertyBag["coordinate"] = Coordinate;
             RenderSharedView("interactive_map/interactive_map");
         }

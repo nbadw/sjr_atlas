@@ -11,33 +11,22 @@ $Url.Link('Home', "%{controller='site', action='index'}")
 
 <div class="yui-gc">		
     <div class="yui-u first">
-        <h3 class="title">NB Watershed Units and Water Body Inventory:</h3>
+        <h3 class="title">Data Documentation:</h3>
         <ul>
             <li><a href="/data-manuals/DW Manual/DWM-05-Drainage System.pdf">New Brunswick Hierarchal Drainage System</a></li>
             <li><a href="/data-manuals/DW Manual/DWM-Appendix A - Drainage Unit Listing.pdf">Drainage Unit Listing</a></li>
             <li><a href="/data-manuals/DW Manual/DWM-06-Water Resource Inventory.pdf">Water Resource Inventory</a></li>
-        </ul>  
-        
-        <h3 class="title">Scientific Reports:</h3>
-        <ul>
-        </ul>
-        
-        <h3 class="title">Published Reports:</h3>
-        <ul>
-            <li><a href="#">Adult Atlantic Salmon Counts</a></li>
-            <li><a href="#">Drainage Units List (Refer to Manual section - Drainage System for methodology)</a></li>
-            <li><a href="#">Stream Habitat Summaries </a></li>
-            <li><a href="#">Lake Survey Summaries </a></li>
-            <li><a href="#">Atlantic Salmon Angling Catch and Effort</a></li>
-            <li><a href="#">Regular Crown Reserve Angling Catch and Effort </a></li>
-        </ul>                        
-        
-        <h3 class="title">Other Documents:</h3>
-        <ul>
             <li><a href="/data-manuals/Other Agencies/ETB/DTDB 1998 User's Guide.pdf">DTDB 1998 Users's Guide</a></li>
             <li><a href="/data-manuals/Other Agencies/ESAs/ESA1.PDF">Environmentally Significant Areas In New Brunswick (15.5 MB)</a></li>
             <li><a href="/data-manuals/Other Agencies/ESAs/ESA2.PDF">Environmentally Significant Areas In New Brunswick - Database Structure, Database Dictionary (6.6 MB)</a></li>
-        </ul>               
+        </ul>          
+        
+        <h3 class="title">Published Reports:</h3>
+        <ul>
+            #foreach($report in $reports)
+                <li>$report.Title</li>
+            #end
+        </ul>                
     </div>
     <div class="yui-u">
         <h2>Please note:</h2>

@@ -64,6 +64,15 @@ namespace SJRAtlas.Models.Atlas
             set { origin = value; }
         }
 
+        private string timePeriod;
+
+        [Property("time_period")]
+        public string TimePeriod
+        {
+            get { return timePeriod; }
+            set { timePeriod = value; }
+        }	
+
         private string uri;
 
         [Property("uri")]

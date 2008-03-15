@@ -1,12 +1,12 @@
 #capturefor(breadcrumb_trail)
-<a href="#" title="Home">Home</a>
+    <a href="#" title="Home">Home</a>
 #end
 
 #capturefor(headline)
-<h1 class="title">Saint John River Atlas</h1>
-<p>The Saint John River Atlas is an online tool for presenting and interacting with the extensive body of data and information associated with the Saint John River, a multi-jurisdictional waterway originating in Maine and Québec and flowing into the Bay of Fundy at Saint John, New Brunswick. It is New Brunswick’s largest river system, draining approximately 40% of the province. See <a rel="shadowbox" href="$Atlas.ContentPath()/images/saint-john-river-basin.jpg">Map</a>.</p>
-<p>The purpose of the Atlas is to provide access to time series data, interactive maps, and publications. Click here for help <a href="#">Getting Started</a></p>
-<p>The Saint John River Atlas is a collaborative initiative between the Canadian Rivers Institute, NB Department of Natural Resources, NB Department of the Environment, Fisheries and Oceans Canada, and various conservation and environmental organizations throughout the watershed. Funding was provided by <a href="#" title="GeoConnections Canada">GeoConnections Canada</a>, <a href="#" title="NB Environmental Trust Fund">NB Environmental Trust Fund</a>, <a href="#" title="NB Wildlife Trust Fund">NB Wildlife Trust Fund</a>, and the <a href="#" title="Province of New Brunswick">Province of New Brunswick</a>.</p>
+    <h1 class="title">Saint John River Atlas</h1>
+    <p>The Saint John River Atlas is an online tool for presenting and interacting with the extensive body of data and information associated with the Saint John River, a multi-jurisdictional waterway originating in Maine and Québec and flowing into the Bay of Fundy at Saint John, New Brunswick. It is New Brunswick’s largest river system, draining approximately 40% of the province. See <a rel="shadowbox" href="$Atlas.ContentPath()/images/saint-john-river-basin.jpg">Map</a>.</p>
+    <p>The purpose of the Atlas is to provide access to time series data, interactive maps, and publications. Click here for help $Url.Link('Getting Started', "%{controller='help', action='website_overview'}").</p>
+    <p>The Saint John River Atlas is a collaborative initiative between the Canadian Rivers Institute, NB Department of Natural Resources, NB Department of the Environment, Fisheries and Oceans Canada, and various conservation and environmental organizations throughout the watershed. Funding was provided by <a href="http://www.geoconnections.org/" title="GeoConnections Canada">GeoConnections Canada</a>, <a href="http://www.gnb.ca/0009/0373/0002/0001-e.asp" title="NB Environmental Trust Fund">NB Environmental Trust Fund</a>, <a href="http://www.nbwtf.ca/" title="NB Wildlife Trust Fund">NB Wildlife Trust Fund</a>, and the <a href="http://www.gnb.ca/" title="Province of New Brunswick">Province of New Brunswick</a>.</p>
 #end
  		
 <div id="interactive-maps" class="box">                    
@@ -20,14 +20,15 @@
         #end
         </ul>
         <p>Looking for $Url.Link('more maps', "%{controller='site', action='maps'}")</a>?</p>             
+        <p style="font-size: 11px;">While the data, maps and other information on this website may not be free from error or omission, care has been taken to ensure the best possible quality. The NB Aquatic Data Warehouse makes no representations or warranties, either expressed or implied, as to the accuracy of the information presented and users of this site assume the entire risk as to the use of any or all information.</p>
         <div class="last"></div>
     </div> 
     <div class="footer"></div>                          
 </div>
 
 <div id="search" class="box">
-    <h2 class="header">Quick Search</h2>    <div class="body">        <p>Enter a place name, lake or stream name, data set name, or other text string to search for maps, reports, data and other information.<br /> $Url.Link('More tips...', "%{controller='search', action='tips'}")</p>
-               <form id="alt-search-form" action="$siteroot/search/quick.rails" method="get">
+    <h2 class="header">Quick Search</h2>    <div class="body">        <p>Enter a place name, lake or stream name, data set name, or other text string to search for maps, reports, data and other information.<br /> $Url.Link('More tips...', "%{controller='help', action='search_tips'}")</p>
+               $Form.FormTag("%{controller='search', action='quick', id='alt-search-form'}")
             <label id="lbl-alt-search" for="txt-alt-search">Search:</label>
             <input id="txt-alt-search" class="search" name="q" type="text"/>            
 	        <div id="btn-alt-search" class="btn">
@@ -46,7 +47,7 @@
 </div>
 
 <div id="links" class="box">
-    <h2 class="header">Links</h2>    <div class="body">        <ul>                           <li><a href="http://www.weatheroffice.ec.gc.ca/forecast/canada/index_e.html?id=NB">Environment Canada's Weather Forecast</a></li>            <li><a href="http://www.lau.chs-shc.gc.ca/cgi-bin/tide-shc.cgi?queryType=showRegion&language=english&region=5">Fisheries &amp; Oceans Canada's Tide Tables</a></li>            <li><a href="http://www.gnb.ca/public/fire-feu/index-e.asp">NB Natural Resource's Forest Fire Index</a></li>            <li><a href="http://www.atl.ec.gc.ca/airquality/index_e.html">Environment Canada's Air Quality Services</a></li>            <li><a href="#">NB Environment's Air Quality Index</a></li>            <li><a href="http://www.hc-sc.gc.ca/index_e.html">Health Canada Health Advisories, Warnings &amp; Recalls</a></li>            <li><a href="http://www.gnb.ca/public/info-e.asp">NB Public Safety Alerts &amp; Preparedness Information</a></li>            <li><a href="#">NB Transportation Highway Cameras</a></li>            <li><a href="#">NB-US Border Wait Times</a></li>        </ul>  
+    <h2 class="header">Links</h2>    <div class="body">        <ul>                           <li><a href="http://www.weatheroffice.ec.gc.ca/forecast/canada/index_e.html?id=NB">Environment Canada's Weather Forecast</a></li>            <li><a href="http://www.lau.chs-shc.gc.ca/cgi-bin/tide-shc.cgi?queryType=showRegion&language=english&region=5">Fisheries &amp; Oceans Canada's Tide Tables</a></li>            <li><a href="http://www.gnb.ca/public/fire-feu/index-e.asp">NB Natural Resource's Forest Fire Index</a></li>            <li><a href="http://www.atl.ec.gc.ca/airquality/index_e.html">Environment Canada's Air Quality Services</a></li>            <li><a href="http://www1.gnb.ca/0355/0003/0000.asp">NB Environment's Air Quality Index</a></li>            <li><a href="http://www.hc-sc.gc.ca/index_e.html">Health Canada Health Advisories, Warnings &amp; Recalls</a></li>            <li><a href="http://www.gnb.ca/public/info-e.asp">NB Public Safety Alerts &amp; Preparedness Information</a></li>            <li><a href="http://www.gnb.ca/0113/cameras/camera-map-e.asp">NB Transportation Highway Cameras</a></li>            <li><a href="http://www.cbsa-asfc.gc.ca/general/times/menu-e.html">NB-US Border Wait Times</a></li>        </ul>  
         <div class="last"></div>
     </div>
     <div class="footer"></div>   

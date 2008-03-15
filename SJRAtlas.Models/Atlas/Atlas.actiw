@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<model dslVersion="1.0.0.0" Id="669cfd57-6423-4f6e-9049-e8b5c792a927" xmlns="http://schemas.microsoft.com/dsltools/ActiveWriter">
+  <additionalImports>AAEAAAD/////AQAAAAAAAAAMAgAAAF1BbHRpbm9yZW4uQWN0aXZlV3JpdGVyLkRzbCwgVmVyc2lvbj0xLjAuMC4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPTkwNTE0MTM5NmRkYjA3OTkEAQAAAKEBU3lzdGVtLkNvbGxlY3Rpb25zLkdlbmVyaWMuTGlzdGAxW1tBbHRpbm9yZW4uQWN0aXZlV3JpdGVyLkltcG9ydCwgQWx0aW5vcmVuLkFjdGl2ZVdyaXRlci5Ec2wsIFZlcnNpb249MS4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj05MDUxNDEzOTZkZGIwNzk5XV0DAAAABl9pdGVtcwVfc2l6ZQhfdmVyc2lvbgQAAB9BbHRpbm9yZW4uQWN0aXZlV3JpdGVyLkltcG9ydFtdAgAAAAgICQMAAAAAAAAAAAAAAAcDAAAAAAEAAAAAAAAABB1BbHRpbm9yZW4uQWN0aXZlV3JpdGVyLkltcG9ydAIAAAAL</additionalImports>
+  <classes>
+    <modelClass name="MapService" schema="dbo" table="web_map_services">
+      <properties>
+        <modelProperty Id="b64daa1b-2bd9-4a58-a836-d1e0b074721e" name="DisplayName" column="display_name" length="0" notNull="true" />
+        <modelProperty Id="19c24beb-bce0-4bf1-8429-14c877c33748" name="ServiceName" column="service_name" length="0" notNull="true" />
+        <modelProperty Id="e8acc744-2f9e-4a93-bb85-b0f8c587edcd" name="Visible" column="visible" columnType="Boolean" length="0" notNull="true" />
+        <modelProperty Id="4434d975-bf90-4e67-8dc9-7689548f9745" name="Remote" column="remote" columnType="Boolean" length="0" notNull="true" />
+        <modelProperty Id="cb630c8d-e467-4e51-ba98-2b8b3b871882" name="Id" column="id" columnType="Int32" length="0" notNull="true" keyType="PrimaryKey" />
+      </properties>
+    </modelClass>
+    <modelClass name="MapServiceListing" schema="dbo" table="web_map_service_listings">
+      <targets>
+        <manyToOneRelation Id="2ca9d403-31e5-4fc1-8731-0e48de2254f1" targetOrderBy="position" sourceColumn="interactive_map_id">
+          <modelClassMoniker name="/669cfd57-6423-4f6e-9049-e8b5c792a927/InteractiveMap" />
+        </manyToOneRelation>
+        <manyToOneRelation Id="71ee11c4-6cf7-4e5e-a99b-54769f4e152b" sourceColumn="map_service_id">
+          <modelClassMoniker name="/669cfd57-6423-4f6e-9049-e8b5c792a927/MapService" />
+        </manyToOneRelation>
+      </targets>
+      <properties>
+        <modelProperty Id="f1195328-da46-48b1-b5f2-56557d2c78c9" name="InteractiveMapId" column="interactive_map_id" columnType="Int32" length="0" notNull="true" />
+        <modelProperty Id="78a184e8-950f-4768-8d3f-61ec23575a21" name="MapServiceId" column="map_service_id" columnType="Int32" length="0" notNull="true" />
+        <modelProperty Id="16077a36-041a-4b5e-9582-78259bc6dcfe" name="Position" column="position" columnType="Int32" length="0" notNull="true" />
+        <modelProperty Id="133187d5-ac2b-42b4-ba3c-44f5cad904a8" name="Id" column="id" columnType="Int32" length="0" notNull="true" keyType="PrimaryKey" />
+      </properties>
+    </modelClass>
+    <modelClass name="InteractiveMap" schema="dbo" table="web_interactive_maps">
+      <properties>
+        <modelProperty Id="e4fa97e0-2bcb-48c5-be62-7a7db9218da4" name="Title" column="title" length="0" notNull="true" />
+        <modelProperty Id="992f7653-b455-4409-875c-e1cc7609f84f" name="Abstract" column="abstract" columnType="StringClob" length="0" />
+        <modelProperty Id="e6cd22be-61e6-4f41-ade5-361c4db36fa3" name="Origin" column="origin" length="0" />
+        <modelProperty Id="ff045fc8-e0b6-4985-8049-a5a33a1496fc" name="TimePeriod" column="time_period" length="0" />
+        <modelProperty Id="c8503584-530f-4004-be80-664b3e545de1" name="IsBasinMap" column="full_basin_coverage" columnType="Boolean" length="0" notNull="true" />
+        <modelProperty Id="1262f27d-ae23-411d-bcb4-64da1ce81c38" name="ThumbnailUrl" column="thumbnail_url" length="0" />
+        <modelProperty Id="1a2a081c-3b1d-4a30-9809-97c8f387a0d4" name="LargeThumbnailUrl" column="large_thumbnail_url" length="0" />
+        <modelProperty Id="fb98f8ea-3ca8-422c-9000-0bc64a3e808d" name="CreatedAt" column="created_at" columnType="Timestamp" length="0" />
+        <modelProperty Id="6e176879-af90-4c9b-9bed-882efd5cebad" name="UpdatedAt" column="updated_at" columnType="Timestamp" length="0" />
+        <modelProperty Id="a1bc5b92-f707-460c-8ce7-93e362a1b14f" name="Id" column="id" columnType="Int32" length="0" notNull="true" keyType="PrimaryKey" />
+      </properties>
+    </modelClass>
+  </classes>
+</model>

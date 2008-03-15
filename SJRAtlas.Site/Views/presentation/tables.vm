@@ -1,99 +1,107 @@
 #capturefor(breadcrumb_trail)
-$Url.Link('Home', "%{controller='site', action='index'}")
-<span class="breadcrumb-separator">&#8722;</span>
-$Url.Link('Search', "%{controller='search', action='index'}")
-<span class="breadcrumb-separator">&#8722;</span>
-<a href="#" title="Tabular Data">Tabular Data</a>
+    $Url.Link('Home', "%{controller='site', action='index'}")
+    <span class="breadcrumb-separator">&#8722;</span>
+    $Url.Link('Search', "%{controller='search', action='index'}")
+    <span class="breadcrumb-separator">&#8722;</span>
+    <a href="#" title="Tabular Data">Tabular Data</a>
 #end
 
-#capturefor(header)
-<link rel="stylesheet" type="text/css" href="$Atlas.ContentPath()/javascripts/ext-2.0.1/resources/css/ext-all.css" />
-<script src="$Atlas.ContentPath()/javascripts/ext-2.0.1/adapter/prototype/ext-prototype-adapter.js" type="text/javascript" language="javascript"></script>
-<script src="$Atlas.ContentPath()/javascripts/ext-2.0.1/ext-all-debug.js" type="text/javascript" language="javascript"></script>
+#capturefor(stylesheets)
+    <!-- EXT JS STYLESHEET -->
+    <link rel="stylesheet" type="text/css" href="$Atlas.ContentPath()/stylesheets/ext-all.css" />
 #end
 
 #capturefor(headline)
-<h1 class="title">Tabular Data</h1>
+    <noscript>
+        <div id="requirements" style="padding: 1em 1em 0; background-color: #fff; border: 1px solid #174A83;">            
+            <h2 class="title" style="color: red">Problem with minimum requirements.</h2>
+            <p style="font-size: 16px">Javascript must be enabled on your web browser to view tabular data.  Please enable it and try again.</p>
+        </div>
+    </noscript>
 #end
-			            
-<script language="javascript" type="text/javascript">	            
-    var config = $configuration;
-    var filters = config['filters'];
-    var tables = config['tables'];
-    
-    for(var i=0; i < tables.length; i++)
-    {
-        var table_config = tables[i];
-        var url = table_config['url'];
-        var download_url = table_config['download'];
-        var columns = table_config['columns'];
+
+#capturefor(javascripts)
+    <script src="$Atlas.ContentPath()/javascripts/ext-all-and-prototype-adapter.js" type="text/javascript" language="javascript"></script>
+    	            
+    <script language="javascript" type="text/javascript">	            
+        var config = $configuration;
+        var filters = config['filters'];
+        var tables = config['tables'];
         
-        var fields = columns;
-        var headers = [];
-        for(var j=0; j < columns.length; j++)
+        for(var i=0; i < tables.length; i++)
         {
-            headers[j] = { header: columns[j] };
-        }
-        
-        var table_div = Ext.DomHelper.append('content', '<div class="table">', true);            
-        
-        var table_store = new Ext.data.JsonStore({
-            url: url,
-            root: 'rows',
-            totalProperty: 'results',
-            fields: fields,
-            baseParams: filters
-        });
-        
-        var downloadAction = function() {  
-            var loadMask = new Ext.LoadMask(this.gridId, {
-                msg: 'Please wait, your download is being prepared...<br/>(Estimated preparation time is 2-5min depending on the size of the dataset)',
-                removeMask: true
+            var table_config = tables[i];
+            var url = table_config['url'];
+            var download_url = table_config['download'];
+            var columns = table_config['columns'];
+            
+            var fields = columns;
+            var headers = [];
+            for(var j=0; j < columns.length; j++)
+            {
+                headers[j] = { header: columns[j] };
+            }
+            
+            var table_div = Ext.DomHelper.append('content', '<div class="table">', true);            
+            
+            var table_store = new Ext.data.JsonStore({
+                url: url,
+                root: 'rows',
+                totalProperty: 'results',
+                fields: fields,
+                baseParams: filters
             });
-                        
-            var iframe = document.createElement('iframe');
-            iframe.src = download_url + Ext.urlEncode(filters);
-            iframe.style.display = 'none'; 
-                        
-            loadMask.show();             
-            iframe.onload = function() {
-                loadMask.hide();                
+            
+            var downloadAction = function() {  
+                var loadMask = new Ext.LoadMask(this.gridId, {
+                    msg: 'Please wait, your download is being prepared...<br/>(Estimated preparation time is 2-5min depending on the size of the dataset)',
+                    removeMask: true
+                });
+                            
+                var iframe = document.createElement('iframe');
+                iframe.src = download_url + Ext.urlEncode(filters);
+                iframe.style.display = 'none'; 
+                            
+                loadMask.show();             
+                iframe.onload = function() {
+                    loadMask.hide();                
+                };
+                Ext.getDom('content').appendChild(iframe); 
             };
-            Ext.getDom('content').appendChild(iframe); 
-        };
-        
-        var grid = new Ext.grid.GridPanel({
-            id: table_div.id,
-            store: table_store,
-            stripeRows: true,
-            frame: true,
-            height: 300,
-            width: 'auto',
-            loadMask: true,
-            columns: headers,
-            title: table_config.title,
-            bbar: new Ext.PagingToolbar({
-                pageSize: 50,
+            
+            var grid = new Ext.grid.GridPanel({
+                id: table_div.id,
                 store: table_store,
-                displayInfo: true,
-                displayMsg: 'Displaying rows {0} - {1} of {2}',
-                emptyMsg: 'No rows to display',
-                items: [
-                    '-', {
-                        text: 'Download',
-                        handler: downloadAction,
-                        cls: 'x-btn-text-icon',
-                        icon: '$Atlas.ContentPath()/images/save-blue-16.png',
-                        gridId: table_div.id
-                    }   
-                ]
-            })               
-        });
+                stripeRows: true,
+                frame: true,
+                height: 300,
+                width: 'auto',
+                loadMask: true,
+                columns: headers,
+                title: table_config.title,
+                bbar: new Ext.PagingToolbar({
+                    pageSize: 50,
+                    store: table_store,
+                    displayInfo: true,
+                    displayMsg: 'Displaying rows {0} - {1} of {2}',
+                    emptyMsg: 'No rows to display',
+                    items: [
+                        '-', {
+                            text: 'Download',
+                            handler: downloadAction,
+                            cls: 'x-btn-text-icon',
+                            icon: '$Atlas.ContentPath()/images/save-blue-16.png',
+                            gridId: table_div.id
+                        }   
+                    ]
+                })               
+            });
+            
+            grid.render(table_div);	
         
-        grid.render(table_div);	
-    
-        table_store.load({
-            params: { start: 0, limit: 50 }
-        });	
-    }	                 
-</script>
+            table_store.load({
+                params: { start: 0, limit: 50 }
+            });	
+        }	                 
+    </script>
+#end

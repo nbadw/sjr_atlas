@@ -2,11 +2,11 @@ var MAX_ABSTRACT_HEIGHT = 18 * 3; // 5 lines at 18px a line
 
 Event.observe(window, 'load', function() { 
     enhanceAbstracts();
-    enhanceImages();    
+    enhanceImageLinks();    
 });
 
 function enhanceAbstracts() {
-    $('content').select('p.abstract').each(function(elm) {
+    $$('#content p.abstract').each(function(elm) {
         var paragraph = elm;
         var height = paragraph.getHeight();
         if(height <= MAX_ABSTRACT_HEIGHT)
@@ -50,7 +50,8 @@ function enhanceAbstracts() {
     });
 }
 
-function enhanceImages() {
+function enhanceImageLinks() {
+    // use shadowbox functionality to handle image links
     Shadowbox.init({
         resizeLgImages: true,
         handleUnsupported: 'remove',

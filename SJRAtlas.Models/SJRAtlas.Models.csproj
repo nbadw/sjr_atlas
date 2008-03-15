@@ -61,6 +61,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Atlas\Atlas.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Atlas.actiw</DependentUpon>
+    </Compile>
+    <Compile Include="Atlas\MapService.cs" />
     <Compile Include="Atlas\PublicationPresentation.cs" />
     <Compile Include="DataWarehouse\Agency.cs" />
     <Compile Include="Atlas\ClosestWatershedToPlace.cs" />
@@ -96,6 +102,11 @@
     <Compile Include="Query\QueryResults.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Atlas\Atlas.actiw">
+      <Generator>ActiveWriterCodeGenerator</Generator>
+      <LastGenOutput>Atlas.cs</LastGenOutput>
+    </None>
+    <None Include="Atlas\Atlas.actiw.diagram" />
     <None Include="DataWarehouse\DataWarehouse.actiw">
       <Generator>ActiveWriterCodeGenerator</Generator>
       <LastGenOutput>DataWarehouse.cs</LastGenOutput>

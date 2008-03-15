@@ -20,18 +20,6 @@ $!{stylesheets}
 <![endif]-->
 <!-- END CONDITIONAL COMMENTS -->
 
-<script type="text/javascript" language="javascript">
-var Atlas = {
-    contentPath: '$Atlas.ContentPath()'    
-}
-</script>
-<script type="text/javascript" language="javascript" src="$Atlas.ContentPath()/javascripts/prototype.js"></script>
-<script type="text/javascript" language="javascript" src="$Atlas.ContentPath()/javascripts/effects.js"></script>
-<script type="text/javascript" language="javascript" src="$Atlas.ContentPath()/javascripts/shadowbox-prototype.js"></script>
-<script type="text/javascript" language="javascript" src="$Atlas.ContentPath()/javascripts/shadowbox.js"></script>
-$!{javascripts}
-<script type="text/javascript" language="javascript" src="$Atlas.ContentPath()/javascripts/site.js"></script>
-
 </head>
 <body id="$!{controller.Name}" class="$!{controller.Action}">
     <div id="container">
@@ -41,11 +29,7 @@ $!{javascripts}
             <h1 class="title"><a href="$siteroot/" title="Home">Saint John River Atlas</a></h1>	
             <h2 class="sponsor"><a href="http://www.unb.ca/cri/" title="Canadian Rivers Institute">A Project by the Canadian Rivers Institute</a></h2>	   
         </div>
-             
-        <div id="feedback">          
-            <a id="leave-feedback" rel="ibox&type=3&height=438" href="$siteroot/feedback/feedbackform.rails">Leave Feedback</a>
-        </div>
-        
+                     
         <div id="navigation">
 	        <div id="tabs">
 		        <ul>			
@@ -54,14 +38,14 @@ $!{javascripts}
                     <li id="search-tab">$Url.Link('Search', "%{controller='search', action='index'}")</li>
                     <li id="forms-tab">$Url.Link('Forms', "%{controller='site', action='forms'}")</li>                
                     <li id="reports-tab">$Url.Link('Reports', "%{controller='site', action='reports'}")</li> 
-                    <li id="about-tab">$Url.Link('About', "%{controller='site', action='about'}")</li>                
+                    <li id="about-tab">$Url.Link('Help', "%{controller='help', action='index'}")</li>                
 		        </ul>
 	        </div>
 	        <div id="quick-search">
 		        <div class="adv-link">
 		            $Url.Link('Advanced Search', "%{controller='search', action='index'}")
 		        </div>
-		        $Form.FormTag("%{controller='search', action='quick', id='quick-search-form'}")			
+		        $Form.FormTag("%{controller='search', action='quick', id='search-form'}")			
 			        <div id="search-box">
 			            <label id="lbl-search" for="txt-search">Quick Search:</label>
 			            <input id="txt-search" class="search" name="q" type="text"/>
@@ -94,5 +78,15 @@ $!{javascripts}
         </div>   
           
     </div>
+    
+    
+    <script type="text/javascript" language="javascript">
+    var Atlas = {
+        contentPath: '$Atlas.ContentPath()'    
+    }
+    </script>
+    <script type="text/javascript" language="javascript" src="$Atlas.ContentPath()/javascripts/prototype-effects-shadowbox.js"></script>
+    $!{javascripts}
+    <script type="text/javascript" language="javascript" src="$Atlas.ContentPath()/javascripts/site.js"></script>
 </body>
 </html>

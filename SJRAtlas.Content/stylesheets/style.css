@@ -200,8 +200,12 @@ form div.btn input {
 	margin-top: 1px; 
 	padding-right: 5px;
 }
-#navigation #quick-search .adv-link a { color: red; }
-#navigation #quick-search .adv-link a:hover { text-decoration: underline; }
+#navigation #quick-search .adv-link a {
+	color: red; 
+}
+#navigation #quick-search .adv-link a:hover {
+	text-decoration: underline; 
+}
 .search {
 	color: #425cbd; 
 	background-color: #fff; 
@@ -255,7 +259,6 @@ form div.btn input {
 	width: 880px; 
 	margin: 0 auto;
 }
-#content a { font-weight: bold; }
 
 #footer {
 	position: relative; 
@@ -425,7 +428,65 @@ form div.btn input {
 	color: #58d;
 	padding: 8px 1em 4px;
 }
-.abstract-toggle a 
-{
+.abstract-toggle a {
 	color: #fff;
+}
+
+/* PLACE NAME SEARCH PAGE */
+.x-tree ul {
+	margin: 0;
+}
+.x-tree ul li {
+	list-style-image: none;	
+}
+.place-info-window h3 {
+	margin-bottom: 7px;
+}
+.place-info-window p {
+	margin: 0 1em;
+}
+.place-info-window p span {
+	font-weight: bold;
+}
+.place-info-window a 
+{
+	display: block;
+	margin-top: 7px;
+}
+
+/* ADVANCED SEARCH PAGE */
+.dataset-list-item { 
+	padding: 3px 5px;
+}
+.dataset-list-item h3 {
+	margin-bottom: 0;
+	font-size: 13px;	
+}
+.waterbody-search-item {
+	padding: 3px 5px;
+}
+.waterbody-search-item * {
+	padding: 0;
+	margin: 0;
+}
+.watershed-search-item {
+	padding: 3px 5px;
+}
+.watershed-search-item * {
+	padding: 0;
+	margin: 0;
+}
+.aquaticsite-search-item {
+	padding: 3px 5px;
+}
+.aquaticsite-search-item * {
+	padding: 0;
+	margin: 0;
+}
+.agency-list-item {
+	padding: 3px 5px;
+}
+.agency-list-item * {
+	padding: 0;
+	margin: 0;
 }

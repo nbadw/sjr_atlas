@@ -62,6 +62,7 @@ namespace SJRAtlas.Site.Controllers
                 resultAttributes.Add(attributes);
             }
 
+            PropertyBag["results_raw"] = results; // for use if javascript is not enabled
             PropertyBag["results"] = JavaScriptConvert.SerializeObject(resultAttributes);
             PropertyBag["query"] = q;
             RenderView("places");

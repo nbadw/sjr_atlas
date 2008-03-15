@@ -9,12 +9,24 @@ using SJRAtlas.Models.Query;
 
 namespace SJRAtlas.Models.Atlas
 {
-    [ActiveRecord("web_interactive_maps")]
-    public class InteractiveMap : ActiveRecordBase<InteractiveMap>, IMetadataAware
+    public partial class InteractiveMap : IMetadataAware
     {
         public InteractiveMap()
         {
-            isBasinMap = false;
+            _isBasinMap = false;
+        }
+
+        public IList<MapService> MapServices
+        {
+            get 
+            {
+                List<MapService> services = new List<MapService>(MapServiceListings.Count);
+                foreach (MapServiceListing serviceList in MapServiceListings)
+                {
+                    services.Add(serviceList.MapService);
+                }
+                return services;
+            }
         }
 
         protected override bool BeforeSave(IDictionary state)
@@ -24,91 +36,6 @@ namespace SJRAtlas.Models.Atlas
             state["UpdatedAt"] = DateTime.Now;
             return true;
         }
-
-        #region ActiveRecord Properties
-
-        private int id;	
-
-        [PrimaryKey("id")]
-        public int Id
-        {
-            get { return id; }
-            set { id = value; }
-        }
-
-        private string title;
-
-        [Property("title")]
-        public string Title
-        {
-            get { return title; }
-            set { title = value; }
-        }
-
-        private string description;
-
-        [Property("description", ColumnType = "StringClob")]
-        public string Description
-        {
-            get { return description; }
-            set { description = value; }
-        }
-        
-        private bool isBasinMap;
-
-        [Property("full_basin_coverage")]
-	    public bool IsBasinMap
-	    {
-		    get { return isBasinMap;}
-		    set { isBasinMap = value;}
-	    }
-
-        private string serviceName;
-
-        [Property("arcgis_service_name")]
-        public string ServiceName
-        {
-            get { return serviceName; }
-            set { serviceName = value; }
-        }
-
-        private string thumbnailUrl;
-
-        [Property("thumbnail_url")]
-        public string ThumbnailUrl
-        {
-            get { return thumbnailUrl; }
-            set { thumbnailUrl = value; }
-        }
-
-        private string largeThumbnailUrl;
-
-        [Property("large_thumbnail_url")]
-        public string LargeThumbnailUrl
-        {
-            get { return largeThumbnailUrl; }
-            set { largeThumbnailUrl = value; }
-        }
-
-        private DateTime createdAt;
-
-        [Property("created_at")]
-        public DateTime CreatedAt
-        {
-            get { return createdAt; }
-            set { createdAt = value; }
-        }
-
-        private DateTime updatedAt;
-
-        [Property("updated_at")]
-        public DateTime UpdatedAt
-        {
-            get { return updatedAt; }
-            set { updatedAt = value; }
-        }
-        
-        #endregion
 
         #region IMetadataAware Members
 
@@ -134,7 +61,7 @@ namespace SJRAtlas.Models.Atlas
                     SELECT        *
                     FROM          web_interactive_maps as interactive_map
                     WHERE         CONTAINS (interactive_map.title, '{0}')
-                    OR            CONTAINS (interactive_map.description, '{0}')",
+                    OR            CONTAINS (interactive_map.abstract, '{0}')",
                     terms
                 )
             );
