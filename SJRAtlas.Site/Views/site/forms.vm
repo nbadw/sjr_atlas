@@ -15,10 +15,12 @@ $Url.Link('Home', "%{controller='site', action='index'}")
         <ul>
             <li><a href="$Atlas.ContentPath()/Data Collection Forms/Water Temperature Recorder Site Form - May 2006.pdf" title="Download Water Temperature Data Logger Form">Water Temperature Data Logger Form</a></li>
             <li><a href="$Atlas.ContentPath()/Data Collection Forms/Fish Stocking Form - May 2006.pdf" title="Download Fish Stocking Form">Fish Stocking Form</a></li>
-            <li><a href="#" title="Download Electrofishing Forms">Electrofishing Forms Package</a>
-                <ul>
-                    <li>Form 1</li>
-                    <li>Form 2</li>
+            <li><a href="$Atlas.ContentPath()/Data Collection Forms/ElectroFishing Forms.rar" title="Download Electrofishing Forms">Electrofishing Forms Package</a>
+                <ul style="margin-bottom: 0;">
+                    <li><a href="$Atlas.ContentPath()/Data Collection Forms/Electrofishing Field Form - July 2002.pdf" title="Electrofishing Field Form">Electrofishing Field Form</a></li>
+                    <li><a href="$Atlas.ContentPath()/Data Collection Forms/Electrofishing Site Form - May 2006.pdf" title="Electrofishing Site Form">Electrofishing Site Form</a></li>
+                    <li><a href="$Atlas.ContentPath()/Data Collection Forms/Electrofishing Summary Form Part 1 - May 2006.pdf" title="Electrofishing Summary Form (Part 1)">Electrofishing Summary Form (Part 1)</a></li>
+                    <li><a href="$Atlas.ContentPath()/Data Collection Forms/Electrofishing Summary Form Part 2 - May 2006.pdf" title="Electrofishing Summary Form (Part 2)">Electrofishing Summary Form (Part 2)</a></li>
                 </ul>
             </li>
             <li><a href="$Atlas.ContentPath()/Data Collection Forms/Individual Fish Measurements Form - May 2006.pdf" title="Download Individual Fish Measurements Form">Individual Fish Measurements Form</a></li>

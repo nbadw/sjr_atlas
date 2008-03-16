@@ -29,6 +29,21 @@ namespace SJRAtlas.Models.Atlas
             }
         }
 
+        public virtual MapService OverviewMapService
+        {
+            get
+            {
+                try
+                {
+                    return MapService.Find(OverviewMapServiceId);
+                }
+                catch (Exception e)
+                {
+                    return null;
+                }
+            }
+        }
+
         protected override bool BeforeSave(IDictionary state)
         {
             if ((DateTime)state["CreatedAt"] == DateTime.MinValue)

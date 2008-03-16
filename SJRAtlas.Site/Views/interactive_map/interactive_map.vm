@@ -1,5 +1,5 @@
 <div class="interactive-map">
     <a rel="shadowbox" title="Preview: $title" href="$!{large_thumbnail_url}"><img class="thumbnail" alt="Map Preview" src="$!{thumbnail_url}"></a>
-    <h3 class="title">$Atlas.MapLink($title, $service_name, "%{cgns='true', coordinate=$coordinate}")</h3>
+    <h3 class="title">$Atlas.MapLink($interactive_map)</h3>
     <p class="description">$!{description}</p>
 </div>

@@ -38,53 +38,23 @@ namespace SJRAtlas.Site.Helpers
             set { config = value; }
         }
 
-        #region Mapping Application Helpers        
-                
-        public string MapLink(string innerContent, IDictionary parameters)
+        #region Mapping Application Helpers    
+
+        public string MapLink(InteractiveMap map)
         {
-            return MapLink(innerContent, Config.DefaultServiceName, parameters, null);            
+            return MapLink(map, null);
         }
 
-        public string MapLink(string innerContent, IDictionary parameters, IDictionary anchorAttributes)
+        public string MapLink(InteractiveMap map, IDictionary anchorAttributes)
         {
-            return MapLink(innerContent, Config.DefaultServiceName, parameters, anchorAttributes);
-        }
-
-        public string MapLink(string innerContent, string serviceName)
-        {
-            return MapLink(innerContent, serviceName, null, null);
-        }
-
-        public string MapLink(string innerContent, string serviceName, IDictionary parameters)
-        {
-            return MapLink(innerContent, serviceName, parameters, null);
-        }
-
-        public string MapLink(string innerContent, string serviceName, IDictionary parameters, IDictionary anchorAttributes)
-        {
-            if (parameters == null)
-                parameters = DictHelper.Create();
             if (anchorAttributes == null)
                 anchorAttributes = DictHelper.Create();
 
-            return String.Format("<a href=\"{0}\" {1}>{2}</a>", MapUrlFor(serviceName, parameters), GetAttributes(anchorAttributes), innerContent);
-        }
-
-        private string MapUrlFor(string serviceName, IDictionary parameters)
-        {  
-            object coordinateParam = parameters["coordinate"];
-            if (coordinateParam != null && coordinateParam is LatLngCoord)
-            {
-                LatLngCoord coordinate = (LatLngCoord)coordinateParam;
-                parameters.Remove("coordinate");
-                parameters.Add("markerPoint[0]", String.Format("{0},{1}", coordinate.Latitude, coordinate.Longitude));
-                if (parameters["Units"] == null)
-                    parameters.Add("Units", Config.DefaultUnits);
-                if (parameters["CoordSys"] == null)
-                    parameters.Add("CoordSys", Config.DefaultCoordinateSystem);
-            }
-            
-            return String.Format("{0}?resource={1}&{2}", Config.MapApplicationUrl, serviceName, BuildQueryString(parameters));
+            return String.Format("<a href=\"{0}?id={1}\" {2}>{3}</a>", 
+                Config.MapApplicationUrl, 
+                map.Id,
+                GetAttributes(anchorAttributes), 
+                map.Title);
         }
 
         #endregion

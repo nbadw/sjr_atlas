@@ -7,7 +7,6 @@
         <modelProperty Id="b64daa1b-2bd9-4a58-a836-d1e0b074721e" name="DisplayName" column="display_name" length="0" notNull="true" />
         <modelProperty Id="19c24beb-bce0-4bf1-8429-14c877c33748" name="ServiceName" column="service_name" length="0" notNull="true" />
         <modelProperty Id="e8acc744-2f9e-4a93-bb85-b0f8c587edcd" name="Visible" column="visible" columnType="Boolean" length="0" notNull="true" />
-        <modelProperty Id="4434d975-bf90-4e67-8dc9-7689548f9745" name="Remote" column="remote" columnType="Boolean" length="0" notNull="true" />
         <modelProperty Id="cb630c8d-e467-4e51-ba98-2b8b3b871882" name="Id" column="id" columnType="Int32" length="0" notNull="true" keyType="PrimaryKey" />
       </properties>
     </modelClass>
@@ -39,6 +38,7 @@
         <modelProperty Id="fb98f8ea-3ca8-422c-9000-0bc64a3e808d" name="CreatedAt" column="created_at" columnType="Timestamp" length="0" />
         <modelProperty Id="6e176879-af90-4c9b-9bed-882efd5cebad" name="UpdatedAt" column="updated_at" columnType="Timestamp" length="0" />
         <modelProperty Id="a1bc5b92-f707-460c-8ce7-93e362a1b14f" name="Id" column="id" columnType="Int32" length="0" notNull="true" keyType="PrimaryKey" />
+        <modelProperty Id="7a4b58a4-7dc0-4ff0-a1c0-1debfaa6e683" name="OverviewMapServiceId" column="overview_map_service_id" columnType="Int32" length="0" />
       </properties>
     </modelClass>
   </classes>
