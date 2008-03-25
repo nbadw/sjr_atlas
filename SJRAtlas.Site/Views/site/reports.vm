@@ -5,28 +5,39 @@ $Url.Link('Home', "%{controller='site', action='index'}")
 #end
 
 #capturefor(headline)
-<h1 class="title">Reports</h1>
-<p>Listed below are links to various publications related to the Saint John River and this Atlas.</p>
+    <h1 class="title">Reports</h1>
+    <p>Listed below are links to various publications related to the Saint John River and this Atlas.</p>
+    <ul id="toc" style="font-size: 14px;">
+        <li><a href="#data-documentation">Data Documentation</a></li>
+        <li><a href="#published-reports">Published Reports</a></li>
+    </ul> 
 #end
 
 <div class="yui-gc">		
     <div class="yui-u first">
-        <h3 class="title">Data Documentation:</h3>
-        <ul>
-            <li><a href="$Atlas.ContentPath()/data-manuals/DW Manual/DWM-05-Drainage System.pdf">New Brunswick Hierarchal Drainage System</a></li>
-            <li><a href="$Atlas.ContentPath()/data-manuals/DW Manual/DWM-Appendix A - Drainage Unit Listing.pdf">Drainage Unit Listing</a></li>
-            <li><a href="$Atlas.ContentPath()/data-manuals/DW Manual/DWM-06-Water Resource Inventory.pdf">Water Resource Inventory</a></li>
-            <li><a href="$Atlas.ContentPath()/data-manuals/Other Agencies/ETB/DTDB 1998 User's Guide.pdf">DTDB 1998 Users's Guide</a></li>
-            <li><a href="$Atlas.ContentPath()/data-manuals/Other Agencies/ESAs/ESA1.PDF">Environmentally Significant Areas In New Brunswick (15.5 MB)</a></li>
-            <li><a href="$Atlas.ContentPath()/data-manuals/Other Agencies/ESAs/ESA2.PDF">Environmentally Significant Areas In New Brunswick - Database Structure, Database Dictionary (6.6 MB)</a></li>
-        </ul>          
+    
+        <a name="data-documentation"></a>
+        <div id="data-documentation">
+            <h2 class="title">Data Documentation:</h2>
+            <ul>
+                <li><a href="$Atlas.ContentPath()/data-manuals/DW Manual/DWM-05-Drainage System.pdf">New Brunswick Hierarchal Drainage System</a></li>
+                <li><a href="$Atlas.ContentPath()/data-manuals/DW Manual/DWM-Appendix A - Drainage Unit Listing.pdf">Drainage Unit Listing</a></li>
+                <li><a href="$Atlas.ContentPath()/data-manuals/DW Manual/DWM-06-Water Resource Inventory.pdf">Water Resource Inventory</a></li>
+                <li><a href="$Atlas.ContentPath()/data-manuals/Other Agencies/ETB/DTDB 1998 User's Guide.pdf">DTDB 1998 Users's Guide</a></li>
+                <li><a href="$Atlas.ContentPath()/data-manuals/Other Agencies/ESAs/ESA1.PDF">Environmentally Significant Areas In New Brunswick (15.5 MB)</a></li>
+                <li><a href="$Atlas.ContentPath()/data-manuals/Other Agencies/ESAs/ESA2.PDF">Environmentally Significant Areas In New Brunswick - Database Structure, Database Dictionary (6.6 MB)</a></li>
+            </ul>   
+        </div>       
         
-        <h3 class="title">Published Reports:</h3>
-        <ul>
-            #foreach($report in $reports)
-                <li>$report.Title</li>
+        <a name="published-reports"></a>
+        <div id="published-reports">  
+            <h2 class="title">Published Reports:</h2>
+            #if($published_reports.Count == 0)
+                <p>No Published Reports</p>
+            #else
+                #parse("publication/_list_reports.vm")
             #end
-        </ul>                
+        </div>                     
     </div>
     <div class="yui-u">
         <h2>Please note:</h2>

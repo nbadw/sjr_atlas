@@ -9,7 +9,7 @@ using SJRAtlas.Models.Query;
 
 namespace SJRAtlas.Models.Atlas
 {
-    public partial class InteractiveMap : IMetadataAware
+    public partial class InteractiveMap : IMetadataAware, IComparable
     {
         public InteractiveMap()
         {
@@ -26,21 +26,6 @@ namespace SJRAtlas.Models.Atlas
                     services.Add(serviceList.MapService);
                 }
                 return services;
-            }
-        }
-
-        public virtual MapService OverviewMapService
-        {
-            get
-            {
-                try
-                {
-                    return MapService.Find(OverviewMapServiceId);
-                }
-                catch (Exception e)
-                {
-                    return null;
-                }
             }
         }
 
@@ -87,7 +72,7 @@ namespace SJRAtlas.Models.Atlas
         public static IList<InteractiveMap> FindAllWithFullBasinCoverageByQuery(string query)
         {
             DetachedCriteria criteria = DetachedCriteria.For<InteractiveMap>();
-            criteria.Add(Expression.And(
+            criteria.Add(Expression.Or(
                 Expression.Like("Title", query),
                 Expression.Eq("IsBasinMap", true)));
             return ActiveRecordMediator<InteractiveMap>.FindAll(criteria,
@@ -113,6 +98,16 @@ namespace SJRAtlas.Models.Atlas
             DetachedCriteria criteria = DetachedCriteria.For<InteractiveMap>();
             criteria.Add(Expression.InG<string>("Title", titles));
             return InteractiveMap.FindAll(criteria, new Order[] { Order.Asc("Title") });
+        }
+
+        #endregion
+
+        #region IComparable Members
+
+        public int CompareTo(object obj)
+        {
+            InteractiveMap im2 = obj as InteractiveMap;
+            return string.Compare(Title, im2.Title);
         }
 
         #endregion

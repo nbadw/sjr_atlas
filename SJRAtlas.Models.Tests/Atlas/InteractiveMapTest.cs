@@ -62,6 +62,7 @@ namespace SJRAtlas.Models.Tests.Atlas
         public void TestGetMetadata()
         {
             InteractiveMap map = new InteractiveMap();
+            map.Title = "Test Map";
             map.CreateAndFlush();
 
             Metadata metadata = new Metadata();
@@ -80,7 +81,6 @@ namespace SJRAtlas.Models.Tests.Atlas
             properties.Add("Title", "New Map Title");
             properties.Add("Id", 3);
             properties.Add("IsBasinMap", true);
-            properties.Add("ServiceName", "new service");
             properties.Add("ThumbnailUrl", "http://location.to.thumbnail");
             properties.Add("LargeThumbnailUrl", "http://location.to.larger.thumbnail");
             properties.Add("CreatedAt", DateTime.Now);
@@ -96,6 +96,7 @@ namespace SJRAtlas.Models.Tests.Atlas
             for (int i = 0; i < testMaps.Length; i++)
             {
                 testMaps[i] = new InteractiveMap();
+                testMaps[i].Title = "Test Map #" + i;
                 testMaps[i].Create();
             }
             testMaps[1].IsBasinMap = true;

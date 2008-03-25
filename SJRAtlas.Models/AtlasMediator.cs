@@ -63,7 +63,21 @@ namespace SJRAtlas.Models
                 if(publication is PublishedMap)
                     publishedMaps.Add((PublishedMap)publication);
             }
+            publishedMaps.Sort(delegate(PublishedMap pm1, PublishedMap pm2) { return pm1.Title.CompareTo(pm2.Title); });
             return publishedMaps;
+        }
+
+        public virtual IList<PublishedReport> FindAllPublishedReports()
+        {
+            IList<Publication> publications = PublishedReport.FindAll();
+            List<PublishedReport> publishedReports = new List<PublishedReport>();
+            foreach (Publication publication in publications)
+            {
+                if (publication is PublishedReport)
+                    publishedReports.Add((PublishedReport)publication);
+            }
+            publishedReports.Sort(delegate(PublishedReport pr1, PublishedReport pr2) { return pr1.Title.CompareTo(pr2.Title); });
+            return publishedReports;
         }
 
         public virtual Watershed FindWatershedByCgndbKey(string cgndbKey)

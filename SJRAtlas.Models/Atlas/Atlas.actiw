@@ -38,7 +38,6 @@
         <modelProperty Id="fb98f8ea-3ca8-422c-9000-0bc64a3e808d" name="CreatedAt" column="created_at" columnType="Timestamp" length="0" />
         <modelProperty Id="6e176879-af90-4c9b-9bed-882efd5cebad" name="UpdatedAt" column="updated_at" columnType="Timestamp" length="0" />
         <modelProperty Id="a1bc5b92-f707-460c-8ce7-93e362a1b14f" name="Id" column="id" columnType="Int32" length="0" notNull="true" keyType="PrimaryKey" />
-        <modelProperty Id="7a4b58a4-7dc0-4ff0-a1c0-1debfaa6e683" name="OverviewMapServiceId" column="overview_map_service_id" columnType="Int32" length="0" />
       </properties>
     </modelClass>
   </classes>

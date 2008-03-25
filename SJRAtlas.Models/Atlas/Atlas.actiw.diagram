@@ -14,13 +14,13 @@
         <elementListCompartment Id="6904b529-4fe6-4cb9-bac3-5ad74b37cd08" absoluteBounds="2.89, 3.785, 1.4700000000000002, 0.86484781901041663" name="Properties" title="Properties" titleFillColor="LightGray" compartmentFillColor="White" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="346311c1-bf1c-40c2-81b2-c0cbea2efa49" absoluteBounds="5.75, 0.625, 1.5, 2.5252791341145833">
+    <classShape Id="346311c1-bf1c-40c2-81b2-c0cbea2efa49" absoluteBounds="5.75, 0.625, 1.5, 2.3609318033854167">
       <modelClassMoniker name="/669cfd57-6423-4f6e-9049-e8b5c792a927/InteractiveMap" />
       <nestedChildShapes>
-        <elementListCompartment Id="404b1eb3-f70d-4120-bc19-0420cdca66be" absoluteBounds="5.765, 1.0350000000000001, 1.4700000000000002, 2.015279134114583" name="Properties" title="Properties" titleFillColor="LightGray" compartmentFillColor="White" />
+        <elementListCompartment Id="404b1eb3-f70d-4120-bc19-0420cdca66be" absoluteBounds="5.765, 1.0350000000000001, 1.4700000000000002, 1.8509318033854165" name="Properties" title="Properties" titleFillColor="LightGray" compartmentFillColor="White" />
       </nestedChildShapes>
     </classShape>
-    <manyToOneConnector edgePoints="[(4.375 : 4.06242390950521); (6.5 : 4.06242390950521); (6.5 : 3.15027913411458)]" manuallyRouted="false" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <manyToOneConnector edgePoints="[(4.375 : 4.06242390950521); (6.5 : 4.06242390950521); (6.5 : 2.98593180338542)]" manuallyRouted="false" fixedFrom="Algorithm" fixedTo="Algorithm">
       <manyToOneRelationMoniker Id="2ca9d403-31e5-4fc1-8731-0e48de2254f1" />
       <relativeChildShapes />
       <nodes>
@@ -28,7 +28,7 @@
         <classShapeMoniker Id="346311c1-bf1c-40c2-81b2-c0cbea2efa49" />
       </nodes>
     </manyToOneConnector>
-    <manyToOneConnector edgePoints="[(3.3125 : 3.375); (3.3125 : 2.49984781901042)]" manuallyRouted="false" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <manyToOneConnector edgePoints="[(3.3125 : 3.375); (3.3125 : 2.49984781901042)]" manuallyRouted="false" fixedFrom="NotFixed" fixedTo="NotFixed">
       <manyToOneRelationMoniker Id="71ee11c4-6cf7-4e5e-a99b-54769f4e152b" />
       <relativeChildShapes />
       <nodes>

@@ -145,6 +145,7 @@
     <Compile Include="Controllers\PresentationController.cs" />
     <Compile Include="Controllers\FeedbackController.cs" />
     <Compile Include="Controllers\PlaceController.cs" />
+    <Compile Include="Controllers\PublicationController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\SiteController.cs" />
     <Compile Include="Controllers\WaterBodyController.cs" />

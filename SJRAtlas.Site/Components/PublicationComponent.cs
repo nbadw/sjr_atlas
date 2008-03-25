@@ -32,7 +32,6 @@ namespace SJRAtlas.Site.Components
             PropertyBag["title"] = Publication.Title;
             PropertyBag["abstract"] = Publication.Abstract;
             PropertyBag["origin"] = Publication.Origin;
-            PropertyBag["url_for_publication"] = "#";
             RenderSharedView("publication/publication");
         }
     }

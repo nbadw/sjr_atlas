@@ -3,6 +3,7 @@ using SJRAtlas.Models.Atlas;
 using System.Xml;
 using System.Xml.Xsl;
 using System.Reflection;
+using System.IO;
 
 namespace SJRAtlas.Site.Controllers
 {
@@ -18,22 +19,18 @@ namespace SJRAtlas.Site.Controllers
             }
 
             Uri location = new Uri(metadata.Uri);
-            if (location.IsFile)// && location.AbsolutePath.EndsWith(".xml"))
-            {
-                //XmlDocument xml = new XmlDocument();
-                //xml.LoadXml(metadata.Content);
-                //using(XmlReader reader = XmlReader.Create(
-                //    Assembly.GetExecutingAssembly().GetManifestResourceStream(
-                //        "SJRAtlas.Site.FGDC.xsl"))) 
-                //{
-                //    XslCompiledTransform xsl = new XslCompiledTransform();
-                //    xsl.Load(reader);                    
-                //    xsl.Transform(xml, null, Context.Response.OutputStream);
-                //}  
-
-                //htmlUri = location.AbsolutePath.Replace(".xml", ".html");                
-                Context.Response.ContentType = "text/xml";
-                RenderText(metadata.Content);
+            if (location.IsFile && location.AbsolutePath.EndsWith(".xml"))
+            {         
+                string htmlFile = location.LocalPath.Replace(".xml", ".html");
+                if(File.Exists(htmlFile))
+                {
+                    Response.WriteFile(htmlFile);
+                }
+                else
+                {
+                    Context.Response.ContentType = "text/xml";
+                    RenderText(metadata.Content);
+                }
             }
             else
             {

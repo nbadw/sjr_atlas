@@ -178,8 +178,6 @@ namespace SJRAtlas.Models.Atlas {
         
         private int _id;
         
-        private int _overviewMapServiceId;
-        
         private IList<MapServiceListing> _mapServiceListings;
         
         [Property("title", ColumnType="String", NotNull=true)]
@@ -279,16 +277,6 @@ namespace SJRAtlas.Models.Atlas {
             }
             set {
                 this._id = value;
-            }
-        }
-        
-        [Property("overview_map_service_id", ColumnType="Int32")]
-        public virtual int OverviewMapServiceId {
-            get {
-                return this._overviewMapServiceId;
-            }
-            set {
-                this._overviewMapServiceId = value;
             }
         }
         

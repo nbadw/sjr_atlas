@@ -1,7 +1,23 @@
 <div class="publication">
-    <h3 class="title"><a href="$url_for_publication">$title</a></h3>
-    <p class="abstract">$!{abstract}</p>
-    <p class="origin"><b>Origin:</b> $!{origin}</p>
-    <p class="published"><b>Published Date:</b> $!{published_date}</p>
-    <p class="time-period"><b>Time Period:</b> $!{time_period}</p>
+    <h3 class="title">$Url.Link($publication.Title, "%{controller='publication', action='view', querystring='id=$publication.Id'}")</h3>
+    
+    <p class="abstract">
+        #if($abstract)
+            $abstract
+        #else
+            No abstract available.
+        #end
+    </p>
+    
+    #if($origin)
+        <p class="origin"><b>Origin:</b> $!{origin}</p>
+    #end
+    
+    #if($published_date)
+        <p class="published"><b>Published Date:</b> $!{published_date}</p>
+    #end
+    
+    #if($time_period)
+        <p class="time-period"><b>Time Period:</b> $!{time_period}</p>
+    #end
 </div>

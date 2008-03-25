@@ -15,8 +15,8 @@ namespace SJRAtlas.Site.Controllers
         {
             Logger.Debug("Site/Index action called");
             string[] mapTitles = {
-                    "Saint John River Basin", "Major Landowners", "Land Use",
-                    "Topographic Map", "Lake Map", "Data Collection Sites" };
+                    "Saint John River Basin", "Major Landowners Map", "Land Use",
+                    "Topographic Map", "Lake Depths Map", "Data Collection Sites" };
             IList<InteractiveMap> maps = AtlasMediator.FindAllInteractiveMapsByTitles(mapTitles);
             PropertyBag["interactive_maps"] = maps;
             RenderView("index");
@@ -24,27 +24,31 @@ namespace SJRAtlas.Site.Controllers
 
         public void About()
         {
-            Logger.Debug("Site/Maps action called");
+            Logger.Debug("Site/About action called");
             RenderView("about");
         }
 
         public void Forms()
         {
-            Logger.Debug("Site/Maps action called");
+            Logger.Debug("Site/Forms action called");
             RenderView("forms");
         }
 
         public void Reports()
         {
-            Logger.Debug("Site/Maps action called");
-            PropertyBag["reports"] = PublishedReport.FindAll();
+            Logger.Debug("Site/Reports action called");
+            PropertyBag["published_reports"] = AtlasMediator.FindAllPublishedReports();
             RenderView("reports");
         }
 
         public void Maps()
-        {            
+        {
             Logger.Debug("Site/Maps action called");
-            PropertyBag["interactive_maps"] = AtlasMediator.FindAll<InteractiveMap>();
+
+            InteractiveMap[] maps = (InteractiveMap[])AtlasMediator.FindAll<InteractiveMap>();
+            Array.Sort<InteractiveMap>(maps);
+        
+            PropertyBag["interactive_maps"] = maps;
             PropertyBag["published_maps"] = AtlasMediator.FindAllPublishedMaps();
             RenderView("maps");
         }
