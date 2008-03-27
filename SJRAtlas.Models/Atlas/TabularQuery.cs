@@ -60,15 +60,11 @@ namespace SJRAtlas.Models.Atlas
             ISession session = ActiveRecordMediator.GetSessionFactoryHolder().CreateSession(typeof(TabularQuery));
             try
             {
-                //Dictionary<string, Type> columns = new Dictionary<string, Type>();
-                string sql = SelectStatement;
-                sql.Insert(
-                    SelectStatement.ToLower().IndexOf("select "),
-                    " TOP 1 "
-                );
-
                 IDbCommand command = session.Connection.CreateCommand();
-                command.CommandText = sql;
+                command.CommandText = String.Format(
+                    "SELECT TOP 1 * FROM ({0}) as temp_table", 
+                    SelectStatement
+                );
                 string[] columnNames;
                 using (IDataReader reader = command.ExecuteReader())
                 {
@@ -76,7 +72,6 @@ namespace SJRAtlas.Models.Atlas
                     for (int i = 0; i < reader.FieldCount; i++)
                     {
                         columnNames[i] = reader.GetName(i);
-                        //, reader.GetFieldType(i));
                     }
                 }
 

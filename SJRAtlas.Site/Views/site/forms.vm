@@ -15,7 +15,7 @@ $Url.Link('Home', "%{controller='site', action='index'}")
         <ul>
             <li><a href="$Atlas.ContentPath()/Data Collection Forms/Water Temperature Recorder Site Form - May 2006.pdf" title="Download Water Temperature Data Logger Form">Water Temperature Data Logger Form</a></li>
             <li><a href="$Atlas.ContentPath()/Data Collection Forms/Fish Stocking Form - May 2006.pdf" title="Download Fish Stocking Form">Fish Stocking Form</a></li>
-            <li><a href="$Atlas.ContentPath()/Data Collection Forms/ElectroFishing Forms.rar" title="Download Electrofishing Forms">Electrofishing Forms Package</a>
+            <li><a href="$Atlas.ContentPath()/Data Collection Forms/ElectroFishing Forms.zip" title="Download Electrofishing Forms">Electrofishing Forms Package</a>
                 <ul style="margin-bottom: 0;">
                     <li><a href="$Atlas.ContentPath()/Data Collection Forms/Electrofishing Field Form - July 2002.pdf" title="Electrofishing Field Form">Electrofishing Field Form</a></li>
                     <li><a href="$Atlas.ContentPath()/Data Collection Forms/Electrofishing Site Form - May 2006.pdf" title="Electrofishing Site Form">Electrofishing Site Form</a></li>
@@ -74,8 +74,7 @@ $Url.Link('Home', "%{controller='site', action='index'}")
     </div>
 
     <div class="yui-u">
-        <h2>Download</h2>
-        <p><a href="$Atlas.ContentPath()/Data Collection Forms/Standard-Forms.zip">Forms Package</a></p>
+        <h2><a href="$Atlas.ContentPath()/Data Collection Forms/Standard Forms.zip">Download the complete forms package</a></h2>
         <p>This package includes all standard forms and manual.</p>                              
         <h2>Please note:</h2>
         <p>Adobe Acrobat is required to view the reports. </p>

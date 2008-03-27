@@ -18,6 +18,8 @@ namespace SJRAtlas.Site.Controllers
             else
                 datasets = DataSet.FindAll();
 
+            Array.Sort<DataSet>((DataSet[])datasets);
+
             Context.Response.ContentType = "text/javascript";
             RenderText(
                 String.Format("{{ results: {0}, datasets: {1} }}", 

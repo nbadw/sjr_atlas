@@ -424,12 +424,12 @@ form div.btn input {
 
 .abstract,
 .abstract-toggle {
-	background-color: #013;
-	color: #58d;
-	padding: 8px 1em 4px;
+	background-color: #fff;
+	color: #013;
+	padding: 8px 1em 4px;	
 }
 .abstract-toggle a {
-	color: #fff;
+	color: #000;
 }
 
 /* PLACE NAME SEARCH PAGE */

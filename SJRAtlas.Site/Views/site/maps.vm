@@ -17,7 +17,7 @@
 <a name="interactive-maps"></a>
 <div id="interactive-maps">
     <h2 class="title">Interactive Maps:</h2>
-    #if($interactive_maps.Count == 0)
+    #if($interactive_maps.Length == 0)
         <p>No Interactive Maps</p>
     #else
         #parse("interactive_map/_list.vm")                        

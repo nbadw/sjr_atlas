@@ -261,7 +261,7 @@
                 var displayName = (data['Name'] || 'Unnamed Water Body');
                 Ext.apply(data, { 
                     displayName: displayName,
-                    title: displayName + ' (ID: ' + data['Id'] + ')',
+                    title: displayName + ' (ID: ' + data['Id'] + ')'
                 });
                 return data;
             };   

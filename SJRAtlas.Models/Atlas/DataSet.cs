@@ -10,7 +10,7 @@ using SJRAtlas.Models.Query;
 namespace SJRAtlas.Models.Atlas
 {
     [ActiveRecord("web_data_sets")]
-    public class DataSet : ActiveRecordBase<DataSet>, IMetadataAware
+    public class DataSet : ActiveRecordBase<DataSet>, IMetadataAware, IComparable
     {
         private int id;
 
@@ -158,5 +158,15 @@ namespace SJRAtlas.Models.Atlas
             query.AddSqlReturnDefinition(typeof(DataSet), "dataset");
             return query.Execute();
         }
+
+        #region IComparable Members
+
+        public int CompareTo(object obj)
+        {
+            DataSet d2 = obj as DataSet;
+            return Title.CompareTo(d2.Title);
+        }
+
+        #endregion
     }
 }
