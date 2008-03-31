@@ -1,0 +1,39 @@
+<table>
+    <tr>
+        <td class="first">Zoom In:</td>
+        <td><p>Click on the tool (mouse changes to crosshairs) then click on the map to have the map zoom in by a fixed amount and re-center the map on the click point.</p>
+        <p>Click on the tool (mouse changes to crosshairs) then use the mouse to draw a rectangle around the area of interest. The map will zoom to this area.</p></td>
+    </tr>
+    <tr>
+        <td class="first">Zoom Out:</td>
+        <td><p>	Click on the tool (mouse changes to crosshairs) then click on the map to have the map zoom out by a fixed amount and re-center the map on the click point.</p></td>
+    </tr>
+    <tr>
+        <td class="first">Pan:</td>
+        <td><p>Click on the tool (mouse changes to crosshairs with arrow ends) then click and hold the mouse to move the map in the desired direction. </p></td>
+    </tr>
+    <tr>
+        <td class="first">Zoom Full Extent:</td>
+        <td><p>Clicking on the tool automatically zooms the map out to the maximum extent (e.g. Saint John River basin).</p></td>
+    </tr>
+    <tr>
+        <td class="first">Identify:</td>
+        <td><p>Click on the tool (mouse changes to a hand) then click on a feature on the map to retrieve information about the feature. The results will be displayed in the Results window and will include information on all layers under the identify point. The results list is nested; the + symbol beside a list item indicates more information is available. </p>
+<p>Click the + symbol beside Results: in the results window.  The layers under the identify point will be displayed. Click on the + symbol beside the layer to see which features were included in the identify, then click on the + symbol beside the feature to view information on the feature.</p>
+<p>Remember the window can be resized.</p></td>
+    </tr>
+    <tr>
+        <td class="first">Measure:</td>
+        <td><p>Clicking on the Measure tool opens a small window which provides 3 measure options:  get the coordinates of a point, get the distance of a line drawn on the map, and get the area of a polygon drawn on the map.</p>
+<p>Click the desired option, then click a point or draw a line or polygon as appropriate for the measure option. Double click to finish the end of a line or to close a polygon. The resulting measurements (coordinates, distance or area) are presented in the Measure window. Distance and area results include drop down boxes to change the unit of measure. Coordinates will be in meters, representing New Brunswick’s NAD83(CSRS) NB Double Stereographic spatial reference system. </p></td>
+    </tr>
+    <tr>
+        <td class="first">Magnifier:</td>
+        <td><p>Clicking on the Magnifier tool, opens a magnifier window which can be moved over the map to view the area under Magnifier window in more detail. The magnification factor can be set through a drop down list at the bottom of the window.
+<br /><span style="color: red; font-style: italic; font-size: 11px;">Note: Not working properly</span></p></td>
+    </tr>
+    <tr>
+        <td class="first">Return to Previous Extent:</td>
+        <td><p>Returns to extent previously viewed in the map window.</p></td>
+    </tr>
+</table>

@@ -36,7 +36,7 @@
 
 #capturefor(javascripts)
     <script src="$Atlas.ContentPath()/javascripts/ext-all-and-prototype-adapter.js" type="text/javascript" language="javascript"></script>
-    <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAAGINyEenSy_3jKcSV_XX_gRT2yXp_ZAY8_ufC3CFXhHIE1NvwkxTjJBRnVvIn8PFzD1OlcSsgbQPO7A" type="text/javascript"></script>
+    <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAAGINyEenSy_3jKcSV_XX_gRSjww3UB3eYpZkCko0X0lqZG0uNnxRM6Sd5Se2-sS3bHOdDr2n6hMM-bw" type="text/javascript"></script>
     
     <script type="text/javascript" language="javascript">
     var Search = { Results: $results };

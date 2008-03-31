@@ -11,7 +11,7 @@ $Url.Link('Home', "%{controller='site', action='index'}")
 
 <div class="yui-gc">		
     <div class="yui-u first">
-        <h3 class="title">The following standardized data collection forms and manual are available:</h3>
+        <p style="font-size: 14px">The following standardized data collection forms and manual are available:</p>
         <ul>
             <li><a href="$Atlas.ContentPath()/Data Collection Forms/Water Temperature Recorder Site Form - May 2006.pdf" title="Download Water Temperature Data Logger Form">Water Temperature Data Logger Form</a></li>
             <li><a href="$Atlas.ContentPath()/Data Collection Forms/Fish Stocking Form - May 2006.pdf" title="Download Fish Stocking Form">Fish Stocking Form</a></li>

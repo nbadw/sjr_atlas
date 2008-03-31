@@ -18,5 +18,9 @@ Date: 3/13/2008
 }
 
 #site.index #content #alt-search-form #btn-alt-search {	
-	margin: -37px 4px 0 0;
+	margin: -37px 0 0 235px;
+	width: 20px;	
+}
+#site.index #content #alt-search-form #btn-alt-search input {	
+	margin-left: -235px;
 }

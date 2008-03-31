@@ -232,7 +232,7 @@
                 ]
             }),
             name: 'waterbodyId',
-            fieldLabel: 'Water Body',
+            fieldLabel: 'Waterbody',
             displayField: 'title',
             typeAhead: false,
             loadingText: 'Searching...',
@@ -244,7 +244,7 @@
             tpl: new Ext.XTemplate(
                 '<tpl for="."><div class="waterbody-search-item">',
                     '<h3>{displayName}</h3>',       
-                    '<p>Waterbody Id: {Id}</p>',
+                    '<p>Waterbody ID: {Id}</p>',
                     '<tpl if="AltName">',
                         '<p>Also known as: {AltName}</p>',
                     '</tpl>',
@@ -428,26 +428,11 @@
 
     DateRangeField = function(options) {
         DateRangeField.superclass.constructor.call( 
-            this, Ext.apply({ maxValue: Date() }, options) 
+            this, Ext.apply({ maxValue: Date(), format: 'Y/m/d' }, options) 
         ); 
     };
 
     Ext.extend(DateRangeField, Ext.form.DateField, {
-    //    setMinValue: function(date) {
-    //        this.minValue = date;
-    //        Ext.apply(this.menu.picker, { minDate: this.minValue });
-    //    },
-    //    
-    //    setMaxValue: function(date) {
-    //        this.maxValue = date;
-    //        Ext.apply(this.menu.picker, { maxValue: this.minValue });    
-    //    },
-    //    
-    //    getValue: function() {
-    //        return this.formatDate(
-    //            Ext.form.DateField.superclass.getValue.call(this)
-    //        );
-    //    }
     });
     </script>
 #end

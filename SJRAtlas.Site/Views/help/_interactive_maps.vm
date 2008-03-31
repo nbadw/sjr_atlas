@@ -1,1 +1,40 @@
-<p>Interactive maps are maps published by the NB Aquatic Data Warehouse using local data as well as layers from other agencies that publish their data through web mapping services (wms). These are not static maps; they display the most current version of the data. And as the name implies, visitors can interact with the maps through map tools and tasks.</p>
+<p>There are several ways of accessing interactive maps:</p>
+<ol>
+    <li>Click on one of the links on the Atlas’ home page</li>
+    <li>Click on the Maps tab to view a list of interactive maps, their descriptions and map previews (see Map page below)</li>
+    <li>Results from a Quick Search will present a list of interactive maps if appropriate (see Search section below)</li>
+</ol>
+<p>All of the interactive maps have the same interface (Figure 1) consisting of a title bar area, tool bar area, a collection of map interaction windows and the map window.</p>
+<p>The collection of map interaction windows are to the left side of the map window. Each of these windows can be expanded/collapsed or docked/undocked using the triangle ( 	&#9650; or &#9660; ) and arrow ( &gt;&gt; or &lt;&lt; ) symbols, respectively, in the smaller window’s title bar. </p>
+<p>Undocking a window moves the window into the map area so it can be moved elsewhere in the map window. </p>
+<p>Windows can be resized by clicking and holding on the bottom or vertical edges of the window.</p>
+<p>The order of the map interaction windows can be rearranged by right clicking on the title bar of one of the windows. A context menu appears; the window can be moved to the top or bottom or up/down one step at a time.</p>
+<p>If a larger map window is desired, the collection of map interaction windows (tasks, results, etc.) can be hidden by clicking on the &#9664; symbol on the vertical bar to the left side of the map window. </p>
+<p>The following provides an overview of the sections of the interactive map window: </p>
+
+<table>
+    <tr>
+        <td class="first">Toolbar:</td>
+        <td><p>Hover the mouse over a tool and the tool name will be displayed
+Click on the tool to activate the tool</p>
+        <p>Tools include Zoom In, Zoom  Out, Pan, Zoom to Full Extent, Identify, Measure,  Magnifier, and Return to Previous Extent</p></td>
+    </tr>
+    <tr>
+        <td class="first">Tasks:</td>
+        <td><p>Presents a list of tasks the user can perform including: 	Find a Place, Select a Place and Print Map</p></td>
+    </tr>
+    <tr>
+        <td class="first">Results:</td>
+        <td><p>Area to present task results. User may be prompted to respond to the task results.</p></td>
+    </tr>
+    <tr>
+        <td class="first">Map Contents:</td>
+        <td><p>Legend for the map contents</p>
+        <p>Layers can be turned on / off</p></td>
+    </tr>
+    <tr>
+        <td class="first">Navigation</td>
+        <td>A compass that can be used to move the map in specific direction</td>
+    </tr>
+</table>
+	

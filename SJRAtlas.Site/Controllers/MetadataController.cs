@@ -20,7 +20,9 @@ namespace SJRAtlas.Site.Controllers
 
             Uri location = new Uri(metadata.Uri);
             if (location.IsFile && location.AbsolutePath.EndsWith(".xml"))
-            {         
+            {
+                CancelLayout();
+                CancelView();
                 string htmlFile = location.LocalPath.Replace(".xml", ".html");
                 if(File.Exists(htmlFile))
                 {

@@ -47,7 +47,7 @@ $!{stylesheets}
 		        </div>
 		        $Form.FormTag("%{controller='search', action='quick', id='search-form'}")			
 			        <div id="search-box">
-			            <label id="lbl-search" for="txt-search">Quick Search:</label>
+			            <label style="display: none;" id="lbl-search" for="txt-search">Quick Search:</label>
 			            <input id="txt-search" class="search" name="q" type="text"/>
 			        </div>
 			        <div id="btn-search" class="btn">

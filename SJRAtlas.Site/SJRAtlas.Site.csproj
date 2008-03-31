@@ -169,6 +169,7 @@
     <Content Include="Config\controllers.config" />
     <Content Include="Config\facilities.config" />
     <Content Include="Config\properties.config" />
+    <Content Include="Config\logging.production.config" />
     <None Include="Views\data_set\data_set.vm" />
     <None Include="Views\data_set\_list.vm" />
     <None Include="Views\help\_advanced_search.vm" />
@@ -188,6 +189,7 @@
     <None Include="Views\publication\_list_maps.vm" />
     <None Include="Views\publication\_list.vm" />
     <None Include="Views\publication\publication.vm" />
+    <None Include="Views\rescues\friendlyerror.vm" />
     <None Include="Views\search\_need-help.vm" />
     <None Include="Views\search\all.vm" />
     <None Include="Views\shared\404.vm" />

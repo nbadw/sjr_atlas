@@ -1,0 +1,7 @@
+<p>Advanced search is for querying and downloading tabular data. It is available through a link adjacent to Quick Search on the top right corner of each Atlas page or as a link under the Quick Search found in the middle section of the Home page. </p>
+<p>The advanced search function requires the user to select a data set; area of interest, agency and date range are optional. </p>
+<p>Area of interest may be a watershed, a water body, or a specific data collection site. </p>
+<p>If watershed unit is selected, enter the drainage code or the name of the unit. Text auto-complete is used so the system will assist with the completion of the drainage code or watershed name by searching the database for similar entries.</p>
+<p>If a lake or stream is selected, enter the water body ID or the name of the water body. Text auto-complete is used so the system will assist with the completion of the water body ID or name by searching the database for similar entries.</p>
+<p>To search for a specific data collection site, a NBADW assigned Aquatic Site ID must be entered. </p>
+<p>To limit the search to data collected by a single agency, select an agency from the drop down list. Or if data from a specific time period is required, enter a single year (e.g. 2001) or a range of years (e.g. 2001-2006).   Click the search button to execute the search </p>

@@ -6,8 +6,9 @@ Date: 2/26/2008
 /* patch for .yui-gb issue in Grids 2.3.0*/
 .yui-gb .yui-u { float:left; }
 
-/* highlights empty links - for debugging purposes */
+/* highlights empty links - for debugging purposes 
 a[href="#"] { color: red; }
+*/
 
 /* BASE TYPOGRAPHY */
 body {
@@ -56,15 +57,16 @@ p.small {
 
 /* STYLES */
 body {
-	background-color: #6d718f; 
+	background-color: #174982; 
 	text-align: justify; 
 	min-width: 950px; 
 }
 
-a { color: #425cbd; }
+a { color: #425cbd; text-decoration: none; }
+a:hover { text-decoration: underline; }
 a.help { color: red; float: right; }
 a.option { color: #488074; }
-h1, h2, h3 { font-weight: bold; }
+h1.title { font-weight: bold; }
 ul { margin-left: 1.5em; }
 ul li { list-style-image: url('../images/bullet.jpg'); }
 
@@ -116,8 +118,7 @@ ul li { list-style-image: url('../images/bullet.jpg'); }
 #navigation {
 	padding-top: 10px;
 	background-color: #e8ebfc; 
-	color: #fff; 
-	border-bottom: 1px solid #070660; 
+	color: #fff; 	
 }
 #navigation #tabs {
 	float: left; 
@@ -201,7 +202,7 @@ form div.btn input {
 	padding-right: 5px;
 }
 #navigation #quick-search .adv-link a {
-	color: red; 
+	color: #174982; 
 }
 #navigation #quick-search .adv-link a:hover {
 	text-decoration: underline; 
@@ -220,6 +221,8 @@ form div.btn input {
 	clear: both;
 	background-color: #174982;
 	padding: 5px 10px;
+	border: 1px solid #fff;
+	border-top: none;
 }
 #navigation #breadcrumbs .location {
 	padding-right: 5px;
@@ -231,7 +234,7 @@ form div.btn input {
 }
 
 #main {
-	background: #d8e6ef no-repeat center top url('../images/main_back.jpg'); 
+	background: #fff; 
 }
 
 #headline {	
@@ -252,6 +255,10 @@ form div.btn input {
 	font-size: 1.1666666666666667em; 
 	line-height: 1.2857142857142858em; 
 	margin-bottom: 1.2857142857142858em; 
+	color: #000;
+}
+#headline li {
+	font-size: 12px; 
 }
 
 #content {
@@ -299,6 +306,7 @@ form div.btn input {
 #content .interactive-map .title,
 #content .dataset .title {
 	margin-bottom: 5px;
+	font-size: 14px;
 }
 #content .publication p,
 #content .interactive-map p,
@@ -330,6 +338,8 @@ form div.btn input {
 	padding-left: 20px;
 	padding-top: 10px;
 	margin-bottom: 0;
+	font-weight: bold;
+	font-size: 16px;
 }
 #site.index #content .box .body {
 	background: url('../images/background_box.jpg') repeat-y;
@@ -349,6 +359,7 @@ form div.btn input {
 }
 #site.index #content li.interactive-map .title {
 	margin-bottom: 0;	
+	font-size: 12px;
 }
 #site.index #content #alt-search-form #lbl-alt-search {
 	margin: 0; 
@@ -395,7 +406,7 @@ form div.btn input {
 }
 
 #help.index .toc {
-	font-weight: bold;	
+	font-weight: normal;	
 }
 #help.index #help-contents .section {
 	margin-bottom: 2.2em;
@@ -408,6 +419,16 @@ form div.btn input {
 }
 #help.index #help-contents .section .contents .section .title {
 	font-size: 14px;
+	text-decoration: underline;
+}
+#help.index #help-contents .section table td.first 
+{
+	vertical-align: top;
+	font-weight: bold;
+	font-style: italic;
+	text-align: left;
+	width: 100px;
+	padding-right: 20px;
 }
 
 .search-query {
@@ -465,12 +486,18 @@ form div.btn input {
 .waterbody-search-item {
 	padding: 3px 5px;
 }
+.waterbody-search-item h3 {
+	font-size: 14px;
+}
 .waterbody-search-item * {
 	padding: 0;
 	margin: 0;
 }
 .watershed-search-item {
 	padding: 3px 5px;
+}
+.watershed-search-item h3 {
+	font-size: 14px;
 }
 .watershed-search-item * {
 	padding: 0;
@@ -479,6 +506,9 @@ form div.btn input {
 .aquaticsite-search-item {
 	padding: 3px 5px;
 }
+.aquaticsite-search-item h3 {
+	font-size: 14px;
+}
 .aquaticsite-search-item * {
 	padding: 0;
 	margin: 0;
@@ -486,7 +516,31 @@ form div.btn input {
 .agency-list-item {
 	padding: 3px 5px;
 }
+.agency-list-item h3 {	
+	font-weight: normal;
+	font-size: 12px;
+}
 .agency-list-item * {
 	padding: 0;
 	margin: 0;
+}
+
+#help.index ol 
+{
+	margin: 0 0 1.5em 3em;
+}
+#help.index ol li 
+{
+	list-style-type: decimal;
+}
+
+h2.title 
+{
+	font-weight: normal;
+	color: #555;
+}
+h3.title 
+{
+	text-decoration: underline;
+	color: #425CBD	
 }

@@ -2,11 +2,15 @@
     <a href="#" title="Home">Home</a>
 #end
 
-#capturefor(headline)
+#capturefor(headline)    
     <h1 class="title">Saint John River Atlas</h1>
-    <p>The Saint John River Atlas is an online tool for presenting and interacting with the extensive body of data and information associated with the Saint John River, a multi-jurisdictional waterway originating in Maine and Québec and flowing into the Bay of Fundy at Saint John, New Brunswick. It is New Brunswick’s largest river system, draining approximately 40% of the province. See <a rel="shadowbox" href="$Atlas.ContentPath()/images/saint-john-river-basin.jpg">Map</a>.</p>
-    <p>The purpose of the Atlas is to provide access to time series data, interactive maps, and publications. Click here for help $Url.Link('Getting Started', "%{controller='help', action='website_overview'}").</p>
+    <img src="$Atlas.ContentPath()/images/saint-john-river-basin.jpg" alt="Saint John River Basin" style="width: 220px; height: 173px; float: left; margin: 0 1em 1em 0;" />    
+    <p>The Saint John River Atlas provides access to environmental, biological and social information for the Saint John River, New Brunswick. The site includes interactive and published maps, time series data, scientific reports and publications.</p>
+    <img src="http://www.gnb.ca/cnb/logos/download/Wordmarks2008/NB_Colour.jpg" style="width: 150px; height: 50px; margin: 0 0 1em 1em; float: right;" />
+    <img src="http://www.apheo.ca/events/07/conf07/Geoconnectionslogo.jpg" style="width: 150px; height: 100px; margin: 0 0 1em 1em; float: right; clear: right;" />
+    
     <p>The Saint John River Atlas is a collaborative initiative between the Canadian Rivers Institute, NB Department of Natural Resources, NB Department of the Environment, Fisheries and Oceans Canada, and various conservation and environmental organizations throughout the watershed. Funding was provided by <a href="http://www.geoconnections.org/" title="GeoConnections Canada">GeoConnections Canada</a>, <a href="http://www.gnb.ca/0009/0373/0002/0001-e.asp" title="NB Environmental Trust Fund">NB Environmental Trust Fund</a>, <a href="http://www.nbwtf.ca/" title="NB Wildlife Trust Fund">NB Wildlife Trust Fund</a>, and the <a href="http://www.gnb.ca/" title="Province of New Brunswick">Province of New Brunswick</a>.</p>
+    <p style="clear: left">Need help <a href="#">getting started?</a></p>
 #end
  		
 <div id="interactive-maps" class="box">                    

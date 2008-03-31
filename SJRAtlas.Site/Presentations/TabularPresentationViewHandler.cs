@@ -152,105 +152,115 @@ namespace SJRAtlas.Site.Presentations
 
             public void Execute(Controller controller)
             {
-                string filename = Path.GetTempFileName();
-                logger.Info("Saving tabular data into " + filename);
-                controller.PropertyBag["filename"] = filename;
-
-                TabularQuery query = TabularQuery.Find(int.Parse(controller.Params["table"]));
-                CustomQuery customQuery = new CustomQuery(query.SelectStatement);
-                customQuery.Logger = GlobalApplication.CreateLogger(typeof(CustomQuery));
-
-                QueryResults results = customQuery
-                    .ConfigureFilters(controller.Params)
-                    .Execute();
-
-                /*
-                 * IMPORTANT: To make sure the Excel applicaton quits properly follow the below steps:
-                 * SEE: http://support.microsoft.com/default.aspx?scid=kb;en-us;317109
-                 *  
-                 * 1. each COM object should be a new variable
-                 * 2. use System.Runtime.InteropServices.Marshal.ReleaseComObject when finished with an object
-                 * 3. set variable to null
-                 * 4. call the Quit method of the application
-                 * 5. run garbage collection methods 
-                 */
-
-                logger.Debug("initializing Excel application");
-                Application excel = new Application();
-                Workbooks books = excel.Workbooks;
-                Workbook book = books.Add(Missing.Value) as Workbook;
-                Sheets sheets = book.Worksheets as Sheets;
-                Worksheet sheet;
-
-                logger.Debug("removing unneeded sheets");
-                while (sheets.Count > 1)
+                try
                 {
-                    sheet = book.ActiveSheet as Worksheet;
-                    sheet.Delete();
-                }
+                    string filename = Path.GetTempFileName();
+                    logger.Info("Saving tabular data into " + filename);
+                    controller.PropertyBag["filename"] = filename;
 
-                sheet = book.ActiveSheet as Worksheet;
-                sheet.Name = query.Title;
+                    TabularQuery query = TabularQuery.Find(int.Parse(controller.Params["table"]));
+                    CustomQuery customQuery = new CustomQuery(query.SelectStatement);
+                    customQuery.Logger = GlobalApplication.CreateLogger(typeof(CustomQuery));
 
-                // first row is column names
-                for (int i = 0; i < results.Columns.Length; i++)
-                {
-                    ((Range)sheet.Cells[1, i + 1]).Font.Bold = true;
-                    sheet.Cells[1, i + 1] = results.Columns[i];                   
-                }
+                    QueryResults results = customQuery
+                        .ConfigureFilters(controller.Params)
+                        .Execute();
 
-                // subsequent rows are values
-                for (int i = 0; i < results.Rows.Count; i++)
-                {
-                    object[] row = results.Rows[i];
-                    for (int j = 0; j < row.Length; j++)
+                    /*
+                     * IMPORTANT: To make sure the Excel applicaton quits properly follow the below steps:
+                     * SEE: http://support.microsoft.com/default.aspx?scid=kb;en-us;317109
+                     *  
+                     * 1. each COM object should be a new variable
+                     * 2. use System.Runtime.InteropServices.Marshal.ReleaseComObject when finished with an object
+                     * 3. set variable to null
+                     * 4. call the Quit method of the application
+                     * 5. run garbage collection methods 
+                     */
+
+                    logger.Debug("initializing Excel application");
+                    Application excel = new Application();
+                    Workbooks books = excel.Workbooks;
+                    Workbook book = books.Add(Missing.Value) as Workbook;
+                    Sheets sheets = book.Worksheets as Sheets;
+                    Worksheet sheet;
+
+                    excel.Visible = true;
+
+                    logger.Debug("removing unneeded sheets");
+                    while (sheets.Count > 1)
                     {
-                        sheet.Cells[i + 2, j + 1] = row[j];
+                        sheet = book.ActiveSheet as Worksheet;
+                        sheet.Delete();
                     }
+
+                    sheet = book.ActiveSheet as Worksheet;
+                    sheet.Name = query.Title;
+
+                    // first row is column names
+                    for (int i = 0; i < results.Columns.Length; i++)
+                    {
+                        ((Range)sheet.Cells[1, i + 1]).Font.Bold = true;
+                        sheet.Cells[1, i + 1] = results.Columns[i];
+                    }
+
+                    // subsequent rows are values
+                    for (int i = 0; i < results.Rows.Count; i++)
+                    {
+                        object[] row = results.Rows[i];
+                        for (int j = 0; j < row.Length; j++)
+                        {
+                            sheet.Cells[i + 2, j + 1] = row[j];
+                        }
+                    }
+
+                    logger.Debug("saving excel workbook");
+                    book.SaveCopyAs(filename);
+                    book.Saved = true;
+                    books.Close();
+
+                    logger.Debug("cleaning up COM objects");
+                    Marshal.ReleaseComObject(sheet);
+                    Marshal.ReleaseComObject(sheets);
+                    Marshal.ReleaseComObject(book);
+                    Marshal.ReleaseComObject(books);
+
+                    sheet = null;
+                    sheets = null;
+                    book = null;
+                    books = null;
+
+                    logger.Debug("closing excel application");
+                    excel.Quit();
+
+                    logger.Debug("final clean up and freeing of resources");
+                    Marshal.ReleaseComObject(excel);
+                    excel = null;
+
+                    GC.GetTotalMemory(false);
+                    GC.Collect();
+                    GC.WaitForPendingFinalizers();
+                    GC.Collect();
+                    GC.GetTotalMemory(true);
+
+                    logger.Debug("sending content");
+                    controller.CancelView();
+                    controller.CancelLayout();
+
+                    IResponse response = controller.Context.Response;
+                    string attachment = String.Format("attachment; filename=\"{0}.xls\"", query.Title);
+                    string contentLength = new FileInfo(filename).Length.ToString();
+
+                    response.Clear();
+                    response.ContentType = "application/excel";
+                    response.AppendHeader("Content-Disposition", attachment);
+                    response.AppendHeader("Content-Length", contentLength);
+                    response.WriteFile(filename);
                 }
-
-                logger.Debug("saving excel workbook");
-                book.SaveCopyAs(filename);
-                book.Saved = true;
-                books.Close();
-
-                logger.Debug("cleaning up COM objects");
-                Marshal.ReleaseComObject(sheet);
-                Marshal.ReleaseComObject(sheets);
-                Marshal.ReleaseComObject(book);
-                Marshal.ReleaseComObject(books);
-
-                sheet = null;
-                sheets = null;
-                book = null;
-                books = null;
-
-                logger.Debug("closing excel application");
-                excel.Quit();
-
-                logger.Debug("final clean up and freeing of resources");
-                Marshal.ReleaseComObject(excel);
-                excel = null;
-
-                GC.GetTotalMemory(false);
-                GC.Collect();
-                GC.WaitForPendingFinalizers();
-                GC.Collect();
-                GC.GetTotalMemory(true);
-
-                logger.Debug("sending content");
-                controller.CancelView();
-                controller.CancelLayout();
-
-                IResponse response = controller.Context.Response;
-                string attachment = String.Format("attachment; filename=\"{0}.xls\"", query.Title);
-                string contentLength = new FileInfo(filename).Length.ToString();
-
-                response.Clear();
-                response.ContentType = "application/excel";
-                response.AppendHeader("Content-Disposition", attachment);
-                response.AppendHeader("Content-Length", contentLength);
-                response.WriteFile(filename);
+                catch (Exception e)
+                {
+                    logger.Error("Could not export to Excel", e);
+                    controller.Response.StatusCode = 500;
+                }
             }
 
             #endregion

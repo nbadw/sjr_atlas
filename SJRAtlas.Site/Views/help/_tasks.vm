@@ -1,0 +1,7 @@
+<table>
+    <tr>
+        <td class="first">Print this Map:</td>
+        <td><p>Clicking on Print this Map task opens a dialog window for entering a map title and setting other parameters for the map, such as resolution and scale. Click on Create Print Page button to open a new window displaying the map image.</p></td>     
+    </tr>
+</table>
+     

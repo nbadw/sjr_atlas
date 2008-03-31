@@ -1,0 +1,30 @@
+<p>Quick search is a text search tool found in the top right corner of all Atlas web pages and in the middle section of the Home page.</p>
+<p>Enter a place name, lake or stream name, data set name, or other text string to search for maps, reports, data and other information.</p>
+<p>Enter the word “watershed” after a water body name if you want the search to include all lakes and streams within a drainage area. Note the water body name must be one of the province's official drainage units. View the Drainage Unit Listing.</p>
+<p>The search checks NR Canada's Canadian Geographic Names database and will return official and rescinded place names. Rescinded names are no longer official place names but may still be commonly used. The search results indicate whether the place name has official status.</p>
+<p>The search function checks NR Canada’s database to determine if the text string is a valid place name. If found and there are more multiple locations with the same name, the list of places are returned so the user can select the desired location. Each location has a View Location link to display the place in a Google map.  </p>
+<p>If a valid watershed name is entered (e.g. Eel River watershed) and there are multiple watersheds in New Brunswick with the same name, the list is presented and the user must select the desired watershed unit.  </p>
+<p>Once a place, lake or stream, or watershed is selected, the search results are presented in 4 categories or groups: Interactive Maps, Published Maps, Published Reports and Data.</p>
+
+<table>
+    <tr>
+        <td class="first">Interactive Maps:</td>
+        <td><p>There are several thematic maps that cover the entire Saint John River basin, such as major landowners and topographic maps. Therefore, when searching on any place or water body within the Saint John River basin, these maps will always be listed.</p>
+        <p>The list will also include any maps that are specific to the selected place or water body, such as lake depth and stream habitat maps. However, not all water bodies have these maps.</p>
+        <p>Interactive maps are web maps published by the NB Aquatic Data Warehouse using local and remote mapping services or data. These maps also contain map tools and tasks that allow the user to interact with map.</p>
+        <p>When an interactive map is selected from the search results, the map will zoom to the selected place or water body.</p></td>
+    </tr>    
+    <tr>
+        <td class="first">Published Maps:</td>
+        <td><p>Published maps are static maps prepared by the NB Aquatic Data Warehouse and other organizations and presented as PDF documents. Each published map has an associated metadata document describing the map, how it was created and by whom, and the time period of the information or data being presented.</p></td>
+    </tr>
+    <tr>
+        <td class="first">Published Reports:</td>
+        <td><p>Published reports are reports or documents prepared by the NB Aquatic Data Warehouse and other organizations and presented as PDF documents. Each published report has an associated metadata document describing the document, the author and publication date. </p></td>
+    </li>
+    <tr>
+        <td class="first">Data:</td>
+        <td><p>If the selected place is a water body, this section of the results lists the data available for the particular water body.</p>
+        <p>The list presents a description of the data set, plus the options available for viewing the data, e.g. as a map, as tables, as a graph, etc.  The data set’s metadata may also be viewed. </p></td>
+    </tr>
+</table>
