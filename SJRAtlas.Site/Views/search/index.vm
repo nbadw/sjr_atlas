@@ -5,9 +5,9 @@
 #end
 
 #capturefor(headline)
+    <div class="help-link" style="float: right; text-align: right">$Url.Link('Need Help?', "%{controller='help', action='advanced_search'}")</div>	
     <h1 class="title">Advanced Search</h1>
-    <p>This is an advanced search option for querying tabular data. You will be able to download the tabular data and its associated spatial data if available.</p>
-    $Url.Link('Help', "%{controller='help', action='advanced_search'}", "%{class='help'}")
+    <p>This is an advanced search option for querying tabular data. You will be able to download the tabular data as an Excel spreadsheet.</p>    
     <p>Enter search criteria in the form below.</p>
 #end
 
@@ -51,6 +51,7 @@
             titleCollapse: true,
             collapsed: true,
             disabled: true,
+            height: 150,
             title: 'Specify an Area of Interest? (optional)',
             items: [waterbodies, watersheds, aquaticSites]
         });
@@ -60,6 +61,7 @@
             titleCollapse: true,
             collapsed: true,
             disabled: true,
+            height: 55,
             title: 'Specify an Agency? (optional)',
             items: [agencies]
         });  
@@ -69,6 +71,7 @@
             titleCollapse: true,
             collapsed: true,
             disabled: true,
+            height: 100,
             title: 'Specify a Date Range? (optional)',
             items: [startDate, endDate]         
         });
@@ -128,11 +131,6 @@
                 params: filters
             });
         });
-        
-    //    startDate.on('change', function(dateField, newValue, oldValue) {
-    //        if(dateField.isValid())
-    //            endDate.setMinValue(newValue);
-    //    });
              
         /* FORM */    
         Ext.override(Ext.form.BasicForm, {    

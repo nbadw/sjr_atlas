@@ -12,8 +12,9 @@
 #end
 
 #capturefor(headline)
+    <div class="help-link" style="float: right; text-align: right">$Url.Link('Need Help?', "%{controller='help', action='google_map'}")</div>
     <h1 class="title">Search</h1>
-    <p>You've searched for: <span class="search-query">&ldquo;$!{query}&rdquo;</span>. Please select one of the below locations to continue.</p>
+    <p>You've searched for: <span class="search-query">&ldquo;$!{query}&rdquo;</span>. Click on a  marker on the map or a place name in the list to view details.</p>
 #end
 
 

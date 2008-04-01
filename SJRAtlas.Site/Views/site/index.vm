@@ -4,13 +4,20 @@
 
 #capturefor(headline)    
     <h1 class="title">Saint John River Atlas</h1>
-    <img src="$Atlas.ContentPath()/images/saint-john-river-basin.jpg" alt="Saint John River Basin" style="width: 220px; height: 173px; float: left; margin: 0 1em 1em 0;" />    
+    
+    <div class="map-image" style="float: left; margin: 0 1em 1em 0;">
+        <a rel="shadowbox" title="Saint John River Basin" href="$Atlas.ContentPath()/images/saint-john-river-basin.jpg"><img alt="Click this image for a larger preview" src="$Atlas.ContentPath()/images/home-map.jpg" alt="Saint John River Basin" /></a>
+    </div>    
+        
     <p>The Saint John River Atlas provides access to environmental, biological and social information for the Saint John River, New Brunswick. The site includes interactive and published maps, time series data, scientific reports and publications.</p>
-    <img src="http://www.gnb.ca/cnb/logos/download/Wordmarks2008/NB_Colour.jpg" style="width: 150px; height: 50px; margin: 0 0 1em 1em; float: right;" />
-    <img src="http://www.apheo.ca/events/07/conf07/Geoconnectionslogo.jpg" style="width: 150px; height: 100px; margin: 0 0 1em 1em; float: right; clear: right;" />
+    
+    <div class="logos" style="width: 170px; margin: 0 0 1em 1em; float: right; text-align: center;">
+        <img src="$Atlas.ContentPath()/images/geoconnections.gif" />
+        <img src="$Atlas.ContentPath()/images/gc.gif" />
+    </div>    
     
     <p>The Saint John River Atlas is a collaborative initiative between the Canadian Rivers Institute, NB Department of Natural Resources, NB Department of the Environment, Fisheries and Oceans Canada, and various conservation and environmental organizations throughout the watershed. Funding was provided by <a href="http://www.geoconnections.org/" title="GeoConnections Canada">GeoConnections Canada</a>, <a href="http://www.gnb.ca/0009/0373/0002/0001-e.asp" title="NB Environmental Trust Fund">NB Environmental Trust Fund</a>, <a href="http://www.nbwtf.ca/" title="NB Wildlife Trust Fund">NB Wildlife Trust Fund</a>, and the <a href="http://www.gnb.ca/" title="Province of New Brunswick">Province of New Brunswick</a>.</p>
-    <p style="clear: left">Need help <a href="#">getting started?</a></p>
+    <p style="clear: left">Need help $Url.Link('getting started', "%{controller='help', action='index'}")?</p>
 #end
  		
 <div id="interactive-maps" class="box">                    

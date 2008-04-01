@@ -315,11 +315,22 @@ namespace SJRAtlas.Models.DataWarehouse
             get
             {
                 if (interactiveMaps == null)
-                {
-                    string query = String.Format("%{0}%", Name);
-                    interactiveMaps = IsWithinBasin() ? 
-                        InteractiveMap.FindAllWithFullBasinCoverageByQuery(query) :
-                        InteractiveMap.FindAllByQuery(query);
+                {                    
+                    List<InteractiveMap> maps = IsWithinBasin() ?
+                        new List<InteractiveMap>(InteractiveMap.FindAllBasinMaps()) :
+                        new List<InteractiveMap>();
+
+                    foreach (DataSet dataset in DataSets)
+                    {
+                        if (dataset.InteractiveMap != null && !maps.Contains(dataset.InteractiveMap))
+                            maps.Add(dataset.InteractiveMap);
+                    }
+
+                    maps.Sort(delegate(InteractiveMap im1, InteractiveMap im2) { 
+                        return im1.Title.CompareTo(im2.Title); 
+                    });
+
+                    interactiveMaps = maps;
                 }
 
                 return interactiveMaps;

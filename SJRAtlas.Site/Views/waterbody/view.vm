@@ -12,6 +12,10 @@ $Url.Link('Home', "%{controller='site', action='index'}")
     Flows Into: <span style="font-weight: normal">$!{waterbody.Watershed.FlowsInto}</span><br />
     </p>
 #end
+
+#capturefor(javascripts)
+    <script type="text/javascript" language="javascript" src="$Atlas.ContentPath()/javascripts/site.js" />
+#end
        
 <div id="expanded-info">
     #if($interactive_maps.Count != 0)

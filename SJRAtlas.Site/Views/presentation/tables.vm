@@ -12,6 +12,7 @@
 #end
 
 #capturefor(headline)
+    <div class="help-link" style="float: right; text-align: right">$Url.Link('Need Help?', "%{controller='help', action='tabular_data_results'}")</div>	
     <noscript>
         <div id="requirements" style="padding: 1em 1em 0; background-color: #fff; border: 1px solid #174A83;">            
             <h2 class="title" style="color: red">Problem with minimum requirements.</h2>
@@ -54,7 +55,7 @@
             
             var downloadAction = function() {  
                 var loadMask = new Ext.LoadMask(this.gridId, {
-                    msg: 'Please wait, your download is being prepared...<br/>(Estimated preparation time is 2-5min depending on the size of the dataset)',
+                    msg: 'Please wait, your download is being prepared...<br/>(Estimated preparation time is 2-5 min depending on the size of the dataset)',
                     removeMask: true
                 });
                             

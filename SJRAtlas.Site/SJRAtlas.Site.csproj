@@ -172,6 +172,8 @@
     <Content Include="Config\logging.production.config" />
     <None Include="Views\data_set\data_set.vm" />
     <None Include="Views\data_set\_list.vm" />
+    <None Include="Views\help\_tabular_data_results.vm" />
+    <None Include="Views\help\_google_map.vm" />
     <None Include="Views\help\_advanced_search.vm" />
     <None Include="Views\help\_search_tips.vm" />
     <None Include="Views\help\_quick_search.vm" />

@@ -20,9 +20,9 @@ $Url.Link('Home', "%{controller='site', action='index'}")
         <div id="data-documentation">
             <h2 class="title">Data Documentation:</h2>
             <ul>
-                <li><a href="$Atlas.ContentPath()/Data Manuals/DW Manual/DWM-05-Drainage System.pdf">New Brunswick Hierarchal Drainage System</a></li>
+                <li><a href="$Atlas.ContentPath()/Data Manuals/DW Manual/NB Drainage System.pdf">New Brunswick Hierarchal Drainage System</a></li>
                 <li><a href="$Atlas.ContentPath()/Data Manuals/DW Manual/DWM-Appendix A - Drainage Unit Listing.pdf">Drainage Unit Listing</a></li>
-                <li><a href="$Atlas.ContentPath()/Data Manuals/DW Manual/DWM-06-Water Resource Inventory.pdf">Water Resource Inventory</a></li>
+                <li><a href="$Atlas.ContentPath()/Data Manuals/DW Manual/Water Body Inventory.pdf">Waterbody Inventory</a></li>
                 <li><a href="$Atlas.ContentPath()/Data Manuals/Other Agencies/ETB/DTDB 1998 User's Guide.pdf">DTDB 1998 Users's Guide</a></li>
                 <li><a href="$Atlas.ContentPath()/Data Manuals/Other Agencies/ESAs/ESA1.PDF">Environmentally Significant Areas In New Brunswick (15.5 MB)</a></li>
                 <li><a href="$Atlas.ContentPath()/Data Manuals/Other Agencies/ESAs/ESA2.PDF">Environmentally Significant Areas In New Brunswick - Database Structure, Database Dictionary (6.6 MB)</a></li>

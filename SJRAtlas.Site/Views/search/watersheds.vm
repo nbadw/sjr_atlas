@@ -7,35 +7,29 @@ $Url.Link('Search', "%{controller='search', action='index'}")
 #end
 
 #capturefor(headline)
+<div class="help-link" style="float: right; text-align: right">$Url.Link('Need Help?', "%{controller='help', action='searching'}")</div>
 <h1>Search</h1>
 <p>You've searched Watersheds for: <span class="search-query">&ldquo;$!{query}&rdquo;</span>. Please select one of the below locations to continue.</p>
 #end
 
-<div class="yui-gc">			
-    <div class="yui-u first">
-        <h2>Watershed Search Results</h2>                
-        <table style="width: 100%;">
-            <thead>
-                <tr>
-                    <th style="font-weight: bold;">Name</th>
-                    <th style="font-weight: bold;">Drainage Code</th>
-                    <th style="font-weight: bold;">Flows Into</th>
-                </tr>
-            </thead>
-            <tbody>                        
-            #foreach( $result in $results )
-                <tr class="watershed-result">
-                    <td class="name">
-                        $Url.Link($result.Name, "%{controller='watershed', action='view', querystring='drainageCode=$result.DrainageCode'}")
-                    </td>
-                    <td class="drainage-code">$result.DrainageCode</td>
-                    <td class="flows-into">$result.FlowsInto</td>
-                </tr>                      
-            #end
-            </tbody>
-        </table>
-    </div>
-    <div class="yui-u">
-        #parse("search/_need-help.vm")
-    </div>              
-</div>
+<h2>Watershed Search Results</h2>                
+<table style="width: 100%;">
+    <thead>
+        <tr>
+            <th style="font-weight: bold;">Name</th>
+            <th style="font-weight: bold;">Drainage Code</th>
+            <th style="font-weight: bold;">Flows Into</th>
+        </tr>
+    </thead>
+    <tbody>                        
+    #foreach( $result in $results )
+        <tr class="watershed-result">
+            <td class="name">
+                $Url.Link($result.Name, "%{controller='watershed', action='view', querystring='drainageCode=$result.DrainageCode'}")
+            </td>
+            <td class="drainage-code">$result.DrainageCode</td>
+            <td class="flows-into">$result.FlowsInto</td>
+        </tr>                      
+    #end
+    </tbody>
+</table>         

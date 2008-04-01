@@ -169,10 +169,9 @@ namespace SJRAtlas.Models.Atlas
             {
                 if (interactiveMaps == null)
                 {
-                    string query = String.Format("%{0}%", Name);
                     interactiveMaps = IsWithinBasin() ?
-                        InteractiveMap.FindAllWithFullBasinCoverageByQuery(query) :
-                        InteractiveMap.FindAllByQuery(query);
+                        new List<InteractiveMap>(InteractiveMap.FindAllBasinMaps()) :
+                        new List<InteractiveMap>();
                 }
 
                 return interactiveMaps; 

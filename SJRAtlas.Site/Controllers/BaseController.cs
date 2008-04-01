@@ -12,7 +12,7 @@ using SJRAtlas.Site.Filters;
 namespace SJRAtlas.Site.Controllers
 {
     [Layout("sjratlas")]
-    [Rescue("friendlyerror")]
+    [Rescue("generalerror")]
     [Helper(typeof(AtlasHelper), "Atlas")]
     [Filter(ExecuteEnum.AfterAction, typeof(EscapeToUnicodeFilter))]
     public class BaseController : SmartDispatcherController

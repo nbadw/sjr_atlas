@@ -101,7 +101,17 @@ namespace SJRAtlas.Models.Atlas
             get { return isDateFilterAware; }
             set { isDateFilterAware = value; }
         }
-                
+
+        private InteractiveMap interactiveMap;
+
+        [JsonIgnore]
+        [BelongsTo("interactive_map_id")]
+        public InteractiveMap InteractiveMap
+        {
+            get { return interactiveMap; }
+            set { interactiveMap = value; }
+        }
+                        
         private IList<Presentation> presentations = new List<Presentation>();
             
         [JsonIgnore]

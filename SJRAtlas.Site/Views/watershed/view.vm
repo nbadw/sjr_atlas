@@ -13,8 +13,7 @@ $Url.Link('Home', "%{controller='site', action='index'}")
 #end
 
 #capturefor(javascripts)
-<script type="text/javascript" language="javascript" src="$Atlas.ContentPath()/javascripts/yahoo-dom-event.js"></script>
-<script type="text/javascript" language="javascript" src="$Atlas.ContentPath()/javascripts/abstract.js" />
+    <script type="text/javascript" language="javascript" src="$Atlas.ContentPath()/javascripts/site.js" />
 #end
 
                

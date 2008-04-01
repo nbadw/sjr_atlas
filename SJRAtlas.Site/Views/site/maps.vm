@@ -4,9 +4,10 @@
     <a href="#" title="Maps">Maps</a>
 #end
 
-#capturefor(headline)		    
-    <h1 class="title">Maps</h1>    <p style="font-size: 13px;">There are 2 types of maps presented: interactive and published. Interactive maps present current data which are updated on a regular basis and through web mapping technology, clients can interact with the map, zooming into areas of interest and requesting information.  The published maps, on the other hand, are static and presented as PDF files.</p>
-    <p style="font-size: 13px;">While the data, maps and other information on this website may not be free from error or omission, care has been taken to ensure the best possible quality. The NB Aquatic Data Warehouse makes no representations or warranties, either expressed or implied, as to the accuracy of the information presented and users of this site assume the entire risk as to the use of any or all information.</p>
+#capturefor(headline)
+    <div class="help-link" style="float: right; text-align: right">$Url.Link('Need Help?', "%{controller='help', action='overview_of_maps'}")</div>		    
+    <h1 class="title">Maps</h1>    <p style="font-size: 13px;">There are 2 types of maps presented: interactive and published. Interactive maps present current data which are updated on a regular basis; through web mapping technology, clients can interact with the map, zooming into areas of interest and requesting information.  The published maps, on the other hand, are static and presented as PDF files.</p>
+    <p style="font-size: 13px;">Please Note: While the data, maps and other information on this website may not be free from error or omission, care has been taken to ensure the best possible quality. The NB Aquatic Data Warehouse makes no representations or warranties, either expressed or implied, as to the accuracy of the information presented and users of this site assume the entire risk as to the use of any or all information.</p>
     <ul id="toc" style="font-size: 14px;">
         <li><a href="#interactive-maps">Interactive Maps</a></li>
         <li><a href="#published-maps">Published Maps</a></li>

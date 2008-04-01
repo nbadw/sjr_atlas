@@ -24,3 +24,5 @@ Date: 3/13/2008
 #site.index #content #alt-search-form #btn-alt-search input {	
 	margin-left: -235px;
 }
+
+.yui-gc .yui-u { width: 31%; }

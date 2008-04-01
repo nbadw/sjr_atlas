@@ -45,7 +45,9 @@ namespace SJRAtlas.Site.Controllers
                     .AddSection("Searching")
                         .Add("Quick Search")
                         .Add("Search Tips")
-                        .Add("Advanced Search");
+                        .Add("Google Map")
+                        .Add("Advanced Search")
+                        .Add("Tabular Data Results");
             }
 
             return helpContents;

@@ -405,23 +405,23 @@ form div.btn input {
 	margin-bottom: 30px;
 }
 
-#help.index .toc {
+#help .toc {
 	font-weight: normal;	
 }
-#help.index #help-contents .section {
+#help #help-contents .section {
 	margin-bottom: 2.2em;
 }
-#help.index #help-contents .section .title {
+#help #help-contents .section .title {
 	font-size: 18px;
 }
-#help.index #help-contents .section .contents .section {
+#help #help-contents .section .contents .section {
 	margin-left: 2em;
 }
-#help.index #help-contents .section .contents .section .title {
+#help #help-contents .section .contents .section .title {
 	font-size: 14px;
 	text-decoration: underline;
 }
-#help.index #help-contents .section table td.first 
+#help #help-contents .section table td.first 
 {
 	vertical-align: top;
 	font-weight: bold;
@@ -469,8 +469,7 @@ form div.btn input {
 .place-info-window p span {
 	font-weight: bold;
 }
-.place-info-window a 
-{
+.place-info-window a {
 	display: block;
 	margin-top: 7px;
 }
@@ -525,22 +524,26 @@ form div.btn input {
 	margin: 0;
 }
 
-#help.index ol 
-{
+#help.index ol {
 	margin: 0 0 1.5em 3em;
 }
-#help.index ol li 
-{
+#help.index ol li {
 	list-style-type: decimal;
 }
 
-h2.title 
-{
+h2.title {
 	font-weight: normal;
 	color: #555;
 }
-h3.title 
-{
+h3.title {
 	text-decoration: underline;
 	color: #425CBD	
+}
+
+.x-date-menu ul.x-menu-list {
+	list-style: none;
+	margin: 0;
+}
+.x-date-menu ul.x-menu-list li {
+	list-style-image: none;
 }
