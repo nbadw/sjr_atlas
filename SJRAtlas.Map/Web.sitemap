@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0">
+  <siteMapNode url="~/Default.aspx" title="Web Mapping Application" description="Web Mapping Application">
+    <siteMapNode url="http://www.esri.com" title="ESRI" description="ESRI" />
+    <siteMapNode url="http://support.esri.com" title="ESRI Support Center" description="ESRI Support Center" />
+    <siteMapNode url="Help/Default.htm" title="Help" description="Help" />
+  </siteMapNode>
+</siteMap>

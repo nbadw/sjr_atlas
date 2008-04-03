@@ -1,0 +1,112 @@
+<%--
+Default skin template. The following skins are provided as examples only.
+
+1. Named control skin. The SkinId should be uniquely defined because
+   duplicate SkinId's per control type are not allowed in the same theme.
+
+<asp:GridView runat="server" SkinId="gridviewSkin" BackColor="White" >
+   <AlternatingRowStyle BackColor="Blue" />
+</asp:GridView>
+
+2. Default skin. The SkinId is not defined. Only one default 
+   control skin per control type is allowed in the same theme.
+
+<asp:Image runat="server" ImageUrl="~/images/image1.jpg" />
+--%>
+
+<%@ Register Assembly="ESRI.ArcGIS.ADF.Tasks, Version=9.2.4.1420, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86" Namespace="ESRI.ArcGIS.ADF.Tasks" TagPrefix="esriTasks" %>
+
+<%@ Register Assembly="ESRI.ArcGIS.ADF.ArcGISServer.Editor, Version=9.2.4.1420, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86" Namespace="ESRI.ArcGIS.ADF.ArcGISServer.Editor" TagPrefix="esriEditor" %>
+
+<%@ Register Assembly="ESRI.ArcGIS.ADF.Web.UI.WebControls, Version=9.2.4.1420, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86"
+    Namespace="ESRI.ArcGIS.ADF.Web.UI.WebControls" TagPrefix="esri" %>
+    
+<esriTasks:SearchAttributesTask runat="server" BackColor="White" BorderColor="#999999" BorderStyle="Solid" 
+BorderWidth="1px" Font-Names="Verdana" 
+Font-Size="8pt" ForeColor="Black"
+TitleBarColor="#4B5731" TitleBarHeight="24px" TitleBarSeparatorLine="True"
+Transparency="0" Font-Bold="True" TitleBarForeColor="White"
+Visible="False"
+DockingContainerElementID="LeftPanelCellDiv" 
+ShowDockedContextMenu="True" 
+ShowDockButton="True" 
+Docked="False"
+TitleBarBackgroundImage="~/App_Themes/Green_Helicopter/images/green1-gradient-24x1.gif" />
+
+<esriEditor:EditorTask runat="server" BackColor="White" BorderColor="#999999" BorderStyle="Solid" 
+BorderWidth="1px" Font-Names="Verdana" 
+Font-Size="8pt" ForeColor="Black"
+TitleBarColor="#4B5731" TitleBarHeight="24px" TitleBarSeparatorLine="True"
+Transparency="0" Font-Bold="True" TitleBarForeColor="White"
+Visible="False"
+DockingContainerElementID="LeftPanelCellDiv" 
+ShowDockedContextMenu="True" 
+ShowDockButton="True" 
+Docked="False"
+TitleBarBackgroundImage="~/App_Themes/Green_Helicopter/images/green1-gradient-24x1.gif" />
+
+<esriTasks:FindAddressTask runat="server" BackColor="White" BorderColor="#999999" BorderStyle="Solid" 
+BorderWidth="1px" Font-Names="Verdana" 
+Font-Size="8pt" ForeColor="Black"
+TitleBarColor="#4B5731" TitleBarHeight="24px" TitleBarSeparatorLine="True"
+Transparency="0" Font-Bold="True" TitleBarForeColor="White"
+Visible="False"
+DockingContainerElementID="LeftPanelCellDiv" 
+ShowDockedContextMenu="True" 
+ShowDockButton="True" 
+Docked="False"
+TitleBarBackgroundImage="~/App_Themes/Green_Helicopter/images/green1-gradient-24x1.gif" />
+
+<esriTasks:FindPlaceTask runat="server" BackColor="White" BorderColor="#999999" BorderStyle="Solid" 
+BorderWidth="1px" Font-Names="Verdana" 
+Font-Size="8pt" ForeColor="Black"
+TitleBarColor="#4B5731" TitleBarHeight="24px" TitleBarSeparatorLine="True"
+Transparency="0" Font-Bold="True" TitleBarForeColor="White"
+Visible="False"
+DockingContainerElementID="LeftPanelCellDiv" 
+ShowDockedContextMenu="True" 
+ShowDockButton="True" 
+Docked="False"
+TitleBarBackgroundImage="~/App_Themes/Green_Helicopter/images/green1-gradient-24x1.gif" />
+
+<esriTasks:GeoprocessingTask runat="server" BackColor="White" BorderColor="#999999" BorderStyle="Solid" 
+BorderWidth="1px" Font-Names="Verdana" 
+Font-Size="8pt" ForeColor="Black"
+TitleBarColor="#4B5731" TitleBarHeight="24px" TitleBarSeparatorLine="True"
+Transparency="0" Font-Bold="True" TitleBarForeColor="White"
+Visible="False"
+DockingContainerElementID="LeftPanelCellDiv" 
+ShowDockedContextMenu="True" 
+ShowDockButton="True" 
+Docked="False"
+TitleBarBackgroundImage="~/App_Themes/Green_Helicopter/images/green1-gradient-24x1.gif" />
+
+<esriTasks:QueryAttributesTask runat="server" BackColor="White" BorderColor="#999999" BorderStyle="Solid" 
+BorderWidth="1px" Font-Names="Verdana" 
+Font-Size="8pt" ForeColor="Black"
+TitleBarColor="#4B5731" TitleBarHeight="24px" TitleBarSeparatorLine="True"
+Transparency="0" Font-Bold="True" TitleBarForeColor="White"
+Visible="False"
+DockingContainerElementID="LeftPanelCellDiv" 
+ShowDockedContextMenu="True" 
+ShowDockButton="True" 
+Docked="False"
+TitleBarBackgroundImage="~/App_Themes/Green_Helicopter/images/green1-gradient-24x1.gif" />
+
+<asp:Menu runat="server" ForeColor="White" Font-Bold="true" SkinID="TaskBarSkin">
+    <StaticMenuItemStyle ItemSpacing="4px" />
+</asp:Menu>
+
+<esri:FloatingPanel runat="server" BackColor="White" BorderColor="#999999" BorderStyle="Solid" 
+BorderWidth="1px" Font-Names="Verdana" 
+Font-Size="8pt" ForeColor="Black"
+TitleBarColor="#4B5731" TitleBarHeight="24px" TitleBarSeparatorLine="True"
+Transparency="0" Font-Bold="True" TitleBarForeColor="White"
+TitleBarBackgroundImage="~/App_Themes/Green_Helicopter/images/green1-gradient-24x1.gif" />
+
+<esri:Magnifier runat="server" BorderColor="#666666" BorderStyle="Outset" 
+BorderWidth="1px" Font-Names="Verdana" 
+Font-Size="8pt" ForeColor="Black"
+TitleBarColor="#4B5731" TitleBarHeight="24px" TitleBarSeparatorLine="True"
+Transparency="50" Font-Bold="True" TitleBarForeColor="White"
+TitleBarBackgroundImage="~/App_Themes/Green_Helicopter/images/green1-gradient-24x1.gif" />
