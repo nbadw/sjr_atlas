@@ -45,6 +45,27 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "C:\...\SJRAtlas.Content\", 
 		DefaultWebSiteLanguage = "Visual C#"
 	EndProjectSection
 EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "C:\...\SJRAtlas.Map\", "SJRAtlas.Map\", "{B952CEBD-50BE-4DEE-A402-30C8CE257C4A}"
+	ProjectSection(WebsiteProperties) = preProject
+		ProjectReferences = "{43819902-84F0-47AB-B474-C1EF5E89ED8A}|SJRAtlas.Models.dll;"
+		Debug.AspNetCompiler.VirtualPath = "/SJRAtlas.Map"
+		Debug.AspNetCompiler.PhysicalPath = "SJRAtlas.Map\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\SJRAtlas.Map\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/SJRAtlas.Map"
+		Release.AspNetCompiler.PhysicalPath = "SJRAtlas.Map\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\SJRAtlas.Map\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "3849"
+		DefaultWebSiteLanguage = "Visual C#"
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|.NET = Debug|.NET
@@ -105,6 +126,16 @@ Global
 		{037F74AD-F577-4EEB-918F-21FDC8F2C51F}.Release|Any CPU.ActiveCfg = Debug|.NET
 		{037F74AD-F577-4EEB-918F-21FDC8F2C51F}.Release|Mixed Platforms.ActiveCfg = Debug|.NET
 		{037F74AD-F577-4EEB-918F-21FDC8F2C51F}.Release|Mixed Platforms.Build.0 = Debug|.NET
+		{B952CEBD-50BE-4DEE-A402-30C8CE257C4A}.Debug|.NET.ActiveCfg = Debug|.NET
+		{B952CEBD-50BE-4DEE-A402-30C8CE257C4A}.Debug|.NET.Build.0 = Debug|.NET
+		{B952CEBD-50BE-4DEE-A402-30C8CE257C4A}.Debug|Any CPU.ActiveCfg = Debug|.NET
+		{B952CEBD-50BE-4DEE-A402-30C8CE257C4A}.Debug|Mixed Platforms.ActiveCfg = Debug|.NET
+		{B952CEBD-50BE-4DEE-A402-30C8CE257C4A}.Debug|Mixed Platforms.Build.0 = Debug|.NET
+		{B952CEBD-50BE-4DEE-A402-30C8CE257C4A}.Release|.NET.ActiveCfg = Debug|.NET
+		{B952CEBD-50BE-4DEE-A402-30C8CE257C4A}.Release|.NET.Build.0 = Debug|.NET
+		{B952CEBD-50BE-4DEE-A402-30C8CE257C4A}.Release|Any CPU.ActiveCfg = Debug|.NET
+		{B952CEBD-50BE-4DEE-A402-30C8CE257C4A}.Release|Mixed Platforms.ActiveCfg = Debug|.NET
+		{B952CEBD-50BE-4DEE-A402-30C8CE257C4A}.Release|Mixed Platforms.Build.0 = Debug|.NET
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
