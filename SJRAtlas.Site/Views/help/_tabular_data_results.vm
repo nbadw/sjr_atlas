@@ -1,3 +1,3 @@
 <p>Some data sets will present more than 1 table.  Each table is presented in 50 row sets.  The lower border of the table contains several tools for navigating and downloading data. </p>
 <p>Use the Page navigation tool on the left side to advance to the next set of 50 records – simply click the arrow symbol or enter a page number. The sequence of rows currently displayed is presented on the right side of the lower border.</p>
-<p>Click Download to export the table to an Excel spreadsheet.  The time to export will vary depending on the size of the table.</p>
+<p>Click Download to export the table to an Excel spreadsheet.  The time to export will vary depending on the size of the table. Click here to download <a href="$Atlas.ContentPath()/Data Manuals/DW Manual/Field List.pdf">Field Names &amp; Descriptions</a></p>

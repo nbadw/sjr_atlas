@@ -1,7 +1,8 @@
 <table>
     <tr>
-        <td class="first">Print this Map:</td>
-        <td><p>Clicking on Print this Map task opens a dialog window for entering a map title and setting other parameters for the map, such as resolution and scale. Click on Create Print Page button to open a new window displaying the map image.</p></td>     
+        <td class="first">Select Features:</td>
+        <td><p>Clicking on the Select Features task opens a small window allowing the user to select the layer whose features they wish to select and to select one of 5 tools for selecting the features. The options include: Select by a Single Click, Select by Dragging a Rectangle, Select by Drawing a Line, Select by Drawing a Polygon, and Select by Drawing a Circle.</p>
+        <p>The attributes of the selected features are presented in the Table Results window. Each row contains a Zoom In and Pan tool. Clicking one of these tools will zoom to the particular record. There are options to Export the records to Excel and Zoom to All records. Click here to download <a href="$Atlas.ContentPath()/Data Manuals/DW Manual/Field List.pdf">Field Names &amp; Descriptions</a></p></td>     
     </tr>
 </table>
      

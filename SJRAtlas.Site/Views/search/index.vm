@@ -7,7 +7,7 @@
 #capturefor(headline)
     <div class="help-link" style="float: right; text-align: right">$Url.Link('Need Help?', "%{controller='help', action='advanced_search'}")</div>	
     <h1 class="title">Advanced Search</h1>
-    <p>This is an advanced search option for querying tabular data. You will be able to download the tabular data as an Excel spreadsheet.</p>    
+    <p>This is an advanced search option for querying tabular data. You will be able to download the tabular data as an Excel spreadsheet. Click here to download <a href="$Atlas.ContentPath()/Data Manuals/DW Manual/Field List.pdf">Field Names &amp; Descriptions</a></p>    
     <p>Enter search criteria in the form below.</p>
 #end
 

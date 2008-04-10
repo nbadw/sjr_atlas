@@ -177,7 +177,6 @@
     <None Include="Views\help\_advanced_search.vm" />
     <None Include="Views\help\_search_tips.vm" />
     <None Include="Views\help\_quick_search.vm" />
-    <None Include="Views\help\_navigation.vm" />
     <None Include="Views\help\_map_contents.vm" />
     <None Include="Views\help\_tasks.vm" />
     <None Include="Views\help\_toolbar.vm" />

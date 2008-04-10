@@ -41,7 +41,6 @@ namespace SJRAtlas.Site.Controllers
                         .Add("ToolBar")
                         .Add("Tasks")
                         .Add("Map Contents")
-                        .Add("Navigation")
                     .AddSection("Searching")
                         .Add("Quick Search")
                         .Add("Search Tips")

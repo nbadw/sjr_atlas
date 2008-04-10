@@ -20,6 +20,7 @@ $Url.Link('Home', "%{controller='site', action='index'}")
         <div id="data-documentation">
             <h2 class="title">Data Documentation:</h2>
             <ul>
+                <li><a href="$Atlas.ContentPath()/Data Manuals/DW Manual/Field List.pdf">Field Names and Descriptions</a></li>
                 <li><a href="$Atlas.ContentPath()/Data Manuals/DW Manual/NB Drainage System.pdf">New Brunswick Hierarchal Drainage System</a></li>
                 <li><a href="$Atlas.ContentPath()/Data Manuals/DW Manual/DWM-Appendix A - Drainage Unit Listing.pdf">Drainage Unit Listing</a></li>
                 <li><a href="$Atlas.ContentPath()/Data Manuals/DW Manual/Water Body Inventory.pdf">Waterbody Inventory</a></li>

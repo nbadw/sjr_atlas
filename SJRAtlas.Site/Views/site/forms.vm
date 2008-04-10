@@ -34,7 +34,7 @@ $Url.Link('Home', "%{controller='site', action='index'}")
         </ul>
         
         <p>These forms provide space to record many important details related to the specific activity, including particulars on the sampling site and methods used. Users should complete all applicable spaces on the forms. Accurately identifying the location of the activity is particularly important. Please record GPS coordinates if available, water body identification numbers (from NB Aquatic Data Warehouse), and textual descriptions. Also, note the locations on a 1:50,000 topographic map. The download package includes a manual for completing the forms.</p>
-        <p>Upon completing the forms, please forward copies of all data, including paper forms, maps, and electronic files, such as digital photographs of sites, data logger output files, GPS coordinates, spreadsheets, Access files, etc., to one of the addresses below:</p>                
+        <p>Upon completing the forms, please forward copies of all data, including paper forms, maps, and electronic files, such as digital photographs of sites, data logger output files, GPS coordinates, spreadsheets, Access files, etc., to the Department of Natural Resources and if your project received funding from the Wildlife trust Fund also send a copy to them.  Addresses are provided below:</p>                
         <div id="form-addresses">
             <table>
                 <thead>

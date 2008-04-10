@@ -13,6 +13,7 @@
 
 #capturefor(headline)
     <div class="help-link" style="float: right; text-align: right">$Url.Link('Need Help?', "%{controller='help', action='tabular_data_results'}")</div>	
+    <p>Click here to download <a href="$Atlas.ContentPath()/Data Manuals/DW Manual/Field List.pdf">Field Names &amp; Descriptions</a></p>
     <noscript>
         <div id="requirements" style="padding: 1em 1em 0; background-color: #fff; border: 1px solid #174A83;">            
             <h2 class="title" style="color: red">Problem with minimum requirements.</h2>

@@ -1,4 +1,7 @@
-<p>The Map Contents window is more than a legend for the map. For most maps it allows the user to turn on or off some of the layers. </p>
-<p>The map contents list is presented as a nested list; clicking on a + symbol will display lower level information. For instance, the highest level in the Map Contents is Map. Clicking on its + symbol displays the individual layers or layer groups in the map. Clicking on the + symbol of a single layer will display the symbology of the layer; clicking on a layer group displays the individual layers within the group. </p>
+<p>The Map Contents window is more than a legend for the map. For most maps it allows the user to turn on or off some of the layers. The map contents window can be enlarged by dragging the lower edge.</p>
+
+<p>Clicking on a + symbol beside a layer name will expand the layer to display its legend. Sometimes multiple layers will be grouped and clicking on the + symbol beside the group name, expands to the list of layers within the group. Clicking on a – symbol will hide the layer’s legend or collapse a group.</p>
+
 <p>If a layer name is a light grey rather than black, this means the layer is scale dependent. That is, the layer will not display unless the map is at a scale appropriate for the displaying the layer. For instance, one would not want to view all the roads or all the streams when the map is at a scale showing the entire province.</p>
+
 <p>The check box beside the layer indicates whether the layer is visible. Checking an unchecked box will cause the map window to refresh and make the layer visible. Clearing a checked layer box will refresh the map and the layer will no longer be visible.</p>
