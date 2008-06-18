@@ -12,7 +12,7 @@ using SJRAtlas.Site.Filters;
 namespace SJRAtlas.Site.Controllers
 {
     [Layout("sjratlas")]
-    [Rescue("generalerror")]
+    [Rescue("friendlyerror")]
     [Helper(typeof(AtlasHelper), "Atlas")]
     [Filter(ExecuteEnum.AfterAction, typeof(EscapeToUnicodeFilter))]
     public class BaseController : SmartDispatcherController
@@ -47,6 +47,32 @@ namespace SJRAtlas.Site.Controllers
                     publicationsByType.Add((T)publication);
             }
             return publicationsByType;
+        }
+
+        protected override void InvokeMethod(MethodInfo method, IDictionary methodArgs)
+        {
+            try
+            {
+                base.InvokeMethod(method, methodArgs);
+            }
+            catch (Exception e)
+            {
+                DeliverEmail(GlobalApplication.CreateErrorEmail(e));
+                throw e;
+            }
+        }
+
+        protected override void InvokeMethod(MethodInfo method, IRequest request, IDictionary actionArgs)
+        {
+            try
+            {
+                base.InvokeMethod(method, request, actionArgs);
+            }
+            catch (Exception e)
+            {
+                DeliverEmail(GlobalApplication.CreateErrorEmail(e));
+                throw e;
+            }
         }
     }
 }
