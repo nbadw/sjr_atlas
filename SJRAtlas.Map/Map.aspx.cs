@@ -33,6 +33,7 @@ public partial class WebMapApplication : System.Web.UI.Page, ICallbackEventHandl
         if (!Page.IsCallback && !Page.IsPostBack)
         {
             Logger = GlobalApplication.CreateLogger(typeof(WebMapApplication));
+            Logger.Info("Initializing Map");
 
             if (Map1.MapResourceManager == null)
                 throw new Exception("No MapResourceManager defined for the map.");
@@ -50,13 +51,13 @@ public partial class WebMapApplication : System.Web.UI.Page, ICallbackEventHandl
 
             m_newLoad = "true";
         }      
-        //m_closeOutCallback = Page.ClientScript.GetCallbackEventReference(Page, "argument", "CloseOutResponse", "context", true);
-        //m_copyrightCallback = Page.ClientScript.GetCallbackEventReference(Page, "argument", "processCallbackResult", "context", true);
+        m_closeOutCallback = Page.ClientScript.GetCallbackEventReference(Page, "argument", "CloseOutResponse", "context", true);
+        m_copyrightCallback = Page.ClientScript.GetCallbackEventReference(Page, "argument", "processCallbackResult", "context", true);
 
-        //// initiate identify class and set link to TaskResults1 for response
-        //identify = new MapIdentify(Map1);
-        //identify.ResultsDisplay = TaskResults1;
-        //identify.NumberDecimals = 4;
+        // initiate identify class and set link to TaskResults1 for response
+        identify = new MapIdentify(Map1);
+        identify.ResultsDisplay = TaskResults1;
+        identify.NumberDecimals = 4;
     }
 
     private ILogger logger;
@@ -90,18 +91,6 @@ public partial class WebMapApplication : System.Web.UI.Page, ICallbackEventHandl
         }
         CopyrightTextHolder.Visible = HasCopyrightText();
 
-    }
-
-    protected void TitleMenu_DataBound(object sender, EventArgs e)
-    {
-        Menu menu = sender as Menu;
-        if (menu != null)
-        {
-            for (int i = 0; i < menu.Items.Count - 1;i++ )
-            {
-                menu.Items[i].SeparatorImageUrl = "~/images/separator.gif";
-            }
-        }
     }
 
     /// <summary>
@@ -143,51 +132,6 @@ public partial class WebMapApplication : System.Web.UI.Page, ICallbackEventHandl
         }
 
         return hasNonPooledResource;
-    }
-
-    protected void ResourceManager_ResourcesInit(object sender, EventArgs e)
-    {
-        if (DesignMode)
-            return;
-        ResourceManager manager = sender as ResourceManager;
-        if (!manager.FailureOnInitialize)
-            return;
-        if (manager is MapResourceManager)
-        {
-            MapResourceManager mapManager = manager as MapResourceManager;
-            for (int i = 0; i < mapManager.ResourceItems.Count; i++)
-            {
-                MapResourceItem item = mapManager.ResourceItems[i];
-                if (item != null && item.FailedToInitialize)
-                {
-                    mapManager.ResourceItems[i] = null;
-                }
-            }
-        }
-        else if (manager is GeocodeResourceManager)
-        {
-            GeocodeResourceManager gcManager = manager as GeocodeResourceManager;
-            for (int i = 0; i < gcManager.ResourceItems.Count; i++)
-            {
-                GeocodeResourceItem item = gcManager.ResourceItems[i];
-                if (item != null && item.FailedToInitialize)
-                {
-                    gcManager.ResourceItems[i] = null;
-                }
-            }
-        }
-        else if (manager is GeoprocessingResourceManager)
-        {
-            GeoprocessingResourceManager gpManager = manager as GeoprocessingResourceManager;
-            for (int i = 0; i < gpManager.ResourceItems.Count; i++)
-            {
-                GeoprocessingResourceItem item = gpManager.ResourceItems[i];
-                if (item != null && item.FailedToInitialize)
-                {
-                    gpManager.ResourceItems[i] = null;
-                }
-            }
-        }
     }
 
     private bool HasCopyrightText()
@@ -267,6 +211,8 @@ public partial class WebMapApplication : System.Web.UI.Page, ICallbackEventHandl
 
     public virtual string RaiseCallbackEvent(string responseString)
     {
+        Logger.Debug("Callback raised: " + responseString);
+
         // break out the responseString into a querystring
         Array keyValuePairs = responseString.Split("&".ToCharArray());
         NameValueCollection m_queryString = new NameValueCollection();

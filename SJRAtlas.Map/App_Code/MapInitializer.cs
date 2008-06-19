@@ -114,9 +114,20 @@ public class MapInitializer
 
                 if (resourceItem.FailedToInitialize)
                     throw new Exception(String.Format("Map service {0} failed to initialize"));
+
+                resourceItem.Resource.Initialize();
             }
 
             MapResourceManager.Refresh();
+
+            if (Logger.IsDebugEnabled)
+            {
+                for (int i = 0; i < MapResourceManager.ResourceItems.Count; i++)
+                {
+                    MapResourceItem item = MapResourceManager.ResourceItems[i];
+                    Logger.Debug(item.Name + " (resource initialized? " + item.Resource.Initialized.ToString() + ")");
+                }
+            }
         }
         catch (Exception e)
         {
@@ -309,7 +320,6 @@ public class MapInitializer
     public void RefreshResources()
     {
         Map.InitializeFunctionalities();
-        Map.Extent = new ESRI.ArcGIS.ADF.Web.Geometry.Envelope(2286186, 7257990.32869855, 2737164, 7694705.09733051);
         Map.Visible = true;
         Map.UseDefaultWebResources = true;
         Map.Refresh();
