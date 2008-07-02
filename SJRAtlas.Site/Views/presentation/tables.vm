@@ -81,6 +81,9 @@
                 loadMask: true,
                 columns: headers,
                 title: table_config.title,
+                viewConfig: {
+                    emptyText: 'No results were found for this dataset that match the specified search options.'
+                },
                 bbar: new Ext.PagingToolbar({
                     pageSize: 50,
                     store: table_store,

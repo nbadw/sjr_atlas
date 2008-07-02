@@ -22,8 +22,6 @@ namespace SJRAtlas.Models.Atlas {
         
         private string _serviceName;
         
-        private bool _visible;
-        
         private int _id;
         
         private IList<MapServiceListing> _mapServiceListings;
@@ -45,16 +43,6 @@ namespace SJRAtlas.Models.Atlas {
             }
             set {
                 this._serviceName = value;
-            }
-        }
-        
-        [Property("visible", ColumnType="Boolean", NotNull=true)]
-        public virtual bool Visible {
-            get {
-                return this._visible;
-            }
-            set {
-                this._visible = value;
             }
         }
         
@@ -89,6 +77,8 @@ namespace SJRAtlas.Models.Atlas {
         private int _position;
         
         private int _id;
+        
+        private bool _visible;
         
         private InteractiveMap _interactiveMap;
         
@@ -131,6 +121,16 @@ namespace SJRAtlas.Models.Atlas {
             }
             set {
                 this._id = value;
+            }
+        }
+        
+        [Property("visible", ColumnType="Boolean")]
+        public virtual bool Visible {
+            get {
+                return this._visible;
+            }
+            set {
+                this._visible = value;
             }
         }
         

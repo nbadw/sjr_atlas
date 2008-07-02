@@ -163,6 +163,7 @@
     <Compile Include="Controllers\BaseController.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="google356fbc636501dbe4.html" />
     <Content Include="log.txt" />
     <Content Include="Config\logging.config" />
     <Content Include="Config\components.config" />
@@ -170,6 +171,9 @@
     <Content Include="Config\facilities.config" />
     <Content Include="Config\properties.config" />
     <Content Include="Config\logging.production.config" />
+    <Content Include="robots.txt" />
+    <Content Include="sitemap.xml" />
+    <Content Include="y_key_9ed73d970c9f150b.html" />
     <None Include="Views\data_set\data_set.vm" />
     <None Include="Views\data_set\_list.vm" />
     <None Include="Views\help\_tabular_data_results.vm" />

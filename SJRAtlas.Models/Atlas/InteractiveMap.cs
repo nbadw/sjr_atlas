@@ -23,6 +23,7 @@ namespace SJRAtlas.Models.Atlas
                 List<MapService> services = new List<MapService>(MapServiceListings.Count);
                 foreach (MapServiceListing serviceList in MapServiceListings)
                 {
+                    serviceList.MapService.Visible = serviceList.Visible;
                     services.Add(serviceList.MapService);
                 }
                 return services;

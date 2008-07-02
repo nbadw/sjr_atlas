@@ -6,6 +6,7 @@ namespace SJRAtlas.Site
     using Castle.Core.Logging;
     using Castle.Components.Common.EmailSender;
     using System.Text;
+    using Castle.MonoRail.Framework;
 
     public class GlobalApplication : HttpApplication, IContainerAccessor
 	{
@@ -35,6 +36,7 @@ namespace SJRAtlas.Site
         {
             Exception e = HttpContext.Current.Server.GetLastError();
             logger.Error("Uncaught exception", e);
+            HttpContext.Current.Server.ClearError();
 
             try
             {
@@ -49,8 +51,7 @@ namespace SJRAtlas.Site
                 }
             }            
             
-            //context.Server.ClearError();
-            // TODO: redirect to a 404
+            // TODO: redirect to a 404?
         }
 
         #region IContainerAccessor Members
@@ -83,22 +84,6 @@ namespace SJRAtlas.Site
             }
 
             return new Message("ccasey@unb.ca", "ccasey@unb.ca", "Application Error", body.ToString());
-
-            try
-            {
-                IEmailSender sender = (IEmailSender)ServiceProvider.GetService(typeof(IEmailSender));
-
-                sender.Send(message);
-            }
-            catch (Exception ex)
-            {
-                if (logger.IsErrorEnabled)
-                {
-                    logger.Error("Error sending e-mail", ex);
-                }
-
-                throw new RailsException("Error sending e-mail", ex);
-            }
         }
 
         public static ILogger CreateLogger(string name)

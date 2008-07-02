@@ -136,6 +136,7 @@ namespace SJRAtlas.Site.Controllers
                             "startDate=" + startDate,
                             "endDate=" + endDate
                     ));
+                    return;
                 }
             }
 

@@ -6,7 +6,6 @@
       <properties>
         <modelProperty Id="b64daa1b-2bd9-4a58-a836-d1e0b074721e" name="DisplayName" column="display_name" length="0" notNull="true" />
         <modelProperty Id="19c24beb-bce0-4bf1-8429-14c877c33748" name="ServiceName" column="service_name" length="0" notNull="true" />
-        <modelProperty Id="e8acc744-2f9e-4a93-bb85-b0f8c587edcd" name="Visible" column="visible" columnType="Boolean" length="0" notNull="true" />
         <modelProperty Id="cb630c8d-e467-4e51-ba98-2b8b3b871882" name="Id" column="id" columnType="Int32" length="0" notNull="true" keyType="PrimaryKey" />
       </properties>
     </modelClass>
@@ -24,6 +23,7 @@
         <modelProperty Id="78a184e8-950f-4768-8d3f-61ec23575a21" name="MapServiceId" column="map_service_id" columnType="Int32" length="0" notNull="true" />
         <modelProperty Id="16077a36-041a-4b5e-9582-78259bc6dcfe" name="Position" column="position" columnType="Int32" length="0" notNull="true" />
         <modelProperty Id="133187d5-ac2b-42b4-ba3c-44f5cad904a8" name="Id" column="id" columnType="Int32" length="0" notNull="true" keyType="PrimaryKey" />
+        <modelProperty Id="e147cc9b-1423-46ce-9dd3-277c3c6c0d6a" name="Visible" column="visible" columnType="Boolean" length="0" />
       </properties>
     </modelClass>
     <modelClass name="InteractiveMap" schema="dbo" table="web_interactive_maps">
