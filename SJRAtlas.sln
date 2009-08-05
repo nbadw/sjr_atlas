@@ -1,32 +1,17 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 9.00
-# Visual Studio 2005
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Web Developer Express 2008
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SJRAtlas.Models", "SJRAtlas.Models\SJRAtlas.Models.csproj", "{43819902-84F0-47AB-B474-C1EF5E89ED8A}"
-	ProjectSection(WebsiteProperties) = preProject
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.Debug = "False"
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SJRAtlas.Models.Tests", "SJRAtlas.Models.Tests\SJRAtlas.Models.Tests.csproj", "{529FB8AB-2830-42BD-96A9-2EFBFFC451DA}"
-	ProjectSection(WebsiteProperties) = preProject
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.Debug = "False"
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SJRAtlas.Site", "SJRAtlas.Site\SJRAtlas.Site.csproj", "{136FD2E6-F684-4A3E-85D2-9A1B2B6896C5}"
-	ProjectSection(WebsiteProperties) = preProject
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.Debug = "False"
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SJRAtlas.Site.Tests", "SJRAtlas.Site.Tests\SJRAtlas.Site.Tests.csproj", "{9BA4FA25-68C9-4A65-B911-4570AA9B78A9}"
-	ProjectSection(WebsiteProperties) = preProject
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.Debug = "False"
-	EndProjectSection
 EndProject
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "C:\...\SJRAtlas.Content\", "SJRAtlas.Content\", "{037F74AD-F577-4EEB-918F-21FDC8F2C51F}"
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "SJRAtlas.Content", "SJRAtlas.Content\", "{037F74AD-F577-4EEB-918F-21FDC8F2C51F}"
 	ProjectSection(WebsiteProperties) = preProject
+		TargetFramework = "2.0"
 		Debug.AspNetCompiler.VirtualPath = "/SJRAtlas.Content"
 		Debug.AspNetCompiler.PhysicalPath = "SJRAtlas.Content\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\SJRAtlas.Content\"
