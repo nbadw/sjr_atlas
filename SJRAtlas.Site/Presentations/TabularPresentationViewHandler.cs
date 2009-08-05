@@ -247,11 +247,11 @@ namespace SJRAtlas.Site.Presentations
                     controller.CancelLayout();
 
                     IResponse response = controller.Context.Response;
-                    string attachment = String.Format("attachment; filename=\"{0}.xls\"", query.Title);
+                    string attachment = String.Format("attachment; filename=\"{0}.xlsx\"", query.Title);
                     string contentLength = new FileInfo(filename).Length.ToString();
 
                     response.Clear();
-                    response.ContentType = "application/excel";
+                    response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";                    
                     response.AppendHeader("Content-Disposition", attachment);
                     response.AppendHeader("Content-Length", contentLength);
                     response.WriteFile(filename);
